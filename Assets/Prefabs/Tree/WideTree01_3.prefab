@@ -402,6 +402,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7737305310177440466}
   - component: {fileID: 3327914895771660998}
+  - component: {fileID: 8481219496932989364}
   m_Layer: 0
   m_Name: WideTree01_3
   m_TagString: Untagged
@@ -417,8 +418,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7737305310177440465}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 92.16625, y: 0.03512591, z: 15.379609}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 3327914895962615422}
   - {fileID: 3327914895667668977}
@@ -444,9 +445,22 @@ LODGroup:
     renderers:
     - renderer: {fileID: 3327914896450424729}
     - renderer: {fileID: 3327914896715246388}
-  - screenRelativeHeight: 0.07
+  - screenRelativeHeight: 0.01
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 3327914895793775159}
     - renderer: {fileID: 3327914896924580323}
   m_Enabled: 1
+--- !u!65 &8481219496932989364
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7737305310177440465}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15, y: 1, z: 0.15}
+  m_Center: {x: 0, y: 0.5, z: 0}

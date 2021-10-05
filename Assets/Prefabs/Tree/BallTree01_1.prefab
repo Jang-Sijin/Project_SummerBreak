@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1768698601897083020}
   - component: {fileID: -6113288027890900323}
+  - component: {fileID: 1478278675655082260}
   m_Layer: 0
   m_Name: BallTree01_1
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1768698601897083021}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 6811027890429958401}
   - {fileID: 6811027890026603439}
@@ -53,13 +54,26 @@ LODGroup:
     - renderer: {fileID: 6811027891225678771}
     - renderer: {fileID: 6811027890816356928}
     - renderer: {fileID: 6811027889899012494}
-  - screenRelativeHeight: 0.07
+  - screenRelativeHeight: 0.01
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 6811027889702588233}
     - renderer: {fileID: 6811027890861253731}
     - renderer: {fileID: 6811027889855562981}
   m_Enabled: 1
+--- !u!65 &1478278675655082260
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768698601897083021}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15, y: 1, z: 0.15}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &6811027889702588238
 GameObject:
   m_ObjectHideFlags: 0

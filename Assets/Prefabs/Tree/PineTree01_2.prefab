@@ -92,6 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 475984179003373777}
   - component: {fileID: 1079476847997671733}
+  - component: {fileID: 1663820855044723819}
   m_Layer: 0
   m_Name: PineTree01_2
   m_TagString: Untagged
@@ -129,17 +130,30 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.14
+  - screenRelativeHeight: 0.07
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 961645712484969374}
     - renderer: {fileID: 2516290959409633145}
-  - screenRelativeHeight: 0.07
+  - screenRelativeHeight: 0.01
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 1556692738490247334}
     - renderer: {fileID: 2702737012775315868}
   m_Enabled: 1
+--- !u!65 &1663820855044723819
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475984179003373776}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 1, z: 0.8}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &1512220440444485644
 GameObject:
   m_ObjectHideFlags: 0
