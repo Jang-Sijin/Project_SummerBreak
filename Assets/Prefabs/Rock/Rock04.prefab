@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1754033744861757599}
   - component: {fileID: 3456600608508186426}
   - component: {fileID: 584545158013877232}
+  - component: {fileID: 4340029439113120021}
   m_Layer: 0
   m_Name: Rock04
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377051217560656421}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 73.732574, y: 0.01398806, z: 11.225586}
+  m_LocalPosition: {x: 79.04142, y: 0.013989729, z: 4.942686}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,3 +83,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4340029439113120021
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377051217560656421}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1500417894664506086, guid: c021df711fc41db4ebde8ffc1e7bfd34, type: 3}
