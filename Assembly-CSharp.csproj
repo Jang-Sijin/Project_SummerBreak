@@ -41,15 +41,16 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Prototype\JangSijin\MonsterState.cs" />
+     <Compile Include="Assets\Prototype\JangSijin\Monster.cs" />
      <Compile Include="Assets\Prototype\JangSijin\PlayerController.cs" />
      <Compile Include="Assets\Prototype\MinHo\PlayerScript\PlayerStatus.cs" />
+     <Compile Include="Assets\Prototype\JangSijin\CreateMonster.cs" />
      <Compile Include="Assets\Prototype\MinHo\PlayerScript\PlayerInputManager.cs" />
      <Compile Include="Assets\Prototype\MinHo\PlayerScript\PlayerMovement.cs" />
-     <Compile Include="Assets\Prototype\JangSijin\GameManager.cs" />
-     <Compile Include="Assets\Prototype\JangSijin\CreateMonster.cs" />
-     <Compile Include="Assets\Prototype\JangSijin\Monster.cs" />
-     <Compile Include="Assets\Prototype\JangSijin\MonsterState.cs" />
      <Compile Include="Assets\Prototype\JangSijin\ObjectPoolManager.cs" />
+     <Compile Include="Assets\Prototype\JangSijin\GameManager.cs" />
+     <Compile Include="Assets\Prototype\JangSijin\InputManager.cs" />
      <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
      <None Include="Assets\Shader\Lighting\CustomLighting.hlsl" />
      <Reference Include="UnityEngine">
