@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 namespace _1.TitleScene.Script
 {
@@ -7,7 +8,8 @@ namespace _1.TitleScene.Script
     {
         public AudioSource backGroundSound;
     
-        [Header("BGM(배경음)의 파일명은 BGM_으로 설정해주세요.")]
+        [Header("BGM(배경음)의 파일명은 Scene의 맨앞 숫자로 설정해주세요.")]
+        [Header("[예시: 1.TitleScene -> 1_BGM_Something]")]
         public AudioClip[] backGroundList; // 배경음 리스트
     
         public static SoundManager instance; // Sound Manager을 싱글톤으로 관리
@@ -30,17 +32,17 @@ namespace _1.TitleScene.Script
         {
             foreach (var bgmListIndex in backGroundList)
             {
-                string bgmName = bgmListIndex.name.Substring(0,4);
-                Debug.Log($"[장시진] {arg0.name} Scene의 BGM 파일명: {bgmListIndex.name}");
-            
-                if ("BGM_" == bgmName) // 배경음 이름의 앞 4글자가 BGM_으로 시작하면
+                string bgmName = bgmListIndex.name.Substring(0,1);
+
+                if (arg0.name[0].ToString() == bgmName) // 배경음 이름의 앞 4글자가 BGM_으로 시작하면
                 {
+                    Debug.Log($"[장시진] {arg0.name} Scene의 BGM 파일명: {bgmListIndex.name}");
                     BgSoundPlay(bgmListIndex); // 배경음 실행
+                    break;
                 }
-                else // 배경음 이름의 앞 4글자가 BGM_으로 시작하지 않으면 배경음 없도록(null) 설정
+                else if (bgmListIndex == backGroundList[backGroundList.Length - 1])
                 {
-                    Debug.Log($"[장시진] {arg0.name} Scene의 BGM 파일이 없거나 BGM 파일명 형식에 오류가 있습니다.");
-                    BgSoundPlay(null);
+                    Debug.Log($"[장시진] {arg0.name} Scene의 BGM 파일이 없거나 BGM 파일명 형식에 오류가 있습니다.");   
                 }
             }
         }

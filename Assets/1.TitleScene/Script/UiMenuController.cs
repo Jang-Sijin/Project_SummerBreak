@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace _1.TitleScene.Script
@@ -10,11 +11,18 @@ namespace _1.TitleScene.Script
         public AudioClip quitAudioClip;
         public AudioClip backAudioClip;
 
+        private GameObject _sceneLoader;
+
+        private void Start()
+        {
+            _sceneLoader = GameObject.Find("SceneManager");
+        }
+
+
         public void StartButton()
         {
             SoundManager.instance.SfxPlay("StartButton", startAudioClip);
-            LoadingSceneController.Instance.LoadScene("SMKPractice");
-            Debug.Log($"[장시진] {LoadingSceneController.Instance.name}");
+            _sceneLoader.GetComponent<SceneLoader>().enabled = true;
         }
 
         public void LoadStartButton()
