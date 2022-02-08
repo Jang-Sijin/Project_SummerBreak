@@ -41,12 +41,15 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\1.TitleScene\Script\SceneLoader.cs" />
-     <Compile Include="Assets\1.TitleScene\Script\UiMenuController.cs" />
-     <Compile Include="Assets\2.IngameScene\C#Scrips\PlayerController.cs" />
+     <Compile Include="Assets\1.TitleScene\Scripts\SceneLoader.cs" />
+     <Compile Include="Assets\1.TitleScene\Scripts\UiMenuSoundController.cs" />
+     <Compile Include="Assets\2.IngameScene\Scripts\PlayerController.cs" />
      <Compile Include="Assets\3.LoadingScene\LoadingSceneController.cs" />
-     <Compile Include="Assets\1.TitleScene\Script\SoundManager.cs" />
-     <Compile Include="Assets\2.IngameScene\C#Scrips\TimeController.cs" />
+     <Compile Include="Assets\1.TitleScene\Scripts\SoundManager.cs" />
+     <Compile Include="Assets\2.IngameScene\Scripts\TimeController.cs" />
+     <Compile Include="Assets\1.TitleScene\Scripts\SoundInputTextValue.cs" />
+     <Compile Include="Assets\2.IngameScene\Scripts\IngameUISoundController.cs" />
+     <Compile Include="Assets\2.IngameScene\Scripts\GameManager.cs" />
      <None Include="Assets\Z_TerrainSamples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace _1.TitleScene.Script
 {
-    public class UiMenuController : MonoBehaviour
+    public class UiMenuSoundController : MonoBehaviour
     {
         public AudioClip startAudioClip;
         public AudioClip loadStartAudioClip;
-        public AudioClip optionAudioClip;
+        public AudioClip clickAudioClip;
         public AudioClip quitAudioClip;
         public AudioClip backAudioClip;
 
@@ -30,14 +30,14 @@ namespace _1.TitleScene.Script
             SoundManager.instance.SfxPlay("LoadStartButton", loadStartAudioClip);
         }
 
-        public void OptionButton()
+        public void ClickButton()
         {
-            SoundManager.instance.SfxPlay("OptionButton", optionAudioClip);
+            SoundManager.instance.SfxPlay("ClickButton", clickAudioClip);
         }
 
         public void QuitButton()
         {
-            SoundManager.instance.SfxPlay("OptionButton", quitAudioClip);
+            SoundManager.instance.SfxPlay("ClickButton", quitAudioClip);
             Application.Quit();
         }
     
