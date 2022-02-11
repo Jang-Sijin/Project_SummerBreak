@@ -39,7 +39,7 @@ using UnityEngine.UIElements;
             } 
             else
             { 
-                Destroy(gameObject);  
+                Destroy(gameObject);
             }
         }
         #endregion Singleton

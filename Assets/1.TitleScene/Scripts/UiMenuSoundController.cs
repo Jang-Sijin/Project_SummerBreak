@@ -27,7 +27,9 @@ namespace _1.TitleScene.Script
 
         public void LoadStartButton()
         {
+            XMLManager.instance.LoadByXML();
             SoundManager.instance.SfxPlay("LoadStartButton", loadStartAudioClip);
+            _sceneLoader.GetComponent<SceneLoader>().enabled = true;
         }
 
         public void ClickButton()
