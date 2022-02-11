@@ -5,9 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject playerGameObject;
-
-    // [SerializeField]
-    private Vector3 startPlayerPosition;
+    public Transform loadPlayerTransform;
     
     #region Game Manager 싱글톤 설정
     public static GameManager instance; // Game Manager을 싱글톤으로 관리
@@ -22,13 +20,14 @@ public class GameManager : MonoBehaviour
         else
         {
             // 이미 Game Manager가 존재할 때 오브젝트 파괴 
-            Destroy(gameObject);  
+            Destroy(this.gameObject);  
         }
     }
     #endregion
 
     void Start()
     {
+        
     }
     
     void Update()

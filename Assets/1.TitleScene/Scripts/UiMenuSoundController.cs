@@ -18,17 +18,16 @@ namespace _1.TitleScene.Script
             _sceneLoader = GameObject.Find("SceneManager");
         }
 
-
-        public void StartButton()
-        {
-            SoundManager.instance.SfxPlay("StartButton", startAudioClip);
-            _sceneLoader.GetComponent<SceneLoader>().enabled = true;
-        }
-
         public void LoadStartButton()
         {
             XMLManager.instance.LoadByXML();
             SoundManager.instance.SfxPlay("LoadStartButton", loadStartAudioClip);
+            _sceneLoader.GetComponent<SceneLoader>().enabled = true;
+        }
+
+        public void StartButton()
+        {
+            SoundManager.instance.SfxPlay("StartButton", startAudioClip);
             _sceneLoader.GetComponent<SceneLoader>().enabled = true;
         }
 

@@ -19,7 +19,7 @@ public class XMLManager : MonoBehaviour
         else
         {
             // 이미 XML Manager가 존재할 때 오브젝트 파괴 
-            Destroy(gameObject);  
+            Destroy(this.gameObject);  
         }
     }
     #endregion
@@ -34,21 +34,26 @@ public class XMLManager : MonoBehaviour
 
     private SavePlayerInfo CreateSaveGameObject()
     {
-        SavePlayerInfo savePlayerInfo = new SavePlayerInfo();
-
-        savePlayerInfo.positionX = GameManager.instance.playerGameObject.transform.position.x;
-        savePlayerInfo.positionY = GameManager.instance.playerGameObject.transform.position.y;
-        savePlayerInfo.positionZ = GameManager.instance.playerGameObject.transform.position.z;
+        // 현재 시점에서 오브젝트 이름이 Player를 찾고 할당한다.
+        GameObject player = GameObject.Find("Player");
+        SavePlayerInfo savePlayerInfo = new SavePlayerInfo
+        {
+            positionX = player.transform.position.x,
+            positionY = player.transform.position.y,
+            positionZ = player.transform.position.z,
         
-        savePlayerInfo.rotationX = GameManager.instance.playerGameObject.transform.rotation.x;
-        savePlayerInfo.rotationY = GameManager.instance.playerGameObject.transform.rotation.y;
-        savePlayerInfo.rotationZ = GameManager.instance.playerGameObject.transform.rotation.z;
-
+            rotationX = player.transform.rotation.x,
+            rotationY = player.transform.rotation.y,
+            rotationZ = player.transform.rotation.z
+        };
+        
         return savePlayerInfo;
     }
     
     public void SaveByMXL()
     {
+        // SaveByMXL함수는 xml 파일에 현재 데이터를 저장합니다.
+        
         // 현재 캐릭터의 정보가 저장되어 있는 변수입니다.
         SavePlayerInfo savePlayerInfo = CreateSaveGameObject();
 
@@ -123,16 +128,18 @@ public class XMLManager : MonoBehaviour
         // 디버그 체크
         if (File.Exists(Application.dataPath + saveDataPathName))
         {
-            Debug.Log("[장시진] XML 파일 저장 완료!");
+            Debug.Log($"[장시진] savePlayerInfo = x:{savePlayerInfo.positionX}, y:{savePlayerInfo.positionY}, z:{savePlayerInfo.positionZ}");
+            Debug.Log($"[장시진] XML 파일 저장 완료!");
         }
         else
         {
-            Debug.Log("[장시진] XML 파일 저장 실패!!!");
+            Debug.Log($"[장시진] XML 파일 저장 실패!!!");
         }
     }
 
     public void LoadByXML()
     {
+        // 저장된 XML 파일을 읽어 인게임에 세팅합니다.
         string saveDataPathName = "/SaveFile/SaveFile_01.xml";
         if (File.Exists(Application.dataPath + saveDataPathName))
         {
@@ -166,8 +173,9 @@ public class XMLManager : MonoBehaviour
             savePlayerInfo.rotationZ = rotationZNum;
             
             // 게임 실제 데이터에 데이터를 저장합니다.
-            GameManager.instance.playerGameObject.transform.position = new Vector3(savePlayerInfo.positionX, savePlayerInfo.positionY, savePlayerInfo.positionZ);
-            GameManager.instance.playerGameObject.transform.rotation = Quaternion.Euler(savePlayerInfo.rotationX, savePlayerInfo.rotationY, savePlayerInfo.rotationZ);
+            GameManager.instance.loadPlayerTransform = transform; // (필수!!!) loadPlayerTransform 초기화 
+            GameManager.instance.loadPlayerTransform.position = new Vector3(savePlayerInfo.positionX, savePlayerInfo.positionY, savePlayerInfo.positionZ);
+            GameManager.instance.loadPlayerTransform.rotation = Quaternion.Euler(savePlayerInfo.rotationX, savePlayerInfo.rotationY, savePlayerInfo.rotationZ);
         }
         else
         {

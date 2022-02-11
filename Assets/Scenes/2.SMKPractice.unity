@@ -3716,7 +3716,7 @@ GameObject:
   - component: {fileID: 1113267129}
   - component: {fileID: 1113267128}
   m_Layer: 5
-  m_Name: KeySetting_Button (1)
+  m_Name: KeySetting_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4250,7 +4250,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 24908459733724974}
+      - m_Target: {fileID: 5733836633188334103, guid: a0d998ce251c4984380e16d7fd1e6da3, type: 3}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: InGameTimeStart
         m_Mode: 1
@@ -4635,17 +4635,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 622d03710d1ba69409d9f655f8f2665c, type: 3}
---- !u!114 &1232469580 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8915518345366457900, guid: 622d03710d1ba69409d9f655f8f2665c, type: 3}
-  m_PrefabInstance: {fileID: 1232469579}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aacddb440fecc1a4ab9afef3e7807415, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1233304050 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4738639036628317437, guid: edfb65a86cea80a4ab8b849487cd2d3c, type: 3}
@@ -5823,7 +5812,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 24908459733724974}
+      - m_Target: {fileID: 5733836633188334103, guid: a0d998ce251c4984380e16d7fd1e6da3, type: 3}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: InGameTimeStop
         m_Mode: 1
@@ -6277,7 +6266,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1232469580}
+      - m_Target: {fileID: 8915518345366457900, guid: 622d03710d1ba69409d9f655f8f2665c, type: 3}
         m_TargetAssemblyTypeName: XMLManager, Assembly-CSharp
         m_MethodName: SaveByMXL
         m_Mode: 1
@@ -7677,17 +7666,6 @@ PrefabInstance:
       objectReference: {fileID: 348092159}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0d998ce251c4984380e16d7fd1e6da3, type: 3}
---- !u!114 &24908459733724974 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5733836633188334103, guid: a0d998ce251c4984380e16d7fd1e6da3, type: 3}
-  m_PrefabInstance: {fileID: 24908459733724973}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ca8dff5de27c9b40b95f33c53bcf6f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &48656437128671851 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5241386266395242951, guid: 92b877afe2e3cd94cb189ca1468624c2, type: 3}
@@ -10351,15 +10329,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7019602024088684271, guid: b2c54095b335be74d82ade25341268a5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 404.945
+      value: 405
       objectReference: {fileID: 0}
     - target: {fileID: 7019602024088684271, guid: b2c54095b335be74d82ade25341268a5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.72
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7019602024088684271, guid: b2c54095b335be74d82ade25341268a5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 224.9
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 7019602024088684271, guid: b2c54095b335be74d82ade25341268a5, type: 3}
       propertyPath: m_LocalRotation.w

@@ -19,17 +19,24 @@ public class SavePlayerInfo
 
 public class PlayerInfo : MonoBehaviour
 {
-
     private void Awake()
     {
     }
 
     private void Start()
     {
-        this.gameObject.transform.position = GameManager.instance.playerGameObject.transform.position;
-        this.gameObject.transform.rotation = GameManager.instance.playerGameObject.transform.rotation;
-        
-        Debug.Log($"{this.gameObject.transform.position}");
-        Debug.Log($"{this.gameObject.transform.rotation}");
+        if (GameManager.instance.loadPlayerTransform)
+        {
+            this.gameObject.transform.position = GameManager.instance.loadPlayerTransform.position;
+            this.gameObject.transform.rotation = GameManager.instance.loadPlayerTransform.rotation;
+        }
+        else
+        {
+            this.gameObject.transform.position = GameManager.instance.playerGameObject.transform.position;
+            this.gameObject.transform.rotation = GameManager.instance.playerGameObject.transform.rotation;   
+        }
+
+        Debug.Log($"[장시진] player오브젝트 생성 후 위치:{this.gameObject.transform.position}");
+        Debug.Log($"[장시진] player오브젝트 생성 후 각도:{this.gameObject.transform.rotation}");
     }
 }
