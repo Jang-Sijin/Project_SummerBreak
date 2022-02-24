@@ -31,9 +31,9 @@ public class PlayerMovement : MonoBehaviour
 
     public float curspeed;
     [SerializeField]
-    private float jumpPower = 10.0f; 
+    private float jumpPower = 5.0f; 
     [SerializeField]
-    private float flapPower = 1.0f; 
+    private float flapPower = 3.0f; 
     [SerializeField]
     float glideGravityMultiplier = 0.01f;
     [SerializeField]
@@ -78,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
     
     public void Ground_Idle()
     {
+        m_rigidbody.velocity = Vector3.zero;
         currentState = playerState.Ground_idleState;
     }
 
