@@ -78,7 +78,6 @@ public class PlayerMovement : MonoBehaviour
     
     public void Ground_Idle()
     {
-        m_rigidbody.velocity = Vector3.zero;
         currentState = playerState.Ground_idleState;
     }
 
