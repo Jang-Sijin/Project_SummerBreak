@@ -21,7 +21,8 @@ public class PlayerMovement : MonoBehaviour
         walkState,
         swimmingState,
         climb_idleState,
-        climbing
+        climbing,
+        sliding
     }
     
     public playerState currentState;
@@ -342,6 +343,13 @@ public class PlayerMovement : MonoBehaviour
     public void CancelClimb()
     {
         isClimbed = false;
+        m_rigidbody.useGravity = true;
+        m_rigidbody.isKinematic = false;
+    }
+
+    public void Sliding()
+    {
+        currentState = playerState.sliding;
     }
 
     public void Climbing(Vector2 input)

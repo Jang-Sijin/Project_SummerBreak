@@ -3115,20 +3115,13 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816510519}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 4146adc1815dd724ba81c4780583f8fa, type: 3}
+  m_Avatar: {fileID: 9000000, guid: e0b571540d0cf1b4d853a7bd9517cd02, type: 3}
   m_Controller: {fileID: 9100000, guid: bb69d4fc6abe59840b211e9892719735, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'Bip001 R UpperArm'\n\tTransform 'Bip001 Spine1'\n\tTransform
-    'Bip001 R Finger11'\n\tTransform 'Bip001 L UpperArm'\n\tTransform 'Bip001 R Foot'\n\tTransform
-    'Bip001 L Finger11'\n\tTransform 'Bip001 L Finger1'\n\tTransform 'Bip001 L Hand'\n\tTransform
-    'Bip001 Spine'\n\tTransform 'Bip001 R Thigh'\n\tand more ...\n\tFrom animation
-    clip 'Playable_Character_JumpUP'\n\tFrom animation clip 'Playable_Character_Flap'\n\tFrom
-    animation clip 'Playable_Character_Gliding'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -8070,7 +8063,32 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9227618689fdba847b11b3d55273d52f, type: 2}
-    m_RemovedComponents: []
+    - target: {fileID: 2239732619751385553, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9227618689fdba847b11b3d55273d52f, type: 2}
+    - target: {fileID: 2682665815450030569, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9227618689fdba847b11b3d55273d52f, type: 2}
+    - target: {fileID: 3410532874492123903, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9227618689fdba847b11b3d55273d52f, type: 2}
+    - target: {fileID: 6833986646046891344, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9227618689fdba847b11b3d55273d52f, type: 2}
+    - target: {fileID: 7275754376188798312, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9227618689fdba847b11b3d55273d52f, type: 2}
+    - target: {fileID: 7968758637275688574, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9227618689fdba847b11b3d55273d52f, type: 2}
+    m_RemovedComponents:
+    - {fileID: 966192916211711620, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
 --- !u!4 &1074078895896567886 stripped
 Transform:

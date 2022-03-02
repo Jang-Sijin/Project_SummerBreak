@@ -20,6 +20,7 @@ public class PlayerInputManager : MonoBehaviour
     public bool GlideDoingCheck;
     public bool ClimbDoingCheck;
     public bool spaceClickCheck;
+    public bool SlidingCheck;
     
     private Stopwatch swMove = new Stopwatch();
     private Stopwatch swSpace = new Stopwatch();
@@ -144,6 +145,7 @@ public class PlayerInputManager : MonoBehaviour
             ClimbDoingCheck = true;
             GlideDoingCheck = false;
             JumpDoingCheck = false;
+            FlapDoingCheck = false;
             spaceClickCheck = true;
         }
         else if (!player.isClimbed && !GlideDoingCheck && spaceClickCheck)
@@ -161,9 +163,16 @@ public class PlayerInputManager : MonoBehaviour
             }
         }
 
-        if (ClimbDoingCheck && !player.isClimbed)
+        if (!ClimbDoingCheck && !spaceClickCheck && player.isClimbed)
+        {
+            player.Sliding();
+            player.CancelClimb();
+        }
+        
+        if (!ClimbDoingCheck && !player.isClimbed)
         {
             ClimbDoingCheck = false;
+            player.CancelClimb();
         }
     }
 
