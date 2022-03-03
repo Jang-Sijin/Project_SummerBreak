@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     private float LerpAngle;
     private Quaternion lerpStartRotation;
     private float lastRollRotation;
-    private float rollAngle = 0.0f;
+    public float rollAngle = 0.0f;
     private bool RLcheck = false;           // false: right, left: true
     
     //Swim
@@ -140,8 +140,8 @@ public class PlayerMovement : MonoBehaviour
             
             Quaternion newRotation = Quaternion.LookRotation(moveDirection);
             //m_rigidbody.rotation = Quaternion.Slerp(m_rigidbody.rotation, newRotation, Time.deltaTime * 3.0f);
-            
             // 보간이 되는 중인지 확인
+            Debug.Log($"rigid:{m_rigidbody.rotation}, new:{newRotation}");
             if (Mathf.Abs(Quaternion.Dot(m_rigidbody.rotation, newRotation)) <= 0.9999f)
             {
                 currentFrameLerp = true;
@@ -161,9 +161,7 @@ public class PlayerMovement : MonoBehaviour
                     
                     lerpStartRotation = Quaternion.LookRotation(rigidbodyForward);
                     LerpAngle = Quaternion.Angle(newRotation, lerpStartRotation);
-                    
                     LerpTime = LerpAngle / lerpAngleSpeed;
-
                 }
 
 
@@ -208,9 +206,8 @@ public class PlayerMovement : MonoBehaviour
                         }
                         //Debug.Log("Roll 원상복구회전");
                     }
-
-                    rollAngle = Mathf.Clamp(rollAngle, -90.0f, 90.0f);
-                    finalRotation.z = rollAngle;
+                    rollAngle = Mathf.Clamp(rollAngle, -90.0f, 90.0f); 
+                    finalRotation.z = rollAngle; 
                     m_rigidbody.rotation = Quaternion.Euler(finalRotation);
                 }
             }

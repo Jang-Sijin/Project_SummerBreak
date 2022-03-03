@@ -174,6 +174,11 @@ public class PlayerInputManager : MonoBehaviour
             ClimbDoingCheck = false;
             player.CancelClimb();
         }
+
+        if (!GlideDoingCheck)
+        {
+            player.rollAngle = 0.0f;
+        }
     }
 
     // input WASD
