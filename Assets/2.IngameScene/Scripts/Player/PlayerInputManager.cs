@@ -208,6 +208,28 @@ public class PlayerInputManager : MonoBehaviour
         
     }
     
+    
+    //Left Click
+    public void OnLeftCheck(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (EnableLog)
+                Debug.Log(context.phase.ToString());
+
+            if (player.isGrounded && playerstatus.currentItem == PlayerStatus.item.attack)
+            {
+                player.Attack();
+            }
+            
+        }
+        else if (context.canceled)
+        {
+            if (EnableLog)
+                Debug.Log(context.phase.ToString());
+        }
+    }
+    
     // input Space
     public void OnSpace(InputAction.CallbackContext context)
     {

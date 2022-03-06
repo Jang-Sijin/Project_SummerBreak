@@ -5,6 +5,16 @@ using UnityEngine;
 public class PlayerStatus : MonoBehaviour
 {
     public string name;
+    
+    public enum item
+    {
+        nothing,
+        attack,
+        interaction
+    }
+
+    public item currentItem;
+    
     public float maxHealth = 100.0f;
     public float currentHealth;
 
@@ -21,6 +31,7 @@ public class PlayerStatus : MonoBehaviour
         currentMaxstamina = 100.0f;
         currentStamina = currentMaxstamina;
         runSpeed = walkSpeed * runValue;
+        currentItem = item.nothing;
     }
 
     public void UpgradeCurMaxStamina(float stamina)

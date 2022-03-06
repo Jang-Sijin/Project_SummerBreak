@@ -22,7 +22,8 @@ public class PlayerMovement : MonoBehaviour
         swimmingState,
         climb_idleState,
         climbing,
-        sliding
+        sliding,
+        attack
     }
     
     public playerState currentState;
@@ -292,6 +293,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+    public void Attack()
+    {
+        if (playerstatus.currentItem == PlayerStatus.item.attack)
+        {
+            currentState = playerState.attack;
+        }
+    }
 
     
     public void IsGround()
@@ -346,7 +354,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void Sliding()
     {
-        currentState = playerState.sliding;
+        if (!isGrounded)
+        {
+            currentState = playerState.sliding;
+        }
     }
 
     public void Climbing(Vector2 input)
