@@ -123,9 +123,11 @@ public class XMLManager : MonoBehaviour
         
         // 세이브 파일 위치 설정 및 저장
         string saveDataPathName = "/SaveFile/" + saveFileName + ".xml";
+        // 빌드용: xmlDocument.Save(Application.persistentDataPath + saveDataPathName);
         xmlDocument.Save(Application.dataPath + saveDataPathName);
         
         // 디버그 체크
+        // 빌드용: xmlDocument.Save(Application.persistentDataPath + saveDataPathName);
         if (File.Exists(Application.dataPath + saveDataPathName))
         {
             Debug.Log($"[장시진] savePlayerInfo = x:{savePlayerInfo.positionX}, y:{savePlayerInfo.positionY}, z:{savePlayerInfo.positionZ}");
@@ -137,6 +139,13 @@ public class XMLManager : MonoBehaviour
         }
     }
 
+    public void SaveByMXLAndQuit()
+    {
+        SaveByMXL();
+        
+        Application.Quit();
+    }
+    
     public void LoadByXML()
     {
         // 저장된 XML 파일을 읽어 인게임에 세팅합니다.

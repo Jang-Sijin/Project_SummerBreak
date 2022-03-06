@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
 
-public class SavePlayerInfo
+[Serializable] // 직렬화
+public struct SavePlayerInfo
 {
     // public int saveSlotNum;
     // public string playTime;

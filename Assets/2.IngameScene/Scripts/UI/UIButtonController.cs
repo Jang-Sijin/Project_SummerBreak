@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IngameUISoundController : MonoBehaviour
+public class UIButtonController : MonoBehaviour
 {
     public AudioClip clickAudioClip;
     public AudioClip quitAudioClip;
@@ -26,6 +26,20 @@ public class IngameUISoundController : MonoBehaviour
     public void QuitButton()
     {
         SoundManager.instance.SfxPlay("ClickButton", quitAudioClip);
+    }
+
+
+    public void SaveButton()
+    {
+        SoundManager.instance.SfxPlay("ClickButton", clickAudioClip);
+        XMLManager.instance.SaveByMXL();
+    }
+    
+    public void SaveAndQuitButton()
+    {
+        SoundManager.instance.SfxPlay("ClickButton", clickAudioClip);
+        XMLManager.instance.SaveByMXL();
+        
         Application.Quit();
     }
 }

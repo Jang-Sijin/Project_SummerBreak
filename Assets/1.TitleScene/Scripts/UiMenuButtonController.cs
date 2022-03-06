@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _1.TitleScene.Script
 {
-    public class UiMenuSoundController : MonoBehaviour
+    public class UiMenuButtonController : MonoBehaviour
     {
         public AudioClip startAudioClip;
         public AudioClip loadStartAudioClip;
@@ -20,9 +20,9 @@ namespace _1.TitleScene.Script
 
         public void LoadStartButton()
         {
-            XMLManager.instance.LoadByXML();
             SoundManager.instance.SfxPlay("LoadStartButton", loadStartAudioClip);
             _sceneLoader.GetComponent<SceneLoader>().enabled = true;
+            XMLManager.instance.LoadByXML();
         }
 
         public void StartButton()
