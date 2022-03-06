@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6539047268388577066}
   - component: {fileID: 9033002119226649568}
   - component: {fileID: 5263539804824126648}
+  - component: {fileID: 8446876811916151355}
   m_Layer: 0
   m_Name: Coin_Silver
   m_TagString: Untagged
@@ -94,5 +95,24 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.17626296, y: 0.035447747, z: 0.17626296}
-  m_Center: {x: 0, y: 0.01781495, z: 0}
+  m_Size: {x: 0.17626296, y: 0.17626297, z: 0.035447754}
+  m_Center: {x: 0.0000011995435, y: 0.088121966, z: 0.004014156}
+--- !u!205 &8446876811916151355
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7375585441807157813}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.0000011995435, y: 0.088121966, z: 0.0040141568}
+  m_Size: 1.5
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 9033002119226649568}
+  m_Enabled: 1
