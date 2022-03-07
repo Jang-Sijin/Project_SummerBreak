@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 810587810522822573}
   - component: {fileID: 810587811025517552}
+  - component: {fileID: 3289101054050179324}
   - component: {fileID: 810587811025517555}
   - component: {fileID: 5209194192608405227}
   - component: {fileID: 810587811025517554}
@@ -54,6 +55,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &3289101054050179324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810587811025517561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b117f0c8533a4b4bbc102f563319fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentAttack: {fileID: 0}
 --- !u!136 &810587811025517555
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -106,6 +120,7 @@ MonoBehaviour:
   currentFrameLerp: 0
   lastFrameLerpDirection: {x: 0, y: 0, z: 0}
   currentFrameLerpDirection: {x: 0, y: 0, z: 0}
+  rollAngle: 0
   waterSurface: 0
   d_fromWaterSurface: 0
   inWater: 0
@@ -144,6 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5617f64042c55bc4895bd90e4c7671b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentItem: 0
   name: 
   maxHealth: 100
   currentHealth: 0

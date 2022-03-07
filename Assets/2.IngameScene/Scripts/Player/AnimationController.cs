@@ -19,6 +19,8 @@ public class AnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+            m_animation.SetBool("Attack", m_PlayerMovement.currentState == PlayerMovement.playerState.attack);
+        
             m_animation.SetBool("Sliding",m_PlayerMovement.currentState == PlayerMovement.playerState.sliding);
         
             m_animation.SetBool("isGrounded", m_PlayerMovement.isGrounded == true);
