@@ -7,7 +7,7 @@ public class ItemPickUp : MonoBehaviour
     public Item itemDB;
     
     [SerializeField] private AudioClip takeItemAudioClip;
-    [SerializeField] private Inventory playerInventory;
+    // [SerializeField] private Inventory playerInventory;
     
     private void OnTriggerEnter(Collider other) // 콜라이더 박스 -> 충돌이 일어났을 때 트리거 발생
     {

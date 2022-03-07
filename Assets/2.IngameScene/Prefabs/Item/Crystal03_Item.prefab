@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 8561248478670214616}
   - component: {fileID: 7912637980271080467}
   - component: {fileID: 7912637980271080466}
+  - component: {fileID: 881191974308340423}
   m_Layer: 0
-  m_Name: Crystal03
+  m_Name: Crystal03_Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 7912637980271080461}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3057383482756280103}
   m_Father: {fileID: 0}
@@ -118,6 +119,20 @@ LODGroup:
     renderers:
     - renderer: {fileID: 8561248478670214616}
   m_Enabled: 1
+--- !u!114 &881191974308340423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7912637980271080461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b3ea519015e5445be8e65c1b61b141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDB: {fileID: 11400000, guid: 9f1e89b280daafa4f93c6c44ed51e67a, type: 2}
+  takeItemAudioClip: {fileID: 8300000, guid: 0cf800d049619d946b0d874a36e79bd1, type: 3}
 --- !u!1 &8021868160357376115
 GameObject:
   m_ObjectHideFlags: 0
