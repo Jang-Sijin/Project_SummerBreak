@@ -12,7 +12,7 @@ public class PlayerInputManager : MonoBehaviour
     
     private Vector2 moveDirection;
 
-    private float flapSpendStamina = 10.0f;
+    // private float flapSpendStamina = 10.0f;
     
     public bool moveDoingCheck;
     public bool JumpDoingCheck;

@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float startTime = 0.0f;
     private float LerpTime = 0.0f;
-    private float lastTime = 0.0f;
+    // private float lastTime = 0.0f;
     public bool lastFrameLerp;
     public bool currentFrameLerp;
     public Vector3 lastFrameLerpDirection;
@@ -125,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 moveDirection = Vector3.zero;
         currentState = playerState.glideState;
-        Vector3 LerpTimeDirection;
+        // Vector3 LerpTimeDirection;
         //Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
         //Debug.Log($"MoveCheck : {moveCheck}");
         if (moveCheck == true)
