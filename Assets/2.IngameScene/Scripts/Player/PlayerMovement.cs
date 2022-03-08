@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
         m_rigidbody.AddForce(jumpDirection,ForceMode.Impulse);
     }
 
-    public void Move(Vector2 direction, bool jumpCheck)
+    public void Move(Vector2 direction)
     {
         forwardDirection = Vector2.zero;
         if (curspeed != playerstatus.runSpeed)
