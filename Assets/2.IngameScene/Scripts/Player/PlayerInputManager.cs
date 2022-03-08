@@ -52,7 +52,7 @@ public class PlayerInputManager : MonoBehaviour
             }
             if (moveDoingCheck)
             {
-                player.Move(moveDirection);
+                player.Move(moveDirection, JumpDoingCheck);
             }
             if (JumpDoingCheck)
             {
