@@ -125,7 +125,7 @@ public class PlayerInputManager : MonoBehaviour
         player.CheckForClimb();
         
         
-        if (moveDoingCheck&& player.isGrounded)
+        if (moveDoingCheck && player.isGrounded)
         {
             swMove.Start();
             if (swMove.ElapsedMilliseconds >= 1000)

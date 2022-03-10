@@ -283,7 +283,6 @@ public class PlayerMovement : MonoBehaviour
         forwardDirection = Vector2.zero;
         Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
         
-        Debug.Log("수중 이동");
         m_rigidbody.AddForce(moveDirection,ForceMode.Impulse);
         Quaternion newRotation = Quaternion.LookRotation(moveDirection);
         m_rigidbody.rotation = Quaternion.Slerp(m_rigidbody.rotation, newRotation,0.5f);
@@ -295,6 +294,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (playerstatus.currentItem == PlayerStatus.item.attack)
         {
+            m_rigidbody.velocity = Vector3.zero;
             currentState = playerState.attack;
         }
     }
@@ -323,7 +323,6 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(origin, transform.forward, out hit, 0.6f))
         {
-            Debug.Log("sdfa");
             isClimbed = true;
         }
         else
