@@ -9,7 +9,7 @@ using UnityEngine;
 public class PlayerEventSystem : MonoBehaviour
 {
     // [키 입력 체크]
-    private bool eKeyDown;
+    private bool eKeyDown; // e버튼(상호작용)
     
     // [플레이어 근처에 있는 오브젝트]
     private GameObject nearObject;
@@ -60,7 +60,7 @@ public class PlayerEventSystem : MonoBehaviour
             
             // 다이얼로그 시작 코루틴 중지
             NpcDialogTrigger npcDialogTrigger = nearObject.GetComponent<NpcDialogTrigger>();
-            DialogSystem.instance.ResetDialog();
+            DialogSystem.instance.ResetDialog(); // Dialog UI 초기화
             npcDialogTrigger.StopCoroutine("StartDialog");
             nearObject = null;
         }
