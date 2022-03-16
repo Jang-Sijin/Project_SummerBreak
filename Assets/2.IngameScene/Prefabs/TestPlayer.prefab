@@ -16,9 +16,11 @@ GameObject:
   - component: {fileID: 810587811025517557}
   - component: {fileID: 810587811025517556}
   - component: {fileID: 810587811025517559}
+  - component: {fileID: 1564396842}
+  - component: {fileID: 1564396851}
   m_Layer: 0
   m_Name: TestPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,17 +97,18 @@ MonoBehaviour:
   currentState: 0
   playerstatus: {fileID: 810587811025517556}
   curspeed: 0
-  jumpPower: 3
+  jumpPower: 1.5
   flapPower: 3
   glideGravityMultiplier: 0.1
   distoGround: 1
-  lerpAngleSpeed: 90
+  lerpAngleSpeed: 135
   gravity: 0
   isGrounded: 0
   lastFrameLerp: 0
   currentFrameLerp: 0
   lastFrameLerpDirection: {x: 0, y: 0, z: 0}
   currentFrameLerpDirection: {x: 0, y: 0, z: 0}
+  rollAngle: 0
   waterSurface: 0
   d_fromWaterSurface: 0
   inWater: 0
@@ -144,7 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5617f64042c55bc4895bd90e4c7671b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
   maxHealth: 100
   currentHealth: 0
   currentMaxstamina: 0
@@ -230,6 +232,37 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerActions
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!95 &1564396842
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810587811025517561}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: e0b571540d0cf1b4d853a7bd9517cd02, type: 3}
+  m_Controller: {fileID: 9100000, guid: bb69d4fc6abe59840b211e9892719735, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1564396851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810587811025517561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fba1cb33c43d98d4a8381d070a5af3fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6227375696529983491
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281,10 +314,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5117598870293535107, guid: 8bb03dfdd66c4424aafc8fcf1d797f38, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9227618689fdba847b11b3d55273d52f, type: 2}
     - target: {fileID: 919132149155446097, guid: 8bb03dfdd66c4424aafc8fcf1d797f38, type: 3}
       propertyPath: m_Name
       value: '@Playable_Character_IDLE'
       objectReference: {fileID: 0}
+    - target: {fileID: 8734925712558330620, guid: 8bb03dfdd66c4424aafc8fcf1d797f38, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9227618689fdba847b11b3d55273d52f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bb03dfdd66c4424aafc8fcf1d797f38, type: 3}
 --- !u!4 &5901593816148701160 stripped

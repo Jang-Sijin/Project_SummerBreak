@@ -8,7 +8,7 @@ public class DialogSystem : MonoBehaviour
 {
 	[Header("↓숫자가 작아질수록 타이핑 속도가 빨라집니다.")] 
 	[SerializeField] private float typingSpeed = 0.05f; // 텍스트 타이핑 효과의 재생 속도
-	// [SerializeField] private bool isAutoStart = true; // 자동 시작 여부
+	[SerializeField] private bool isAutoStart = true; // 자동 시작 여부
 	
 	[Header("↓NpcDialogSystem 오브젝트를 연결해주세요.")]
 	[SerializeField] private DialogUiController dialogUi; // 대화창(DialogCanvas) UI 컨트롤
@@ -48,20 +48,13 @@ public class DialogSystem : MonoBehaviour
 			Setup();
 
 			// 자동 재생(isAutoStart=true)으로 설정되어 있으면 첫 번째 대사 재생
-			// if ( isAutoStart ) SetNextDialog();
+			if ( isAutoStart ) SetNextDialog(dialogList);
 
 			_isFirst = false;
 		}
 
 		if (Input.GetMouseButtonDown(0)) // 마우스 버튼을 누르면 조건 실행
 		{
-			// 캔버스가 활성화되어 있지 않으면 실행
-			if (dialogUi.npcDialogCanvas.gameObject.activeSelf == false)
-			{
-				dialogUi.CanvasOpen();
-				dialogUi.SetActiveTextObjects(true);
-			}
-			
 			// 텍스트 타이핑 효과를 재생중일때 마우스 왼쪽 클릭하면 타이핑 효과 종료
 			if (_isTypingEffect == true)
 			{
@@ -94,19 +87,22 @@ public class DialogSystem : MonoBehaviour
 	
 	private void SetNextDialog(List<NpcDialogDBEntity> dialogList)
 	{
-		// 0. 대사가 시작될 때는 Arrow UI가 나오지 않도록 설정
+		// 1. 대화 UI창이 활성화가 안되었으면 활성화한다.
+		OpenDialogUi();
+		
+		// 2. 대사가 시작될 때는 Arrow UI가 나오지 않도록 설정
 		dialogUi.SetActiveArrowObject(false);
 		
-		// 1. 다음 대사를 진행할 수 있도록 Index증가
+		// 3. 다음 대사를 진행할 수 있도록 Index증가
 		_currentDialogIndex++;
 
-		// 2. 현재 화자 이름 텍스트 설정
+		// 4. 현재 화자 이름 텍스트 설정
 		dialogUi.nameText.text = dialogList[_currentDialogIndex].Name;
 		
-		// 3. 현재 화자의 대사 텍스트 설정
+		// 5. 현재 화자의 대사 텍스트 설정
 		dialogUi.dialogText.text = dialogList[_currentDialogIndex].Dialog;
 		
-		// 4. 타이핑 효과 코루틴 실행
+		// 6. 타이핑 효과 코루틴 실행
 		StartCoroutine("OnTypingText", dialogList);
 	}
 
@@ -129,5 +125,34 @@ public class DialogSystem : MonoBehaviour
 
 		// 대사가 완료되었을 때 출력되는 화살표 애니메이션 오브젝트 활성화
 		dialogUi.SetActiveArrowObject(true);
+	}
+
+	private void OpenDialogUi()
+	{
+		// 캔버스가 활성화되어 있지 않으면 실행
+		if (dialogUi.npcDialogCanvas.gameObject.activeSelf == false)
+		{
+			dialogUi.CanvasOpen();
+			dialogUi.SetActiveTextObjects(true);
+		}
+	}
+
+	private void CloseDialogUi()
+	{
+		// 캔버스가 활성화되어 있으면 UI를 비활성화 되도록 변경
+		if (dialogUi.npcDialogCanvas.gameObject.activeSelf == true)
+		{
+			dialogUi.CanvasClose();
+			dialogUi.SetActiveTextObjects(false);
+		}
+	}
+
+	public void ResetDialog()
+	{
+		StopCoroutine("OnTypingText");
+		_isFirst = true; // 최초 1회만 호출하기 위한 변수
+		_currentDialogIndex = -1; // 현재 대사 순번
+		_isTypingEffect = false; // 텍스트 타이핑 효과를 재생중인지
+		CloseDialogUi();
 	}
 }
