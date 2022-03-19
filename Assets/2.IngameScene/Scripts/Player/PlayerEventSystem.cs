@@ -40,12 +40,25 @@ public class PlayerEventSystem : MonoBehaviour
                 NpcDialogTrigger npcDialogTrigger = nearObject.GetComponent<NpcDialogTrigger>();
                 npcDialogTrigger.EnterPlayer();
             }
+            else if (nearObject.CompareTag("DialogObj"))
+            {
+                print($"{eKeyDown}");
+                // 다이얼로그 시작 코루틴 시작
+                ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
+                objDialogTrigger.EnterPlayer();
+            }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("QuestNpc"))
+        if (!other.CompareTag("Item"))
+        {
+            // 트리거가 발생 UI(E키)를 활성화(출력)한다.
+            transform.Find("Player_SpeechBubble").gameObject.SetActive(true);
+        }
+
+        if (other.CompareTag("QuestNpc") || other.CompareTag("DialogObj"))
         {
             // print($"[장시진]: Player-NPC Collider 충돌 성공 -> 상호작용 가능");
             nearObject = other.gameObject;
@@ -54,6 +67,12 @@ public class PlayerEventSystem : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (!other.CompareTag("Item"))
+        {
+            // 트리거가 발생 UI(E키)를 비활성화(출력X)한다.
+            transform.Find("Player_SpeechBubble").gameObject.SetActive(false);
+        }
+
         if (other.CompareTag("QuestNpc"))
         {
             // print($"[장시진]: Player-NPC Collider 충돌 실패 -> 상호작용 불가능");
@@ -62,6 +81,14 @@ public class PlayerEventSystem : MonoBehaviour
             NpcDialogTrigger npcDialogTrigger = nearObject.GetComponent<NpcDialogTrigger>();
             DialogSystem.instance.ResetDialog(); // Dialog UI 초기화
             npcDialogTrigger.StopCoroutine("StartDialog");
+            nearObject = null;
+        }
+        else if (other.CompareTag("DialogObj"))
+        {
+            // 다이얼로그 시작 코루틴 중지
+            ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
+            DialogSystem.instance.ResetDialog(); // Dialog UI 초기화
+            objDialogTrigger.StopCoroutine("StartDialog");
             nearObject = null;
         }
     }

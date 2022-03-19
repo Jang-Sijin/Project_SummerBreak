@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4040244387762976856}
   - component: {fileID: 3700274930585232097}
+  - component: {fileID: 1035477786}
+  - component: {fileID: 1764914073484761068}
   m_Layer: 0
   m_Name: PlankPostSign03
-  m_TagString: Untagged
+  m_TagString: DialogObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,6 +55,34 @@ LODGroup:
     - renderer: {fileID: 6234905707959890730}
     - renderer: {fileID: 8913086632344916212}
   m_Enabled: 1
+--- !u!114 &1035477786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3700274930585232098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867486b3a341a84a8315dafbdeee3c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogDB: {fileID: 11400000, guid: 8acb37ca59c1ce9449df66ce1310f278, type: 2}
+  dialogID: 3
+  useDialogList: []
+--- !u!65 &1764914073484761068
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3700274930585232098}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 2, z: 3}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &4848668066959333774
 GameObject:
   m_ObjectHideFlags: 0
