@@ -19,7 +19,7 @@ namespace BehaviorTree
                 switch (node.Evaluate())
                 {
                     case NodeState.FAILURE:
-                        state = NodeState.RUNNING;
+                        state = NodeState.FAILURE;
                         return state;
                     case NodeState.RUNNING:
                         continue;
