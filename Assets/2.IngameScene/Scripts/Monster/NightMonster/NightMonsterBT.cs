@@ -15,6 +15,11 @@ public class NightMonsterBT : BTTree
         {
             new Sequence(new List<Node>
             {
+               new CheckHitMonster(transform),
+               new HitForTarget(transform)
+            }),
+            new Sequence(new List<Node>
+            {
                 new CheckAttackRange(transform,targetPoint),
                 new AtttackToTarget(transform, targetPoint)
             }),
