@@ -22,7 +22,8 @@ public class PlayerMovement : MonoBehaviour
         swimmingState,
         climb_idleState,
         climbing,
-        sliding
+        sliding,
+        attack
     }
     
     public playerState currentState;
@@ -38,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float glideGravityMultiplier = 0.01f;
     [SerializeField]
-    private float distoGround = 1.5f;
+    private float distoGround = 0.4f;
     [SerializeField]
     private float lerpAngleSpeed = 10.0f;
     
@@ -70,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
     //Climb
     public bool isClimbed;
     
-    void Start()
+    void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody>();
         currentState = playerState.Ground_idleState;
@@ -90,6 +91,24 @@ public class PlayerMovement : MonoBehaviour
         Vector3 jumpDirection = new Vector3(0.0f, jumpPower, 0.0f);
         //Debug.Log("점프함");
         m_rigidbody.AddForce(jumpDirection,ForceMode.Impulse);
+    }
+
+    public void Move(Vector2 direction)
+    {
+        forwardDirection = Vector2.zero;
+        if (curspeed != playerstatus.runSpeed)
+        {
+            currentState = playerState.walkState;
+        }
+        else
+        {
+            currentState = playerState.runState;
+        }
+        Vector3 moveDirection = new Vector3(direction.x, 0.0f, direction.y);
+        float angle = Mathf.Atan2(moveDirection.x,moveDirection.z) * Mathf.Rad2Deg;
+        m_rigidbody.velocity = moveDirection * curspeed;
+        Quaternion newRotation = Quaternion.LookRotation(moveDirection);
+        m_rigidbody.rotation = Quaternion.Slerp(m_rigidbody.rotation, newRotation,0.5f);
     }
 
     public void Failing()
@@ -141,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
             Quaternion newRotation = Quaternion.LookRotation(moveDirection);
             //m_rigidbody.rotation = Quaternion.Slerp(m_rigidbody.rotation, newRotation, Time.deltaTime * 3.0f);
             // 보간이 되는 중인지 확인
-            Debug.Log($"rigid:{m_rigidbody.rotation}, new:{newRotation}");
+            //Debug.Log($"rigid:{m_rigidbody.rotation}, new:{newRotation}");
             if (Mathf.Abs(Quaternion.Dot(m_rigidbody.rotation, newRotation)) <= 0.9999f)
             {
                 currentFrameLerp = true;
@@ -236,26 +255,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     
-    
-    
-    public void Move(Vector2 direction)
-    {
-        forwardDirection = Vector2.zero;
-        if (curspeed != playerstatus.runSpeed)
-        {
-            currentState = playerState.walkState;
-        }
-        else
-        {
-            currentState = playerState.runState;
-        }
-
-        Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
-        float angle = Mathf.Atan2(moveDirection.x,moveDirection.z) * Mathf.Rad2Deg;
-        m_rigidbody.velocity = moveDirection * curspeed;
-        Quaternion newRotation = Quaternion.LookRotation(moveDirection);
-        m_rigidbody.rotation = Quaternion.Slerp(m_rigidbody.rotation, newRotation,0.5f);
-    }
 
     public void Swim_idle()
     {
@@ -284,7 +283,6 @@ public class PlayerMovement : MonoBehaviour
         forwardDirection = Vector2.zero;
         Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
         
-        Debug.Log("수중 이동");
         m_rigidbody.AddForce(moveDirection,ForceMode.Impulse);
         Quaternion newRotation = Quaternion.LookRotation(moveDirection);
         m_rigidbody.rotation = Quaternion.Slerp(m_rigidbody.rotation, newRotation,0.5f);
@@ -292,18 +290,26 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+    public void Attack()
+    {
+        if (playerstatus.currentItem == PlayerStatus.item.attack)
+        {
+            m_rigidbody.velocity = Vector3.zero;
+            currentState = playerState.attack;
+        }
+    }
 
     
     public void IsGround()
     {
 
+        Debug.DrawRay(transform.position, -Vector3.up, Color.red);
         int layerMask = (-1) - (1 << LayerMask.NameToLayer("Water"));
         
-        isGrounded = Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, distoGround + 0.1f, layerMask);
-        
-        //isGrounded = Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, distoGround + 0.1f);
-        
-        
+        //isGrounded = Physics.Raycast(transform.position, -Vector3.up, layerMask);
+        //isGrounded = Physics.CheckSphere(transform.position - new Vector3(0, 1, 0), distoGround, layerMask);
+        isGrounded = Physics.Raycast(transform.position, -Vector3.up,0.1f, layerMask);
+
 
         if (!isClimbed && (inWater == false || isGrounded))
         {
@@ -317,7 +323,6 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(origin, transform.forward, out hit, 0.6f))
         {
-            Debug.Log("sdfa");
             isClimbed = true;
         }
         else
@@ -339,14 +344,16 @@ public class PlayerMovement : MonoBehaviour
     }
     public void CancelClimb()
     {
-        isClimbed = false;
         m_rigidbody.useGravity = true;
         m_rigidbody.isKinematic = false;
     }
 
     public void Sliding()
     {
-        currentState = playerState.sliding;
+        if (!isGrounded && isClimbed)
+        {
+            currentState = playerState.sliding;
+        }
     }
 
     public void Climbing(Vector2 input)
