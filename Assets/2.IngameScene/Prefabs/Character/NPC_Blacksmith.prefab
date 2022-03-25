@@ -72,8 +72,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 1, y: 2, z: 0.83}
+  m_Center: {x: 0, y: 1, z: 0.16}
 --- !u!1001 &1574493116927716641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -125,10 +125,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8017584140633651219, guid: 2e50ae085a735c94eb9b517c70cb4f00, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9f79578409dd78742a6ab080689de8ee, type: 2}
+    - target: {fileID: -6564056655305457959, guid: 2e50ae085a735c94eb9b517c70cb4f00, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1f55f5cf689c93247bb4efd88a247be2, type: 2}
+    - target: {fileID: -2365830341862212761, guid: 2e50ae085a735c94eb9b517c70cb4f00, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1f55f5cf689c93247bb4efd88a247be2, type: 2}
     - target: {fileID: 919132149155446097, guid: 2e50ae085a735c94eb9b517c70cb4f00, type: 3}
       propertyPath: m_Name
       value: '@NPC_Blacksmith_IDLE'
       objectReference: {fileID: 0}
+    - target: {fileID: 3014708115134302007, guid: 2e50ae085a735c94eb9b517c70cb4f00, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9f79578409dd78742a6ab080689de8ee, type: 2}
+    - target: {fileID: 4930062464428142653, guid: 2e50ae085a735c94eb9b517c70cb4f00, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4244842bb0aa3024ead6342a83ba311d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e50ae085a735c94eb9b517c70cb4f00, type: 3}
 --- !u!1 &1808424997648797808 stripped
