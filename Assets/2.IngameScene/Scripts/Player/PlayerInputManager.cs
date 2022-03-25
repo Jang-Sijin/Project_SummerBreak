@@ -13,14 +13,18 @@ public class PlayerInputManager : MonoBehaviour
     private Vector2 moveDirection;
 
     // private float flapSpendStamina = 10.0f;
+
+    public GameObject GlideTrail_Right;
+    public GameObject GlideTrail_Left;
     
-    public bool moveDoingCheck;
-    public bool JumpDoingCheck;
-    public bool FlapDoingCheck;
-    public bool GlideDoingCheck;
-    public bool ClimbDoingCheck;
-    public bool spaceClickCheck;
-    public bool SlidingCheck;
+    
+    private bool moveDoingCheck;
+    private bool JumpDoingCheck;
+    private bool FlapDoingCheck;
+    private bool GlideDoingCheck;
+    private bool ClimbDoingCheck;
+    private bool spaceClickCheck;
+    private bool SlidingCheck;
     
     private Stopwatch swMove = new Stopwatch();
     private Stopwatch swSpace = new Stopwatch();
@@ -98,8 +102,10 @@ public class PlayerInputManager : MonoBehaviour
                 }
             }
             else if (GlideDoingCheck)
-            {
-            player.Glider(moveDirection, moveDoingCheck);
+            { 
+                GlideTrail_Left.SetActive(true);
+                GlideTrail_Right.SetActive(true);
+                player.Glider(moveDirection, moveDoingCheck);
             } 
             else if(FlapDoingCheck)
             {
@@ -175,9 +181,11 @@ public class PlayerInputManager : MonoBehaviour
             player.CancelClimb();
         }
 
-        if (!GlideDoingCheck)
+        if (!GlideDoingCheck && GlideTrail_Left)
         {
             player.rollAngle = 0.0f;
+            GlideTrail_Left.SetActive(false);
+            GlideTrail_Right.SetActive(false);
         }
     }
 
