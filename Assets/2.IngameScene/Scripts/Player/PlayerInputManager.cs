@@ -6,8 +6,8 @@ using Debug = UnityEngine.Debug;
 
 public class PlayerInputManager : MonoBehaviour
 {
-    public PlayerMovement player;
-    public PlayerStatus playerstatus;
+    private PlayerMovement player;
+    private PlayerStatus playerstatus;
     //private FreeClimb freeClimb;
     
     private Vector2 moveDirection;
@@ -18,12 +18,19 @@ public class PlayerInputManager : MonoBehaviour
     public GameObject GlideTrail_Left;
     
     
+    [SerializeField]
     private bool moveDoingCheck;
+    [SerializeField]
     private bool JumpDoingCheck;
+    [SerializeField]
     private bool FlapDoingCheck;
+    [SerializeField]
     private bool GlideDoingCheck;
+    [SerializeField]
     private bool ClimbDoingCheck;
+    [SerializeField]
     private bool spaceClickCheck;
+    [SerializeField]
     private bool SlidingCheck;
     
     private Stopwatch swMove = new Stopwatch();
@@ -35,6 +42,7 @@ public class PlayerInputManager : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<PlayerMovement>();
+        playerstatus = GetComponent<PlayerStatus>();
         //freeClimb = GetComponent<FreeClimb>();
         moveDoingCheck = false;
     }
@@ -250,7 +258,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
-            if (!player.isGrounded && playerstatus.currentStamina > 0.0f)
+            if (!player.inWater && !player.isGrounded && playerstatus.currentStamina > 0.0f)
             {
                 //playerstatus.TakeStamina(flapSpendStamina);
                 FlapDoingCheck = true;
@@ -258,7 +266,7 @@ public class PlayerInputManager : MonoBehaviour
                 if (EnableLog)
                     Debug.Log("Flap : " + context.phase.ToString());   
             }
-            else if (player.isGrounded || (player.inWater))
+            else if (player.isGrounded || player.inWater)
             {
                 JumpDoingCheck = true;
                 spaceClickCheck = true;
