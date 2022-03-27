@@ -22,7 +22,7 @@ namespace Monster
      
      void Start()
      {
-         health = 30.0f;
+         health = 100.0f;
          m_rigidbody = GetComponent<Rigidbody>();
          
      }

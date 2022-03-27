@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         currentState = playerState.jumpState;
         
         Vector3 jumpDirection = new Vector3(0.0f, jumpPower, 0.0f);
-        //Debug.Log("점프함");
+        Debug.Log("점프함");
         m_rigidbody.AddForce(jumpDirection,ForceMode.Impulse);
     }
 
@@ -250,16 +250,19 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log("글라이딩");
         }
     }
-    
 
+    public void isSwimed()
+    {
+        d_fromWaterSurface = waterSurface - transform.position.y;
+        d_fromWaterSurface = Mathf.Clamp(d_fromWaterSurface, float.MinValue, waterSurface);
+        isSwim = d_fromWaterSurface >= swimLevel;
+    }
     public void Swim_idle()
     {
         d_fromWaterSurface = waterSurface - transform.position.y;
         d_fromWaterSurface = Mathf.Clamp(d_fromWaterSurface, float.MinValue, waterSurface);
-        isSwim = false;
         if (d_fromWaterSurface >= swimLevel)
         {
-            isSwim = true;
             d_fromWaterSurface = swimLevel;
             currentState = playerState.Swim_idleState;
             Vector3 translateWater = new Vector3(m_rigidbody.position.x, waterSurface - d_fromWaterSurface,
@@ -271,18 +274,20 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public void SwimMove(Vector2 direction)
+    public void SwimMove(Vector2 direction, bool moveCheck)
     {
         Swim_idle();
 
-        currentState = playerState.swimmingState;
-        
-        Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
-        
-        m_rigidbody.AddForce(moveDirection,ForceMode.Impulse);
-        Quaternion newRotation = Quaternion.LookRotation(moveDirection);
-        m_rigidbody.rotation = Quaternion.Slerp(m_rigidbody.rotation, newRotation,0.5f);
-        
+        if (moveCheck == true)
+        {
+            currentState = playerState.swimmingState;
+
+            Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
+
+            m_rigidbody.AddForce(moveDirection, ForceMode.Impulse);
+            Quaternion newRotation = Quaternion.LookRotation(moveDirection);
+            m_rigidbody.rotation = Quaternion.Slerp(m_rigidbody.rotation, newRotation, 0.5f);
+        }
     }
 
 
