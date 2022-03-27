@@ -6,21 +6,32 @@ using Debug = UnityEngine.Debug;
 
 public class PlayerInputManager : MonoBehaviour
 {
-    public PlayerMovement player;
-    public PlayerStatus playerstatus;
+    private PlayerMovement player;
+    private PlayerStatus playerstatus;
     //private FreeClimb freeClimb;
     
     private Vector2 moveDirection;
 
     // private float flapSpendStamina = 10.0f;
+
+    public GameObject GlideTrail_Right;
+    public GameObject GlideTrail_Left;
     
-    public bool moveDoingCheck;
-    public bool JumpDoingCheck;
-    public bool FlapDoingCheck;
-    public bool GlideDoingCheck;
-    public bool ClimbDoingCheck;
-    public bool spaceClickCheck;
-    public bool SlidingCheck;
+    
+    [SerializeField]
+    private bool moveDoingCheck;
+    [SerializeField]
+    private bool JumpDoingCheck;
+    [SerializeField]
+    private bool FlapDoingCheck;
+    [SerializeField]
+    private bool GlideDoingCheck;
+    [SerializeField]
+    private bool ClimbDoingCheck;
+    [SerializeField]
+    private bool spaceClickCheck;
+    [SerializeField]
+    private bool SlidingCheck;
     
     private Stopwatch swMove = new Stopwatch();
     private Stopwatch swSpace = new Stopwatch();
@@ -31,6 +42,7 @@ public class PlayerInputManager : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<PlayerMovement>();
+        playerstatus = GetComponent<PlayerStatus>();
         //freeClimb = GetComponent<FreeClimb>();
         moveDoingCheck = false;
     }
@@ -41,6 +53,7 @@ public class PlayerInputManager : MonoBehaviour
         player.currentFrameLerp = false;
         player.currentFrameLerpDirection = Vector3.zero;
         player.IsGround();
+        player.isSwimed();
 
         if (player.isGrounded)
         {
@@ -56,6 +69,7 @@ public class PlayerInputManager : MonoBehaviour
             }
             if (JumpDoingCheck)
             {
+                Debug.Log("육지점프");
                 player.Jump(moveDirection);
             }
 
@@ -64,21 +78,17 @@ public class PlayerInputManager : MonoBehaviour
                 player.Ground_Idle();
             }
         }
-        else if (player.inWater && !player.isGrounded)
+        else if (player.isSwim && !player.isGrounded)
         {
-            if (moveDoingCheck)
-            {
-                player.SwimMove(moveDirection);
-            }
-
             if (JumpDoingCheck)
             {
+                Debug.Log("수중점프");
                 player.Jump(moveDirection);
             }
 
-            if (!moveDoingCheck && !JumpDoingCheck)
+            if (!JumpDoingCheck)
             {
-                player.Swim_idle();
+                player.SwimMove(moveDirection, moveDoingCheck);
             }
         }
         else if (!player.isGrounded)
@@ -98,8 +108,10 @@ public class PlayerInputManager : MonoBehaviour
                 }
             }
             else if (GlideDoingCheck)
-            {
-            player.Glider(moveDirection, moveDoingCheck);
+            { 
+                GlideTrail_Left.SetActive(true);
+                GlideTrail_Right.SetActive(true);
+                player.Glider(moveDirection, moveDoingCheck);
             } 
             else if(FlapDoingCheck)
             {
@@ -175,9 +187,16 @@ public class PlayerInputManager : MonoBehaviour
             player.CancelClimb();
         }
 
-        if (!GlideDoingCheck)
+        if (!GlideDoingCheck && GlideTrail_Left)
         {
             player.rollAngle = 0.0f;
+            GlideTrail_Left.SetActive(false);
+            GlideTrail_Right.SetActive(false);
+        }
+
+        if (!player.inWater)
+        {
+            player.isSwim = false;
         }
     }
 
@@ -242,7 +261,8 @@ public class PlayerInputManager : MonoBehaviour
         {
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
-            if (!player.isGrounded && playerstatus.currentStamina > 0.0f)
+
+            if (!player.isSwim && !player.isGrounded && playerstatus.currentStamina > 0.0f)
             {
                 //playerstatus.TakeStamina(flapSpendStamina);
                 FlapDoingCheck = true;
@@ -250,7 +270,7 @@ public class PlayerInputManager : MonoBehaviour
                 if (EnableLog)
                     Debug.Log("Flap : " + context.phase.ToString());   
             }
-            else if (player.isGrounded || (player.inWater))
+            else if (player.isGrounded || player.isSwim)
             {
                 JumpDoingCheck = true;
                 spaceClickCheck = true;
@@ -258,7 +278,6 @@ public class PlayerInputManager : MonoBehaviour
                 if (EnableLog)
                     Debug.Log("Jump : " + context.phase.ToString());
             }
-
         }
         else if (context.canceled)
         {

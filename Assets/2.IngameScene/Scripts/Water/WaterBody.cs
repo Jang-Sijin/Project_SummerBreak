@@ -42,10 +42,4 @@ public class WaterBody : MonoBehaviour
             }
         }
     }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

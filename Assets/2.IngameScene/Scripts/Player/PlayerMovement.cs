@@ -28,9 +28,10 @@ public class PlayerMovement : MonoBehaviour
     
     public playerState currentState;
 
-    public PlayerStatus playerstatus;
+    private PlayerStatus playerstatus;
     private Rigidbody m_rigidbody;
 
+    
     public float curspeed;
     [SerializeField]
     private float jumpPower = 5.0f; 
@@ -43,9 +44,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float lerpAngleSpeed = 10.0f;
     
-    public float gravity= -9.81f;
-    private Vector3 curVelocity;
-    Vector2 forwardDirection = Vector2.zero;
+    private float gravity= -9.81f;
 
 
     public bool isGrounded = false;
@@ -66,7 +65,8 @@ public class PlayerMovement : MonoBehaviour
     //Swim
     public float waterSurface, d_fromWaterSurface;
     public bool inWater;
-    float swimLevel = 0.25f;
+    public bool isSwim;
+    public float swimLevel = 0.6f;
 
     //Climb
     public bool isClimbed;
@@ -74,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody>();
+        playerstatus = GetComponent<PlayerStatus>();
         currentState = playerState.Ground_idleState;
         curspeed = playerstatus.walkSpeed;
     }
@@ -85,17 +86,15 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump(Vector2 direction)
     {
-        forwardDirection = Vector2.zero;
         currentState = playerState.jumpState;
         
         Vector3 jumpDirection = new Vector3(0.0f, jumpPower, 0.0f);
-        //Debug.Log("점프함");
+        Debug.Log("점프함");
         m_rigidbody.AddForce(jumpDirection,ForceMode.Impulse);
     }
 
     public void Move(Vector2 direction)
     {
-        forwardDirection = Vector2.zero;
         if (curspeed != playerstatus.runSpeed)
         {
             currentState = playerState.walkState;
@@ -121,7 +120,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Flap()
     {
-        forwardDirection = Vector2.zero;
         currentState = playerState.flapState;
         Vector3 jumpDirection = new Vector3(0.0f, flapPower, 0.0f);
         //Dbug.Log("플랩");
@@ -130,7 +128,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void AirMove(Vector2 direction)
     {
-        forwardDirection = Vector2.zero;
         Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
         curspeed = playerstatus.walkSpeed;
         Vector3 velocity = moveDirection * curspeed;
@@ -233,7 +230,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            forwardDirection = Vector2.zero;
             moveDirection = new Vector3(direction.x, 0, direction.y);
             curspeed = 4.0f; // 가속이 붙은 속도
             Vector3 velocity = moveDirection;
@@ -254,13 +250,17 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log("글라이딩");
         }
     }
-    
 
+    public void isSwimed()
+    {
+        d_fromWaterSurface = waterSurface - transform.position.y;
+        d_fromWaterSurface = Mathf.Clamp(d_fromWaterSurface, float.MinValue, waterSurface);
+        isSwim = d_fromWaterSurface >= swimLevel;
+    }
     public void Swim_idle()
     {
         d_fromWaterSurface = waterSurface - transform.position.y;
         d_fromWaterSurface = Mathf.Clamp(d_fromWaterSurface, float.MinValue, waterSurface);
-
         if (d_fromWaterSurface >= swimLevel)
         {
             d_fromWaterSurface = swimLevel;
@@ -274,19 +274,20 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public void SwimMove(Vector2 direction)
+    public void SwimMove(Vector2 direction, bool moveCheck)
     {
         Swim_idle();
 
-        currentState = playerState.swimmingState;
-        
-        forwardDirection = Vector2.zero;
-        Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
-        
-        m_rigidbody.AddForce(moveDirection,ForceMode.Impulse);
-        Quaternion newRotation = Quaternion.LookRotation(moveDirection);
-        m_rigidbody.rotation = Quaternion.Slerp(m_rigidbody.rotation, newRotation,0.5f);
-        
+        if (moveCheck == true)
+        {
+            currentState = playerState.swimmingState;
+
+            Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
+
+            m_rigidbody.AddForce(moveDirection, ForceMode.Impulse);
+            Quaternion newRotation = Quaternion.LookRotation(moveDirection);
+            m_rigidbody.rotation = Quaternion.Slerp(m_rigidbody.rotation, newRotation, 0.5f);
+        }
     }
 
 
