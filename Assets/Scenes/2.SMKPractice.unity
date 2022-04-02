@@ -11415,8 +11415,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 810587811025517554, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 1564396842}
+    - target: {fileID: 810587811025517554, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
+      propertyPath: flapPower
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 810587811025517554, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
       propertyPath: jumpPower
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 810587811025517554, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
       propertyPath: flapEffect
@@ -11495,6 +11503,11 @@ PrefabInstance:
 --- !u!1 &1564396841 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 810587811025517561, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
+  m_PrefabInstance: {fileID: 1564396840}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1564396842 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1564396842, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
   m_PrefabInstance: {fileID: 1564396840}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1564396846 stripped

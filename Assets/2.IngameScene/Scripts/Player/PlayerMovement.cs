@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerStatus playerstatus;
     private Rigidbody m_rigidbody;
 
+    public Animator _animator;
     
     public float curspeed;
     [SerializeField]
@@ -134,10 +135,13 @@ public class PlayerMovement : MonoBehaviour
     {
         curspeed = playerstatus.walkSpeed;
         currentState = playerState.flapState;
+        _animator.Rebind();
+        _animator.Play("Flap");
         flapEffect.Reinit();
         flapEffect.Play();
         Vector3 jumpDirection = new Vector3(0.0f, flapPower, 0.0f);
         Debug.Log("플랩");
+        m_rigidbody.velocity = Vector3.zero;
         m_rigidbody.AddForce(jumpDirection,ForceMode.Impulse);
     }
 
