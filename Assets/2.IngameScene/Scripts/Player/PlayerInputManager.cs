@@ -17,7 +17,6 @@ public class PlayerInputManager : MonoBehaviour
     public GameObject GlideTrail_Right;
     public GameObject GlideTrail_Left;
     
-    
     [SerializeField]
     private bool moveDoingCheck;
     [SerializeField]
@@ -82,7 +81,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             if (JumpDoingCheck)
             {
-                Debug.Log("수중점프");
+                //Debug.Log("수중점프");
                 player.Jump(moveDirection);
             }
 
@@ -99,7 +98,7 @@ public class PlayerInputManager : MonoBehaviour
                 if (moveDoingCheck)
                 {
                     Vector2 input = player.SquareToCircle(new Vector2(moveDirection.x, moveDirection.y));
-                    Debug.Log($"moveDir{moveDirection}input: {input}");
+                    //Debug.Log($"moveDir{moveDirection}input: {input}");
                     player.Climbing(input);
                 }
                 else
@@ -145,10 +144,6 @@ public class PlayerInputManager : MonoBehaviour
                 player.curspeed = playerstatus.runSpeed;
                 swMove.Stop();
             }
-        }
-        else
-        {
-            player.curspeed = playerstatus.walkSpeed;
         }
         
         if (player.isClimbed && spaceClickCheck)
@@ -220,7 +215,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             swMove.Reset();
             moveDoingCheck = false;
-
+            player.curspeed = playerstatus.walkSpeed;
             if(EnableLog)
                 Debug.Log(context.phase.ToString());
         }
