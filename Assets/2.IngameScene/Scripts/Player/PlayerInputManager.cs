@@ -34,6 +34,8 @@ public class PlayerInputManager : MonoBehaviour
     
     private Stopwatch swMove = new Stopwatch();
     private Stopwatch swSpace = new Stopwatch();
+    private float flapSpendStamina = 10.0f;
+    
 
     public bool EnableLog;
 
@@ -205,8 +207,11 @@ public class PlayerInputManager : MonoBehaviour
         }
         else if (context.performed)
         {
-            moveDoingCheck = true;
-            moveDirection = context.ReadValue<Vector2>();
+            if (!player.attacked)
+            {
+                moveDoingCheck = true;
+                moveDirection = context.ReadValue<Vector2>();
+            }
 
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
@@ -257,15 +262,17 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
 
-            if (!player.isSwim && !player.isGrounded && playerstatus.currentStamina > 0.0f)
+            if (!player.attacked && !player.isSwim && !player.isGrounded && playerstatus.currentStamina > 0.0f)
             {
-                //playerstatus.TakeStamina(flapSpendStamina);
+                if(!playerstatus.DebugMod)
+                    playerstatus.TakeStamina(flapSpendStamina);
+                
                 FlapDoingCheck = true;
                 spaceClickCheck = true;
                 if (EnableLog)
                     Debug.Log("Flap : " + context.phase.ToString());   
             }
-            else if (player.isGrounded || player.isSwim)
+            else if (!player.attacked && (player.isGrounded || player.isSwim))
             {
                 JumpDoingCheck = true;
                 spaceClickCheck = true;

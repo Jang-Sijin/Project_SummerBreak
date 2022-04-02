@@ -48,9 +48,15 @@ public class PlayerEquipmentManager : MonoBehaviour
         colliderAttack.enabled = false;
     }
 
+    public void AttackAwake()
+    {
+        m_player.attacked = true;
+    }
+
     public void AttackCancel()
     {
         m_player.currentState = PlayerMovement.playerState.Ground_idleState;
+        m_player.attacked = false;
     }
     
 }

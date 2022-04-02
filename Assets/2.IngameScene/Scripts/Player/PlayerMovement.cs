@@ -62,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
     private float lastRollRotation;
     public float rollAngle = 0.0f;
     private bool RLcheck = false;           // false: right, left: true
+    public bool attacked = false;
     
     //Swim
     public float waterSurface, d_fromWaterSurface;

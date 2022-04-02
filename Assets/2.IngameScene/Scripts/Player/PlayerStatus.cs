@@ -25,11 +25,16 @@ public class PlayerStatus : MonoBehaviour
     public float runValue = 2.0f;
     public float runSpeed;
 
+    public bool DebugMod = false;
     void Awake()
     {
         currentHealth = maxHealth;
-        currentMaxstamina = 100.0f;
-        currentStamina = currentMaxstamina;
+        if (DebugMod)
+        {
+            currentMaxstamina = 100.0f;
+            currentStamina = currentMaxstamina;
+        }
+
         runSpeed = walkSpeed * runValue;
         currentItem = item.nothing;
     }
@@ -45,7 +50,9 @@ public class PlayerStatus : MonoBehaviour
         currentStamina -= stamina;
         Debug.Log("사용 후 스태미나 : " + currentStamina);
     }
-
+    
+    
+    
     public void HealStamina()
     {
         if (currentStamina >= currentMaxstamina)
