@@ -15,12 +15,13 @@ public class PlayerStatus : MonoBehaviour
 
     public item currentItem;
     
-    public float maxHealth = 100.0f;
-    public float currentHealth;
-
+    [SerializeField]
+    private float maxHealth = 100.0f;
+    [SerializeField]
+    private float currentHealth;
     public float currentMaxstamina;
-    public float currentStamina;
     
+    public float currentStamina;
     public float walkSpeed = 4.0f;
     public float runValue = 2.0f;
     public float runSpeed;
@@ -50,8 +51,12 @@ public class PlayerStatus : MonoBehaviour
         currentStamina -= stamina;
         Debug.Log("사용 후 스태미나 : " + currentStamina);
     }
-    
-    
+
+
+    public void HitHealth(float damageValue)
+    {
+        currentHealth -= damageValue;
+    }
     
     public void HealStamina()
     {

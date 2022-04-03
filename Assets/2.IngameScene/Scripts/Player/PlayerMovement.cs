@@ -18,7 +18,8 @@ public class PlayerMovement : MonoBehaviour
         climb_idleState,
         climbing,
         sliding,
-        attack
+        attack,
+        hit
     }
     
     public playerState currentState;
@@ -63,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
     public float rollAngle = 0.0f;
     private bool RLcheck = false;           // false: right, left: true
     public bool attacked = false;
+    public bool hited = false;
     
     //Swim
     public float waterSurface, d_fromWaterSurface;
@@ -444,4 +446,16 @@ public class PlayerMovement : MonoBehaviour
         return (input.sqrMagnitude >= 1f) ? input.normalized : input;
     }
 
+    public void HitStart(float damageValue)
+    {
+        hited = true;
+        playerstatus.HitHealth(damageValue);
+        currentState = playerState.hit;
+    }
+
+    public void HitEnd()    
+    {
+        hited = false;
+        currentState = playerState.Ground_idleState;
+    }
 }

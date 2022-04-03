@@ -207,7 +207,7 @@ public class PlayerInputManager : MonoBehaviour
         }
         else if (context.performed)
         {
-            if (!player.attacked)
+            if (!player.hited && !player.attacked)
             {
                 moveDoingCheck = true;
                 moveDirection = context.ReadValue<Vector2>();
@@ -235,7 +235,7 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
 
-            if (player.isGrounded && playerstatus.currentItem == PlayerStatus.item.attack)
+            if (!player.hited && player.isGrounded && playerstatus.currentItem == PlayerStatus.item.attack)
             {
                 player.Attack();
             }
@@ -262,7 +262,7 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
 
-            if (!player.attacked && !player.isSwim && !player.isGrounded && playerstatus.currentStamina > 0.0f)
+            if (!player.hited &&!player.attacked && !player.isSwim && !player.isGrounded && playerstatus.currentStamina > 0.0f)
             {
                 if(!playerstatus.DebugMod)
                     playerstatus.TakeStamina(flapSpendStamina);
@@ -272,7 +272,7 @@ public class PlayerInputManager : MonoBehaviour
                 if (EnableLog)
                     Debug.Log("Flap : " + context.phase.ToString());   
             }
-            else if (!player.attacked && (player.isGrounded || player.isSwim))
+            else if (!player.hited && !player.attacked && (player.isGrounded || player.isSwim))
             {
                 JumpDoingCheck = true;
                 spaceClickCheck = true;

@@ -8,14 +8,16 @@ public class AtttackToTarget : Node
 {
     private Transform _lastTarget;
     private Animator _animator;
-
-    private float _attackTime = 1f;
+    private PlayerMovement playerMovement;
+    
+    private float _attackTime = 0.5f;
     private float _attackCounter = 0f;
     
     public AtttackToTarget(Transform transform, Transform t_transform)
     {
         _lastTarget = t_transform;
         _animator = transform.GetComponent<Animator>();
+        playerMovement = t_transform.GetComponent<PlayerMovement>();
     }
 
     public override NodeState Evaluate()
@@ -27,6 +29,7 @@ public class AtttackToTarget : Node
         if (_attackCounter >= _attackTime)
         {
             Debug.Log("공격함");
+            playerMovement.HitStart(NightMonsterBT.damageValue);
             _animator.SetBool("Attack", true);
             _animator.SetBool("Idle", false);
             bool targetIsDead = false;
