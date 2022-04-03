@@ -14,7 +14,7 @@ namespace Monster
      public float thrust = 5.0f;
      public float knockTime = 4.0f;
      private Rigidbody m_rigidbody;
-    
+     private SpawnLoot spawnLoot;
      
      public bool checkHit = false;
      
@@ -22,9 +22,9 @@ namespace Monster
      
      void Start()
      {
-         health = 100.0f;
+         health = 30.0f;
          m_rigidbody = GetComponent<Rigidbody>();
-         
+         spawnLoot = GetComponent<SpawnLoot>();
      }
      
      public void TakeHit()
@@ -39,8 +39,7 @@ namespace Monster
              VisualEffect newExplodeEffect = Instantiate(explodeEffect, transform.position, transform.rotation);
              newExplodeEffect.Play();
              Destroy(newExplodeEffect.gameObject,0.5f);
-             
-             Destroy(gameObject);
+             spawnLoot.spawnLoot = true;
          }
          
      }

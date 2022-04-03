@@ -323,6 +323,7 @@ GameObject:
   - component: {fileID: 6403910201658220750}
   - component: {fileID: 1895617821235727775}
   - component: {fileID: 5929408509493639112}
+  - component: {fileID: 7111785919389056034}
   - component: {fileID: 3357835919303153283}
   m_Layer: 0
   m_Name: NightMonster_Slimyee
@@ -408,6 +409,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPoint: {fileID: 0}
+--- !u!114 &7111785919389056034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450340589363228476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 883e989e05a77a94ca83e19fb75eb842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loot:
+  - {fileID: 7600625946725073331, guid: eb514711c091b06478c1dede76b9c8b3, type: 3}
+  minNumber: 1
+  maxNumber: 3
+  spawnPoint: {fileID: 769732788501885660}
+  spawnLoot: 0
 --- !u!114 &3357835919303153283
 MonoBehaviour:
   m_ObjectHideFlags: 0
