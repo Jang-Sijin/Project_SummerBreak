@@ -17,7 +17,8 @@ namespace Monster
      private SpawnLoot spawnLoot;
      
      public bool checkHit = false;
-     
+
+     public SkinnedMeshRenderer bodyRenderer;
      
      
      void Start()

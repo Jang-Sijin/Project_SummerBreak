@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using UnityEngine.VFX;
@@ -40,8 +42,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float glideGravityMultiplier = 0.01f;
     [SerializeField]
-    private float distoGround = 0.4f;
-    [SerializeField]
     private float lerpAngleSpeed = 10.0f;
     
     private float gravity= -9.81f;
@@ -67,7 +67,8 @@ public class PlayerMovement : MonoBehaviour
     public bool hited = false;
     
     //Swim
-    public float waterSurface, d_fromWaterSurface;
+    public float waterSurface;
+    public float d_fromWaterSurface;
     public bool inWater;
     public bool isSwim;
     public float swimLevel = 0.6f;
@@ -79,6 +80,12 @@ public class PlayerMovement : MonoBehaviour
     private float maxSlopeAngle = 70.0f;
     private RaycastHit slopeHit;
     
+    //Hit
+    public SkinnedMeshRenderer bodyRenderer;
+    public SkinnedMeshRenderer capeRenderer;
+    [SerializeField] 
+    private bool invincible = false;
+    
     void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody>();
@@ -86,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
         currentState = playerState.Ground_idleState;
         curspeed = playerstatus.walkSpeed;
     }
-    
+
     public void Ground_Idle()
     {
         currentState = playerState.Ground_idleState;
@@ -128,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Failing()
     {
-        if (m_rigidbody.velocity.y < 0)
+        if (!isClimbed && m_rigidbody.velocity.y < 0)
         {
             currentState = playerState.failState;
         }
@@ -445,15 +452,39 @@ public class PlayerMovement : MonoBehaviour
     {
         return (input.sqrMagnitude >= 1f) ? input.normalized : input;
     }
-
+    
     public void HitStart(float damageValue)
     {
-        hited = true;
-        playerstatus.HitHealth(damageValue);
-        currentState = playerState.hit;
+        if (!invincible)
+        {
+            hited = true;
+            invincible = true;
+            playerstatus.HitHealth(damageValue);
+            currentState = playerState.hit;
+            StartCoroutine(HitInvincible());
+            StartCoroutine(HitBlink());
+        }
     }
 
-    public void HitEnd()    
+    IEnumerator HitInvincible()
+    {
+        yield return new WaitForSeconds(2.0f);
+        invincible = false;
+    }
+    IEnumerator HitBlink()
+    {
+        while (invincible)
+        {
+            yield return new WaitForSeconds(0.2f);
+            bodyRenderer.enabled = false;
+            capeRenderer.enabled = false;
+            yield return new WaitForSeconds(0.2f);
+            bodyRenderer.enabled = true;
+            capeRenderer.enabled = true;
+        }
+    }
+    
+    public void HitEnd()
     {
         hited = false;
         currentState = playerState.Ground_idleState;
