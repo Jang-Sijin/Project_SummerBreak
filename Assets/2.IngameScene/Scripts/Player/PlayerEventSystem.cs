@@ -5,12 +5,16 @@ using UnityEngine;
 
 // [스크립트 최초 생성자: 장시진]
 // 플레이어의 이벤트 처리와 관련된 스크립트입니다.
+// 수정을 할 때에는 관련 주석을 달아주시고 내용 앞에는 이름을 적어주시면 편합니다. (누가 구현했는지 확인하기 위해서)
+// 예시) [이름] ~을 수행한다.
 
 public class PlayerEventSystem : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject interactionText; // 상호작용이 가능할 때 출력되는 UI Text
+
     // [키 입력 체크]
     private bool eKeyDown; // e버튼(상호작용)
-    
     // [플레이어 근처에 있는 오브젝트]
     private GameObject nearObject;
 
@@ -55,7 +59,7 @@ public class PlayerEventSystem : MonoBehaviour
         if (!other.CompareTag("Item"))
         {
             // 트리거가 발생 UI(E키)를 활성화(출력)한다.
-            transform.Find("Player_SpeechBubble").gameObject.SetActive(true);
+            interactionText.gameObject.SetActive(true);
         }
 
         if (other.CompareTag("QuestNpc") || other.CompareTag("DialogObj"))
@@ -70,9 +74,9 @@ public class PlayerEventSystem : MonoBehaviour
         if (!other.CompareTag("Item"))
         {
             // 트리거가 발생 UI(E키)를 비활성화(출력X)한다.
-            transform.Find("Player_SpeechBubble").gameObject.SetActive(false);
+            interactionText.gameObject.SetActive(false);
         }
-
+        
         if (other.CompareTag("QuestNpc"))
         {
             // print($"[장시진]: Player-NPC Collider 충돌 실패 -> 상호작용 불가능");

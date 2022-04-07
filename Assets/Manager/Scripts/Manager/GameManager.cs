@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
     private bool isMoveMouse = true;
     [SerializeField] private Texture2D cursorDefault;
     [SerializeField] private Texture2D cursorClick;
+
+    [Header("인게임 시간 정보")] 
+    [SerializeField] private TimeController timeController; 
     //---------------------------------------------------------------------------------
     
     #region Game Manager 싱글톤 설정
@@ -70,6 +73,8 @@ public class GameManager : MonoBehaviour
     // 아이템을 획득했을 때 인벤토리에 데이터(아이템)을 저장한다.
     public void AcquireItem(Item item, int count = 1)
     {
+        print($"{slots.Length}");
+        
         // 장비 아이템이 아닐 경우 수행한다. (장비 아이템은 같은 종류여도 따로 slot에 count를 하도록 구현함.)
         if (Item.ItemType.Equipment != item.itemType)
         {
@@ -163,5 +168,11 @@ public class GameManager : MonoBehaviour
             Cursor.visible = true;
             cursorCheckStartTime = 0.0f;
         }
+    }
+    
+    public DateTime GetInGameTime()
+    {
+        print($"{timeController.InGameTime()}");
+        return timeController.InGameTime();
     }
 }
