@@ -6821,6 +6821,11 @@ MonoBehaviour:
   maxSunLightIntensity: 1
   moonLight: {fileID: 1391810238}
   maxMoonLightIntensity: 0.5
+--- !u!1 &323377634 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5118063586186941945, guid: 4ae55e7af65d41f48afe712fb052bc9e, type: 3}
+  m_PrefabInstance: {fileID: 766127374}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &337325951
 GameObject:
   m_ObjectHideFlags: 0
@@ -14822,6 +14827,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4878555968213394181, guid: 4ae55e7af65d41f48afe712fb052bc9e, type: 3}
+      propertyPath: interactionText
+      value: 
+      objectReference: {fileID: 323377634}
     - target: {fileID: 4878555968726782730, guid: 4ae55e7af65d41f48afe712fb052bc9e, type: 3}
       propertyPath: cam
       value: 
@@ -38089,6 +38098,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5733836633188334103, guid: a0d998ce251c4984380e16d7fd1e6da3, type: 3}
+      propertyPath: timeController
+      value: 
+      objectReference: {fileID: 322169935}
     - target: {fileID: 5733836633188334103, guid: a0d998ce251c4984380e16d7fd1e6da3, type: 3}
       propertyPath: playerGameObject
       value: 
