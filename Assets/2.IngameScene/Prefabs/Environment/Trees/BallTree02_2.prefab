@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 3875832366241992762}
   - component: {fileID: 1221809070840762830}
   - component: {fileID: 1885289903059150674}
-  - component: {fileID: 3413195534920347973}
+  - component: {fileID: 2385628543649784122}
   m_Layer: 0
   m_Name: BallTree02_Trunk
   m_TagString: Untagged
@@ -165,8 +165,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3413195534920347973
-MeshCollider:
+--- !u!65 &2385628543649784122
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -175,10 +175,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8262548338187196402, guid: 2eb86cc378d64e1478b3c4ea0c6e0867, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.35, y: 1.04, z: 0.2}
+  m_Center: {x: 0.0040733526, y: 0.54, z: -0.008984478}
 --- !u!1 &1802063893683441823
 GameObject:
   m_ObjectHideFlags: 0
