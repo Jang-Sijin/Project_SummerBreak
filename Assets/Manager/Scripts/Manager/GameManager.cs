@@ -170,7 +170,6 @@ public class GameManager : MonoBehaviour
     
     public DateTime GetInGameTime()
     {
-        print($"{timeController.InGameTime()}");
         return timeController.InGameTime();
     }
 }
