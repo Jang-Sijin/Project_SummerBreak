@@ -2,29 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 using UnityEngine.UI;
 
 [System.Serializable]
 public class DialogUiController : MonoBehaviour
 {
 	public Canvas npcDialogCanvas;				// 캔버스 UI
-	public TMPro.TextMeshProUGUI nameText;		// 현재 대사중인 캐릭터 이름 출력 Text UI
-	public TMPro.TextMeshProUGUI dialogText;	// 대화창 Image UI
+	public TextMeshProUGUI nameText;		// 현재 대사중인 캐릭터 이름 출력 Text UI
+	public TextMeshProUGUI dialogText;	// 대화창 Image UI
 	public GameObject objectArrow;				// 대사가 완료되었을 때 출력되는 커서 오브젝트
 	public Button yesBtn;						// 퀘스트 수락
 	public Button noBtn;						// 퀘스트 거절
 
 #if UNITY_EDITOR
-	private void OnValidate()
-	{
-		npcDialogCanvas = npcDialogCanvas ?? GameObject.Find("NpcDialog_Canvas").GetComponent<Canvas>();
-		nameText = nameText ?? GameObject.Find("NpcDialog_Name_Text").GetComponent<TMPro.TextMeshProUGUI>();
-		dialogText = dialogText ?? GameObject.Find("NpcDialog_Main_Text").GetComponent<TMPro.TextMeshProUGUI>();
-		yesBtn = yesBtn ?? GameObject.Find("YesBtn").GetComponent<Button>();
-		noBtn = noBtn ?? GameObject.Find("NoBtn").GetComponent<Button>();
-
-		CheckComponentValidate();
-	}
+	//private void OnValidate()
+	//{
+	//	npcDialogCanvas = npcDialogCanvas ?? GameObject.Find("NpcDialog_Canvas").GetComponent<Canvas>();
+	//	nameText = nameText ?? GameObject.Find("NpcDialog_Name_Text").GetComponent<TextMeshProUGUI>();
+	//	dialogText = dialogText ?? GameObject.Find("NpcDialog_Dialogue_Text").GetComponent<TextMeshProUGUI>();
+	//	yesBtn = yesBtn ?? GameObject.Find("NpcDialog_Accept_Btn").GetComponent<Button>();
+	//	noBtn = noBtn ?? GameObject.Find("NpcDialog_Refuse_Btn").GetComponent<Button>();
+	//
+	//	CheckComponentValidate();
+	//}
 #endif
 
 	void CheckComponentValidate()

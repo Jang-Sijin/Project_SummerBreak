@@ -39,14 +39,12 @@ public class PlayerEventSystem : MonoBehaviour
         {
             if (nearObject.CompareTag("QuestNpc"))
             {
-                print($"{eKeyDown}");
                 // 다이얼로그 시작 코루틴 시작
                 NpcDialogTrigger npcDialogTrigger = nearObject.GetComponent<NpcDialogTrigger>();
                 npcDialogTrigger.EnterPlayer();
             }
             else if (nearObject.CompareTag("DialogObj"))
             {
-                print($"{eKeyDown}");
                 // 다이얼로그 시작 코루틴 시작
                 ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
                 objDialogTrigger.EnterPlayer();
