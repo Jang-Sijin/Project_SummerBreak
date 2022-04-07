@@ -186,20 +186,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: {fileID: 2160987754013735158}
   cam: {fileID: 0}
---- !u!136 &4878555967531342862
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5725611279840476336}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.08057921
-  m_Height: 0.91
-  m_Direction: 1
-  m_Center: {x: -0.0000038083242, y: 0.37, z: -0.000000049390998}
 --- !u!1 &4878555968159646324
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,6 +882,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &4878555967531342862
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5725611279840476336}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.08057921
+  m_Height: 0.91
+  m_Direction: 1
+  m_Center: {x: -0.0000038083242, y: 0.37, z: -0.000000049390998}
 --- !u!1001 &1574019055245092405
 PrefabInstance:
   m_ObjectHideFlags: 0
