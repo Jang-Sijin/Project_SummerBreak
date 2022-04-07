@@ -141,24 +141,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  playerstatus: {fileID: 810587811025517556}
+  walkEffect: {fileID: 0}
+  jumpEffect: {fileID: 0}
+  flapEffect: {fileID: 0}
+  _animator: {fileID: 0}
   curspeed: 0
   jumpPower: 1.5
   flapPower: 3
   glideGravityMultiplier: 0.1
-  distoGround: 1
   lerpAngleSpeed: 135
-  gravity: 0
   isGrounded: 0
+  isSlope: 0
   lastFrameLerp: 0
   currentFrameLerp: 0
   lastFrameLerpDirection: {x: 0, y: 0, z: 0}
   currentFrameLerpDirection: {x: 0, y: 0, z: 0}
   rollAngle: 0
+  attacked: 0
+  hited: 0
   waterSurface: 0
   d_fromWaterSurface: 0
   inWater: 0
+  isSwim: 0
+  swimLevel: 0.6
   isClimbed: 0
+  bodyRenderer: {fileID: 7968758637275688574}
+  capeRenderer: {fileID: 3410532874492123903}
+  invincible: 0
 --- !u!114 &810587811025517557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,8 +180,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91612d1814badb4d88837d925ec09dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  playerstatus: {fileID: 810587811025517556}
+  GlideTrail_Right: {fileID: 0}
+  GlideTrail_Left: {fileID: 0}
   moveDoingCheck: 0
   JumpDoingCheck: 0
   FlapDoingCheck: 0
@@ -193,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5617f64042c55bc4895bd90e4c7671b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentItem: 0
   maxHealth: 100
   currentHealth: 0
   currentMaxstamina: 0
@@ -200,6 +210,7 @@ MonoBehaviour:
   walkSpeed: 4
   runValue: 2
   runSpeed: 0
+  DebugMod: 0
 --- !u!114 &810587811025517559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,5 +574,15 @@ PrefabInstance:
 --- !u!4 &5901593816148701160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8bb03dfdd66c4424aafc8fcf1d797f38, type: 3}
+  m_PrefabInstance: {fileID: 6227375696529983491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &3410532874492123903 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8734925712558330620, guid: 8bb03dfdd66c4424aafc8fcf1d797f38, type: 3}
+  m_PrefabInstance: {fileID: 6227375696529983491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7968758637275688574 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -5117598870293535107, guid: 8bb03dfdd66c4424aafc8fcf1d797f38, type: 3}
   m_PrefabInstance: {fileID: 6227375696529983491}
   m_PrefabAsset: {fileID: 0}
