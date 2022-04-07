@@ -2662,14 +2662,14 @@ AnimationClip:
         time: 0.53333336
         value: {x: 3.7143494e-10, y: 0.34788597, z: 0.008497439}
         inSlope: {x: -0, y: -0.008078125, z: 3.776738e-17}
-        outSlope: {x: -1.740324e-15, y: -0.008081185, z: 8.812404e-17}
+        outSlope: {x: -0, y: -0.008078125, z: 3.776738e-17}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.6666667
-        value: {x: 3.7143494e-10, y: 0.34749427, z: 0.008497439}
+        value: {x: 3.7143494e-10, y: 0.32442182, z: 0.008497438}
         inSlope: {x: -0, y: 1.2085561e-15, z: 3.776738e-17}
         outSlope: {x: -0, y: 1.2085561e-15, z: 3.776738e-17}
         tangentMode: 0
@@ -19881,7 +19881,7 @@ AnimationClip:
         time: 0.53333336
         value: 3.7143494e-10
         inSlope: -0
-        outSlope: -1.740324e-15
+        outSlope: -0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -19918,14 +19918,14 @@ AnimationClip:
         time: 0.53333336
         value: 0.34788597
         inSlope: -0.008078125
-        outSlope: -0.008081185
+        outSlope: -0.008078125
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: 0.34749427
+        value: 0.32442182
         inSlope: 1.2085561e-15
         outSlope: 1.2085561e-15
         tangentMode: 0
@@ -19955,14 +19955,14 @@ AnimationClip:
         time: 0.53333336
         value: 0.008497439
         inSlope: 3.776738e-17
-        outSlope: 8.812404e-17
+        outSlope: 3.776738e-17
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: 0.008497439
+        value: 0.008497438
         inSlope: 3.776738e-17
         outSlope: 3.776738e-17
         tangentMode: 0
@@ -43107,6 +43107,13 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0
+    functionName: AttackAwake
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.033333335
     functionName: AttackStart
     data: 

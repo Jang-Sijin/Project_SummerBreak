@@ -17,7 +17,6 @@ public class PlayerInputManager : MonoBehaviour
     public GameObject GlideTrail_Right;
     public GameObject GlideTrail_Left;
     
-    
     [SerializeField]
     private bool moveDoingCheck;
     [SerializeField]
@@ -35,6 +34,8 @@ public class PlayerInputManager : MonoBehaviour
     
     private Stopwatch swMove = new Stopwatch();
     private Stopwatch swSpace = new Stopwatch();
+    private float flapSpendStamina = 10.0f;
+    
 
     public bool EnableLog;
 
@@ -82,7 +83,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             if (JumpDoingCheck)
             {
-                Debug.Log("수중점프");
+                //Debug.Log("수중점프");
                 player.Jump(moveDirection);
             }
 
@@ -99,7 +100,7 @@ public class PlayerInputManager : MonoBehaviour
                 if (moveDoingCheck)
                 {
                     Vector2 input = player.SquareToCircle(new Vector2(moveDirection.x, moveDirection.y));
-                    Debug.Log($"moveDir{moveDirection}input: {input}");
+                    //Debug.Log($"moveDir{moveDirection}input: {input}");
                     player.Climbing(input);
                 }
                 else
@@ -145,10 +146,6 @@ public class PlayerInputManager : MonoBehaviour
                 player.curspeed = playerstatus.runSpeed;
                 swMove.Stop();
             }
-        }
-        else
-        {
-            player.curspeed = playerstatus.walkSpeed;
         }
         
         if (player.isClimbed && spaceClickCheck)
@@ -210,8 +207,11 @@ public class PlayerInputManager : MonoBehaviour
         }
         else if (context.performed)
         {
-            moveDoingCheck = true;
-            moveDirection = context.ReadValue<Vector2>();
+            if (!player.hited && !player.attacked)
+            {
+                moveDoingCheck = true;
+                moveDirection = context.ReadValue<Vector2>();
+            }
 
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
@@ -220,7 +220,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             swMove.Reset();
             moveDoingCheck = false;
-
+            player.curspeed = playerstatus.walkSpeed;
             if(EnableLog)
                 Debug.Log(context.phase.ToString());
         }
@@ -235,7 +235,7 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
 
-            if (player.isGrounded && playerstatus.currentItem == PlayerStatus.item.attack)
+            if (!player.hited && player.isGrounded && playerstatus.currentItem == PlayerStatus.item.attack)
             {
                 player.Attack();
             }
@@ -262,15 +262,17 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
 
-            if (!player.isSwim && !player.isGrounded && playerstatus.currentStamina > 0.0f)
+            if (!player.hited &&!player.attacked && !player.isSwim && !player.isGrounded && playerstatus.currentStamina > 0.0f)
             {
-                //playerstatus.TakeStamina(flapSpendStamina);
+                if(!playerstatus.DebugMod)
+                    playerstatus.TakeStamina(flapSpendStamina);
+                
                 FlapDoingCheck = true;
                 spaceClickCheck = true;
                 if (EnableLog)
                     Debug.Log("Flap : " + context.phase.ToString());   
             }
-            else if (player.isGrounded || player.isSwim)
+            else if (!player.hited && !player.attacked && (player.isGrounded || player.isSwim))
             {
                 JumpDoingCheck = true;
                 spaceClickCheck = true;

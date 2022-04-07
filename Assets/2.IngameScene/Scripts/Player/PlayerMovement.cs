@@ -1,11 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-using UnityEngine.Serialization;
 using Debug = UnityEngine.Debug;
+using UnityEngine.VFX;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -23,14 +20,19 @@ public class PlayerMovement : MonoBehaviour
         climb_idleState,
         climbing,
         sliding,
-        attack
+        attack,
+        hit
     }
     
     public playerState currentState;
+    public VisualEffect walkEffect;
+    public VisualEffect jumpEffect;
+    public VisualEffect flapEffect;
 
     private PlayerStatus playerstatus;
     private Rigidbody m_rigidbody;
 
+    public Animator _animator;
     
     public float curspeed;
     [SerializeField]
@@ -40,14 +42,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float glideGravityMultiplier = 0.01f;
     [SerializeField]
-    private float distoGround = 0.4f;
-    [SerializeField]
     private float lerpAngleSpeed = 10.0f;
     
     private float gravity= -9.81f;
 
 
     public bool isGrounded = false;
+    [SerializeField] 
+    private bool isSlope;
 
     private float startTime = 0.0f;
     private float LerpTime = 0.0f;
@@ -61,9 +63,12 @@ public class PlayerMovement : MonoBehaviour
     private float lastRollRotation;
     public float rollAngle = 0.0f;
     private bool RLcheck = false;           // false: right, left: true
+    public bool attacked = false;
+    public bool hited = false;
     
     //Swim
-    public float waterSurface, d_fromWaterSurface;
+    public float waterSurface;
+    public float d_fromWaterSurface;
     public bool inWater;
     public bool isSwim;
     public float swimLevel = 0.6f;
@@ -71,14 +76,30 @@ public class PlayerMovement : MonoBehaviour
     //Climb
     public bool isClimbed;
     
+    //Slope
+    private float maxSlopeAngle = 70.0f;
+    private RaycastHit slopeHit;
+    
+    //Hit
+    public SkinnedMeshRenderer bodyRenderer;
+    public SkinnedMeshRenderer capeRenderer;
+    private Material bodyMaterial;
+    private Material capeMaterial;
+    [SerializeField] 
+    private bool invincible = false;
+    
     void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody>();
         playerstatus = GetComponent<PlayerStatus>();
         currentState = playerState.Ground_idleState;
         curspeed = playerstatus.walkSpeed;
+        bodyMaterial = bodyRenderer.material;
+        capeMaterial = capeRenderer.material;
+        bodyMaterial.SetFloat("RedLv", 0.0f);
+        capeMaterial.SetFloat("RedLv",0.0f);
     }
-    
+
     public void Ground_Idle()
     {
         currentState = playerState.Ground_idleState;
@@ -87,8 +108,8 @@ public class PlayerMovement : MonoBehaviour
     public void Jump(Vector2 direction)
     {
         currentState = playerState.jumpState;
-        
         Vector3 jumpDirection = new Vector3(0.0f, jumpPower, 0.0f);
+        jumpEffect.Play();
         Debug.Log("점프함");
         m_rigidbody.AddForce(jumpDirection,ForceMode.Impulse);
     }
@@ -104,15 +125,23 @@ public class PlayerMovement : MonoBehaviour
             currentState = playerState.runState;
         }
         Vector3 moveDirection = new Vector3(direction.x, 0.0f, direction.y);
-        float angle = Mathf.Atan2(moveDirection.x,moveDirection.z) * Mathf.Rad2Deg;
-        m_rigidbody.velocity = moveDirection * curspeed;
+        if (isSlope)
+        {
+            
+            m_rigidbody.velocity = GetSlopeMoveDirection(moveDirection) * curspeed;
+        }
+        else
+        {
+            m_rigidbody.velocity = moveDirection * curspeed;
+        }
         Quaternion newRotation = Quaternion.LookRotation(moveDirection);
         m_rigidbody.rotation = Quaternion.Slerp(m_rigidbody.rotation, newRotation,0.5f);
+        walkEffect.Play();
     }
 
     public void Failing()
     {
-        if (m_rigidbody.velocity.y < 0)
+        if (!isClimbed && m_rigidbody.velocity.y < 0)
         {
             currentState = playerState.failState;
         }
@@ -120,16 +149,21 @@ public class PlayerMovement : MonoBehaviour
 
     public void Flap()
     {
+        curspeed = playerstatus.walkSpeed;
         currentState = playerState.flapState;
+        _animator.Rebind();
+        _animator.Play("Flap");
+        flapEffect.Reinit();
+        flapEffect.Play();
         Vector3 jumpDirection = new Vector3(0.0f, flapPower, 0.0f);
-        //Dbug.Log("플랩");
+        Debug.Log("플랩");
+        m_rigidbody.velocity = Vector3.zero;
         m_rigidbody.AddForce(jumpDirection,ForceMode.Impulse);
     }
 
     public void AirMove(Vector2 direction)
     {
         Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
-        curspeed = playerstatus.walkSpeed;
         Vector3 velocity = moveDirection * curspeed;
         velocity.y = m_rigidbody.velocity.y;
         float angle = Mathf.Atan2(moveDirection.x,moveDirection.z) * Mathf.Rad2Deg;
@@ -139,6 +173,7 @@ public class PlayerMovement : MonoBehaviour
     
     public void Glider(Vector2 direction, bool moveCheck)
     {
+        curspeed = playerstatus.walkSpeed;
         Vector3 moveDirection = Vector3.zero;
         currentState = playerState.glideState;
         // Vector3 LerpTimeDirection;
@@ -253,9 +288,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void isSwimed()
     {
-        d_fromWaterSurface = waterSurface - transform.position.y;
-        d_fromWaterSurface = Mathf.Clamp(d_fromWaterSurface, float.MinValue, waterSurface);
-        isSwim = d_fromWaterSurface >= swimLevel;
+        if (inWater)
+        {
+            d_fromWaterSurface = waterSurface - transform.position.y;
+            d_fromWaterSurface = Mathf.Clamp(d_fromWaterSurface, float.MinValue, waterSurface);
+            isSwim = d_fromWaterSurface >= swimLevel;
+        }
     }
     public void Swim_idle()
     {
@@ -306,10 +344,11 @@ public class PlayerMovement : MonoBehaviour
 
         Debug.DrawRay(transform.position, -Vector3.up, Color.red);
         int layerMask = (-1) - (1 << LayerMask.NameToLayer("Water"));
-        
+        OnSlope();
         //isGrounded = Physics.Raycast(transform.position, -Vector3.up, layerMask);
         //isGrounded = Physics.CheckSphere(transform.position - new Vector3(0, 1, 0), distoGround, layerMask);
-        isGrounded = Physics.Raycast(transform.position, -Vector3.up,0.1f, layerMask);
+        isGrounded = Physics.Raycast(transform.position, -Vector3.up, 0.1f, layerMask) ||
+                     isSlope;
 
 
         if (!isClimbed && (inWater == false || isGrounded))
@@ -318,18 +357,39 @@ public class PlayerMovement : MonoBehaviour
             m_rigidbody.isKinematic = false;
         }
     }
-    public void CheckForClimb()
+
+    private void OnSlope()
     {
-        Vector3 origin = transform.position;
-        RaycastHit hit;
-        if (Physics.Raycast(origin, transform.forward, out hit, 0.6f))
+        float playerHeight = 1.5f;
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, 
+            playerHeight * 0.5f + 0.3f))
         {
-            isClimbed = true;
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            isSlope = angle < maxSlopeAngle && angle != 0;
         }
         else
         {
-            isClimbed = false;
+            isSlope = false;
         }
+    }
+
+    private Vector3 GetSlopeMoveDirection(Vector3 moveDirection)
+    {
+        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
+    }
+    
+    public void CheckForClimb()
+    {
+            Vector3 origin = transform.position;
+            RaycastHit hit;
+            if (!isGrounded && Physics.Raycast(origin, transform.forward, out hit, 0.6f))
+            {
+                isClimbed = true;
+            }
+            else
+            {
+                isClimbed = false;
+            }
     }
     public void EnterClimb()
     {
@@ -398,5 +458,58 @@ public class PlayerMovement : MonoBehaviour
     {
         return (input.sqrMagnitude >= 1f) ? input.normalized : input;
     }
+    
+    public void HitStart(float damageValue, Rigidbody monsterRigidbody)
+    {
+        if (!invincible)
+        {
+            hited = true;
+            invincible = true;
+            bodyMaterial.SetFloat("RedLv", 0.1f);
+            capeMaterial.SetFloat("RedLv",0.1f);
+            playerstatus.HitHealth(damageValue);
+            currentState = playerState.hit;
+            StartCoroutine(HitInvincible());
+            StartCoroutine(HitBlink());
+            Vector3 differnce = transform.position - monsterRigidbody.transform.position;
+            differnce = differnce.normalized * 5.0f;
+            m_rigidbody.AddForce(differnce,ForceMode.Impulse);
+            StartCoroutine(KnockCo(monsterRigidbody));
+        }
+    }
 
+    IEnumerator KnockCo(Rigidbody monster)
+    {
+        if (monster != null)
+        {
+            yield return new WaitForSeconds(0.1f);
+            monster.velocity = Vector3.zero;
+        }
+    }
+    
+    IEnumerator HitInvincible()
+    {
+        yield return new WaitForSeconds(2.0f);
+        invincible = false;
+    }
+    IEnumerator HitBlink()
+    {
+        while (invincible)
+        {
+            yield return new WaitForSeconds(0.2f);
+            bodyRenderer.enabled = false;
+            capeRenderer.enabled = false;
+            yield return new WaitForSeconds(0.2f);
+            bodyRenderer.enabled = true;
+            capeRenderer.enabled = true;
+        }
+    }
+    
+    public void HitEnd()
+    {
+        hited = false;
+        bodyMaterial.SetFloat("RedLv", 0.0f);
+        capeMaterial.SetFloat("RedLv",0.0f);
+        currentState = playerState.Ground_idleState;
+    }
 }

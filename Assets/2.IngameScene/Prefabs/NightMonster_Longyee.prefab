@@ -357,6 +357,7 @@ GameObject:
   - component: {fileID: 2297151150283947963}
   - component: {fileID: 2297151150283947964}
   - component: {fileID: 2297151150283947967}
+  - component: {fileID: 8000376521013750880}
   - component: {fileID: 2297151150283947966}
   - component: {fileID: 2297151150283947961}
   m_Layer: 0
@@ -430,6 +431,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &8000376521013750880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2297151150283947962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 883e989e05a77a94ca83e19fb75eb842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loot:
+  - {fileID: 7600625946725073331, guid: eb514711c091b06478c1dede76b9c8b3, type: 3}
+  minNumber: 1
+  maxNumber: 3
+  spawnPoint: {fileID: 0}
+  spawnLoot: 0
 --- !u!114 &2297151150283947966
 MonoBehaviour:
   m_ObjectHideFlags: 0
