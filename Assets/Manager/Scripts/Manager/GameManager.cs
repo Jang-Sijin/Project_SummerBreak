@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     private bool isMoveMouse = true;
     [SerializeField] private Texture2D cursorDefault;
     [SerializeField] private Texture2D cursorClick;
+
+    [Header("인게임 시간")] [SerializeField] private TimeController timeController; 
     //---------------------------------------------------------------------------------
     
     #region Game Manager 싱글톤 설정
@@ -57,6 +59,11 @@ public class GameManager : MonoBehaviour
         beforeMousePosition = Input.mousePosition;
         // 마우스 커서 이미지 할당 (Default:기본)
         StartCoroutine(SetMouseCursor());
+    }
+
+    private void Update()
+    {
+        print($"{timeController.InGameTime()}");
     }
 
     // 인게임 시간 정지
@@ -163,5 +170,11 @@ public class GameManager : MonoBehaviour
             Cursor.visible = true;
             cursorCheckStartTime = 0.0f;
         }
+    }
+
+    public DateTime InGameTime()
+    {
+        print($"{timeController.InGameTime()}");
+        return timeController.InGameTime();
     }
 }
