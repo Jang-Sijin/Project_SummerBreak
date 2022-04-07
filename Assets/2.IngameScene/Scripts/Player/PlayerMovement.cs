@@ -83,6 +83,8 @@ public class PlayerMovement : MonoBehaviour
     //Hit
     public SkinnedMeshRenderer bodyRenderer;
     public SkinnedMeshRenderer capeRenderer;
+    private Material bodyMaterial;
+    private Material capeMaterial;
     [SerializeField] 
     private bool invincible = false;
     
@@ -92,6 +94,10 @@ public class PlayerMovement : MonoBehaviour
         playerstatus = GetComponent<PlayerStatus>();
         currentState = playerState.Ground_idleState;
         curspeed = playerstatus.walkSpeed;
+        bodyMaterial = bodyRenderer.material;
+        capeMaterial = capeRenderer.material;
+        bodyMaterial.SetFloat("RedLv", 0.0f);
+        capeMaterial.SetFloat("RedLv",0.0f);
     }
 
     public void Ground_Idle()
@@ -453,19 +459,34 @@ public class PlayerMovement : MonoBehaviour
         return (input.sqrMagnitude >= 1f) ? input.normalized : input;
     }
     
-    public void HitStart(float damageValue)
+    public void HitStart(float damageValue, Rigidbody monsterRigidbody)
     {
         if (!invincible)
         {
             hited = true;
             invincible = true;
+            bodyMaterial.SetFloat("RedLv", 0.1f);
+            capeMaterial.SetFloat("RedLv",0.1f);
             playerstatus.HitHealth(damageValue);
             currentState = playerState.hit;
             StartCoroutine(HitInvincible());
             StartCoroutine(HitBlink());
+            Vector3 differnce = transform.position - monsterRigidbody.transform.position;
+            differnce = differnce.normalized * 5.0f;
+            m_rigidbody.AddForce(differnce,ForceMode.Impulse);
+            StartCoroutine(KnockCo(monsterRigidbody));
         }
     }
 
+    IEnumerator KnockCo(Rigidbody monster)
+    {
+        if (monster != null)
+        {
+            yield return new WaitForSeconds(0.1f);
+            monster.velocity = Vector3.zero;
+        }
+    }
+    
     IEnumerator HitInvincible()
     {
         yield return new WaitForSeconds(2.0f);
@@ -487,6 +508,8 @@ public class PlayerMovement : MonoBehaviour
     public void HitEnd()
     {
         hited = false;
+        bodyMaterial.SetFloat("RedLv", 0.0f);
+        capeMaterial.SetFloat("RedLv",0.0f);
         currentState = playerState.Ground_idleState;
     }
 }

@@ -7360,6 +7360,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7116862590868623687, guid: 0d0d17c0f95ebf24599df5abe5dad7a3, type: 3}
   m_PrefabInstance: {fileID: 992368801}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &994404232 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3158275083409669874, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
+  m_PrefabInstance: {fileID: 1564396840}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1002189430 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4603238727476349278, guid: 3986b3b2baccf7348bc9b732519fe64d, type: 3}
@@ -7979,6 +7984,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1074856335}
   m_CullTransparentMesh: 1
+--- !u!1 &1076560162 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2112152729173688874, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
+  m_PrefabInstance: {fileID: 1564396840}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1111045758
 GameObject:
   m_ObjectHideFlags: 0
@@ -11505,6 +11515,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 810587811025517554, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
+      propertyPath: bodyObject
+      value: 
+      objectReference: {fileID: 994404232}
+    - target: {fileID: 810587811025517554, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
+      propertyPath: capeObject
+      value: 
+      objectReference: {fileID: 1076560162}
+    - target: {fileID: 810587811025517554, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
       propertyPath: flapEffect
       value: 
       objectReference: {fileID: 87826797}
@@ -11517,9 +11535,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 96765215}
     - target: {fileID: 810587811025517554, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
+      propertyPath: bodyMaterial
+      value: 
+      objectReference: {fileID: 994404232}
+    - target: {fileID: 810587811025517554, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
       propertyPath: bodyRenderer
       value: 
       objectReference: {fileID: 1523139649}
+    - target: {fileID: 810587811025517554, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
+      propertyPath: capeMaterial
+      value: 
+      objectReference: {fileID: 1076560162}
     - target: {fileID: 810587811025517554, guid: a3a1c04cfa6e4fa4b8504b0cf47c10c4, type: 3}
       propertyPath: capeRenderer
       value: 
@@ -13032,6 +13058,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8457710150263207072, guid: b8d7adb92027db14e9dc8d39252feea5, type: 3}
   m_PrefabInstance: {fileID: 713254727}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &1675872959 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2297151148924340623, guid: 310869ad426818444b9a156ace3d4c01, type: 3}
+  m_PrefabInstance: {fileID: 2297151148884203850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1681690333
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13565,6 +13596,11 @@ Transform:
   m_Father: {fileID: 858552110}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &1742764761 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4040929263519624307, guid: 4298bb10fe5793241bc8f1d4321d0e7b, type: 3}
+  m_PrefabInstance: {fileID: 769732789056755055}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1742847541
 GameObject:
   m_ObjectHideFlags: 0
@@ -16943,6 +16979,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3357835919303153283, guid: 4298bb10fe5793241bc8f1d4321d0e7b, type: 3}
+      propertyPath: eyeRenderer
+      value: 
+      objectReference: {fileID: 1742764761}
+    - target: {fileID: 3357835919303153283, guid: 4298bb10fe5793241bc8f1d4321d0e7b, type: 3}
       propertyPath: bodyRenderer
       value: 
       objectReference: {fileID: 769732789056755056}
@@ -17639,6 +17679,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2297151150283947961, guid: 310869ad426818444b9a156ace3d4c01, type: 3}
+      propertyPath: eyeRenderer
+      value: 
+      objectReference: {fileID: 1675872959}
     - target: {fileID: 2297151150283947961, guid: 310869ad426818444b9a156ace3d4c01, type: 3}
       propertyPath: bodyRenderer
       value: 
