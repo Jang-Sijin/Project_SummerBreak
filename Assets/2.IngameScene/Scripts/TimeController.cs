@@ -120,9 +120,4 @@ public class TimeController : MonoBehaviour
 
         return difference;
     }
-
-    public DateTime InGameTime()
-    {
-        return currentTime;
-    }
 }
