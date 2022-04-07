@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5189554310286384532
+--- !u!1 &6909939982298381370
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5189554310286384539}
-  - component: {fileID: 5189554310286384538}
+  - component: {fileID: 4521920492653383745}
+  - component: {fileID: 3203960978324660240}
   m_Layer: 0
-  m_Name: SceneManager
+  m_Name: JsonManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5189554310286384539
+--- !u!4 &4521920492653383745
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5189554310286384532}
+  m_GameObject: {fileID: 6909939982298381370}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 534.0604, y: 326.8077, z: -3.79198}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5189554310286384538
+--- !u!114 &3203960978324660240
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5189554310286384532}
-  m_Enabled: 0
+  m_GameObject: {fileID: 6909939982298381370}
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5363f226254d6e45b3f948149f5aa44, type: 3}
+  m_Script: {fileID: 11500000, guid: bcf9abf09714efd4b9c10a7d092fc202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: 2.IngameScene
-  loadingSceneName: LoadingUI
+  dataPath: /SaveFile/savefile.json
+  selectSaveData:
+    name: 
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    hp: 0
+    stamina: 0
+    saveTime: 
