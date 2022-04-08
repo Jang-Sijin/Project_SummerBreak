@@ -7,12 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Rock03
-  m_Shader: {fileID: -6465566751694194690, guid: 2551d03a3e1165f4096299846b4ac576, type: 3}
+  m_Name: Rock033
+  m_Shader: {fileID: -6465566751694194690, guid: ed66bfc99d39472499b01b9e19b573dc, type: 3}
   m_ShaderKeywords: BOOLEAN_04E7CBFCEB8A4D21BFFB5290882612D4_ON BOOLEAN_A755EEC42A7440C284306694860D10A3_ON
     BOOLEAN_E133D33A6AEA41079504B17ADBDE5FE6_ON
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -20,6 +20,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - BaseColorTexture:
+        m_Texture: {fileID: 2800000, guid: 8ca600a96d309e74d8ffa154a5bb138b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Side1:
         m_Texture: {fileID: 2800000, guid: feffe8d574b33214eabbe5a093a37341, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -109,6 +113,7 @@ Material:
     - Blend_Sharpness_Top: 0.2
     - FingerprintStrength: 1
     - FlatSurfaceStrength: -0.15
+    - RedLv: 0
     - SmoothnessStrength: 0.6
     - _AlphaClip: 0
     - _Blend: 0
@@ -137,12 +142,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_1f6b97e51db74853ab9a671b7b63a3e0: {r: 0.248, g: 0.20737931, b: 0.1582069, a: 0}
-    - Color_e2a6c02d8805468eafb64000a208f6de: {r: 0.185, g: 0.15479591, b: 0.11704082, a: 0}
-    - ShadowColor01: {r: 0.235, g: 0.19650862, b: 0.1499138, a: 1}
-    - ShadowColor02: {r: 0.156, g: 0.13044828, b: 0.09951725, a: 1}
+    - Color_1f6b97e51db74853ab9a671b7b63a3e0: {r: 0.138, g: 0.12545453, b: 0.11081818, a: 0}
+    - Color_e2a6c02d8805468eafb64000a208f6de: {r: 0.085, g: 0.07828948, b: 0.06934211, a: 0}
+    - ShadowColor01: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 1}
+    - ShadowColor02: {r: 0.11320752, g: 0.11320752, b: 0.11320752, a: 1}
     - TextureScale: {r: 1, g: 1, b: 0, a: 0}
-    - _BaseColor: {r: 0.4811321, g: 0.35679337, b: 0.31545925, a: 1}
+    - _BaseColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
