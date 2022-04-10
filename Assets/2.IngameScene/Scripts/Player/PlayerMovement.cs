@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isClimbed;
     
     //Slope
-    private float maxSlopeAngle = 70.0f;
+    private float maxSlopeAngle = 50.0f;
     private RaycastHit slopeHit;
     
     //Hit
@@ -103,15 +103,16 @@ public class PlayerMovement : MonoBehaviour
     public void Ground_Idle()
     {
         currentState = playerState.Ground_idleState;
+        m_rigidbody.velocity = Vector3.zero;
     }
 
     public void Jump(Vector2 direction)
     {
-        currentState = playerState.jumpState;
-        Vector3 jumpDirection = new Vector3(0.0f, jumpPower, 0.0f);
-        jumpEffect.Play();
-        Debug.Log("점프함");
-        m_rigidbody.AddForce(jumpDirection,ForceMode.Impulse);
+            currentState = playerState.jumpState;
+            Vector3 jumpDirection = new Vector3(0.0f, jumpPower, 0.0f);
+            jumpEffect.Play();
+            Debug.Log("[이민호] 점프함");
+            m_rigidbody.AddForce(jumpDirection, ForceMode.Impulse);
     }
 
     public void Move(Vector2 direction)
@@ -156,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
         flapEffect.Reinit();
         flapEffect.Play();
         Vector3 jumpDirection = new Vector3(0.0f, flapPower, 0.0f);
-        Debug.Log("플랩");
+        Debug.Log("[이민호] 플랩");
         m_rigidbody.velocity = Vector3.zero;
         m_rigidbody.AddForce(jumpDirection,ForceMode.Impulse);
     }
@@ -167,6 +168,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 velocity = moveDirection * curspeed;
         velocity.y = m_rigidbody.velocity.y;
         float angle = Mathf.Atan2(moveDirection.x,moveDirection.z) * Mathf.Rad2Deg;
+        //Debug.Log("[이민호] 공중이동");
         m_rigidbody.velocity = velocity;
         m_rigidbody.rotation = Quaternion.Euler(0,angle,0);
     }
@@ -342,14 +344,14 @@ public class PlayerMovement : MonoBehaviour
     public void IsGround()
     {
 
-        Debug.DrawRay(transform.position, -Vector3.up, Color.red);
+        //Debug.DrawRay(transform.position, -Vector3.up, Color.red);
         int layerMask = (-1) - (1 << LayerMask.NameToLayer("Water"));
         OnSlope();
         //isGrounded = Physics.Raycast(transform.position, -Vector3.up, layerMask);
         //isGrounded = Physics.CheckSphere(transform.position - new Vector3(0, 1, 0), distoGround, layerMask);
+        Debug.DrawLine(transform.position,transform.position - Vector3.up * 0.1f,Color.red,1.0f);
         isGrounded = Physics.Raycast(transform.position, -Vector3.up, 0.1f, layerMask) ||
                      isSlope;
-
 
         if (!isClimbed && (inWater == false || isGrounded))
         {
@@ -360,15 +362,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnSlope()
     {
-        float playerHeight = 1.5f;
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, 
-            playerHeight * 0.5f + 0.3f))
+        int layerMask = (-1) - (1 << LayerMask.NameToLayer("Water"));
+        
+        //Debug.DrawLine(transform.position,transform.position - Vector3.up * 0.3f,Color.red,0.5f);
+        if (Physics.Raycast(transform.position, -Vector3.up, out slopeHit, 
+            0.1f,layerMask))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             isSlope = angle < maxSlopeAngle && angle != 0;
+            if (isSlope)
+            {
+                //Debug.Log($"[이민호] SlopeAngle:{angle}");
+            }
         }
         else
         {
+            //Debug.Log("[이민호] 아님!");
             isSlope = false;
         }
     }
@@ -380,7 +389,7 @@ public class PlayerMovement : MonoBehaviour
     
     public void CheckForClimb()
     {
-            Vector3 origin = transform.position;
+            Vector3 origin = new Vector3(transform.position.x,transform.position.y + 0.75f, transform.position.z);
             RaycastHit hit;
             if (!isGrounded && Physics.Raycast(origin, transform.forward, out hit, 0.6f))
             {
