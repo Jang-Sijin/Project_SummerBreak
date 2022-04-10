@@ -10,6 +10,8 @@ public class CopyPosition : MonoBehaviour
     [SerializeField]
     private Transform target; // 쫒아가야할 대상 Transform
 
+    [SerializeField] private int minimapCameraHeight = 15;
+
     private void Update()
     {
         // 쫒아가야할 대상이 없으면 종료
@@ -18,7 +20,7 @@ public class CopyPosition : MonoBehaviour
 
         transform.position = new Vector3(
             (x ? target.position.x : transform.position.x),
-            (y ? target.position.y : transform.position.y),
+            (y ? target.position.y + minimapCameraHeight : transform.position.y),
             (z ? target.position.z : transform.position.z));
     }
 }
