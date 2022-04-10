@@ -47,6 +47,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        foreach (var data in SaveDataDictionary.saveDataDictionary)
+        {
+            print($"{data.Key}, {data.Value}");
+            print($"name:{data.Value.name}, position:{data.Value.position}, rotation:{data.Value.rotation}, hp:{data.Value.hp}, stamina:{data.Value.stamina},");
+        }
         InitLoadSaveData();
             
         // 시작시 마우스 커서 기본으로 설정

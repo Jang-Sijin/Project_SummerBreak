@@ -34,7 +34,7 @@ using UnityEngine.UIElements;
             if (instance == null)
             {
                 instance = this;
-                DontDestroyOnLoad(instance);
+                // DontDestroyOnLoad(instance);
                 SceneManager.sceneLoaded += OnSceneLoaded;
             } 
             else
