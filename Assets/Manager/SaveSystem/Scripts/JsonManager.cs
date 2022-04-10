@@ -12,10 +12,11 @@ public class JsonManager : MonoBehaviour
 
     private int saveDataSlotCount = 10;
     private string currentSelectBtnName;
+    private string clearSlotName = "빈 슬롯";
 
-    public SaveInfo selectSaveData;
-    
-    
+    [SerializeField]
+    private SaveInfo selectSaveData;
+
     #region Singleton
     public static JsonManager instance; // Json Manager을 싱글톤으로 관리
     private void Awake()
@@ -76,11 +77,13 @@ public class JsonManager : MonoBehaviour
 
     public void Save(string saveSlotKey)
     {
-        saveDataDictionary[saveSlotKey] = new SaveInfo($"{saveSlotKey}",
-            new Vector3(0, 0, 0), new Vector3(0, 0, 0),
-            0, 0,
-            DateTime.Now.ToString("yyyy.MM.dd ") +
-            DateTime.Now.ToString("HH:mm:ss tt ") + DateTime.Now.DayOfWeek.ToString().ToUpper().Substring(0, 3));
+        saveDataDictionary[saveSlotKey] = new SaveInfo(
+            $"{saveSlotKey}",
+            new Vector3(0, 0, 0), 
+            new Vector3(0, 0, 0),
+            0, 
+            0,
+            DateTime.Now.ToString("yyyy.MM.dd ") + DateTime.Now.ToString("HH:mm:ss tt ") + DateTime.Now.DayOfWeek.ToString().ToUpper().Substring(0, 3));
 
         // Formatting.Indented -> Json 자동으로 라인/들여쓰기 적용 [참고: https://www.csharpstudy.com/Data/Json-beautifier.aspx]
         string jdata = JsonConvert.SerializeObject(saveDataDictionary, Formatting.Indented);
@@ -97,7 +100,7 @@ public class JsonManager : MonoBehaviour
         for (int i = 0; i < saveDataSlotCount; i++)
         {
             // transform은 JsonManager 오브젝트의 transform으로 설정합니다. (필수 확인: JsonManager 오브젝트의 위치(0,0,0), 회전(0,0,0)으로 설정해줘야 합니다.)
-            createData[$"SaveSlot ({i})"] = new SaveInfo("빈 슬롯", 
+            createData[$"SaveSlot ({i})"] = new SaveInfo(clearSlotName, 
                 new Vector3(0,0,0), 
                 new Vector3(0,0,0), 
                 0, 
@@ -115,7 +118,7 @@ public class JsonManager : MonoBehaviour
     public void ClearSlot(string slotName)
     {
         saveDataDictionary[slotName] = 
-            new SaveInfo("빈 슬롯", new Vector3(0,0,0), new Vector3(0,0,0), 0, 0, "");
+            new SaveInfo(clearSlotName, new Vector3(0,0,0), new Vector3(0,0,0), 0, 0, "");
         
         string jdata = JsonConvert.SerializeObject(saveDataDictionary, Formatting.Indented);
         File.WriteAllText(Application.dataPath + dataPath, jdata);
@@ -143,6 +146,33 @@ public class JsonManager : MonoBehaviour
         {
             print($"{data.Key}, {data.Value}");
             print($"name:{data.Value.name}, position:{data.Value.position}, rotation:{data.Value.rotation}, hp:{data.Value.hp}, stamina:{data.Value.stamina},");
+        }
+    }
+    
+    // 세이브 파일을 불러올 때 선택한 세이브 슬롯의 저장 데이터를 반환한다. 선택된 세이브 파일이 없다면 NULL 
+    public SaveInfo LoadSaveFile()
+    {
+        if (selectSaveData.name.ToString() != clearSlotName && selectSaveData != null)
+        {
+            return selectSaveData;
+        }
+        else // selectSaveData == null
+        {
+            return null;
+        }
+    }
+
+    // 선택된 세이브 파일이 있는지 확인하는 함수 // 세이브 파일 있음: true, 세이브 파일 없음: false
+    public bool CheckSaveFile()
+    {
+        // 선택된 세이브 파일이 없을 때
+        if (selectSaveData.name.ToString() == clearSlotName || selectSaveData.name.ToString() == "")
+        {
+            return false;
+        }
+        else // 선택된 세이브 파일이 있을 때
+        {
+            return true;
         }
     }
 }

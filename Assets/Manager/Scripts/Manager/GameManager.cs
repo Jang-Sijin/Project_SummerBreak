@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        InitLoadSaveData();
+            
         // 시작시 마우스 커서 기본으로 설정
         Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
         // 시작시 마우스 위치 현재 마우스 위치로 설정
@@ -134,5 +136,26 @@ public class GameManager : MonoBehaviour
     public DateTime GetInGameTime()
     {
         return timeController.InGameTime();
+    }
+
+    private void InitLoadSaveData()
+    {
+        // 로드할 데이터가 있을 때
+        if (JsonManager.instance.CheckSaveFile())
+        {
+            print($"[장시진] 불러올 데이터가 있습니다.");
+            SaveInfo saveinfo = JsonManager.instance.LoadSaveFile();
+            
+            // 플레이어 데이터 로드
+            playerGameObject.transform.position = saveinfo.position;
+            playerGameObject.transform.rotation = Quaternion.Euler(saveinfo.rotation);
+            
+            return;
+        }
+        else // 로드할 데이터가 없을 때
+        {
+            print($"[장시진] 불러올 데이터가 없습니다. 새로운 게임을 시작합니다.");
+            return;
+        }
     }
 }
