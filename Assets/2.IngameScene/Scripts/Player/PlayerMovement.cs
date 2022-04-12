@@ -349,7 +349,7 @@ public class PlayerMovement : MonoBehaviour
         OnSlope();
         //isGrounded = Physics.Raycast(transform.position, -Vector3.up, layerMask);
         //isGrounded = Physics.CheckSphere(transform.position - new Vector3(0, 1, 0), distoGround, layerMask);
-        Debug.DrawLine(transform.position,transform.position - Vector3.up * 0.1f,Color.red,1.0f);
+        //Debug.DrawLine(transform.position,transform.position - Vector3.up * 0.1f,Color.red,1.0f);
         isGrounded = Physics.Raycast(transform.position, -Vector3.up, 0.1f, layerMask) ||
                      isSlope;
 
@@ -389,9 +389,10 @@ public class PlayerMovement : MonoBehaviour
     
     public void CheckForClimb()
     {
-            Vector3 origin = new Vector3(transform.position.x,transform.position.y + 0.75f, transform.position.z);
+            Vector3 origin = new Vector3(transform.position.x,transform.position.y + 0.7f, transform.position.z);
+            Debug.DrawLine(origin,origin + Vector3.forward * 1.0f,Color.red,1.0f);
             RaycastHit hit;
-            if (!isGrounded && Physics.Raycast(origin, transform.forward, out hit, 0.6f))
+            if (!isGrounded && Physics.Raycast(origin, transform.forward, out hit, 1.0f))
             {
                 isClimbed = true;
             }

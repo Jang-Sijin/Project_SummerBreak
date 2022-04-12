@@ -1,8 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
-
 using BehaviorTree;
 
-public class NightMonsterBT : BTTree
+public class SlimyeeBT : BTTree
 {
     public UnityEngine.Transform targetPoint;
     public static float speed = 2f;
@@ -16,17 +16,11 @@ public class NightMonsterBT : BTTree
             // Hit
             new Sequence(new List<Node>
             {
-               new CheckHitMonster(transform),
-               new HitForTarget(transform)
             }),
-            // Attack
+            // Time Check
             new Sequence(new List<Node>
             {
-                new CheckAttackRange(transform,targetPoint),
-                new AtttackToTarget(transform, targetPoint)
             }),
-            // Move
-            new FollowTarget(transform, targetPoint)
         });
 
         return root;
