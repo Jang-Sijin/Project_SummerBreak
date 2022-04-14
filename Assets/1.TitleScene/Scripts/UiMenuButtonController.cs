@@ -11,24 +11,17 @@ namespace _1.TitleScene.Script
         public AudioClip quitAudioClip;
         public AudioClip backAudioClip;
 
-        private GameObject _sceneLoader;
-
-        private void Start()
-        {
-            _sceneLoader = GameObject.Find("SceneManager");
-        }
-
         public void LoadStartButton()
         {
             SoundManager.instance.SfxPlay("LoadStartButton", loadStartAudioClip);
-            _sceneLoader.GetComponent<SceneLoader>().enabled = true;
+            SceneLoaderManager.instance.LoadGameScene();
             XMLManager.instance.LoadByXML();
         }
 
         public void StartButton()
         {
             SoundManager.instance.SfxPlay("StartButton", startAudioClip);
-            _sceneLoader.GetComponent<SceneLoader>().enabled = true;
+            SceneLoaderManager.instance.LoadGameScene();
         }
 
         public void ClickButton()

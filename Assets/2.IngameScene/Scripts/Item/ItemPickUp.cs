@@ -22,7 +22,7 @@ public class ItemPickUp : MonoBehaviour
     private void CanPickUp()
     {
         SoundManager.instance.SfxPlay("TakeItemAudio", takeItemAudioClip); // 아이템 획득 효과음 실행
-        GameManager.instance.AcquireItem(itemDB);
+        InventorySystem.instance.AcquireItem(itemDB);
         // playerInventory.AcquireItem(itemDB); [위의 코드로 바꿈 -> 더이상 안씀]
 
         Debug.Log($"[장시진] {itemDB.itemName} 아이템 획득!");

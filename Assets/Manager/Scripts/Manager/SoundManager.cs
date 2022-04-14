@@ -34,7 +34,7 @@ using UnityEngine.UIElements;
             if (instance == null)
             {
                 instance = this;
-                DontDestroyOnLoad(instance);
+                // DontDestroyOnLoad(instance);
                 SceneManager.sceneLoaded += OnSceneLoaded;
             } 
             else
@@ -50,7 +50,7 @@ using UnityEngine.UIElements;
             {
                 string bgmName = bgmListIndex.name.Substring(0,1);
 
-                if (arg0.name[0].ToString() == bgmName) // 배경음 이름의 앞 4글자가 BGM_으로 시작하면
+                if (arg0.name[1].ToString() == bgmName) // 배경음 이름의 앞 4글자가 BGM_으로 시작하면
                 {
                     Debug.Log($"[장시진] {arg0.name} Scene의 BGM 파일명: {bgmListIndex.name}");
                     BgSoundPlay(bgmListIndex); // 배경음 실행

@@ -11,6 +11,10 @@ public class SaveInfo
     public int stamina;
     public string saveTime;
 
+    public SaveInfo()
+    {
+        
+    }
     public SaveInfo(string name, Vector3 position, Vector3 rotation, int hp, int stamina, string saveTime)
     {
         this.name = name;

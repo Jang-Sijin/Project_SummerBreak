@@ -32,13 +32,12 @@ public class UIButtonController : MonoBehaviour
     public void SaveButton()
     {
         SoundManager.instance.SfxPlay("ClickButton", clickAudioClip);
-        XMLManager.instance.SaveByMXL();
     }
     
     public void SaveAndQuitButton()
     {
         SoundManager.instance.SfxPlay("ClickButton", clickAudioClip);
-        XMLManager.instance.SaveByMXL();
+        // XMLManager.instance.SaveByMXL();
         
         Application.Quit();
     }
