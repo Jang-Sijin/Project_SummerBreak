@@ -320,11 +320,11 @@ GameObject:
   m_Component:
   - component: {fileID: 769732788501885660}
   - component: {fileID: 7681707123828149184}
+  - component: {fileID: 3357835919303153283}
   - component: {fileID: 6403910201658220750}
   - component: {fileID: 1895617821235727775}
   - component: {fileID: 5929408509493639112}
   - component: {fileID: 7111785919389056034}
-  - component: {fileID: 3357835919303153283}
   m_Layer: 0
   m_Name: NightMonster_Slimyee
   m_TagString: Monster
@@ -367,6 +367,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3357835919303153283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450340589363228476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68b3017102916541b701b141e9e0ed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curMonsterType: 0
+  health: 0
+  explodeEffect: {fileID: 769732789284740328}
+  thrust: 10
+  knockTime: 4
+  checkHit: 0
+  bodyRenderer: {fileID: 2241047334551454368}
+  eyeRenderer: {fileID: 4040929263519624307}
 --- !u!65 &6403910201658220750
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -427,24 +447,6 @@ MonoBehaviour:
   maxNumber: 3
   spawnPoint: {fileID: 769732788501885660}
   spawnLoot: 0
---- !u!114 &3357835919303153283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8450340589363228476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f68b3017102916541b701b141e9e0ed5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explodeEffect: {fileID: 769732789284740328}
-  thrust: 10
-  knockTime: 4
-  checkHit: 0
-  bodyRenderer: {fileID: 2241047334551454368}
-  eyeRenderer: {fileID: 4040929263519624307}
 --- !u!1 &8764210049310144465
 GameObject:
   m_ObjectHideFlags: 0

@@ -51,9 +51,9 @@ public class SpawnLoot : MonoBehaviour
         hasBeenCollected = true;
         int number = Random.Range(minNumber, maxNumber);
         coinCount = (number / 5) + (number % 5);
-        Debug.Log($"number:{number}");
+        //Debug.Log($"[이민호] number:{number}");
         StartCoroutine(CreateLoot(number));
-        Debug.Log("한번");
+        //Debug.Log("[이민호] 한번");
     }
 
     IEnumerator CreateLoot(int number)

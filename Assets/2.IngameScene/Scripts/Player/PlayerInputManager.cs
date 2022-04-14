@@ -50,7 +50,6 @@ public class PlayerInputManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
         player.currentFrameLerp = false;
         player.currentFrameLerpDirection = Vector3.zero;
         player.IsGround();
@@ -64,17 +63,16 @@ public class PlayerInputManager : MonoBehaviour
             {
                 GlideDoingCheck = false;
             }
-            if (moveDoingCheck)
+            if (JumpDoingCheck)
+            {
+                Debug.Log("[이민호] 육지점프");
+                player.Jump(moveDirection);
+            }
+            else if (moveDoingCheck)
             {
                 player.Move(moveDirection);
             }
-            if (JumpDoingCheck)
-            {
-                Debug.Log("육지점프");
-                player.Jump(moveDirection);
-            }
-
-            if (!moveDoingCheck && !JumpDoingCheck)
+            else
             {
                 player.Ground_Idle();
             }
@@ -83,7 +81,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             if (JumpDoingCheck)
             {
-                //Debug.Log("수중점프");
+                //Debug.Log("[이민호] 수중점프");
                 player.Jump(moveDirection);
             }
 
@@ -270,7 +268,7 @@ public class PlayerInputManager : MonoBehaviour
                 FlapDoingCheck = true;
                 spaceClickCheck = true;
                 if (EnableLog)
-                    Debug.Log("Flap : " + context.phase.ToString());   
+                    Debug.Log("[이민호] Flap : " + context.phase.ToString());   
             }
             else if (!player.hited && !player.attacked && (player.isGrounded || player.isSwim))
             {
@@ -278,7 +276,7 @@ public class PlayerInputManager : MonoBehaviour
                 spaceClickCheck = true;
                 GlideDoingCheck = false;
                 if (EnableLog)
-                    Debug.Log("Jump : " + context.phase.ToString());
+                    Debug.Log("[이민호] Jump : " + context.phase.ToString());
             }
         }
         else if (context.canceled)

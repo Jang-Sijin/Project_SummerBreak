@@ -355,11 +355,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2297151150283947960}
   - component: {fileID: 2297151150283947963}
+  - component: {fileID: 2297151150283947961}
   - component: {fileID: 2297151150283947964}
   - component: {fileID: 2297151150283947967}
   - component: {fileID: 8000376521013750880}
   - component: {fileID: 2297151150283947966}
-  - component: {fileID: 2297151150283947961}
   m_Layer: 0
   m_Name: NightMonster_Longyee
   m_TagString: Untagged
@@ -402,6 +402,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2297151150283947961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2297151150283947962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68b3017102916541b701b141e9e0ed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curMonsterType: 0
+  health: 0
+  explodeEffect: {fileID: 2297151149259800491}
+  thrust: 10
+  knockTime: 4
+  checkHit: 0
+  bodyRenderer: {fileID: 2297151148667744510}
+  eyeRenderer: {fileID: 2297151148924340623}
 --- !u!65 &2297151150283947964
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -462,24 +482,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPoint: {fileID: 0}
---- !u!114 &2297151150283947961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2297151150283947962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f68b3017102916541b701b141e9e0ed5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explodeEffect: {fileID: 2297151149259800491}
-  thrust: 10
-  knockTime: 4
-  checkHit: 0
-  bodyRenderer: {fileID: 2297151148667744510}
-  eyeRenderer: {fileID: 2297151148924340623}
 --- !u!1 &2297151150580586232
 GameObject:
   m_ObjectHideFlags: 0

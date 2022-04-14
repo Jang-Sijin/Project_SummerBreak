@@ -19,7 +19,7 @@ public class CheckHitMonster : Node
     {
         if (monsterManager.checkHit == true)
         {
-            Debug.Log("타격함");
+            //Debug.Log("[이민호] 타격함");
             state = NodeState.SUCCESS;
             return state;
         }

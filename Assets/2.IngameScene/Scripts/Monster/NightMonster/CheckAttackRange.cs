@@ -7,21 +7,24 @@ using BehaviorTree;
 public class CheckAttackRange : Node
 {
 
-    private static int playerLayerMask = 1 << LayerMask.NameToLayer("Player");
-    
     private Transform _transform;
     private Transform target_transform;
     private Animator _animator;
     
-    public CheckAttackRange(Transform transform, Transform t_transform)
+    public CheckAttackRange(Transform transform)
     {
         _transform = transform;
         _animator = transform.GetComponent<Animator>();
-        target_transform = t_transform;
     }
 
     public override NodeState Evaluate()
-    { 
+    {
+        target_transform = (Transform)GetData("target");
+        if (target_transform == null)
+        {
+            state = NodeState.FAILURE;
+            return state;
+        }
         if (Vector3.Distance(_transform.position, target_transform.position) 
           <= NightMonsterBT.attackRange)
         {
@@ -32,7 +35,7 @@ public class CheckAttackRange : Node
             _animator.SetBool("Hit", false);
             
             
-            Debug.Log("범위에 있음");
+            //Debug.Log("[이민호] 범위에 있음");
             state = NodeState.SUCCESS;
             return state;
         }

@@ -17,7 +17,7 @@ public class HitForTarget : Node
     public override NodeState Evaluate()
     {
         
-        Debug.Log("타격함2");
+        //Debug.Log("[이민호]타격함2");
         monsterManager.KnockBack();
         monsterManager.TakeHit();
         
