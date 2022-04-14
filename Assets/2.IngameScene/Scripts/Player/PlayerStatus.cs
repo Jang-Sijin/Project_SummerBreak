@@ -20,7 +20,6 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField]
     private float currentHealth;
     public float currentMaxstamina;
-    
     public float currentStamina;
     public float walkSpeed = 4.0f;
     public float runValue = 2.0f;

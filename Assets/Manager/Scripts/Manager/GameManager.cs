@@ -157,10 +157,8 @@ public class GameManager : MonoBehaviour
             
             return;
         }
-        else // 로드할 데이터가 없을 때
-        {
-            print($"[장시진] 불러올 데이터가 없습니다. 새로운 게임을 시작합니다.");
-            return;
-        }
+        
+        print($"[장시진] 불러올 데이터가 없습니다. 새로운 게임을 시작합니다.");
+        return;
     }
 }

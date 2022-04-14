@@ -6,8 +6,8 @@ using UnityEngine;
 
 public static class SaveDataDictionary
 {
-    public static Dictionary<string, SaveInfo> saveDataDictionary;
-    public static SaveInfo selectSaveData;
+    public static Dictionary<string, SaveInfo> saveDataDictionary = new Dictionary<string, SaveInfo>();
+    public static SaveInfo selectSaveData = new SaveInfo();
 }
 
 public class JsonManager : MonoBehaviour
@@ -42,16 +42,16 @@ public class JsonManager : MonoBehaviour
 
     private void Start()
     {
-        foreach (var data in SaveDataDictionary.saveDataDictionary)
-        {
-            print($"{data.Key}, {data.Value}");
-            print($"name:{data.Value.name}, position:{data.Value.position}, rotation:{data.Value.rotation}, hp:{data.Value.hp}, stamina:{data.Value.stamina},");
-        }
+        //foreach (var data in SaveDataDictionary.saveDataDictionary)
+        //{
+        //    print($"{data.Key}, {data.Value}");
+        //    print($"name:{data.Value.name}, position:{data.Value.position}, rotation:{data.Value.rotation}, hp:{data.Value.hp}, stamina:{data.Value.stamina},");
+        //}
     }
 
     private void Update()
     {
-        print($"{currentSelectBtnName}");
+        // print($"{currentSelectBtnName}");
     }
 
     public void LoadInit()
@@ -66,7 +66,11 @@ public class JsonManager : MonoBehaviour
         }
         else
         {
+            // 새로운 세이브 파일을 생성한다.
             CreateJsonFile();
+            
+            string jdata = File.ReadAllText(Application.dataPath + dataPath);
+            SaveDataDictionary.saveDataDictionary = JsonConvert.DeserializeObject<Dictionary<string, SaveInfo>>(jdata);
         }
     }
 
@@ -84,20 +88,20 @@ public class JsonManager : MonoBehaviour
         }
     }
 
-    public void Save(string slotName)
+    public void Save(string slotName, string saveName)
     {
-        foreach (var data in SaveDataDictionary.saveDataDictionary)
-        {
-            print($"{data.Key}, {data.Value}");
-            print($"name:{data.Value.name}, position:{data.Value.position}, rotation:{data.Value.rotation}, hp:{data.Value.hp}, stamina:{data.Value.stamina},");
-        }
+        //foreach (var data in SaveDataDictionary.saveDataDictionary)
+        //{
+        //    print($"[장시진] {data.Key}, {data.Value}");
+        //    print($"[장시진] name:{data.Value.name}, position:{data.Value.position}, rotation:{data.Value.rotation}, hp:{data.Value.hp}, stamina:{data.Value.stamina},");
+        //}
         
-        print($"{slotName}");
-        print($"{SaveDataDictionary.saveDataDictionary[slotName]}");
-        if (slotName != null)
+        print($"[장시진] slotName:{slotName}, saveName:{saveName}");
+        print($"[장시진] {SaveDataDictionary.saveDataDictionary[slotName]}");
+        if (!string.IsNullOrEmpty(slotName))
         {
             SaveDataDictionary.saveDataDictionary[slotName] = new SaveInfo(
-                $"{slotName}",
+                saveName,
                 GameManager.instance.playerGameObject.transform.position,
                 GameManager.instance.playerGameObject.transform.rotation.eulerAngles,
                 0,
@@ -108,14 +112,14 @@ public class JsonManager : MonoBehaviour
             // Formatting.Indented -> Json 자동으로 라인/들여쓰기 적용 [참고: https://www.csharpstudy.com/Data/Json-beautifier.aspx]
             string jdata = JsonConvert.SerializeObject(SaveDataDictionary.saveDataDictionary, Formatting.Indented);
             File.WriteAllText(Application.dataPath + dataPath, jdata);
-            print($"[장시진] {slotName} Save Success!!!");
+            print($"[장시진] {slotName}, {saveName} Save Success!!!");
             
             SaveSlot currentSaveSlot = GameObject.Find(slotName).GetComponent<SaveSlot>();
             currentSaveSlot.UpdateSlotText();
         }
         else
         {
-            print("선택된 세이브 슬롯이 없습니다. 세이브 슬롯을 다시 선택해주세요.");
+            print("[장시진] 선택된 세이브 슬롯이 없습니다. 세이브 슬롯을 다시 선택해주세요.");
         }
     }
 
@@ -128,7 +132,8 @@ public class JsonManager : MonoBehaviour
         for (int i = 0; i < saveDataSlotCount; i++)
         {
             // transform은 JsonManager 오브젝트의 transform으로 설정합니다. (필수 확인: JsonManager 오브젝트의 위치(0,0,0), 회전(0,0,0)으로 설정해줘야 합니다.)
-            createData[$"SaveSlot ({i})"] = new SaveInfo(clearSlotName, 
+            createData[$"SaveSlot ({i})"] = new SaveInfo(
+                clearSlotName,
                 new Vector3(0,0,0), 
                 new Vector3(0,0,0), 
                 0, 
@@ -146,7 +151,13 @@ public class JsonManager : MonoBehaviour
     public void ClearSlot(string slotName)
     {
         SaveDataDictionary.saveDataDictionary[slotName] = 
-            new SaveInfo(clearSlotName, new Vector3(0,0,0), new Vector3(0,0,0), 0, 0, "");
+            new SaveInfo(
+                clearSlotName, 
+                new Vector3(0,0,0), 
+                new Vector3(0,0,0), 
+                0, 
+                0, 
+                "");
         
         string jdata = JsonConvert.SerializeObject(SaveDataDictionary.saveDataDictionary, Formatting.Indented);
         File.WriteAllText(Application.dataPath + dataPath, jdata);
@@ -181,30 +192,28 @@ public class JsonManager : MonoBehaviour
     // 세이브 파일을 불러올 때 선택한 세이브 슬롯의 저장 데이터를 반환한다. 선택된 세이브 파일이 없다면 NULL 
     public SaveInfo LoadSaveFile()
     {
-        if (SaveDataDictionary.selectSaveData.name.ToString() != clearSlotName && SaveDataDictionary.selectSaveData != null)
-        {
-            loadData = SaveDataDictionary.selectSaveData;
-            
-            return SaveDataDictionary.selectSaveData;
-        }
-        else // selectSaveData == null
+        if (SaveDataDictionary.selectSaveData == null || SaveDataDictionary.selectSaveData.name == clearSlotName || string.IsNullOrEmpty(SaveDataDictionary.selectSaveData.name))
         {
             return null;
-        }
+        } 
+        
+        // selectSaveData != null
+        loadData = SaveDataDictionary.selectSaveData;
+        return SaveDataDictionary.selectSaveData;
     }
 
     // 선택된 세이브 파일이 있는지 확인하는 함수 // 세이브 파일 있음: true, 세이브 파일 없음: false
     public bool CheckSaveFile()
     {
-        // 선택된 세이브 파일이 없을 때
-        if (SaveDataDictionary.selectSaveData.name.ToString() == clearSlotName || SaveDataDictionary.selectSaveData.name.ToString() == "")
+        print($"[장시진] CheckSaveFile:{SaveDataDictionary.selectSaveData.name}?");
+        // 선택된 세이브 파일이 없을 때 // null 값 또는 "" 값이있는 문자열을 확인하려면 C#에서 string.IsNullOrEmpty() 메서드를 사용할 수 있습니다. 문자열이 비어 있거나 널이면 true 를 리턴.
+        if (SaveDataDictionary.selectSaveData == null || SaveDataDictionary.selectSaveData.name == clearSlotName || string.IsNullOrEmpty(SaveDataDictionary.selectSaveData.name))
         {
             return false;
         }
-        else // 선택된 세이브 파일이 있을 때
-        {
-            return true;
-        }
+        
+        // 선택된 세이브 파일이 있을 때
+        return true;
     }
 
     public string GetCurrentSelectBtnName()

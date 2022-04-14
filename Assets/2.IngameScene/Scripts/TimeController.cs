@@ -6,39 +6,51 @@ using TMPro;
 
 public class TimeController : MonoBehaviour
 {
+    [Header("↓ 게임에서의 시간 속도 (실제 흐르는 시간 * TimeMultiplier)")]
     [SerializeField]
     private float timeMultiplier;
 
+    [Header("↓게임이 시작되었을 때 시간")]
     [SerializeField]
     private float startHour;
 
+    [Header("↓현재 게임의 시간 TEXT")]
     [SerializeField]
     private TextMeshProUGUI timeText;
 
+    [Header("↓해가 떠있는 시간의 조명(Light)")]
     [SerializeField]
     private Light sunLight;
 
+    [Header("↓일출 시간")]
     [SerializeField]
     private float sunriseHour;
 
+    [Header("↓일몰 시간")]
     [SerializeField]
     private float sunsetHour;
 
+    [Header("↓해가 떠있는 시간의 빛 색상")]
     [SerializeField]
     private Color dayAmbientLight;
 
+    [Header("↓달이 떠있는 시간의 빛 색상")]
     [SerializeField]
     private Color nightAmbientLight;
 
+    [Header("↓Light이 변환될 때 ")]
     [SerializeField]
     private AnimationCurve lightChangeCurve;
 
+    [Header("↓최대 태양 조명 강도 [0~1]")]
     [SerializeField]
     private float maxSunLightIntensity;
 
+    [Header("↓밤 조명(Light)")]
     [SerializeField]
     private Light moonLight;
 
+    [Header("↓최대 달 조명 강도 [0~1]")]
     [SerializeField]
     private float maxMoonLightIntensity;
 
