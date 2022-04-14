@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
     public void Ground_Idle()
     {
         currentState = playerState.Ground_idleState;
-        m_rigidbody.velocity = Vector3.zero;
+        m_rigidbody.velocity = m_rigidbody.velocity * 0.1f;
     }
 
     public void Jump(Vector2 direction)
@@ -343,7 +343,6 @@ public class PlayerMovement : MonoBehaviour
     
     public void IsGround()
     {
-
         //Debug.DrawRay(transform.position, -Vector3.up, Color.red);
         int layerMask = (-1) - (1 << LayerMask.NameToLayer("Water"));
         OnSlope();
@@ -359,7 +358,10 @@ public class PlayerMovement : MonoBehaviour
             m_rigidbody.isKinematic = false;
         }
     }
+    
+    
 
+    
     private void OnSlope()
     {
         int layerMask = (-1) - (1 << LayerMask.NameToLayer("Water"));
@@ -444,7 +446,7 @@ public class PlayerMovement : MonoBehaviour
                 k++;
             }
 
-            offset = Quaternion.AngleAxis(90f, transform.forward) * offset;
+            offset = Quaternion.AngleAxis(80f, transform.forward) * offset;
         }
 
         checkDirection /= k;

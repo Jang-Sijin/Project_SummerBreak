@@ -7,8 +7,6 @@ using BehaviorTree;
 public class CheckAttackRange : Node
 {
 
-    private static int playerLayerMask = 1 << LayerMask.NameToLayer("Player");
-    
     private Transform _transform;
     private Transform target_transform;
     private Animator _animator;
@@ -32,7 +30,7 @@ public class CheckAttackRange : Node
             _animator.SetBool("Hit", false);
             
             
-            Debug.Log("범위에 있음");
+            //Debug.Log("[이민호] 범위에 있음");
             state = NodeState.SUCCESS;
             return state;
         }

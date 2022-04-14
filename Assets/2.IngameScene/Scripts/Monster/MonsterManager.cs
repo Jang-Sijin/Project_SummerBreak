@@ -8,13 +8,28 @@ using UnityEngine.VFX;
 public class MonsterManager : MonoBehaviour
 {
 
+    public enum monsterType
+    {
+        nightMonster,
+        slimyee,
+        longyee
+    }
+
+    public monsterType curMonsterType;
+    [SerializeField]
     private float health;
+
+    [SerializeField] 
+    private bool sociality = false;
     public VisualEffect explodeEffect;
     public float thrust = 5.0f;
     public float knockTime = 4.0f;
+    [SerializeField]
+    private int inTime;
     private Rigidbody m_rigidbody;
     private SpawnLoot spawnLoot;
-
+    
+    
     public bool checkHit = false;
 
     public SkinnedMeshRenderer bodyRenderer;
@@ -23,7 +38,20 @@ public class MonsterManager : MonoBehaviour
     private Material eyeMaterial;
     void Start()
     {
-        health = 30.0f;
+        if (curMonsterType == monsterType.slimyee)
+        {
+            health = 15.0f;
+        }
+        else if (curMonsterType == monsterType.longyee)
+        {
+            health = 30.0f;
+            sociality = true;
+        }
+        else
+        {
+            health = 10.0f;
+            sociality = true;
+        }
         m_rigidbody = GetComponent<Rigidbody>();
         spawnLoot = GetComponent<SpawnLoot>();
         bodyMaterial = bodyRenderer.material;
@@ -32,11 +60,15 @@ public class MonsterManager : MonoBehaviour
         eyeMaterial.SetFloat("RedLv",0.0f);
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(this.transform.position, 6.0f);
+    }
     public void TakeHit()
     {
 
         health -= 10.0f;
-        Debug.Log($"몬스터 체력: {health}");
+        Debug.Log($"[이민호] 몬스터 체력: {health}");
         bool isDead = health <= 0;
 
         if (isDead)
@@ -49,6 +81,11 @@ public class MonsterManager : MonoBehaviour
 
     }
 
+    public bool GetSociality()
+    {
+        return sociality;
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Equipment_Attack"))

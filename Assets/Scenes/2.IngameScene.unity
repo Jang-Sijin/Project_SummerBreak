@@ -7218,6 +7218,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6617084635213766334, guid: 679656a4b3a18f7459ef08b2680d961d, type: 3}
   m_PrefabInstance: {fileID: 521936265}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &523676355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 523676356}
+  m_Layer: 0
+  m_Name: ----------[MonsterSpawner]----------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &523676356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523676355}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 96.64046, y: 7.951309, z: 148.1586}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &526329828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31304,6 +31334,26 @@ PrefabInstance:
     - target: {fileID: 5711812269903815707, guid: 5900a5eb1e955bb48a300bc0d2da66e7, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711812270174419009, guid: 5900a5eb1e955bb48a300bc0d2da66e7, type: 3}
+      propertyPath: flapPower
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711812270174419009, guid: 5900a5eb1e955bb48a300bc0d2da66e7, type: 3}
+      propertyPath: jumpPower
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711812270174419014, guid: 5900a5eb1e955bb48a300bc0d2da66e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 119.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711812270174419014, guid: 5900a5eb1e955bb48a300bc0d2da66e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5711812270174419014, guid: 5900a5eb1e955bb48a300bc0d2da66e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 134.647
       objectReference: {fileID: 0}
     - target: {fileID: 5711812270534613296, guid: 5900a5eb1e955bb48a300bc0d2da66e7, type: 3}
       propertyPath: m_Materials.Array.data[0]

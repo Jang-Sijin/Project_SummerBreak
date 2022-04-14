@@ -50,7 +50,6 @@ public class PlayerInputManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
         player.currentFrameLerp = false;
         player.currentFrameLerpDirection = Vector3.zero;
         player.IsGround();

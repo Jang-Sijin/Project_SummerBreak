@@ -10,18 +10,18 @@ public class FollowTarget : Node
     private Transform target_transform;
     private Animator _animator;
     
-    public FollowTarget(Transform _transform, Transform t_transform)
+    public FollowTarget(Transform _transform)
     {
         m_transform = _transform;
         _animator = _transform.GetComponent<Animator>();
-        target_transform = t_transform;
     }
 
     public override NodeState Evaluate()
     {
+
+        target_transform = (Transform) GetData("target");
         
-        
-        if (Vector3.Distance(m_transform.position, target_transform.position) > NightMonsterBT.attackRange)
+        if (Vector3.Distance(m_transform.position, target_transform.position) > 0.1f)
         {
             _animator.SetBool("Chasting", true);
             _animator.SetBool("Attack", false);

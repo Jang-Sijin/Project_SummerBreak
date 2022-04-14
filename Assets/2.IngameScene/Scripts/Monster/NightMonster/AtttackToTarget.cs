@@ -30,7 +30,7 @@ public class AtttackToTarget : Node
         _animator.SetBool("Idle", true);
         if (_attackCounter >= _attackTime)
         {
-            Debug.Log("공격함");
+            //Debug.Log("[이민호] 몬스터가 공격함");
             playerMovement.HitStart(NightMonsterBT.damageValue,_rigidbody);
             _animator.SetBool("Attack", true);
             _animator.SetBool("Idle", false);

@@ -26,7 +26,7 @@ public class NightMonsterBT : BTTree
                 new AtttackToTarget(transform, targetPoint)
             }),
             // Move
-            new FollowTarget(transform, targetPoint)
+            new FollowTarget(transform)
         });
 
         return root;
