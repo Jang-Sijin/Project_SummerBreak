@@ -316,7 +316,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void SwimMove(Vector2 direction, bool moveCheck)
     {
-        Swim_idle();
+        if (!isSwim)
+        {
+            Swim_idle();
+        }
 
         if (moveCheck == true)
         {

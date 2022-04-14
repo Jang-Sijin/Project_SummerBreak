@@ -14,17 +14,16 @@ public class AtttackToTarget : Node
     private float _attackTime = 0.5f;
     private float _attackCounter = 0f;
     
-    public AtttackToTarget(Transform transform, Transform t_transform)
+    public AtttackToTarget(Transform transform)
     {
-        _lastTarget = t_transform;
         _animator = transform.GetComponent<Animator>();
         _rigidbody = transform.GetComponent<Rigidbody>();
-        playerMovement = t_transform.GetComponent<PlayerMovement>();
     }
 
     public override NodeState Evaluate()
     {
-        
+        _lastTarget = (Transform)GetData("target");
+        playerMovement = _lastTarget.GetComponent<PlayerMovement>();
         _attackCounter += Time.deltaTime;
         _animator.SetBool("Attack", false);
         _animator.SetBool("Idle", true);

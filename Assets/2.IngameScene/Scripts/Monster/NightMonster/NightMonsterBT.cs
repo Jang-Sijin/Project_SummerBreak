@@ -22,11 +22,15 @@ public class NightMonsterBT : BTTree
             // Attack
             new Sequence(new List<Node>
             {
-                new CheckAttackRange(transform,targetPoint),
-                new AtttackToTarget(transform, targetPoint)
+                new CheckAttackRange(transform),
+                new AtttackToTarget(transform)
             }),
-            // Move
-            new FollowTarget(transform)
+            // Follow
+            new Sequence(new List<Node>
+            {
+                new CheckInFOVRange(transform),
+                new FollowTarget(transform)
+            })
         });
 
         return root;

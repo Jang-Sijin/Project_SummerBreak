@@ -9,6 +9,7 @@ public class SlimyeeBT : BTTree
     public static float fovRange = 6.0f;
     public static float damageValue = 10.0f;
     
+    
     protected override Node SetUpTree()
     {
         Node root = new Selector(new List<Node>
@@ -22,7 +23,18 @@ public class SlimyeeBT : BTTree
             // Time : Night
             new Sequence(new List<Node>
             {
-                new CheckInTime(transform)
+                new CheckInTime(transform),
+                new Sequence(new List<Node>
+                {
+                    
+                })
+                
+            }),
+            // Attack
+            new Sequence(new List<Node>
+            {
+                new CheckAttackRange(transform),
+                new AtttackToTarget(transform)
             }),
             // Follow
             new Sequence(new List<Node>
