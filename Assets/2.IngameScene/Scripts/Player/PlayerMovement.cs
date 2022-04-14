@@ -392,7 +392,7 @@ public class PlayerMovement : MonoBehaviour
     public void CheckForClimb()
     {
             Vector3 origin = new Vector3(transform.position.x,transform.position.y + 0.7f, transform.position.z);
-            Debug.DrawLine(origin,origin + Vector3.forward * 1.0f,Color.red,1.0f);
+            //Debug.DrawLine(origin,origin + Vector3.forward * 1.0f,Color.red,1.0f);
             RaycastHit hit;
             if (!isGrounded && Physics.Raycast(origin, transform.forward, out hit, 1.0f))
             {

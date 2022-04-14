@@ -1,15 +1,17 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class RandomMonsterSpawner : MonoBehaviour
+public class LockMonsterSpawner : MonoBehaviour
 {
     [SerializeField] 
     private List<GameObject> monsters = new List<GameObject>();
-
+    
+    [SerializeField] 
+    private List<GameObject> spawnPoints = new List<GameObject>();
+    
+    
     [SerializeField] 
     [Range(1, 99)] 
     private int minNumber = 2;
@@ -25,7 +27,7 @@ public class RandomMonsterSpawner : MonoBehaviour
 
     [SerializeField] 
     private float spawnRange = 15.0f;
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -35,7 +37,7 @@ public class RandomMonsterSpawner : MonoBehaviour
             Spawn();
         }
     }
-
+    
     private bool SpawnTrigger()
     {
         int layerMask = (1 << LayerMask.NameToLayer("Player"));
@@ -51,21 +53,16 @@ public class RandomMonsterSpawner : MonoBehaviour
     private void Spawn()
     {
         hasBeenCollected = true;
-        int number = Random.Range(minNumber, maxNumber);
+        int number = spawnPoints.Count;
         StartCoroutine(CreateMonster(number));
         //Debug.Log("[이민호] 몬스터 생성");
     }
 
     IEnumerator CreateMonster(int number)
     {
-        float range_x;
-        float range_z;
         for (int i = 0; i < number; i++)
         {
-            range_x = Random.Range((spawnRange / 2) * -1, spawnRange / 2);
-            range_z = Random.Range((spawnRange / 2) * -1, spawnRange / 2);
-            Vector3 origin = new Vector3(this.transform.position.x + range_x, this.transform.position.y, this.transform.position.z + range_z);
-            GameObject tempLoot = Instantiate(monsters[Random.Range(0, monsters.Count)],origin,Quaternion.identity);
+            GameObject tempLoot = Instantiate(monsters[Random.Range(0, monsters.Count)],spawnPoints[i].transform.position,Quaternion.identity);
             yield return new WaitForSeconds(0.001f);
         }
     }
@@ -76,6 +73,4 @@ public class RandomMonsterSpawner : MonoBehaviour
         
         //Gizmos.DrawWireCube(this.transform.position,new Vector3(spawnRange,0.0f,spawnRange));
     }
-
-    
 }

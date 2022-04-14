@@ -28,8 +28,9 @@ public class MonsterManager : MonoBehaviour
     private int inTime;
     private Rigidbody m_rigidbody;
     private SpawnLoot spawnLoot;
-    
-    
+
+    [SerializeField]
+    private Vector3 spawnPoint;
     public bool checkHit = false;
 
     public SkinnedMeshRenderer bodyRenderer;
@@ -52,6 +53,8 @@ public class MonsterManager : MonoBehaviour
             health = 10.0f;
             sociality = true;
         }
+
+        spawnPoint = this.transform.position;
         m_rigidbody = GetComponent<Rigidbody>();
         spawnLoot = GetComponent<SpawnLoot>();
         bodyMaterial = bodyRenderer.material;
@@ -62,7 +65,7 @@ public class MonsterManager : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(this.transform.position, 6.0f);
+        //Gizmos.DrawWireSphere(this.transform.position, 6.0f);
     }
     public void TakeHit()
     {
@@ -85,7 +88,7 @@ public class MonsterManager : MonoBehaviour
     {
         return sociality;
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Equipment_Attack"))
