@@ -16,7 +16,8 @@ public class Item : ScriptableObject
     }
     
     public string itemName;         // 아이템 이름
-    public string itemInfo;     // 아이템 정보(내용)
+    [TextArea]
+    public string itemInfo;         // 아이템 정보(내용)
     public Sprite itemImage;        // 아이템 이미지(UI)
     public GameObject itemPrefab;   // 아이템 프리팹
     public ItemType itemType;       // 아이템 타입
