@@ -5,11 +5,14 @@ using BehaviorTree;
 public class SlimyeeBT : BTTree
 {
     public static float speed = 2f;
+    public static float guardSpeed = 1.0f;
     public static float attackRange = 0.7f;
     public static float fovRange = 6.0f;
     public static float damageValue = 10.0f;
-    
-    
+    public static float guardFovRange = 10.0f;
+    public static float socialityRange = 15.0f;
+
+    public bool guardCheck = false;
     protected override Node SetUpTree()
     {
         Node root = new Selector(new List<Node>
@@ -24,11 +27,17 @@ public class SlimyeeBT : BTTree
             new Sequence(new List<Node>
             {
                 new CheckInTime(transform),
+                // Sociality
                 new Sequence(new List<Node>
                 {
-                    
+                   new CheckInFRIRange(transform)
+                }),
+                // Guard Follow
+                new Sequence(new List<Node>
+                {
+                    new CheckGuardTarget(transform),
+                    new GuardFollowTarget(transform)
                 })
-                
             }),
             // Attack
             new Sequence(new List<Node>
