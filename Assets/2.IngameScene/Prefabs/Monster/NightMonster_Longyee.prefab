@@ -51,7 +51,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 05e053dca2a4fde40b06909875d35cda, type: 2}
+  - {fileID: 2100000, guid: e0ecbe39cd8a7be4b9780cb471ce7b65, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -416,9 +416,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curMonsterType: 0
   health: 0
+  sociality: 0
   explodeEffect: {fileID: 2297151149259800491}
   thrust: 10
   knockTime: 4
+  inTime: 0
+  spawnPoint: {x: 0, y: 0, z: 0}
   checkHit: 0
   bodyRenderer: {fileID: 2297151148667744510}
   eyeRenderer: {fileID: 2297151148924340623}

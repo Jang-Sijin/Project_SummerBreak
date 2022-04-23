@@ -72,9 +72,9 @@ public class RandomMonsterSpawner : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        //Gizmos.DrawWireSphere(this.transform.position, spawnRange);
+        Gizmos.DrawWireSphere(this.transform.position, spawnRange);
         
-        //Gizmos.DrawWireCube(this.transform.position,new Vector3(spawnRange,0.0f,spawnRange));
+        Gizmos.DrawWireCube(this.transform.position,new Vector3(spawnRange,0.0f,spawnRange));
     }
 
     
