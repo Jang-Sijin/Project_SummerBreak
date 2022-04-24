@@ -17,7 +17,7 @@ public class RunAwayTarget : Node
     {
         
         
-        state = NodeState.FAILURE;
+        state = NodeState.RUNNING;
         return state;
     }
 }

@@ -26,7 +26,7 @@ public class CheckGuardTarget : Node
         else if (t != null && Physics.CheckSphere(_transform.position, SlimyeeBT.fovRange, layerMask))
         {
             slimyeeBt.guardCheck = true;
-            Debug.Log("[이민호] 인지모드");
+            //Debug.Log("[이민호] 인지모드");
             state = NodeState.FAILURE;
             return state;
         }

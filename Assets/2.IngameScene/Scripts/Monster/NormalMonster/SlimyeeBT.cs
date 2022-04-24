@@ -13,6 +13,7 @@ public class SlimyeeBT : BTTree
     public static float socialityRange = 15.0f;
 
     public bool guardCheck = false;
+    
     protected override Node SetUpTree()
     {
         Node root = new Selector(new List<Node>
@@ -24,13 +25,13 @@ public class SlimyeeBT : BTTree
                 new HitForTarget(transform)
             }),
             // Time : Night
-            new Sequence(new List<Node>
+            new Condition(new List<Node>
             {
-                new CheckInTime(transform),
                 // Sociality
                 new Sequence(new List<Node>
                 {
-                   new CheckInFRIRange(transform)
+                   new CheckInFRIRange(transform),
+                   new RunAwayTarget(transform)
                 }),
                 // Guard Follow
                 new Sequence(new List<Node>

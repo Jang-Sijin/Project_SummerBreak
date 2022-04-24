@@ -15,10 +15,9 @@ public class CheckInFRIRange : Node
     public override NodeState Evaluate()
     {
         int layerMask = (1 << LayerMask.NameToLayer("Monster"));
-
         if (Physics.CheckSphere(_transform.position,SlimyeeBT.socialityRange, layerMask))
         {
-            Debug.Log("[이민호] 주변에 친구 있음");
+            //Debug.Log("[이민호] 주변에 친구 있음");
             state = NodeState.FAILURE;
             return state;
         }
