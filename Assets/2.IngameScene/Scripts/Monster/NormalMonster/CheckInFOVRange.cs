@@ -32,7 +32,7 @@ public class CheckInFOVRange : Node
             state = NodeState.FAILURE;
             return state;
         }
-        Debug.Log("[이민호] 인지");
+        //Debug.Log("[이민호] 인지");
         state = NodeState.SUCCESS;
         return state;
     }

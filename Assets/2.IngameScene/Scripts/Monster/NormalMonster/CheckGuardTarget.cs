@@ -43,7 +43,7 @@ public class CheckGuardTarget : Node
             state = NodeState.FAILURE;
             return state;
         }
-        Debug.Log("[이민호] 경계모드");
+        //Debug.Log("[이민호] 경계모드");
         
         state = NodeState.SUCCESS;
         return state;
