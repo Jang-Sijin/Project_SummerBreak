@@ -25,7 +25,7 @@ public class RunAwayTarget : Node
         Vector3 newPos = _transform.position + dirToPlayer;
 
         _transform.position = Vector3.MoveTowards(_transform.position, newPos,
-            SlimyeeBT.guardSpeed * Time.deltaTime);
+            SlimyeeBT.runAwaySpeed * Time.deltaTime);
         _transform.LookAt(newPos);
         
         _animator.SetBool("Chasting", true);

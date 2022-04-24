@@ -11,6 +11,7 @@ public class SlimyeeBT : BTTree
     public static float damageValue = 10.0f;
     public static float guardFovRange = 10.0f;
     public static float socialityRange = 15.0f;
+    public static float runAwaySpeed = 4.0f;
 
     public bool guardCheck = false;
     
