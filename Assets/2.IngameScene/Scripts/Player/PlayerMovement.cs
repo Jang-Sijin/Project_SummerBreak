@@ -87,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
     private Material capeMaterial;
     [SerializeField] 
     private bool invincible = false;
+    public GameObject respawnPoint;
     
     void Awake()
     {
@@ -102,8 +103,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void Ground_Idle()
     {
-        currentState = playerState.Ground_idleState;
-        m_rigidbody.velocity = m_rigidbody.velocity * 0.1f;
+        if (currentState != playerState.hit)
+        {
+            currentState = playerState.Ground_idleState;
+
+            m_rigidbody.velocity = m_rigidbody.velocity * 0.1f;
+        }
     }
 
     public void Jump(Vector2 direction)
@@ -476,7 +481,16 @@ public class PlayerMovement : MonoBehaviour
     
     public void HitStart(float damageValue, Rigidbody monsterRigidbody)
     {
-        if (!invincible)
+        if (playerstatus.GetCurHealth() <= 0)
+        {
+            hited = false;
+            invincible = false;
+            bodyMaterial.SetFloat("RedLv", 0.0f);
+            capeMaterial.SetFloat("RedLv",0.0f);
+            this.transform.position = respawnPoint.transform.position;
+            playerstatus.ReSetCurHealth();
+        }
+        else if (!invincible)
         {
             hited = true;
             invincible = true;
@@ -489,16 +503,6 @@ public class PlayerMovement : MonoBehaviour
             Vector3 differnce = transform.position - monsterRigidbody.transform.position;
             differnce = differnce.normalized * 5.0f;
             m_rigidbody.AddForce(differnce,ForceMode.Impulse);
-            StartCoroutine(KnockCo(monsterRigidbody));
-        }
-    }
-
-    IEnumerator KnockCo(Rigidbody monster)
-    {
-        if (monster != null)
-        {
-            yield return new WaitForSeconds(0.1f);
-            monster.velocity = Vector3.zero;
         }
     }
     
