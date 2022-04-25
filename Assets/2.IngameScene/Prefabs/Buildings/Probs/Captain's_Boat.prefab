@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 816763436222559512}
   - component: {fileID: 8561519275208613}
+  - component: {fileID: 3013914731114701828}
   m_Layer: 0
   m_Name: Captain's_Boat
   m_TagString: Untagged
@@ -73,6 +74,21 @@ LODGroup:
     - renderer: {fileID: 5091457420938306210}
     - renderer: {fileID: 4456196609830222192}
   m_Enabled: 1
+--- !u!114 &3013914731114701828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8561519275208610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 624879eb99abd0c4ba8c72b9ce29e5f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  degreesPerSecond: 0
+  amplitude: 0.1
+  frequency: 0.5
 --- !u!1 &659887120203887224
 GameObject:
   m_ObjectHideFlags: 0

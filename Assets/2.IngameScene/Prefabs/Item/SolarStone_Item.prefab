@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 6016872710749657949}
   - component: {fileID: 1467162092472274077}
   - component: {fileID: 4727049083677988815}
+  - component: {fileID: 1334468517659646144}
   m_Layer: 0
   m_Name: SolarStone_Item
   m_TagString: Item
@@ -205,7 +206,7 @@ LODGroup:
   m_GameObject: {fileID: 4970682916548033423}
   serializedVersion: 2
   m_LocalReferencePoint: {x: 0, y: 1, z: 0}
-  m_Size: 1.7
+  m_Size: 2.5
   m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
@@ -244,3 +245,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDB: {fileID: 11400000, guid: 7394651cda7ab9042a13ede9403a31fc, type: 2}
   takeItemAudioClip: {fileID: 8300000, guid: 0cf800d049619d946b0d874a36e79bd1, type: 3}
+--- !u!114 &1334468517659646144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4970682916548033423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 624879eb99abd0c4ba8c72b9ce29e5f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  degreesPerSecond: 40
+  amplitude: 0.1
+  frequency: 1

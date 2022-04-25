@@ -44,8 +44,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 2, z: 3}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 1, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0.5}
 --- !u!114 &9144715926165309655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +133,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: dfb2ea5b66651fa4d9516a8cda33f2f5, type: 2}
+    - target: {fileID: 5866666021909216657, guid: ac98283f13c891d4789964073580fbc2, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c3d3a519afc8d06418e14292929596b1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac98283f13c891d4789964073580fbc2, type: 3}
 --- !u!1 &8724091505073467607 stripped

@@ -44,8 +44,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 2, z: 3}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 1, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0.5}
 --- !u!114 &5084623462928740228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +133,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '@NPC_ShopOwner_IDLE'
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: aa87ae5e3b7649f4d9bdf49df76e9ffe, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f3cbc94bd4694d24ab09305c9b2498a3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa87ae5e3b7649f4d9bdf49df76e9ffe, type: 3}
 --- !u!1 &4261423550179129177 stripped

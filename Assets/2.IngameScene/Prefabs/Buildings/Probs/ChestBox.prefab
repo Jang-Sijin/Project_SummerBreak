@@ -92,6 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4633627749673510854}
   - component: {fileID: 4766048798458146696}
+  - component: {fileID: 3139759745575157143}
   m_Layer: 0
   m_Name: ChestBox
   m_TagString: Untagged
@@ -124,7 +125,7 @@ LODGroup:
   m_GameObject: {fileID: 5406047228976364924}
   serializedVersion: 2
   m_LocalReferencePoint: {x: -0.0031866431, y: 0.27810878, z: -0.015722066}
-  m_Size: 1.5
+  m_Size: 2.5
   m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
@@ -135,6 +136,25 @@ LODGroup:
     - renderer: {fileID: 1535495009320300162}
     - renderer: {fileID: 9129471165777606986}
   m_Enabled: 1
+--- !u!95 &3139759745575157143
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406047228976364924}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8bf85dcba5c36bc45bb1ce5c02056898, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8335839598698602965
 GameObject:
   m_ObjectHideFlags: 0
