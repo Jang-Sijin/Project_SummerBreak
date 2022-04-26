@@ -12,6 +12,7 @@ public class Item : ScriptableObject
     {
         Equipment,      // 장비
         Consumables,    // 소비
+        Coin,
         Etc             // 기타
     }
     

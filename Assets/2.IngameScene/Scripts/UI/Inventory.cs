@@ -7,15 +7,15 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     public static bool inventoryActivated = false; // 인벤토리 시스템이 활성화 체크
-    [SerializeField] private GameObject go_InventoryBase;
-
-    [SerializeField] private GameObject go_SlotsParent;
-
+    [SerializeField] private GameObject inventoryBase;
+    [SerializeField] private GameObject slotsParent;
+    [SerializeField] private Slot EquimentSlot;
+    
     private Slot[] slots;
 
     private void Start()
     {
-        slots = go_SlotsParent.GetComponentsInChildren<Slot>(); // 해당 오브젝트의 자식 slot 오브젝트를 slots 배열에 할당한다.
+        slots = slotsParent.GetComponentsInChildren<Slot>(); // 해당 오브젝트의 자식 slot 오브젝트를 slots 배열에 할당한다.
     }
 
     // private void TryOpenInventory()
@@ -38,12 +38,12 @@ public class Inventory : MonoBehaviour
 
     private void OpenInventory()
     {
-        go_InventoryBase.SetActive(true);
+        inventoryBase.SetActive(true);
     }
 
     private void CloseInventory()
     {
-        go_InventoryBase.SetActive(false);
+        inventoryBase.SetActive(false);
     }
 
     // 아이템을 획득했을 때 인벤토리에 데이터(아이템)을 저장한다.
