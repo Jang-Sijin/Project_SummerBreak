@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree;
+using UnityEngine;
 
 public class SlimyeeBT : BTTree
 {
@@ -14,7 +15,7 @@ public class SlimyeeBT : BTTree
     public static float runAwaySpeed = 4.0f;
 
     public bool guardCheck = false;
-    
+    public Vector3 randomTargetGoal = Vector3.zero;
     protected override Node SetUpTree()
     {
         Node root = new Selector(new List<Node>
@@ -52,7 +53,9 @@ public class SlimyeeBT : BTTree
             {
                 new CheckInFOVRange(transform),
                 new FollowTarget(transform)
-            })
+            }),
+            //Random Move
+            new RandomMove(transform)
         });
 
         return root;

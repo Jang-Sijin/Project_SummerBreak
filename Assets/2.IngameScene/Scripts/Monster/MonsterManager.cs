@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.VFX;
+using Random = UnityEngine.Random;
 
 public class MonsterManager : MonoBehaviour
 {
@@ -19,8 +20,6 @@ public class MonsterManager : MonoBehaviour
     [SerializeField]
     private float health;
 
-    [SerializeField] 
-    private bool sociality = false;
     public VisualEffect explodeEffect;
     public float thrust = 5.0f;
     public float knockTime = 4.0f;
@@ -37,6 +36,10 @@ public class MonsterManager : MonoBehaviour
     public SkinnedMeshRenderer eyeRenderer;
     private Material bodyMaterial;
     private Material eyeMaterial;
+
+    [SerializeField]
+    private float Range;
+    
     void Start()
     {
         if (curMonsterType == monsterType.slimyee)
@@ -46,12 +49,10 @@ public class MonsterManager : MonoBehaviour
         else if (curMonsterType == monsterType.longyee)
         {
             health = 30.0f;
-            sociality = true;
         }
         else
         {
             health = 10.0f;
-            sociality = true;
         }
 
         spawnPoint = this.transform.position;
@@ -63,13 +64,8 @@ public class MonsterManager : MonoBehaviour
         eyeMaterial.SetFloat("RedLv",0.0f);
     }
 
-    private void OnDrawGizmos()
-    {
-        //Gizmos.DrawWireSphere(this.transform.position, 6.0f);
-    }
     public void TakeHit()
     {
-
         health -= 10.0f;
         Debug.Log($"[이민호] 몬스터 체력: {health}");
         bool isDead = health <= 0;
@@ -81,14 +77,28 @@ public class MonsterManager : MonoBehaviour
             Destroy(newExplodeEffect.gameObject, 0.5f);
             spawnLoot.spawnLoot = true;
         }
-
     }
 
-    public bool GetSociality()
+    public Vector3 RandomPoint(float range)
     {
-        return sociality;
+        
+        Vector3 randomPoint = spawnPoint + Random.insideUnitSphere * range;
+        
+        randomPoint.y = spawnPoint.y;
+        
+        Debug.DrawRay(randomPoint, Vector3.up, Color.red, 1);
+        
+        return randomPoint;
     }
-
+    
+    private void OnDrawGizmos()
+    {
+        //Gizmos.DrawWireSphere(this.transform.position, 6.0f);
+        
+        Gizmos.DrawWireSphere(this.transform.position,1.0f);
+        
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Equipment_Attack"))
@@ -96,7 +106,7 @@ public class MonsterManager : MonoBehaviour
             checkHit = true;
         }
     }
-
+    
     public void KnockBack()
     {
         Rigidbody player = GameObject.FindWithTag("Player").GetComponent<Rigidbody>();
