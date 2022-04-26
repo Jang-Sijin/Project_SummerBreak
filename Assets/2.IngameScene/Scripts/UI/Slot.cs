@@ -12,8 +12,13 @@ using Image = UnityEngine.UI.Image;
 
 public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
+    [Header("장비 슬롯")]
+    [SerializeField] private GameObject equipmentSlot;
+    
+    [Header("마우스 위치")]
     private Vector3 _originMousePos;
     
+    [Header("획득한 아이템")]
     public Item item; // 획득한 아이템 DB
     public int itemCount; // 획득한 아이템의 개수
     public Image itemImage; // 아이템의 이미지
@@ -173,16 +178,37 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         // 아이템과 아이템의 개수를 복사한다.
         Item copyItem = item;
         int copyItemCount = itemCount;
-
-        AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
-
-        if (copyItem != null)
+        
+        // 1.현재 슬롯이 장비 슬롯이면서 2.드래그 중인 아이템의 타입이 장비 아이템일 경우
+        if (this == equipmentSlot.GetComponent<Slot>() && DragSlot.instance.dragSlot.item.itemType == Item.ItemType.Equipment)
         {
-            DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
+            AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
+            
+            if (copyItem != null)
+            {
+                DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
+            }
+            else
+            {
+                DragSlot.instance.dragSlot.ClearSlot();
+            }
+            
+            return;
         }
-        else
+        else if (this != equipmentSlot.GetComponent<Slot>()) // 일반 슬롯일 경우
         {
-            DragSlot.instance.dragSlot.ClearSlot();
+            AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
+
+            if (copyItem != null)
+            {
+                DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
+            }
+            else
+            {
+                DragSlot.instance.dragSlot.ClearSlot();
+            }
+            
+            return;
         }
     }
 }

@@ -27,7 +27,7 @@ public class ItemPickUp : MonoBehaviour
 
         Debug.Log($"[장시진] {itemDB.itemName} 아이템 획득!");
     }
-    
+
     private void InfoDisappear()
     {
         Destroy(this.gameObject); // 아이템 오브젝트 삭제
