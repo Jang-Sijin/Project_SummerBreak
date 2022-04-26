@@ -5,16 +5,20 @@ using UnityEngine;
 
 public class SlimyeeBT : BTTree
 {
+
+    public MonsterManager monsterManager;
     public static float speed = 2f;
     public static float guardSpeed = 1.0f;
+    public static float damageValue = 10.0f;
+    public static float runAwaySpeed = 2.0f;
+    
     public static float attackRange = 0.7f;
     public static float fovRange = 6.0f;
-    public static float damageValue = 10.0f;
     public static float guardFovRange = 10.0f;
     public static float socialityRange = 15.0f;
-    public static float runAwaySpeed = 4.0f;
 
     public bool guardCheck = false;
+    public bool aloneCheck = false;
     public Vector3 randomTargetGoal = Vector3.zero;
     protected override Node SetUpTree()
     {

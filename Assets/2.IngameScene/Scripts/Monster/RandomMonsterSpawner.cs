@@ -21,8 +21,6 @@ public class RandomMonsterSpawner : MonoBehaviour
 
     public bool hasBeenCollected = false;
 
-    private bool spawnMonster = false;
-
     [SerializeField] 
     private float spawnRange = 15.0f;
     
@@ -31,7 +29,6 @@ public class RandomMonsterSpawner : MonoBehaviour
     {
         if (!hasBeenCollected && SpawnTrigger())
         {
-            spawnMonster = false;
             Spawn();
         }
     }

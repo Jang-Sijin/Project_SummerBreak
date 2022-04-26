@@ -12,8 +12,10 @@ public class MonsterManager : MonoBehaviour
     public enum monsterType
     {
         nightMonster,
-        slimyee,
-        longyee
+        green_slimyee,
+        red_slimyee,
+        green_longyee,
+        red_longyee
     }
 
     public monsterType curMonsterType;
@@ -37,22 +39,42 @@ public class MonsterManager : MonoBehaviour
     private Material bodyMaterial;
     private Material eyeMaterial;
 
-    [SerializeField]
-    private float Range;
-    
+    //status
+    private float damgeValue;
+    private float speed;
+    private float attackCoolTime;
     void Start()
     {
-        if (curMonsterType == monsterType.slimyee)
-        {
-            health = 15.0f;
-        }
-        else if (curMonsterType == monsterType.longyee)
-        {
-            health = 30.0f;
-        }
-        else
+        // 01
+        if (curMonsterType == monsterType.green_slimyee || curMonsterType == monsterType.nightMonster)
         {
             health = 10.0f;
+            damgeValue = 10.0f;
+        }
+        // 02
+        else if (curMonsterType == monsterType.green_longyee || curMonsterType == monsterType.red_slimyee)
+        {
+            health = 20.0f;
+            damgeValue = 20.0f;
+        }
+        // 03
+        else if(curMonsterType == monsterType.red_longyee)
+        {
+            health = 30.0f;
+            damgeValue = 30.0f;
+        }
+        // slimyee
+        if (curMonsterType == monsterType.green_slimyee || curMonsterType == monsterType.red_slimyee 
+                                                        || curMonsterType == monsterType.nightMonster)
+        {
+            speed = 2.0f;
+            attackCoolTime = 1.0f;
+        }
+        // longyee
+        else if (curMonsterType == monsterType.green_longyee || curMonsterType == monsterType.red_longyee)
+        {
+            speed = 3.0f;
+            attackCoolTime = 3.0f;
         }
 
         spawnPoint = this.transform.position;

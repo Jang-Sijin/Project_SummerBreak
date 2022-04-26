@@ -26,7 +26,7 @@ public class HitForTarget : Node
         _animator.SetBool("Idle", false);
         _animator.SetBool("Hit", true);
         monsterManager.checkHit = false;
-        
+        SlimyeeBT.speed = 1f;
         
         state = NodeState.RUNNING;
         return state;

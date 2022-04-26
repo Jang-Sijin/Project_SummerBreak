@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 8000376521013750880}
   - component: {fileID: 2297151150283947966}
   m_Layer: 0
-  m_Name: NightMonster_Longyee
+  m_Name: SNightMonster_Longyee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -419,6 +419,8 @@ MonoBehaviour:
   explodeEffect: {fileID: 2297151149259800491}
   thrust: 10
   knockTime: 4
+  inTime: 0
+  spawnPoint: {x: 0, y: 0, z: 0}
   checkHit: 0
   bodyRenderer: {fileID: 2297151148667744510}
   eyeRenderer: {fileID: 2297151148924340623}
@@ -467,7 +469,7 @@ MonoBehaviour:
   - {fileID: 7600625946725073331, guid: eb514711c091b06478c1dede76b9c8b3, type: 3}
   minNumber: 1
   maxNumber: 3
-  spawnPoint: {fileID: 0}
+  spawnPoint: {fileID: 2297151150283947960}
   spawnLoot: 0
 --- !u!114 &2297151150283947966
 MonoBehaviour:
@@ -481,7 +483,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f4920c236460a4a827d845513a93e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPoint: {fileID: 0}
 --- !u!1 &2297151150580586232
 GameObject:
   m_ObjectHideFlags: 0

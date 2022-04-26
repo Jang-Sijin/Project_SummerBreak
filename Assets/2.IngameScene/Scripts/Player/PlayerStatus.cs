@@ -57,10 +57,10 @@ public class PlayerStatus : MonoBehaviour
     {
         currentHealth -= damageValue;
     }
-
+    
     public void ReSetCurHealth()
     {
-        currentHealth = maxHealth;
+        currentHealth = maxHealth / 2;
     }
     public float GetCurHealth()
     {

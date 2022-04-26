@@ -7,19 +7,23 @@ using BehaviorTree;
 public class FollowTarget : Node
 {
     private Transform m_transform;
-    private Transform target_transform;
     private Animator _animator;
+    private MonsterManager _monsterManager;
     
     public FollowTarget(Transform _transform)
     {
         m_transform = _transform;
         _animator = _transform.GetComponent<Animator>();
+        _monsterManager = _transform.GetComponent<MonsterManager>();
     }
 
     public override NodeState Evaluate()
     {
-
-        target_transform = (Transform) GetData("target");
+        float speed = _monsterManager.curMonsterType == MonsterManager.monsterType.nightMonster
+            ? NightMonsterBT.speed
+            : SlimyeeBT.speed;
+        
+        Transform target_transform = (Transform) GetData("target");
         
         if (Vector3.Distance(m_transform.position, target_transform.position) > 0.1f)
         {
@@ -28,7 +32,7 @@ public class FollowTarget : Node
             _animator.SetBool("Idle", false);
             _animator.SetBool("Hit", false);
             m_transform.position = Vector3.MoveTowards(m_transform.position, target_transform.position,
-                NightMonsterBT.speed * Time.deltaTime);
+                speed * Time.deltaTime);
             m_transform.LookAt(target_transform.position);
             
         }

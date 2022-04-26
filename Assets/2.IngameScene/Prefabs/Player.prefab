@@ -1,5 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4108891327626112148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 327455824214256366}
+  - component: {fileID: 5395555094189219400}
+  m_Layer: 7
+  m_Name: NightMonsterSpanwer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &327455824214256366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4108891327626112148}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5711812270174419014}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5395555094189219400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4108891327626112148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ffe3ecd9148af74b90dbc0d718939e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsters:
+  - {fileID: 8450340589363228476, guid: 4298bb10fe5793241bc8f1d4321d0e7b, type: 3}
+  - {fileID: 2297151150283947962, guid: 310869ad426818444b9a156ace3d4c01, type: 3}
+  minNumber: 2
+  maxNumber: 3
+  hasBeenCollected: 0
+  spawnRange: 5
+  spawnCount: 0
+  inTime: 0
 --- !u!1 &5711812268957871685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1747,6 +1799,7 @@ Transform:
   - {fileID: 5711812270547623423}
   - {fileID: 5711812269589322029}
   - {fileID: 5711812270534613297}
+  - {fileID: 327455824214256366}
   m_Father: {fileID: 5711812268957871686}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1845,6 +1898,7 @@ MonoBehaviour:
   bodyRenderer: {fileID: 5711812270732199980}
   capeRenderer: {fileID: 5711812270624110037}
   invincible: 0
+  respawnPoint: {fileID: 0}
 --- !u!114 &5711812270174419008
 MonoBehaviour:
   m_ObjectHideFlags: 0
