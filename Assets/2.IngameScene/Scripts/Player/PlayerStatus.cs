@@ -25,6 +25,7 @@ public class PlayerStatus : MonoBehaviour
     public float runValue = 2.0f;
     public float runSpeed;
 
+    
     public bool DebugMod = false;
     void Awake()
     {
@@ -57,6 +58,15 @@ public class PlayerStatus : MonoBehaviour
         currentHealth -= damageValue;
     }
     
+    public void ReSetCurHealth()
+    {
+        currentHealth = maxHealth / 2;
+    }
+    public float GetCurHealth()
+    {
+        return currentHealth;
+    }
+
     public void HealStamina()
     {
         if (currentStamina >= currentMaxstamina)

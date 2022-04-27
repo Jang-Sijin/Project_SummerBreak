@@ -10,11 +10,13 @@ public class CheckAttackRange : Node
     private Transform _transform;
     private Transform target_transform;
     private Animator _animator;
+    private MonsterManager _monsterManager;
     
     public CheckAttackRange(Transform transform)
     {
         _transform = transform;
         _animator = transform.GetComponent<Animator>();
+        _monsterManager = transform.GetComponent<MonsterManager>();
     }
 
     public override NodeState Evaluate()
@@ -25,8 +27,13 @@ public class CheckAttackRange : Node
             state = NodeState.FAILURE;
             return state;
         }
+        
+        float attackRange = _monsterManager.curMonsterType == MonsterManager.monsterType.nightMonster
+            ? NightMonsterBT.attackRange
+            : SlimyeeBT.attackRange;
+        
         if (Vector3.Distance(_transform.position, target_transform.position) 
-          <= NightMonsterBT.attackRange)
+          <= attackRange)
         {
             
             _animator.SetBool("Chasting", false);

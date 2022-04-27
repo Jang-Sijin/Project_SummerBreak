@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 
 using BehaviorTree;
+using Unity.VisualScripting;
+using UnityEngine;
+using Sequence = BehaviorTree.Sequence;
 
 public class NightMonsterBT : BTTree
 {
-    public UnityEngine.Transform targetPoint;
     public static float speed = 2f;
     public static float attackRange = 0.7f;
     public static float damageValue = 10.0f;
