@@ -62,11 +62,6 @@ public class PlayerStatus : MonoBehaviour
     {
         currentHealth = maxHealth / 2;
     }
-    public float GetCurHealth()
-    {
-        return currentHealth;
-    }
-
     public void HealStamina()
     {
         if (currentStamina >= currentMaxstamina)
@@ -77,5 +72,33 @@ public class PlayerStatus : MonoBehaviour
         {
             currentStamina += 10.0f;
         }
+    }
+    //Getter
+    public float GetCurHealth()
+    {
+        return currentHealth;
+    }
+
+    public float GetCurStamina()
+    {
+        return currentStamina;
+    }
+
+    public float GetMaxStamina()
+    {
+        return currentMaxstamina;
+    }
+    //Setter
+    public void SetCurHealth(float value)
+    {
+        currentHealth += value;
+    }
+    public void SetCurStamina(float value)
+    {
+        currentStamina += value;
+    }
+    public void SetMaxStamina(float value)
+    {
+        currentMaxstamina += value;
     }
 }
