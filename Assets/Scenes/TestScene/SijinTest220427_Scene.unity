@@ -4621,8 +4621,8 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
+  m_UpdateMethod: 0
+  m_BlendUpdateMethod: 0
   m_DefaultBlend:
     m_Style: 1
     m_Time: 0.5
@@ -10265,6 +10265,7 @@ MonoBehaviour:
   bodyRenderer: {fileID: 275401511}
   capeRenderer: {fileID: 299569392}
   invincible: 0
+  respawnPoint: {fileID: 0}
 --- !u!114 &357541925
 MonoBehaviour:
   m_ObjectHideFlags: 0
