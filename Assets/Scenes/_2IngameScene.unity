@@ -10049,8 +10049,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 484912592}
-  - component: {fileID: 484912593}
-  - component: {fileID: 484912594}
   m_Layer: 4
   m_Name: WaterBody
   m_TagString: Untagged
@@ -10081,34 +10079,6 @@ Transform:
   m_Father: {fileID: 1200600708}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &484912593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484912591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58441dd282322d441848dce1d3f960ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!54 &484912594
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484912591}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &486192717
 GameObject:
   m_ObjectHideFlags: 0
@@ -28358,6 +28328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58441dd282322d441848dce1d3f960ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1772180697}
 --- !u!114 &1079024737 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1199510360255174478, guid: 6f0534da8c670a540a0ba73a74f9dd7b, type: 3}
@@ -31109,6 +31080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58441dd282322d441848dce1d3f960ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1772180697}
 --- !u!1001 &1164641258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31702,6 +31674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58441dd282322d441848dce1d3f960ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1772180697}
 --- !u!1 &1193568803
 GameObject:
   m_ObjectHideFlags: 3
@@ -31952,6 +31925,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1200600708}
+  - component: {fileID: 1200600710}
+  - component: {fileID: 1200600709}
   m_Layer: 0
   m_Name: SeaGroup
   m_TagString: Untagged
@@ -31974,6 +31949,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1200600709
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200600707}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1200600710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200600707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58441dd282322d441848dce1d3f960ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1772180697}
 --- !u!1 &1200901478
 GameObject:
   m_ObjectHideFlags: 0
@@ -34054,6 +34058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58441dd282322d441848dce1d3f960ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1772180697}
 --- !u!65 &1282019467
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -46198,6 +46203,7 @@ MonoBehaviour:
   bodyRenderer: {fileID: 1315054772}
   capeRenderer: {fileID: 1150523725}
   invincible: 0
+  respawnPoint: {fileID: 0}
 --- !u!114 &1772180698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48475,6 +48481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58441dd282322d441848dce1d3f960ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1772180697}
 --- !u!4 &1839912840 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 563337407777671821, guid: 3f59225015537ec49b3877a5fe7d04be, type: 3}
@@ -49750,6 +49757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58441dd282322d441848dce1d3f960ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!1001 &1915659046
 PrefabInstance:
   m_ObjectHideFlags: 0

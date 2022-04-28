@@ -116,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
             currentState = playerState.jumpState;
             Vector3 jumpDirection = new Vector3(0.0f, jumpPower, 0.0f);
             jumpEffect.Play();
-            Debug.Log("[이민호] 점프함");
+            //Debug.Log("[이민호] 점프함");
             m_rigidbody.AddForce(jumpDirection, ForceMode.Impulse);
     }
 
@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
         flapEffect.Reinit();
         flapEffect.Play();
         Vector3 jumpDirection = new Vector3(0.0f, flapPower, 0.0f);
-        Debug.Log("[이민호] 플랩");
+        //Debug.Log("[이민호] 플랩");
         m_rigidbody.velocity = Vector3.zero;
         m_rigidbody.AddForce(jumpDirection,ForceMode.Impulse);
     }
@@ -301,6 +301,10 @@ public class PlayerMovement : MonoBehaviour
             d_fromWaterSurface = Mathf.Clamp(d_fromWaterSurface, float.MinValue, waterSurface);
             isSwim = d_fromWaterSurface >= swimLevel;
         }
+        else
+        {
+            waterSurface = 0.0f;
+        }
     }
     public void Swim_idle()
     {
@@ -328,6 +332,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveCheck == true)
         {
+            m_rigidbody.useGravity = false;
             currentState = playerState.swimmingState;
 
             Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);

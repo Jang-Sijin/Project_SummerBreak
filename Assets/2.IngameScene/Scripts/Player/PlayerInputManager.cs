@@ -54,18 +54,19 @@ public class PlayerInputManager : MonoBehaviour
         player.currentFrameLerpDirection = Vector3.zero;
         player.IsGround();
         player.isSwimed();
+        player.Swim_idle();
 
         if (player.isGrounded)
         {
             //freeClimb.CancelClimb();
-            player.CancelClimb();
+            //player.CancelClimb();
             if (GlideDoingCheck)
             {
                 GlideDoingCheck = false;
             }
             if (JumpDoingCheck)
             {
-                Debug.Log("[이민호] 육지점프");
+                //Debug.Log("[이민호] 육지점프");
                 player.Jump(moveDirection);
             }
             else if (moveDoingCheck)
@@ -170,13 +171,13 @@ public class PlayerInputManager : MonoBehaviour
             }
         }
 
-        if (!ClimbDoingCheck && !spaceClickCheck && player.isClimbed)
+        if (!ClimbDoingCheck && !spaceClickCheck && player.isClimbed && !player.isSwim)
         {
             player.Sliding();
             player.CancelClimb();
         }
         
-        if (!ClimbDoingCheck && !player.isClimbed)
+        if (!ClimbDoingCheck && !player.isClimbed && !player.isSwim)
         {
             ClimbDoingCheck = false;
             player.CancelClimb();
