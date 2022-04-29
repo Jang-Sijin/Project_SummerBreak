@@ -117,7 +117,7 @@ public class MonsterManager : MonoBehaviour
     {
         //Gizmos.DrawWireSphere(this.transform.position, 6.0f);
         
-        Gizmos.DrawWireSphere(this.transform.position,1.0f);
+        //Gizmos.DrawWireSphere(this.transform.position,1.0f);
         
     }
     

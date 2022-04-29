@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator _animator;
     
     public float curspeed;
+    public float swimSpeed = 3.0f;
     [SerializeField]
     private float jumpPower = 5.0f; 
     [SerializeField]
@@ -337,7 +338,7 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 moveDirection = new Vector3(direction.x, 0, direction.y);
 
-            m_rigidbody.AddForce(moveDirection, ForceMode.Impulse);
+            m_rigidbody.AddForce(moveDirection * swimSpeed, ForceMode.Impulse);
             Quaternion newRotation = Quaternion.LookRotation(moveDirection);
             m_rigidbody.rotation = Quaternion.Slerp(m_rigidbody.rotation, newRotation, 0.5f);
         }
@@ -364,7 +365,7 @@ public class PlayerMovement : MonoBehaviour
         //Debug.DrawLine(transform.position,transform.position - Vector3.up * 0.1f,Color.red,1.0f);
         isGrounded = Physics.Raycast(transform.position, -Vector3.up, 0.1f, layerMask) ||
                      isSlope;
-
+        //isGrounded = Physics.CheckSphere(transform.position, 0.1f, layerMask) || isSlope;
         if (!isClimbed && (inWater == false || isGrounded))
         {
             m_rigidbody.useGravity = true;
@@ -373,7 +374,14 @@ public class PlayerMovement : MonoBehaviour
     }
     
     
-
+    private void OnDrawGizmos()
+    {
+        //Gizmos.DrawWireSphere(this.transform.position, 6.0f);
+        
+        //Gizmos.DrawWireSphere(transform.position,0.1f);
+        
+    }
+    
     
     private void OnSlope()
     {
@@ -458,12 +466,10 @@ public class PlayerMovement : MonoBehaviour
                 checkDirection += checkHit.normal;
                 k++;
             }
-
-            offset = Quaternion.AngleAxis(80f, transform.forward) * offset;
+            Debug.Log($"check: {checkDirection}");
         }
 
         checkDirection /= k;
-
         RaycastHit hit;
         if (Physics.Raycast(transform.position, -checkDirection, out hit))
         {
