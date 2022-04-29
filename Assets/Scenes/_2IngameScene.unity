@@ -6877,7 +6877,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 351131315}
-  m_LocalRotation: {x: 0.47658828, y: -0.00031934498, z: 0.00017312191, w: 0.87912655}
+  m_LocalRotation: {x: 0.47658828, y: -0.0003193022, z: 0.00017309871, w: 0.87912655}
   m_LocalPosition: {x: 215, y: 20.6, z: 80.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -46181,6 +46181,7 @@ MonoBehaviour:
   flapEffect: {fileID: 1111045543}
   _animator: {fileID: 1772180693}
   curspeed: 0
+  swimSpeed: 3
   jumpPower: 5
   flapPower: 5
   glideGravityMultiplier: 0.1
@@ -46200,6 +46201,8 @@ MonoBehaviour:
   isSwim: 0
   swimLevel: 0.6
   isClimbed: 0
+  isClimbedUp: 0
+  checkDirection: {x: 0, y: 0, z: 0}
   bodyRenderer: {fileID: 1315054772}
   capeRenderer: {fileID: 1150523725}
   invincible: 0
@@ -51703,7 +51706,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006778813}
-  m_LocalRotation: {x: 0.47658828, y: -0.00031934498, z: 0.00017312191, w: 0.87912655}
+  m_LocalRotation: {x: 0.47658828, y: -0.0003193022, z: 0.00017309871, w: 0.87912655}
   m_LocalPosition: {x: 215, y: 20.6, z: 80.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

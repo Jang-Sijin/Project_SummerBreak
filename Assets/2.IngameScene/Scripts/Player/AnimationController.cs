@@ -18,8 +18,7 @@ public class AnimationController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
-            
+    {
             m_animation.SetBool("Hit", m_PlayerMovement.currentState == PlayerMovement.playerState.hit);
         
             m_animation.SetBool("Attack", m_PlayerMovement.currentState == PlayerMovement.playerState.attack);

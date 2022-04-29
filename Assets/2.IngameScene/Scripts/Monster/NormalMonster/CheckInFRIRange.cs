@@ -15,22 +15,33 @@ public class CheckInFRIRange : Node
 
     public override NodeState Evaluate()
     {
-        if (_slimyeeBt.aloneCheck)
+        int layerMaskPlayer = (1 << LayerMask.NameToLayer("Player"));
+        object tP = GetData("target");
+        
+        if (tP == null)
         {
-            state = NodeState.SUCCESS;
-            return state;
+            Collider[] colliderP = Physics.OverlapSphere(_transform.position, SlimyeeBT.guardFovRange, layerMaskPlayer);
+
+            if (colliderP.Length > 0)
+            {
+                parent.parent.SetData("target",colliderP[0].transform);
+            }
+            else
+            {
+                state = NodeState.FAILURE;
+                return state;
+            }
         }
+        
         int layerMask = (1 << LayerMask.NameToLayer("Monster"));
         Collider[] collider = Physics.OverlapSphere(_transform.position, SlimyeeBT.socialityRange, layerMask);
-        object t = GetData("target");
-        if (collider.Length > 1 || t == null)
+        if (collider.Length > 1)
         {
             //Debug.Log("[이민호] 주변에 친구 있음");
             state = NodeState.FAILURE;
             return state;
         }
 
-        _slimyeeBt.aloneCheck = true;
         //Debug.Log("[이민호] 주변에 친구 없음");
         state = NodeState.SUCCESS;
         return state;

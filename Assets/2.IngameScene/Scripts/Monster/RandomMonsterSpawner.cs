@@ -37,7 +37,7 @@ public class RandomMonsterSpawner : MonoBehaviour
     {
         int layerMask = (1 << LayerMask.NameToLayer("Player"));
         //Gizmos.DrawWireSphere(transform.position, 6.0f);
-        if (Physics.CheckSphere(transform.position,15.0f, layerMask))
+        if (Physics.CheckSphere(transform.position,spawnRange, layerMask))
         {
             //Debug.Log("[이민호] 생성 범위내로 옴");
             return true;

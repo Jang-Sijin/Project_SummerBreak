@@ -135,7 +135,11 @@ public class PlayerInputManager : MonoBehaviour
     private void Update()
     {
         player.CheckForClimb();
-        
+        if (player.isClimbedUp)
+        {
+            spaceClickCheck = false;
+            ClimbDoingCheck = false;
+        }
         
         if (moveDoingCheck && player.isGrounded)
         {
