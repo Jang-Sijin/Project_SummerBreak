@@ -93,7 +93,6 @@ public class PlayerInputManager : MonoBehaviour
         }
         else if (!player.isGrounded)
         {
-
             if (ClimbDoingCheck)
             {
                 if (moveDoingCheck)
@@ -138,6 +137,12 @@ public class PlayerInputManager : MonoBehaviour
         if (player.isClimbedUp)
         {
             spaceClickCheck = false;
+            ClimbDoingCheck = false;
+        }
+        else if (GlideDoingCheck && player.isSwim)
+        {
+            spaceClickCheck = false;
+            GlideDoingCheck = false;
             ClimbDoingCheck = false;
         }
         
