@@ -842,7 +842,7 @@ RectTransform:
   - {fileID: 1656149473}
   - {fileID: 531969947}
   m_Father: {fileID: 1031910457}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1462,7 +1462,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1031910457}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2185,7 +2185,7 @@ RectTransform:
   m_LocalScale: {x: 20, y: 11, z: 1.2143}
   m_Children: []
   m_Father: {fileID: 1031910457}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3401,7 +3401,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1031910457}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3938,9 +3938,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 40
+  field of view: 60
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3963,8 +3963,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1019738465}
-  m_LocalRotation: {x: 0.009788139, y: 0.6886209, z: -0.009297042, w: 0.7249959}
-  m_LocalPosition: {x: -41.3, y: 6.7, z: -72.11}
+  m_LocalRotation: {x: 0.118968636, y: 0.39584684, z: -0.05372795, w: 0.9089913}
+  m_LocalPosition: {x: -14.38, y: 8.29, z: -88.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4155,13 +4155,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 511363241}
   - {fileID: 834925133}
   - {fileID: 1162468427}
   - {fileID: 358296929}
   - {fileID: 1686430542}
   - {fileID: 1686161290}
   - {fileID: 210623071}
-  - {fileID: 511363241}
   - {fileID: 1740272731}
   m_Father: {fileID: 1974138992}
   m_RootOrder: 0
@@ -4962,7 +4962,7 @@ RectTransform:
   - {fileID: 435665085}
   - {fileID: 357990336}
   m_Father: {fileID: 1031910457}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8054,7 +8054,7 @@ RectTransform:
   - {fileID: 529211266}
   - {fileID: 1342975122}
   m_Father: {fileID: 1031910457}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -8094,7 +8094,7 @@ RectTransform:
   - {fileID: 1910940785}
   - {fileID: 813592171}
   m_Father: {fileID: 1031910457}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -10819,6 +10819,14 @@ PrefabInstance:
     - target: {fileID: 7372860551218250737, guid: e666f664eb90e5e4c9e3e609f0ca9550, type: 3}
       propertyPath: SFXstartVolumeValue
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372860551218250737, guid: e666f664eb90e5e4c9e3e609f0ca9550, type: 3}
+      propertyPath: backGroundList.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372860551218250738, guid: e666f664eb90e5e4c9e3e609f0ca9550, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7372860551218250739, guid: e666f664eb90e5e4c9e3e609f0ca9550, type: 3}
       propertyPath: m_Name
