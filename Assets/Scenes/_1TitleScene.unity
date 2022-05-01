@@ -2626,11 +2626,11 @@ PlayableDirector:
   - key: {fileID: 5200481838736131561, guid: e091b0e52d9b0364787bae0ec0e16cf3, type: 2}
     value: {fileID: 1019738466}
   - key: {fileID: -3545221696137684148, guid: e091b0e52d9b0364787bae0ec0e16cf3, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 1847332933}
   - key: {fileID: 9287099575165853, guid: e091b0e52d9b0364787bae0ec0e16cf3, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 1847332933}
   - key: {fileID: -8309382831747008909, guid: e091b0e52d9b0364787bae0ec0e16cf3, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 1847332933}
   - key: {fileID: -1076954292433204645, guid: e091b0e52d9b0364787bae0ec0e16cf3, type: 2}
     value: {fileID: 1350770126}
   - key: {fileID: -2283266019693662299, guid: e091b0e52d9b0364787bae0ec0e16cf3, type: 2}
@@ -8245,6 +8245,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7130346385566036213, guid: 453ab319bae87294183dea42c79c7054, type: 3}
   m_PrefabInstance: {fileID: 7130346383912797358}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1847332933 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7372860551218250738, guid: e666f664eb90e5e4c9e3e609f0ca9550, type: 3}
+  m_PrefabInstance: {fileID: 7372860550816916843}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1861678582
 GameObject:
   m_ObjectHideFlags: 0
@@ -10637,7 +10642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7130346385566036213, guid: 453ab319bae87294183dea42c79c7054, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7130346385566036213, guid: 453ab319bae87294183dea42c79c7054, type: 3}
       propertyPath: m_AnchorMax.x
@@ -10814,11 +10819,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7372860551218250737, guid: e666f664eb90e5e4c9e3e609f0ca9550, type: 3}
       propertyPath: BGstartVolumeValue
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7372860551218250737, guid: e666f664eb90e5e4c9e3e609f0ca9550, type: 3}
       propertyPath: SFXstartVolumeValue
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7372860551218250737, guid: e666f664eb90e5e4c9e3e609f0ca9550, type: 3}
       propertyPath: backGroundList.Array.size
