@@ -215,7 +215,7 @@ public class PlayerInputManager : MonoBehaviour
         }
         else if (context.performed)
         {
-            if (!player.hited && !player.attacked)
+            if (!player.climbFlap && !player.hited && !player.attacked)
             {
                 moveDoingCheck = true;
                 moveDirection = context.ReadValue<Vector2>();
@@ -243,9 +243,9 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
 
-            if (!player.hited && player.isGrounded && playerstatus.currentItem == PlayerStatus.item.attack)
+            if (!player.hited && player.isGrounded && playerstatus.currentItem != PlayerStatus.item.nothing)
             {
-                player.Attack();
+                player.Equipment();
             }
             
         }

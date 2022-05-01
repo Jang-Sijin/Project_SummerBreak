@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,8 @@ public class PlayerStatus : MonoBehaviour
     {
         nothing,
         attack,
-        interaction
+        interaction_sleep,
+        interaction_quillPen
     }
 
     public item currentItem;
@@ -25,6 +27,10 @@ public class PlayerStatus : MonoBehaviour
     public float runValue = 2.0f;
     public float runSpeed;
 
+    [SerializeField] 
+    private GameObject equipmentSlotObj;
+
+    private Slot equipmentSlot;
     
     public bool DebugMod = false;
     void Awake()
@@ -38,6 +44,29 @@ public class PlayerStatus : MonoBehaviour
 
         runSpeed = walkSpeed * runValue;
         currentItem = item.nothing;
+    }
+
+    private void Start()
+    {
+        equipmentSlot = equipmentSlotObj.GetComponent<Slot>();
+    }
+
+    private void Update()
+    {
+        
+        if (equipmentSlot.item != null)
+        {
+            if (equipmentSlot.item.itemName == "소드")
+            {
+                currentItem = item.attack;
+                //currentItem = item.interaction_sleep;
+                //currentItem = item.interaction_quillPen;
+            }
+        }
+        else
+        {
+            currentItem = item.nothing;
+        }
     }
 
     public void UpgradeCurMaxStamina(float stamina)

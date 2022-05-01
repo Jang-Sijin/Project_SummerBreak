@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     }
     
     public playerState currentState;
-    public VisualEffect walkEffect;
+    
     public VisualEffect jumpEffect;
     public VisualEffect flapEffect;
 
@@ -78,6 +78,9 @@ public class PlayerMovement : MonoBehaviour
     public bool isClimbed;
     public bool isClimbedUp;
     public Vector3 checkDirection = Vector3.zero;
+    public bool climbFlap = false;
+    [SerializeField]
+    private float climbFlapValue = 8.0f;
     
     //Slope
     private float maxSlopeAngle = 50.0f;
@@ -91,6 +94,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] 
     private bool invincible = false;
     public GameObject respawnPoint;
+    
+    [SerializeField] private GameObject opitionUi;
     
     void Awake()
     {
@@ -110,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
         {
             currentState = playerState.Ground_idleState;
             isClimbedUp = false;
+            climbFlap = false;
             checkDirection = Vector3.zero;
             m_rigidbody.velocity = m_rigidbody.velocity * 0.1f;
         }
@@ -146,7 +152,6 @@ public class PlayerMovement : MonoBehaviour
         }
         Quaternion newRotation = Quaternion.LookRotation(moveDirection);
         m_rigidbody.rotation = Quaternion.Slerp(m_rigidbody.rotation, newRotation,0.5f);
-        walkEffect.Play();
     }
 
     public void Failing()
@@ -154,6 +159,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isClimbed && m_rigidbody.velocity.y < 0)
         {
             currentState = playerState.failState;
+            climbFlap = false;
         }
     }
 
@@ -179,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 velocity = moveDirection * curspeed;
             velocity.y = m_rigidbody.velocity.y;
             float angle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
-            Debug.Log("[이민호] 공중이동");
+            //Debug.Log("[이민호] 공중이동");
             m_rigidbody.velocity = velocity;
             m_rigidbody.rotation = Quaternion.Euler(0, angle, 0);
         }
@@ -352,12 +358,23 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public void Attack()
+    public void Equipment()
     {
-        if (playerstatus.currentItem == PlayerStatus.item.attack)
+        if (!opitionUi.activeSelf)
         {
-            m_rigidbody.velocity = Vector3.zero;
-            currentState = playerState.attack;
+            if (playerstatus.currentItem == PlayerStatus.item.attack)
+            {
+                m_rigidbody.velocity = Vector3.zero;
+                currentState = playerState.attack;
+            }
+            else if (playerstatus.currentItem == PlayerStatus.item.interaction_sleep)
+            {
+                GameManager.instance.SetInGameTime(7);
+            }
+            else if (playerstatus.currentItem == PlayerStatus.item.interaction_quillPen)
+            {
+                
+            }
         }
     }
 
@@ -456,7 +473,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Sliding()
     {
-        if (!isGrounded && isClimbed)
+        if (!isGrounded && isClimbed && !climbFlap)
         {
             currentState = playerState.sliding;
         }
@@ -478,6 +495,41 @@ public class PlayerMovement : MonoBehaviour
     public void Climbing(Vector2 input)
     {
         int layerMask = (1 << LayerMask.NameToLayer("Grounded"));
+
+        Vector3 offset = transform.TransformDirection(Vector2.one * 0.5f);
+        checkDirection = Vector3.zero;
+        int k = 0;
+
+        for (int i = 0; i < 4; i++) 
+        { 
+            RaycastHit checkHit; 
+            if (Physics.Raycast(transform.position + offset, 
+                transform.forward, 
+                out checkHit,layerMask))
+            { 
+                checkDirection += checkHit.normal; 
+                k++;
+            }
+            
+            offset = Quaternion.AngleAxis(80.0f, transform.forward) * offset; 
+            //Debug.Log($"check: {checkDirection}");
+        }
+        
+        checkDirection /= k; 
+        checkDirection = checkDirection.normalized; 
+        RaycastHit hit; 
+        if (Physics.Raycast(transform.position, -checkDirection, out hit, 1.0f,layerMask)) 
+        { 
+            Debug.Log($"[이민호] 됨"); 
+            m_rigidbody.isKinematic = false;
+            m_rigidbody.position = Vector3.Lerp(m_rigidbody.position, hit.point + hit.normal * 0.5f, 
+                5f * Time.fixedDeltaTime);
+            
+            transform.forward = Vector3.Lerp(transform.forward, -hit.normal, 10f * Time.fixedDeltaTime);
+            
+            currentState = playerState.climbing; 
+            m_rigidbody.velocity = transform.TransformDirection(input) * 2.0f;
+        }
         if (checkDirection != Vector3.zero && !isClimbedUp && ClimbingUp() && input == Vector2.up)
         {
             Debug.Log("[이민호] 머리가 빔");
@@ -486,6 +538,7 @@ public class PlayerMovement : MonoBehaviour
             _animator.Rebind();
             _animator.Play("Flap");
             flapEffect.Reinit();
+            climbFlap = true;
             flapEffect.Play();
             //Debug.Log("[이민호] 플랩");
             m_rigidbody.velocity = Vector3.zero;
@@ -493,43 +546,7 @@ public class PlayerMovement : MonoBehaviour
             m_rigidbody.velocity = jumpDirection;
             //m_rigidbody.AddForce(jumpDirection,ForceMode.VelocityChange);
         }
-        else
-        {
-            Vector3 offset = transform.TransformDirection(Vector2.one * 0.5f);
-            checkDirection = Vector3.zero;
-            int k = 0;
-
-            for (int i = 0; i < 4; i++)
-            {
-                RaycastHit checkHit;
-                if (Physics.Raycast(transform.position + offset,
-                    transform.forward,
-                    out checkHit,layerMask))
-                {
-                    checkDirection += checkHit.normal;
-                    k++;
-                }
-
-                offset = Quaternion.AngleAxis(80.0f, transform.forward) * offset;
-                //Debug.Log($"check: {checkDirection}");
-            }
-
-            checkDirection /= k;
-            checkDirection = checkDirection.normalized;
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, -checkDirection, out hit, 1.0f,layerMask))
-            {
-                Debug.Log($"[이민호] 됨");
-                m_rigidbody.isKinematic = false;
-                m_rigidbody.position = Vector3.Lerp(m_rigidbody.position, hit.point + hit.normal * 0.5f,
-                    5f * Time.fixedDeltaTime);
-                transform.forward = Vector3.Lerp(transform.forward, -hit.normal, 10f * Time.fixedDeltaTime);
-
-                currentState = playerState.climbing;
-                m_rigidbody.velocity = transform.TransformDirection(input) * 2.0f;
-            }
-        }
-        //m_rigidbody.velocity = Vector3.up * 5f + hit.normal * 2f;
+            //m_rigidbody.velocity = Vector3.up * 5f + hit.normal * 2f;
     }
 
 
