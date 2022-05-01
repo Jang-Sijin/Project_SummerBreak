@@ -142,6 +142,11 @@ public class GameManager : MonoBehaviour
     {
         return timeController.InGameTime();
     }
+    
+    public void SetInGameTime(int hour)
+    {
+        timeController.SetInGameTime(hour);
+    }
 
     private void InitLoadSaveData()
     {
