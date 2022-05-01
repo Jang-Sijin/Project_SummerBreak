@@ -13,9 +13,14 @@ public class PlayerInputManager : MonoBehaviour
     private Vector2 moveDirection;
 
     // private float flapSpendStamina = 10.0f;
+    [SerializeField]
+    private GameObject GlideTrail_Right;
+    
+    [SerializeField]
+    private GameObject GlideTrail_Left;
 
-    public GameObject GlideTrail_Right;
-    public GameObject GlideTrail_Left;
+    [SerializeField] 
+    private GameObject walkEffect;
     
     [SerializeField]
     private bool moveDoingCheck;
@@ -134,6 +139,15 @@ public class PlayerInputManager : MonoBehaviour
     private void Update()
     {
         player.CheckForClimb();
+        if (player.isGrounded && moveDoingCheck)
+        {
+            walkEffect.SetActive(true);
+        }
+        else
+        {
+            walkEffect.SetActive(false);
+        }
+        
         if (player.isClimbedUp)
         {
             spaceClickCheck = false;
