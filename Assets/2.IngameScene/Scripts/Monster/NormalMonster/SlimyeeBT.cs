@@ -15,7 +15,7 @@ public class SlimyeeBT : BTTree
     public static float attackRange = 0.7f;
     public static float fovRange = 6.0f;
     public static float guardFovRange = 10.0f;
-    public static float socialityRange = 15.0f;
+    public static float socialityRange = 20.0f;
 
     public bool guardCheck = false;
     public bool aloneCheck = false;

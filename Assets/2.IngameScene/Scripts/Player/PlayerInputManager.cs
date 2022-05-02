@@ -139,6 +139,11 @@ public class PlayerInputManager : MonoBehaviour
     private void Update()
     {
         player.CheckForClimb();
+        if (player.hited)
+        {
+            moveDoingCheck = false;
+            player.currentState = PlayerMovement.playerState.hit;
+        }
         if (player.isGrounded && moveDoingCheck)
         {
             walkEffect.SetActive(true);

@@ -143,11 +143,17 @@ public class MonsterManager : MonoBehaviour
         
         Vector3 randomPoint = spawnPoint + Random.insideUnitSphere * range;
         
-        randomPoint.y = spawnPoint.y;
+        randomPoint.y = transform.position.y;
         
         //Debug.DrawRay(randomPoint, Vector3.up, Color.red, 1);
+        StartCoroutine(moveCoolTime());
         
         return randomPoint;
+    }
+    
+    private IEnumerator moveCoolTime()
+    {
+        yield return new WaitForSeconds(3.0f);
     }
     
     private void OnDrawGizmos()
