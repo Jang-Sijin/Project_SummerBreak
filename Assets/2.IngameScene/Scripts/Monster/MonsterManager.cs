@@ -39,10 +39,14 @@ public class MonsterManager : MonoBehaviour
     private Material bodyMaterial;
     private Material eyeMaterial;
 
+    private bool inCameravisible = false;
+
     //status
     private float damgeValue;
     private float speed;
     private float attackCoolTime;
+
+    private bool dead = false;
     void Start()
     {
         // 01
@@ -86,10 +90,43 @@ public class MonsterManager : MonoBehaviour
         eyeMaterial.SetFloat("RedLv",0.0f);
     }
 
+    private void Update()
+    {
+        if (!dead)
+        {
+            MonsterVisible();
+        }
+    }
+
+    private void MonsterVisible()
+    {
+        //Camera mainCamera = Camera.main;
+        var planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+        var point = transform.position;
+        foreach (var plane in planes)
+        {
+            if (plane.GetDistanceToPoint(point) < 0)
+            {
+                if (inCameravisible)
+                {
+                    dead = true;
+                    VisualEffect newExplodeEffect = Instantiate(explodeEffect, transform.position, transform.rotation);
+                    newExplodeEffect.Play();
+                    Destroy(newExplodeEffect.gameObject, 0.5f);
+                    //Debug.Log("[이민호] 밖으로 나감");
+                    Destroy(gameObject);
+                }
+
+                return;
+            }
+        }
+
+        inCameravisible = true;
+    }
     public void TakeHit()
     {
         health -= 10.0f;
-        Debug.Log($"[이민호] 몬스터 체력: {health}");
+        //Debug.Log($"[이민호] 몬스터 체력: {health}");
         bool isDead = health <= 0;
 
         if (isDead)
@@ -108,7 +145,7 @@ public class MonsterManager : MonoBehaviour
         
         randomPoint.y = spawnPoint.y;
         
-        Debug.DrawRay(randomPoint, Vector3.up, Color.red, 1);
+        //Debug.DrawRay(randomPoint, Vector3.up, Color.red, 1);
         
         return randomPoint;
     }

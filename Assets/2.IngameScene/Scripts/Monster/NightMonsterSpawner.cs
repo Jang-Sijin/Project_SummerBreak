@@ -38,9 +38,6 @@ public class NightMonsterSpawner : MonoBehaviour
 
     [SerializeField] 
     private bool dayCheck = false;
-
-    [SerializeField]
-    private bool checkSurroundMonster = false;
     
     // Update is called once per frame
     void Update()

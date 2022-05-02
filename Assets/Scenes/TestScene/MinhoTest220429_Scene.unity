@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028396, g: 0.22571427, b: 0.30692327, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028364, g: 0.22571364, b: 0.30692187, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -23232,7 +23232,7 @@ GameObject:
   - component: {fileID: 903146987}
   m_Layer: 0
   m_Name: MainCamera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30338,6 +30338,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8793882395189909047, guid: 7dde6472550956044afa2a39166050d8, type: 3}
   m_PrefabInstance: {fileID: 1104321848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1106775394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6679031108004514695, guid: 3fb1d65192ceaf349a963b7a2e44860c, type: 3}
+  m_PrefabInstance: {fileID: 883005217}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1108640019
 GameObject:
@@ -38300,7 +38305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1448548836
 Transform:
   m_ObjectHideFlags: 0
@@ -42954,7 +42959,7 @@ MonoBehaviour:
   runValue: 1.5
   runSpeed: 0
   equipmentSlotObj: {fileID: 1438468973}
-  DebugMod: 0
+  DebugMod: 1
 --- !u!114 &1616734438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42969,6 +42974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlideTrail_Right: {fileID: 1742973010}
   GlideTrail_Left: {fileID: 1448548835}
+  walkEffect: {fileID: 1106775394}
   moveDoingCheck: 0
   JumpDoingCheck: 0
   FlapDoingCheck: 0
@@ -45874,7 +45880,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1742973011
 Transform:
   m_ObjectHideFlags: 0
