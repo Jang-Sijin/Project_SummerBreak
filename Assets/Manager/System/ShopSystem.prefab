@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5579277979987341890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5579277979987341891}
+  - component: {fileID: 5579277979987341888}
+  m_Layer: 0
+  m_Name: ShopSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5579277979987341891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5579277979987341890}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5579277979987341888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5579277979987341890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 606c1fd4709549842a3e6f3665d02644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopCanvas: {fileID: 0}
+  shopBuyUI: {fileID: 0}
+  shopSaleUI: {fileID: 0}
+  shopSlotsParent: {fileID: 0}
+  shopBuyButton: {fileID: 0}
+  shopSaleButton: {fileID: 0}
+  shopBuyBackButton: {fileID: 0}
+  shopSaleBackButton: {fileID: 0}
+  shopItemList:
+  - {fileID: 11400000, guid: e5765e0149daae940ad2bbb91b74e910, type: 2}
+  - {fileID: 11400000, guid: b0926180dae89c647962736c156491de, type: 2}
+  - {fileID: 11400000, guid: 79133e7f3d08865478c1965167b6da37, type: 2}
+  - {fileID: 11400000, guid: d8907979de167b74b9570de73788afda, type: 2}
+  - {fileID: 11400000, guid: 2c75cf980092a334899957b65ee186d3, type: 2}
+  - {fileID: 11400000, guid: 772a260864a927d44bb7e21dd96cd07c, type: 2}
+  - {fileID: 11400000, guid: 38272d6536f9e5647b954200285bcf8a, type: 2}

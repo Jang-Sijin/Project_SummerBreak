@@ -137,4 +137,9 @@ public class TimeController : MonoBehaviour
     {
         return currentTime;
     }
+
+    public void SetInGameTime(int hour)
+    {
+        currentTime = DateTime.Now.Date + TimeSpan.FromHours(hour);
+    }
 }

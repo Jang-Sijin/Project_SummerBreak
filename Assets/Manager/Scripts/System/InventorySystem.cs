@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,12 +12,20 @@ public class InventorySystem : MonoBehaviour
     private GameObject playerUI;
     
     [Header("인벤토리 설정")]
-    public GameObject inventorySlotsParent;
-    public GameObject inventoryEquipmentSlot;
+    [SerializeField] private GameObject inventorySlotsParent;
+    [SerializeField] private GameObject inventoryEquipmentSlot;
     
+    [Header("상점 인벤토리 설정")]
+    [SerializeField] private GameObject shopInventorySlotsParent;
+    [SerializeField] private GameObject shopInventoryEquipmentSlot;
+
     private Slot[] itemSlots;
     private Slot equipmentSlot;
-    private int playerCoinCount;
+    private Slot[] shopItemSlots;
+    private Slot shopEquipmentSlot;
+    
+    [Header("플레이어가 획득한 코인 개수")]
+    public int playerCoinCount;
     
     #region Inventory System 싱글톤 설정
     public static InventorySystem instance; // Game Manager을 싱글톤으로 관리
@@ -39,6 +49,9 @@ public class InventorySystem : MonoBehaviour
         // 해당 오브젝트의 자식 slot 오브젝트를 itemSlots 배열에 할당한다.
         itemSlots = inventorySlotsParent.GetComponentsInChildren<Slot>();
         equipmentSlot = inventoryEquipmentSlot.GetComponent<Slot>();
+        
+        shopItemSlots = shopInventorySlotsParent.GetComponentsInChildren<Slot>();
+        shopEquipmentSlot = shopInventoryEquipmentSlot.GetComponent<Slot>();
     }
 
     // 아이템을 획득했을 때 인벤토리에 데이터(아이템)을 저장한다.
@@ -84,7 +97,7 @@ public class InventorySystem : MonoBehaviour
     {
         Color color;
         
-        // 모든 슬롯의 흰색 테두리 배경의 알파값을 0으로 설정한다.
+        // 모든 아이템 슬롯의 흰색 테두리 배경의 알파값을 0으로 설정한다.
         foreach (var slot in itemSlots)
         {
             color = slot.GetComponent<Image>().color;
@@ -97,13 +110,46 @@ public class InventorySystem : MonoBehaviour
         color.a = alpha;
         equipmentSlot.GetComponent<Image>().color = color;
     }
-    
-    public void ChangeBgImageAlphaSlot(int alpha)
+
+    public void ExportInventorySlotsData(Slot[] slots)
     {
+        if (slots.Length != itemSlots.Length)
+        {
+            print($"[장시진] 상점 인벤토리 크기와 플레이어 인벤토리 크기가 서로 다릅니다. ExportInventorySlotsData Func Err");
+            return;
+        }
+
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+            slots[i] = itemSlots[i];
+        }
     }
 
-    public int GetPlayerCoinCount()
+    public void UpdateInventoryToShopInventorySlots()
     {
-        return playerCoinCount;
+        try
+        {
+            shopEquipmentSlot = equipmentSlot;
+        
+            for (int i = 0; i < itemSlots.Length; ++i)
+            {
+                shopItemSlots[i] = itemSlots[i];
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("UpdateInventoryToShopInventorySlots 예외 발생");
+            throw;
+        }
+    }
+    
+    public void UpdateShopInventoryToInventorySlots()
+    {
+        equipmentSlot = shopEquipmentSlot;
+        
+        for (int i = 0; i < shopItemSlots.Length; ++i)
+        {
+            itemSlots[i] = shopItemSlots[i];
+        }
     }
 }

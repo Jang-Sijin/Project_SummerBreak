@@ -17,6 +17,8 @@ public class NpcDialogTrigger : MonoBehaviour
     [Header("↓[Debug] 대화 목록 확인용 리스트")]
     [SerializeField] private List<NpcDialogDBEntity> useDialogList; // 선택한 퀘스트ID의 대사 목록 리스트
 
+    private bool bCheckExitDialog = true; // false: 다이얼로그 실행중, true: 다이얼로그 종료됨.
+
     private void Awake()
     {
         // 테스트 체크 [디버그]
@@ -30,7 +32,18 @@ public class NpcDialogTrigger : MonoBehaviour
 
     private IEnumerator StartDialog()
     {
+        bCheckExitDialog = false;
+
         // setQuestID에 해당되는 Dialog 리스트를 매개변수로 보낸다. // Linq
-        yield return new WaitUntil(() => DialogSystem.instance.UpdateDialog(this.dialogDB.DialogSheet.Where(excelDB => excelDB.DialogID == dialogID).ToList()));
+        yield return new WaitUntil(() =>
+            bCheckExitDialog = DialogSystem.instance.UpdateDialog(this.dialogDB.DialogSheet
+                .Where(excelDB => excelDB.DialogID == dialogID).ToList()));
+
+        bCheckExitDialog = true;
+    }
+
+    public bool GetCheckExitDialog()
+    {
+        return bCheckExitDialog;
     }
 }

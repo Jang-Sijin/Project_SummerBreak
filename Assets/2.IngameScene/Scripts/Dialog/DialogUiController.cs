@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,6 +48,8 @@ public class DialogUiController : MonoBehaviour
 		SetActiveArrowObject(false);
 		SetActiveButtonObjects(false);
 		SetActiveTextObjects(false);
+		
+		yesBtn.onClick.AddListener(AcceptButtonYes);
 	}
 
 	public void SetActiveTextObjects(bool visible)
@@ -132,5 +135,13 @@ public class DialogUiController : MonoBehaviour
 
 		//몬스터가죽으면 --> CallBack 에  퀘스트체크도 하나넣어주는거임 
 		//
+	}
+
+	public void AcceptButtonYes()
+	{
+		if (PlayerEventSystem.instance.GetNearGameObject().CompareTag("ShopNpc"))
+		{
+			ShopSystem.instance.OpenShopCanvas();
+		}
 	}
 }

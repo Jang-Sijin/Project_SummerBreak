@@ -161,7 +161,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         DragSlot.instance.dragSlot = null;
     }
 
-    // 슬롯과 슬롯의 교체
+    // 슬롯과 슬롯의 교체 // 드래그를 멈춘 위치에 있는 오브젝트에서 호출됩니다.
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("[장시진] ItemSlot OnDrop 호출");
@@ -178,9 +178,10 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         // 아이템과 아이템의 개수를 복사한다.
         Item copyItem = item;
         int copyItemCount = itemCount;
-        
+
+        Slot CheckEqipmentSlot = equipmentSlot.GetComponent<Slot>();
         // 1.현재 슬롯이 장비 슬롯이면서 2.드래그 중인 아이템의 타입이 장비 아이템일 경우
-        if (this == equipmentSlot.GetComponent<Slot>() && DragSlot.instance.dragSlot.item.itemType == Item.ItemType.Equipment)
+        if (this == CheckEqipmentSlot && DragSlot.instance.dragSlot.item.itemType == Item.ItemType.Equipment)
         {
             AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
             
@@ -192,10 +193,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             {
                 DragSlot.instance.dragSlot.ClearSlot();
             }
-            
-            return;
         }
-        else if (this != equipmentSlot.GetComponent<Slot>()) // 일반 슬롯일 경우
+        else if (this != CheckEqipmentSlot) // 장비 슬롯이 아닐 때(일반 슬롯) 
         {
             AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
 
@@ -207,8 +206,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             {
                 DragSlot.instance.dragSlot.ClearSlot();
             }
-            
-            return;
         }
     }
 }

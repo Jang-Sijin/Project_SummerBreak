@@ -40,20 +40,6 @@ public class JsonManager : MonoBehaviour
     }
     #endregion Singleton
 
-    private void Start()
-    {
-        //foreach (var data in SaveDataDictionary.saveDataDictionary)
-        //{
-        //    print($"{data.Key}, {data.Value}");
-        //    print($"name:{data.Value.name}, position:{data.Value.position}, rotation:{data.Value.rotation}, hp:{data.Value.hp}, stamina:{data.Value.stamina},");
-        //}
-    }
-
-    private void Update()
-    {
-        // print($"{currentSelectBtnName}");
-    }
-
     public void LoadInit()
     {
         string filePath = $"{Application.dataPath + dataPath}";

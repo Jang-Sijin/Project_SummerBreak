@@ -41,7 +41,7 @@ public class DialogSystem : MonoBehaviour
 
 	#region NPC Dialog
 	
-		public bool UpdateDialog(List<NpcDialogDBEntity> dialogList)
+	public bool UpdateDialog(List<NpcDialogDBEntity> dialogList)
 	{
 		// 대사 분기가 시작될 때 1회만 호출
 		if (_isFirst == true)

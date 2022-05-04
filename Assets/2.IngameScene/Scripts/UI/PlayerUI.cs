@@ -19,11 +19,11 @@ public class PlayerUI : MonoBehaviour
         playerHpImageArray = playerHpImageArrayParent.GetComponentsInChildren<Image>();
         playerStaminaImageArray = playerStaminaImageArrayParent.GetComponentsInChildren<Image>();
 
-        playerCoinTextMesh.text = InventorySystem.instance.GetPlayerCoinCount().ToString();
+        playerCoinTextMesh.text = InventorySystem.instance.playerCoinCount.ToString();
     }
 
     public void UpdatePlayerCoinCountUI()
     {
-        playerCoinTextMesh.text = InventorySystem.instance.GetPlayerCoinCount().ToString();
+        playerCoinTextMesh.text = InventorySystem.instance.playerCoinCount.ToString();
     }
 }

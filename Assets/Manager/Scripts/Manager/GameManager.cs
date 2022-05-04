@@ -24,7 +24,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Texture2D cursorClick;
 
     [Header("인게임 시간 정보")] 
-    [SerializeField] private TimeController timeController; 
+    [SerializeField] private TimeController timeController;
+
+    [Header("플레이어 UI[체력/스테미너/코인]")] public GameObject PlayerUI;
     //---------------------------------------------------------------------------------
     
     #region Game Manager 싱글톤 설정
@@ -141,6 +143,11 @@ public class GameManager : MonoBehaviour
     public DateTime GetInGameTime()
     {
         return timeController.InGameTime();
+    }
+
+    public void SetInGameTime(int hour)
+    {
+        timeController.SetInGameTime(hour);
     }
 
     private void InitLoadSaveData()
