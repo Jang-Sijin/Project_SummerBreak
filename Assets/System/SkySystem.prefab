@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 495f84965ea6e294e929825ac88284da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeMultiplier: 2000
+  timeMultiplier: 540
   startHour: 12
   timeText: {fileID: 0}
   sunLight: {fileID: 2452393992713717260}
@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 2452393993111873824}
   - component: {fileID: 2452393993111873825}
   - component: {fileID: 1986199456}
+  - component: {fileID: 2452393992332607393}
   m_Layer: 0
   m_Name: MoonLight
   m_TagString: Untagged
@@ -323,6 +324,20 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!114 &1986199456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2452393993111873826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UsePipelineSettings: 0
+  m_AdditionalLightsShadowResolutionTier: 0
+--- !u!114 &2452393992332607393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

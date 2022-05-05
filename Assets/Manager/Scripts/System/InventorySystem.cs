@@ -111,6 +111,15 @@ public class InventorySystem : MonoBehaviour
         equipmentSlot.GetComponent<Image>().color = color;
     }
 
+    public void CheckSlotList()
+    {
+        // 인벤토리 슬롯들과 장비 슬롯에 어떤 아이템이 들어가 있는지 확인한다. //
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+            
+        }
+    }
+
     public void ExportInventorySlotsData(Slot[] slots)
     {
         if (slots.Length != itemSlots.Length)

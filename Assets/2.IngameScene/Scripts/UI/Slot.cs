@@ -104,6 +104,14 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
                 }
                 else if(item.itemType == Item.ItemType.Consumables) // 소모 아이템
                 {
+                    // switch (item.itemName)
+                    {
+                        // case "물약":
+                            // PlayerStatus playerStatus = GameManager.instance.playerGameObject.GetComponent<PlayerStatus>();
+                            // playerStatus.체력이올라가도록하는함수(50);
+                            // SetSlotCount(-1);
+                            // break;
+                    }
                     // 소모
                     Debug.Log($"[장시진] 소모 아이템 {item.itemName}을 사용.");
                     SetSlotCount(-1);

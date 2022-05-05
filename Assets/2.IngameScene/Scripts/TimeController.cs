@@ -142,4 +142,9 @@ public class TimeController : MonoBehaviour
     {
         currentTime = DateTime.Now.Date + TimeSpan.FromHours(hour);
     }
+
+    public void SetTimeMultiplier(int timeSpeed)
+    {
+        timeMultiplier = timeSpeed;
+    }
 }
