@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Diagnostics;
@@ -13,9 +14,14 @@ public class PlayerInputManager : MonoBehaviour
     private Vector2 moveDirection;
 
     // private float flapSpendStamina = 10.0f;
+    [SerializeField]
+    private GameObject GlideTrail_Right;
+    
+    [SerializeField]
+    private GameObject GlideTrail_Left;
 
-    public GameObject GlideTrail_Right;
-    public GameObject GlideTrail_Left;
+    [SerializeField] 
+    private GameObject walkEffect;
     
     [SerializeField]
     private bool moveDoingCheck;
@@ -54,18 +60,19 @@ public class PlayerInputManager : MonoBehaviour
         player.currentFrameLerpDirection = Vector3.zero;
         player.IsGround();
         player.isSwimed();
+        player.Swim_idle();
 
         if (player.isGrounded)
         {
             //freeClimb.CancelClimb();
-            player.CancelClimb();
+            //player.CancelClimb();
             if (GlideDoingCheck)
             {
                 GlideDoingCheck = false;
             }
             if (JumpDoingCheck)
             {
-                Debug.Log("[이민호] 육지점프");
+                //Debug.Log("[이민호] 육지점프");
                 player.Jump(moveDirection);
             }
             else if (moveDoingCheck)
@@ -92,7 +99,6 @@ public class PlayerInputManager : MonoBehaviour
         }
         else if (!player.isGrounded)
         {
-
             if (ClimbDoingCheck)
             {
                 if (moveDoingCheck)
@@ -100,6 +106,11 @@ public class PlayerInputManager : MonoBehaviour
                     Vector2 input = player.SquareToCircle(new Vector2(moveDirection.x, moveDirection.y));
                     //Debug.Log($"moveDir{moveDirection}input: {input}");
                     player.Climbing(input);
+                    
+                    if (playerstatus.currentStamina > 0)
+                    {
+                        StartCoroutine(TakeStamina(1.0f));
+                    }
                 }
                 else
                 {
@@ -111,6 +122,11 @@ public class PlayerInputManager : MonoBehaviour
                 GlideTrail_Left.SetActive(true);
                 GlideTrail_Right.SetActive(true);
                 player.Glider(moveDirection, moveDoingCheck);
+                
+                if (playerstatus.currentStamina > 0)
+                {
+                    StartCoroutine(TakeStamina(1.0f));
+                }
             } 
             else if(FlapDoingCheck)
             {
@@ -134,7 +150,31 @@ public class PlayerInputManager : MonoBehaviour
     private void Update()
     {
         player.CheckForClimb();
+        if (player.hited)
+        {
+            moveDoingCheck = false;
+            player.currentState = PlayerMovement.playerState.hit;
+        }
+        if (player.isGrounded && moveDoingCheck)
+        {
+            walkEffect.SetActive(true);
+        }
+        else
+        {
+            walkEffect.SetActive(false);
+        }
         
+        if (player.isClimbedUp)
+        {
+            spaceClickCheck = false;
+            ClimbDoingCheck = false;
+        }
+        else if (GlideDoingCheck && player.isSwim)
+        {
+            spaceClickCheck = false;
+            GlideDoingCheck = false;
+            ClimbDoingCheck = false;
+        }
         
         if (moveDoingCheck && player.isGrounded)
         {
@@ -170,13 +210,13 @@ public class PlayerInputManager : MonoBehaviour
             }
         }
 
-        if (!ClimbDoingCheck && !spaceClickCheck && player.isClimbed)
+        if (!ClimbDoingCheck && !spaceClickCheck && player.isClimbed && !player.isSwim)
         {
             player.Sliding();
             player.CancelClimb();
         }
         
-        if (!ClimbDoingCheck && !player.isClimbed)
+        if (!ClimbDoingCheck && !player.isClimbed && !player.isSwim)
         {
             ClimbDoingCheck = false;
             player.CancelClimb();
@@ -205,7 +245,7 @@ public class PlayerInputManager : MonoBehaviour
         }
         else if (context.performed)
         {
-            if (!player.hited && !player.attacked)
+            if (!player.climbFlap && !player.hited && !player.attacked)
             {
                 moveDoingCheck = true;
                 moveDirection = context.ReadValue<Vector2>();
@@ -233,9 +273,9 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
 
-            if (!player.hited && player.isGrounded && playerstatus.currentItem == PlayerStatus.item.attack)
+            if (!player.hited && player.isGrounded && playerstatus.currentItem != PlayerStatus.item.nothing)
             {
-                player.Attack();
+                player.Equipment();
             }
             
         }
@@ -245,6 +285,13 @@ public class PlayerInputManager : MonoBehaviour
                 Debug.Log(context.phase.ToString());
         }
     }
+    
+    IEnumerator TakeStamina(float value)
+    {
+        playerstatus.TakeStamina(value);
+        yield return new WaitForSeconds(100.0f);
+    }
+    
 
     
     // input Space

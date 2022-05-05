@@ -25,12 +25,16 @@ public class PlayerEquipmentManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_playerStatus.currentItem == PlayerStatus.item.attack)
+        if (m_playerStatus.currentItem != PlayerStatus.item.nothing)
         {
-            equipmentAttack.SetActive(true);
-        }
-        else if (m_playerStatus.currentItem == PlayerStatus.item.interaction)
-        {
+            if (m_playerStatus.currentItem == PlayerStatus.item.attack)
+            {
+                equipmentAttack.SetActive(true);
+            }
+            else
+            {
+                equipmentAttack.SetActive(false);
+            }
         }
         else
         {

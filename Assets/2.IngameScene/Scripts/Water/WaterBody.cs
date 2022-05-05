@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class WaterBody : MonoBehaviour
 {
-    private PlayerMovement player;
-    // Start is called before the first frame update
-    void Start()
-    {
-        player = FindObjectOfType<PlayerMovement>();
-    }
+    public PlayerMovement player;
 
     void OnTriggerStay(Collider other)
     {

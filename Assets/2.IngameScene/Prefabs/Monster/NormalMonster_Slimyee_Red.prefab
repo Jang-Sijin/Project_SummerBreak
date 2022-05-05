@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 4289818543005311439}
   - component: {fileID: 946502164155890116}
   - component: {fileID: 7002979033523251424}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NormalMonster_Slimyee_Red
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -179,9 +179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f68b3017102916541b701b141e9e0ed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curMonsterType: 1
+  curMonsterType: 2
   health: 0
-  sociality: 0
   explodeEffect: {fileID: 1245293638431029419}
   thrust: 10
   knockTime: 4
@@ -231,6 +230,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cba3c9c392959042b06556ea9416232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterManager: {fileID: 0}
+  guardCheck: 0
+  aloneCheck: 0
+  randomTargetGoal: {x: 0, y: 0, z: 0}
 --- !u!114 &7002979033523251424
 MonoBehaviour:
   m_ObjectHideFlags: 0

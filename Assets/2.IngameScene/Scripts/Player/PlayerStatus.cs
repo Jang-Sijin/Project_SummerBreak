@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,8 @@ public class PlayerStatus : MonoBehaviour
     {
         nothing,
         attack,
-        interaction
+        interaction_sleep,
+        interaction_quillPen
     }
 
     public item currentItem;
@@ -25,6 +27,10 @@ public class PlayerStatus : MonoBehaviour
     public float runValue = 2.0f;
     public float runSpeed;
 
+    [SerializeField] 
+    private GameObject equipmentSlotObj;
+
+    private Slot equipmentSlot;
     
     public bool DebugMod = false;
     void Awake()
@@ -40,6 +46,29 @@ public class PlayerStatus : MonoBehaviour
         currentItem = item.nothing;
     }
 
+    private void Start()
+    {
+        equipmentSlot = equipmentSlotObj.GetComponent<Slot>();
+    }
+
+    private void Update()
+    {
+        
+        if (equipmentSlot.item != null)
+        {
+            if (equipmentSlot.item.itemName == "소드")
+            {
+                //currentItem = item.attack;
+                //currentItem = item.interaction_sleep;
+                currentItem = item.interaction_quillPen;
+            }
+        }
+        else
+        {
+            currentItem = item.nothing;
+        }
+    }
+
     public void UpgradeCurMaxStamina(float stamina)
     {
         currentMaxstamina += stamina;
@@ -47,9 +76,17 @@ public class PlayerStatus : MonoBehaviour
     
     public void TakeStamina(float stamina)
     {
-        Debug.Log("현재 스태미나 : " + currentStamina);
+        //Debug.Log("[이민호]현재 스태미나 : " + currentStamina);
         currentStamina -= stamina;
-        Debug.Log("사용 후 스태미나 : " + currentStamina);
+        //Debug.Log("[이민호]사용 후 스태미나 : " + currentStamina);
+    }
+
+    public void HealthStamina(float stamina)
+    {
+        if (currentStamina < currentMaxstamina)
+        {
+            currentStamina += stamina;
+        }
     }
 
 

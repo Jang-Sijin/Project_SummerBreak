@@ -61,6 +61,12 @@ public class PlayerEventSystem : MonoBehaviour
                 ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
                 objDialogTrigger.EnterPlayer();
             }
+            else if (nearObject.CompareTag("LandMarkObj"))
+            {
+                // 다이얼로그 시작 코루틴 시작
+                ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
+                objDialogTrigger.EnterPlayer();
+            }
             else if (nearObject.CompareTag("ShopNpc"))
             {
                 // 다이얼로그 시작 코루틴 시작
@@ -81,7 +87,7 @@ public class PlayerEventSystem : MonoBehaviour
             interactionText.gameObject.SetActive(true);
         }
 
-        if (other.CompareTag("QuestNpc") || other.CompareTag("DialogObj") || other.CompareTag("ShopNpc"))
+        if (other.CompareTag("QuestNpc") || other.CompareTag("DialogObj") || other.CompareTag("ShopNpc") || other.CompareTag("LandMarkObj"))
         {
             // print($"[장시진]: Player-NPC Collider 충돌 성공 -> 상호작용 가능");
             nearObject = other.gameObject;
@@ -122,6 +128,21 @@ public class PlayerEventSystem : MonoBehaviour
             NpcDialogTrigger npcDialogTrigger = nearObject.GetComponent<NpcDialogTrigger>();
             DialogSystem.instance.ResetDialog(); // Dialog UI 초기화
             npcDialogTrigger.StopCoroutine("StartDialog");
+            nearObject = null;
+        }
+        else if (other.CompareTag("LandMarkObj"))
+        {
+            PlayerStatus playerStatus = GetComponent<PlayerStatus>();
+            if (playerStatus.currentItem == PlayerStatus.item.interaction_quillPen)
+            {
+                MapOpenTrigger mapOpenTrigger = nearObject.GetComponent<MapOpenTrigger>();
+
+                mapOpenTrigger.SetActiveMapPiece();
+            }
+
+            ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
+            DialogSystem.instance.ResetDialog(); // Dialog UI 초기화
+            objDialogTrigger.StopCoroutine("StartDialog");
             nearObject = null;
         }
     }
