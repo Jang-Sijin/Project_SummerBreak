@@ -110,9 +110,6 @@ public class MonsterManager : MonoBehaviour
                 if (inCameravisible)
                 {
                     dead = true;
-                    VisualEffect newExplodeEffect = Instantiate(explodeEffect, transform.position, transform.rotation);
-                    newExplodeEffect.Play();
-                    Destroy(newExplodeEffect.gameObject, 0.5f);
                     //Debug.Log("[이민호] 밖으로 나감");
                     Destroy(gameObject);
                 }

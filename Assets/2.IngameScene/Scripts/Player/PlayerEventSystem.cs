@@ -132,13 +132,9 @@ public class PlayerEventSystem : MonoBehaviour
         }
         else if (other.CompareTag("LandMarkObj"))
         {
-            PlayerStatus playerStatus = GetComponent<PlayerStatus>();
-            if (playerStatus.currentItem == PlayerStatus.item.interaction_quillPen)
-            {
-                MapOpenTrigger mapOpenTrigger = nearObject.GetComponent<MapOpenTrigger>();
+            MapOpenTrigger mapOpenTrigger = nearObject.GetComponent<MapOpenTrigger>();
 
-                mapOpenTrigger.SetActiveMapPiece();
-            }
+            mapOpenTrigger.SetActiveMapPiece();
 
             ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
             DialogSystem.instance.ResetDialog(); // Dialog UI 초기화
