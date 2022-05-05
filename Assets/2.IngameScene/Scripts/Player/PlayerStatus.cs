@@ -76,9 +76,17 @@ public class PlayerStatus : MonoBehaviour
     
     public void TakeStamina(float stamina)
     {
-        Debug.Log("현재 스태미나 : " + currentStamina);
+        //Debug.Log("[이민호]현재 스태미나 : " + currentStamina);
         currentStamina -= stamina;
-        Debug.Log("사용 후 스태미나 : " + currentStamina);
+        //Debug.Log("[이민호]사용 후 스태미나 : " + currentStamina);
+    }
+
+    public void HealthStamina(float stamina)
+    {
+        if (currentStamina < currentMaxstamina)
+        {
+            currentStamina += stamina;
+        }
     }
 
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Diagnostics;
@@ -105,6 +106,11 @@ public class PlayerInputManager : MonoBehaviour
                     Vector2 input = player.SquareToCircle(new Vector2(moveDirection.x, moveDirection.y));
                     //Debug.Log($"moveDir{moveDirection}input: {input}");
                     player.Climbing(input);
+                    
+                    if (playerstatus.currentStamina > 0)
+                    {
+                        StartCoroutine(TakeStamina(1.0f));
+                    }
                 }
                 else
                 {
@@ -116,6 +122,11 @@ public class PlayerInputManager : MonoBehaviour
                 GlideTrail_Left.SetActive(true);
                 GlideTrail_Right.SetActive(true);
                 player.Glider(moveDirection, moveDoingCheck);
+                
+                if (playerstatus.currentStamina > 0)
+                {
+                    StartCoroutine(TakeStamina(1.0f));
+                }
             } 
             else if(FlapDoingCheck)
             {
@@ -274,6 +285,13 @@ public class PlayerInputManager : MonoBehaviour
                 Debug.Log(context.phase.ToString());
         }
     }
+    
+    IEnumerator TakeStamina(float value)
+    {
+        playerstatus.TakeStamina(value);
+        yield return new WaitForSeconds(100.0f);
+    }
+    
 
     
     // input Space

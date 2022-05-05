@@ -172,6 +172,7 @@ public class PlayerMovement : MonoBehaviour
         flapEffect.Reinit();
         flapEffect.Play();
         Vector3 jumpDirection = new Vector3(0.0f, flapPower, 0.0f);
+        playerstatus.TakeStamina(10.0f);
         //Debug.Log("[이민호] 플랩");
         m_rigidbody.velocity = Vector3.zero;
         m_rigidbody.AddForce(jumpDirection,ForceMode.Impulse);
@@ -329,6 +330,11 @@ public class PlayerMovement : MonoBehaviour
         d_fromWaterSurface = Mathf.Clamp(d_fromWaterSurface, float.MinValue, waterSurface);
         if (d_fromWaterSurface >= swimLevel)
         {
+            
+            if (playerstatus.currentStamina < playerstatus.currentMaxstamina)
+            {
+                StartCoroutine(HealStamina(1.0f));
+            }
             d_fromWaterSurface = swimLevel;
             currentState = playerState.Swim_idleState;
             Vector3 translateWater = new Vector3(m_rigidbody.position.x, waterSurface - d_fromWaterSurface,
@@ -392,6 +398,10 @@ public class PlayerMovement : MonoBehaviour
         //Debug.DrawLine(transform.position,transform.position - Vector3.up * 0.1f,Color.red,1.0f);
         isGrounded = Physics.Raycast(transform.position, -Vector3.up, 0.1f, layerMask) ||
                      isSlope;
+        if (playerstatus.currentStamina < playerstatus.currentMaxstamina && isGrounded)
+        {
+            StartCoroutine(HealStamina(1.0f));
+        }
         //isGrounded = Physics.CheckSphere(transform.position, 0.1f, layerMask) || isSlope;
         if (!isClimbed && (inWater == false || isGrounded))
         {
@@ -521,9 +531,10 @@ public class PlayerMovement : MonoBehaviour
         checkDirection /= k; 
         checkDirection = checkDirection.normalized; 
         RaycastHit hit; 
-        if (Physics.Raycast(transform.position, -checkDirection, out hit, 1.0f,layerMask)) 
-        { 
-            //Debug.Log($"[이민호] 됨"); 
+        if (Physics.Raycast(transform.position, -checkDirection, out hit, 1.0f,layerMask))
+        {
+
+            Debug.Log($"[이민호] 됨"); 
             m_rigidbody.isKinematic = false;
             m_rigidbody.position = Vector3.Lerp(m_rigidbody.position, hit.point + hit.normal * 0.5f, 
                 5f * Time.fixedDeltaTime);
@@ -546,8 +557,9 @@ public class PlayerMovement : MonoBehaviour
             flapEffect.Play();
             //Debug.Log("[이민호] 플랩");
             m_rigidbody.velocity = Vector3.zero;
-            Vector3 jumpDirection = Vector3.up * flapPower;
-            m_rigidbody.velocity = jumpDirection;
+            Vector3 jumpDirection = Vector3.up * 6.0f;
+            Vector3 climbUpDirection = transform.forward + jumpDirection;
+            m_rigidbody.velocity = climbUpDirection;
             //m_rigidbody.AddForce(jumpDirection,ForceMode.VelocityChange);
         }
             //m_rigidbody.velocity = Vector3.up * 5f + hit.normal * 2f;
@@ -591,6 +603,15 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         invincible = false;
     }
+    
+    
+    
+    IEnumerator HealStamina(float value)
+    {
+        playerstatus.HealthStamina(value);
+        yield return new WaitForSeconds(0.1f);
+    }
+    
     IEnumerator HitBlink()
     {
         while (invincible)
