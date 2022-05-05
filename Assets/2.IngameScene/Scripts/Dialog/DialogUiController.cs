@@ -9,6 +9,8 @@ using UnityEngine.UI;
 [System.Serializable]
 public class DialogUiController : MonoBehaviour
 {
+	[Header("[다이얼로그 UI]")]
+	[Header("다이얼로그가 끝난 후 이벤트 등록은 해당 스크립트에 구현")]
 	public Canvas npcDialogCanvas;				// 캔버스 UI
 	public TextMeshProUGUI nameText;		// 현재 대사중인 캐릭터 이름 출력 Text UI
 	public TextMeshProUGUI dialogText;	// 대화창 Image UI
