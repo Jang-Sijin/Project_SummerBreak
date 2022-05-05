@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028364, g: 0.22571364, b: 0.30692187, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028396, g: 0.22571427, b: 0.30692327, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2478,6 +2478,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlankPostSign01
       objectReference: {fileID: 0}
+    - target: {fileID: 1488061041806598368, guid: 501a34b243d3d24448684538449481d8, type: 3}
+      propertyPath: mapPiece
+      value: 
+      objectReference: {fileID: 2120473971}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 501a34b243d3d24448684538449481d8, type: 3}
 --- !u!4 &117043967 stripped
@@ -3776,6 +3780,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlankPostSign3
       objectReference: {fileID: 0}
+    - target: {fileID: 766095822745898665, guid: 501a34b243d3d24448684538449481d8, type: 3}
+      propertyPath: m_TagString
+      value: LandMarkObj
+      objectReference: {fileID: 0}
+    - target: {fileID: 1488061041806598368, guid: 501a34b243d3d24448684538449481d8, type: 3}
+      propertyPath: mapPiece
+      value: 
+      objectReference: {fileID: 1412614171}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 501a34b243d3d24448684538449481d8, type: 3}
 --- !u!4 &199697277 stripped
@@ -5988,6 +6000,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 148881263245769012, guid: b927f7c965b836f4093e7477fe63c17b, type: 3}
   m_PrefabInstance: {fileID: 274506143}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &275303890 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3128074162348620470, guid: 6f0534da8c670a540a0ba73a74f9dd7b, type: 3}
+  m_PrefabInstance: {fileID: 1438468970}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &275543786
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8110,6 +8127,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlankPostSign01
       objectReference: {fileID: 0}
+    - target: {fileID: 1488061041806598368, guid: 501a34b243d3d24448684538449481d8, type: 3}
+      propertyPath: mapPiece
+      value: 
+      objectReference: {fileID: 1754228095}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 501a34b243d3d24448684538449481d8, type: 3}
 --- !u!4 &358268201 stripped
@@ -18535,6 +18556,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlankPostSign01
       objectReference: {fileID: 0}
+    - target: {fileID: 1488061041806598368, guid: 501a34b243d3d24448684538449481d8, type: 3}
+      propertyPath: mapPiece
+      value: 
+      objectReference: {fileID: 275303890}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 501a34b243d3d24448684538449481d8, type: 3}
 --- !u!4 &717855203 stripped
@@ -36516,6 +36541,11 @@ Transform:
   m_Father: {fileID: 1616734432}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1412614171 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1430351366828932578, guid: 6f0534da8c670a540a0ba73a74f9dd7b, type: 3}
+  m_PrefabInstance: {fileID: 1438468970}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1416619801
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42106,11 +42136,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 563337407777671922, guid: 3f59225015537ec49b3877a5fe7d04be, type: 3}
       propertyPath: maxNumber
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 563337407777671922, guid: 3f59225015537ec49b3877a5fe7d04be, type: 3}
       propertyPath: minNumber
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 563337407777671922, guid: 3f59225015537ec49b3877a5fe7d04be, type: 3}
       propertyPath: spawnRange
@@ -44966,6 +44996,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3423188881974121655, guid: b4386bfb4004ded44bbac08785a86163, type: 3}
   m_PrefabInstance: {fileID: 1689704811}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1694600318 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4256558153246385938, guid: 6f0534da8c670a540a0ba73a74f9dd7b, type: 3}
+  m_PrefabInstance: {fileID: 1438468970}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1694808484
 GameObject:
   m_ObjectHideFlags: 0
@@ -46317,6 +46352,11 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!1 &1754228095 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2115835093220766012, guid: 6f0534da8c670a540a0ba73a74f9dd7b, type: 3}
+  m_PrefabInstance: {fileID: 1438468970}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1755503684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53627,6 +53667,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlankPostSign01
       objectReference: {fileID: 0}
+    - target: {fileID: 1488061041806598368, guid: 501a34b243d3d24448684538449481d8, type: 3}
+      propertyPath: mapPiece
+      value: 
+      objectReference: {fileID: 1694600318}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 501a34b243d3d24448684538449481d8, type: 3}
 --- !u!4 &1991775036 stripped
@@ -55685,6 +55729,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 849833506285362471, guid: cf58782e5467735428398f5a8299783e, type: 3}
   m_PrefabInstance: {fileID: 2120243361}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2120473971 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7444423426817303, guid: 6f0534da8c670a540a0ba73a74f9dd7b, type: 3}
+  m_PrefabInstance: {fileID: 1438468970}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2122061984
 PrefabInstance:

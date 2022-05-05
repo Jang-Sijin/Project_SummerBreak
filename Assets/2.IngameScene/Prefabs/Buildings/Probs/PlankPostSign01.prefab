@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 766095822745898664}
   - component: {fileID: 208884055}
   - component: {fileID: 7066604772833342455}
+  - component: {fileID: 1488061041806598368}
   m_Layer: 0
   m_Name: PlankPostSign01
-  m_TagString: DialogObj
+  m_TagString: LandMarkObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,6 +84,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: -0.36}
+--- !u!114 &1488061041806598368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766095822745898665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0738c8b75c0dc5d47aca56b86a8868a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapPiece: {fileID: 0}
 --- !u!1 &5063652251673949711
 GameObject:
   m_ObjectHideFlags: 0

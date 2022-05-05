@@ -240,8 +240,9 @@ public class PlayerMovement : MonoBehaviour
                 {
                     lastRollRotation = m_rigidbody.rotation.eulerAngles.y;
                     float curTime = Time.time - startTime;
-                    Quaternion finalRotation = Quaternion.Slerp(lerpStartRotation, newRotation, curTime / LerpTime);
-                    m_rigidbody.rotation = finalRotation;
+                    Vector3 finalRotation = Quaternion.Slerp(lerpStartRotation, newRotation, curTime / LerpTime)
+                        .eulerAngles;
+                    //m_rigidbody.rotation = finalRotation;
                     float increaseOrDecrease = finalRotation.y - lastRollRotation; // 나중방향과 현재방향의 각도의 증감분
                     //Debug.Log($"[이민호]curTime: {curTime}, LerpTime: {LerpTime}");
                     if (increaseOrDecrease < 0)
@@ -278,8 +279,10 @@ public class PlayerMovement : MonoBehaviour
                         }
                         //Debug.Log("[이민호] Roll 원상복구회전");
                     }
-                    rollAngle = Mathf.Clamp(rollAngle, -90.0f, 90.0f); 
-                    //m_rigidbody.rotation = Quaternion.Euler(finalRotation);
+                    rollAngle = Mathf.Clamp(rollAngle, -65.0f, 65.0f);
+                    finalRotation.z = rollAngle;
+                    
+                    m_rigidbody.rotation = Quaternion.Euler(finalRotation);
                     //Debug.Log($"[이민호] rotation:{m_rigidbody.rotation}, new:{newRotation}");
                 }
             }
@@ -520,7 +523,7 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit; 
         if (Physics.Raycast(transform.position, -checkDirection, out hit, 1.0f,layerMask)) 
         { 
-            Debug.Log($"[이민호] 됨"); 
+            //Debug.Log($"[이민호] 됨"); 
             m_rigidbody.isKinematic = false;
             m_rigidbody.position = Vector3.Lerp(m_rigidbody.position, hit.point + hit.normal * 0.5f, 
                 5f * Time.fixedDeltaTime);
@@ -530,9 +533,10 @@ public class PlayerMovement : MonoBehaviour
             currentState = playerState.climbing; 
             m_rigidbody.velocity = transform.TransformDirection(input) * 2.0f;
         }
+        
         if (checkDirection != Vector3.zero && !isClimbedUp && ClimbingUp() && input == Vector2.up)
         {
-            Debug.Log("[이민호] 머리가 빔");
+            //Debug.Log("[이민호] 머리가 빔");
             isClimbedUp = true;
             curspeed = playerstatus.walkSpeed;
             _animator.Rebind();
@@ -542,7 +546,7 @@ public class PlayerMovement : MonoBehaviour
             flapEffect.Play();
             //Debug.Log("[이민호] 플랩");
             m_rigidbody.velocity = Vector3.zero;
-            Vector3 jumpDirection = Vector3.up * 8;
+            Vector3 jumpDirection = Vector3.up * flapPower;
             m_rigidbody.velocity = jumpDirection;
             //m_rigidbody.AddForce(jumpDirection,ForceMode.VelocityChange);
         }

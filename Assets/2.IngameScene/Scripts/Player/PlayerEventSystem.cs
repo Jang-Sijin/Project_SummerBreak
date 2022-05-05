@@ -18,6 +18,8 @@ public class PlayerEventSystem : MonoBehaviour
     // [플레이어 근처에 있는 오브젝트]
     private GameObject nearObject;
 
+    
+    
     private void Update()
     {
         // 키 입력 체크
@@ -49,6 +51,18 @@ public class PlayerEventSystem : MonoBehaviour
                 ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
                 objDialogTrigger.EnterPlayer();
             }
+            else if (nearObject.CompareTag("LandMarkObj"))
+            {
+                PlayerStatus playerStatus = GetComponent<PlayerStatus>();
+                if (playerStatus.currentItem == PlayerStatus.item.interaction_quillPen)
+                {
+                    MapOpenTrigger mapOpenTrigger = nearObject.GetComponent<MapOpenTrigger>();
+                    mapOpenTrigger.SetActiveMapPiece();
+                }
+
+                ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
+                objDialogTrigger.EnterPlayer();
+            }
         }
     }
 
@@ -60,7 +74,7 @@ public class PlayerEventSystem : MonoBehaviour
             interactionText.gameObject.SetActive(true);
         }
 
-        if (other.CompareTag("QuestNpc") || other.CompareTag("DialogObj"))
+        if (other.CompareTag("QuestNpc") || other.CompareTag("DialogObj") || other.CompareTag("LandMarkObj"))
         {
             // print($"[장시진]: Player-NPC Collider 충돌 성공 -> 상호작용 가능");
             nearObject = other.gameObject;
@@ -85,7 +99,7 @@ public class PlayerEventSystem : MonoBehaviour
             npcDialogTrigger.StopCoroutine("StartDialog");
             nearObject = null;
         }
-        else if (other.CompareTag("DialogObj"))
+        else if (other.CompareTag("DialogObj") || other.CompareTag("LandMarkObj"))
         {
             // 다이얼로그 시작 코루틴 중지
             ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();

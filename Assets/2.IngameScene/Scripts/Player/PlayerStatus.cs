@@ -58,9 +58,9 @@ public class PlayerStatus : MonoBehaviour
         {
             if (equipmentSlot.item.itemName == "소드")
             {
-                currentItem = item.attack;
+                //currentItem = item.attack;
                 //currentItem = item.interaction_sleep;
-                //currentItem = item.interaction_quillPen;
+                currentItem = item.interaction_quillPen;
             }
         }
         else

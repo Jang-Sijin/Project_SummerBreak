@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class SlimyeeBT : BTTree
 {
-
-    public MonsterManager monsterManager;
     public static float speed = 2f;
     public static float guardSpeed = 1.0f;
     public static float damageValue = 10.0f;
