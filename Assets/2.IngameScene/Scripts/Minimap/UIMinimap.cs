@@ -13,7 +13,7 @@ public class UIMinimap : MonoBehaviour
     private void Awake()
     {
         // 맵 이름을 현재 씬 이름으로 설정 (원하는 이름으로 설정)
-        textMapName.text = "Map Name";
+        textMapName.text = "MiniMap";
     }
 
     public void ZoomIn()
