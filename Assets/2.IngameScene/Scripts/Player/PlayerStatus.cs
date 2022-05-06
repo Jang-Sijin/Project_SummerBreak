@@ -89,6 +89,18 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
+    public void HealHealth(float value)
+    {
+        if (currentHealth + value >= maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        else
+        {
+            currentHealth += value;
+        }
+        
+    }
 
     public void HitHealth(float damageValue)
     {
@@ -109,6 +121,11 @@ public class PlayerStatus : MonoBehaviour
         {
             currentStamina += 10.0f;
         }
+    }
+
+    public void HealMaxStamina()
+    {
+        currentMaxstamina += 10.0f;
     }
     //Getter
     public float GetCurHealth()
