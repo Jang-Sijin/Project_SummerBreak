@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 220324384490140063}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 325392362358257065}
   m_Father: {fileID: 0}
@@ -60,6 +60,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogDB: {fileID: 11400000, guid: 8acb37ca59c1ce9449df66ce1310f278, type: 2}
   dialogID: 10001
+  npcVirtualCameraObj: {fileID: 0}
+  npcAnimator: {fileID: 5936916893725159379}
   useDialogList: []
 --- !u!1 &1139364585028808467
 GameObject:
