@@ -76,10 +76,44 @@ public class PlayerStatus : MonoBehaviour
         {
             currentItem = item.nothing;
         }
+
+        for (int i = 0; i < 10; ++i)
+        {
+            if (i <= (int)(currentHealth / 10) - 1)
+            {
+                playerHpImageArray[i].color = new Color(255, 255, 255, 255);
+            }
+            else
+            {
+                playerHpImageArray[i].color = new Color(255, 255, 255, 0);
+            }
+        }
+        
+        for (int i = 0; i < 10; ++i)
+        {
+            if (i <= (int)(currentMaxstamina / 10) - 1)
+            {
+                playerStaminaImageArray[i].color = new Color(255, 255, 255, 255);
+            }
+            else
+            {
+                playerStaminaImageArray[i].color = new Color(255, 255, 255, 0);
+            }
+        }
+        
+        for (int i = 0; i < (int)currentMaxstamina / 10; ++i)
+        {
+            if (i <= (int)(currentStamina / 10) - 1)
+            {
+                playerStaminaImageArray[i].color = new Color(255, 255, 255, 255);
+            }
+            else
+            {
+                playerStaminaImageArray[i].color = new Color(0, 0, 0, 255);
+            }
+        }
         
         
-
-
     }
 
     public void UpgradeCurMaxStamina(float stamina)
@@ -106,10 +140,6 @@ public class PlayerStatus : MonoBehaviour
     {
         if (currentHealth + value >= maxHealth)
         {
-            foreach (var VARIABLE in (COLLECTION))
-            {
-                
-            }
             currentHealth = maxHealth;
         }
         else

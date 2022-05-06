@@ -63,6 +63,9 @@ public class PlayerEventSystem : MonoBehaviour
             }
             else if (nearObject.CompareTag("LandMarkObj"))
             {
+                MapOpenTrigger mapOpenTrigger = nearObject.GetComponent<MapOpenTrigger>();
+                mapOpenTrigger.SetActiveMapPiece();
+                
                 // 다이얼로그 시작 코루틴 시작
                 ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
                 objDialogTrigger.EnterPlayer();
@@ -132,9 +135,6 @@ public class PlayerEventSystem : MonoBehaviour
         }
         else if (other.CompareTag("LandMarkObj"))
         {
-            MapOpenTrigger mapOpenTrigger = nearObject.GetComponent<MapOpenTrigger>();
-
-            mapOpenTrigger.SetActiveMapPiece();
 
             ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
             DialogSystem.instance.ResetDialog(); // Dialog UI 초기화

@@ -173,7 +173,7 @@ public class PlayerMovement : MonoBehaviour
         flapEffect.Play();
         Vector3 jumpDirection = new Vector3(0.0f, flapPower, 0.0f);
         playerstatus.TakeStamina(10.0f);
-        //Debug.Log("[이민호] 플랩");
+        Debug.Log("[이민호] 플랩");
         m_rigidbody.velocity = Vector3.zero;
         m_rigidbody.AddForce(jumpDirection,ForceMode.Impulse);
     }
@@ -202,6 +202,12 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log($"MoveCheck : {moveCheck}");
         if (moveCheck == true)
         {
+            
+            if (playerstatus.currentStamina > 0)
+            {
+                StartCoroutine(TakeStamina(1.0f));
+            }
+            
             moveDirection = new Vector3(direction.x, 0, direction.y);
             
             Vector3 velocity = moveDirection * 3.0f;
@@ -611,6 +617,14 @@ public class PlayerMovement : MonoBehaviour
         playerstatus.HealthStamina(value);
         yield return new WaitForSeconds(0.1f);
     }
+    
+    
+    IEnumerator TakeStamina(float value)
+    {
+        playerstatus.TakeStamina(value);
+        yield return new WaitForSeconds(100.0f);
+    }
+
     
     IEnumerator HitBlink()
     {
