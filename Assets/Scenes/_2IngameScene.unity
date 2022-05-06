@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028396, g: 0.22571427, b: 0.30692327, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028364, g: 0.22571364, b: 0.30692187, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -46494,7 +46494,7 @@ MonoBehaviour:
   runValue: 1.5
   runSpeed: 0
   equipmentSlotObj: {fileID: 479933044}
-  DebugMod: 1
+  DebugMod: 0
 --- !u!114 &1772180696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56904,6 +56904,14 @@ PrefabInstance:
     - target: {fileID: 5804199546489255817, guid: 3e91a4dfdf8cd7c41b0115990e660800, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804199546489255819, guid: 3e91a4dfdf8cd7c41b0115990e660800, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804199546489255822, guid: 3e91a4dfdf8cd7c41b0115990e660800, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5804199546492437992, guid: 3e91a4dfdf8cd7c41b0115990e660800, type: 3}
       propertyPath: m_Name

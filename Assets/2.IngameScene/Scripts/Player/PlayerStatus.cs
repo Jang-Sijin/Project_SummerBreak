@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class PlayerStatus : MonoBehaviour
 {
-    
-    
     public enum item
     {
         nothing,
@@ -31,6 +31,12 @@ public class PlayerStatus : MonoBehaviour
     private GameObject equipmentSlotObj;
 
     private Slot equipmentSlot;
+
+    private PlayerUI playerUI;
+
+    private Image[] playerHpImageArray;
+
+    private Image[] playerStaminaImageArray;
     
     public bool DebugMod = false;
     void Awake()
@@ -49,6 +55,9 @@ public class PlayerStatus : MonoBehaviour
     private void Start()
     {
         equipmentSlot = equipmentSlotObj.GetComponent<Slot>();
+        playerUI = GameManager.instance.PlayerUI.GetComponent<PlayerUI>();
+        playerHpImageArray = playerUI.GetHpImageArray();
+        playerStaminaImageArray = playerUI.GetStaminaImageArray();
     }
 
     private void Update()
@@ -67,6 +76,10 @@ public class PlayerStatus : MonoBehaviour
         {
             currentItem = item.nothing;
         }
+        
+        
+
+
     }
 
     public void UpgradeCurMaxStamina(float stamina)
@@ -93,6 +106,10 @@ public class PlayerStatus : MonoBehaviour
     {
         if (currentHealth + value >= maxHealth)
         {
+            foreach (var VARIABLE in (COLLECTION))
+            {
+                
+            }
             currentHealth = maxHealth;
         }
         else
@@ -100,8 +117,8 @@ public class PlayerStatus : MonoBehaviour
             currentHealth += value;
         }
         
-    }
-
+    }   
+    
     public void HitHealth(float damageValue)
     {
         currentHealth -= damageValue;
