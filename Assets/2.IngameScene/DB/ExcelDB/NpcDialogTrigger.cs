@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,13 +12,15 @@ public class NpcDialogTrigger : MonoBehaviour
     [SerializeField] private ExcelDB dialogDB; // Import Excel File
     [Header("↓출력을 원하는 다이얼로그 ID 번호를 입력해주세요.")] 
     [SerializeField] private int dialogID; // 대화 출력을 원하는 퀘스트ID 선택
-    // [Header("↓DialogSystem 오브젝트를 연결해주세요.")]
-    // [SerializeField] private DialogSystem dialogSystem;
+    [Header("↓NPC VirtualCamera 오브젝트를 연결해주세요.")]
+    [SerializeField] private GameObject npcVirtualCameraObj;
+    [Header("↓NPC Animator가 있는 오브젝트를 연결해주세요.")]
+    [SerializeField] private Animator npcAnimator; // Npc 애니메이터
     
     [Header("↓[Debug] 대화 목록 확인용 리스트")]
     [SerializeField] private List<NpcDialogDBEntity> useDialogList; // 선택한 퀘스트ID의 대사 목록 리스트
 
-    private bool bCheckExitDialog = true; // false: 다이얼로그 실행중, true: 다이얼로그 종료됨.
+    private bool isExitDialog = true; // false: 다이얼로그 실행중, true: 다이얼로그 종료됨.
 
     private void Awake()
     {
@@ -32,18 +35,16 @@ public class NpcDialogTrigger : MonoBehaviour
 
     private IEnumerator StartDialog()
     {
-        bCheckExitDialog = false;
-
         // setQuestID에 해당되는 Dialog 리스트를 매개변수로 보낸다. // Linq
         yield return new WaitUntil(() =>
-            bCheckExitDialog = DialogSystem.instance.UpdateDialog(this.dialogDB.DialogSheet
-                .Where(excelDB => excelDB.DialogID == dialogID).ToList()));
+            isExitDialog = DialogSystem.instance.UpdateDialog(this.dialogDB.DialogSheet
+                .Where(excelDB => excelDB.DialogID == dialogID).ToList(), npcAnimator, npcVirtualCameraObj));
 
-        bCheckExitDialog = true;
+        // print($"isExitDialog:{isExitDialog}");
     }
 
     public bool GetCheckExitDialog()
     {
-        return bCheckExitDialog;
+        return isExitDialog;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Cinemachine;
 
 public class DialogSystem : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class DialogSystem : MonoBehaviour
 	private bool _isFirst = true; // 최초 1회만 호출하기 위한 변수
 	private int _currentDialogIndex = -1; // 현재 대사 순번
 	private bool _isTypingEffect = false; // 텍스트 타이핑 효과를 재생중인지
+
+	private Animator _getNpcAnimator;
+	private GameObject _getNpcVirtualCameraObj;
 	
 	#region Singleton
 	public static DialogSystem instance; // DialogSystem을 싱글톤으로 관리
@@ -41,13 +45,16 @@ public class DialogSystem : MonoBehaviour
 
 	#region NPC Dialog
 	
-	public bool UpdateDialog(List<NpcDialogDBEntity> dialogList)
+	public bool UpdateDialog(List<NpcDialogDBEntity> dialogList, Animator npcAnimator, GameObject npcVirtualCameraObj)
 	{
 		// 대사 분기가 시작될 때 1회만 호출
 		if (_isFirst == true)
 		{
 			// 초기화. 캐릭터 이미지는 활성화하고, 대사 관련 UI는 모두 비활성화
 			Setup();
+			
+			_getNpcAnimator = npcAnimator;
+			_getNpcVirtualCameraObj = npcVirtualCameraObj;
 
 			// 자동 재생(isAutoStart=true)으로 설정되어 있으면 첫 번째 대사 재생
 			if ( isAutoStart ) SetNextDialog(dialogList);
@@ -173,6 +180,7 @@ public class DialogSystem : MonoBehaviour
 			{
 				// 대사가 더 이상 없을 경우 확인 버튼 또는 퀘스트 수락, 퀘스트 거절 버튼을 활성화
 				dialogUi.SetActiveButtonObjects(true);
+				CloseDialogUi();
 				return true;
 			}
 		}
@@ -230,16 +238,34 @@ public class DialogSystem : MonoBehaviour
 		{
 			dialogUi.CanvasOpen();
 			dialogUi.SetActiveTextObjects(true);
+			
+			// NPC 애니메이션 시작, 시네마신 카메라 on
+			if(_getNpcAnimator != null)
+				_getNpcAnimator.SetBool("Talk", true);
+			if(_getNpcVirtualCameraObj != null)
+				_getNpcVirtualCameraObj.gameObject.SetActive(true);
 		}
 	}
 
-	private void CloseDialogUi()
+	public void CloseDialogUi()
 	{
 		// 캔버스가 활성화되어 있으면 UI를 비활성화 되도록 변경
 		if (dialogUi.npcDialogCanvas.gameObject.activeSelf == true)
 		{
 			dialogUi.CanvasClose();
 			dialogUi.SetActiveTextObjects(false);
+			
+			// NPC 애니메이션 종료, 시네마신 카메라 off
+			if(_getNpcAnimator != null)
+				_getNpcAnimator.SetBool("Talk", false);
+			if(_getNpcVirtualCameraObj != null)
+				_getNpcVirtualCameraObj.gameObject.SetActive(false);
+		}
+		
+		// 플레이어가 만약 상점 다이얼로그를 종료하였다면 상점 UI를 출력한다.
+		if (PlayerEventSystem.instance.GetNearGameObject().CompareTag("ShopNpc"))
+		{
+			ShopSystem.instance.OpenShopCanvas();
 		}
 	}
 
