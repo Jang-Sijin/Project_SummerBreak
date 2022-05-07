@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -40,7 +39,6 @@ public class PlayerInputManager : MonoBehaviour
     
     private Stopwatch swMove = new Stopwatch();
     private Stopwatch swSpace = new Stopwatch();
-    private float flapSpendStamina = 10.0f;
     private bool isDialoged = false;
 
     public bool EnableLog;

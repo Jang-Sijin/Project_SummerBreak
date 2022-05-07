@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 using UnityEngine.VFX;
 
 public class PlayerMovement : MonoBehaviour
@@ -81,7 +78,6 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 checkDirection = Vector3.zero;
     public bool climbFlap = false;
     [SerializeField]
-    private float climbFlapValue = 8.0f;
     
     //Slope
     private float maxSlopeAngle = 50.0f;

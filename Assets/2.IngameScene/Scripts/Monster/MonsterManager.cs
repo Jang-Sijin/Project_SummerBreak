@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
@@ -42,9 +39,8 @@ public class MonsterManager : MonoBehaviour
     private bool inCameravisible = false;
 
     //status
-    private float damgeValue;
-    private float speed;
-    private float attackCoolTime;
+    //private float damgeValue;
+    //private float speed;
 
     private bool dead = false;
     void Start()
@@ -53,32 +49,30 @@ public class MonsterManager : MonoBehaviour
         if (curMonsterType == monsterType.green_slimyee || curMonsterType == monsterType.nightMonster)
         {
             health = 10.0f;
-            damgeValue = 10.0f;
+            //damgeValue = 10.0f;
         }
         // 02
         else if (curMonsterType == monsterType.green_longyee || curMonsterType == monsterType.red_slimyee)
         {
             health = 20.0f;
-            damgeValue = 20.0f;
+            //damgeValue = 20.0f;
         }
         // 03
         else if(curMonsterType == monsterType.red_longyee)
         {
             health = 30.0f;
-            damgeValue = 30.0f;
+            //damgeValue = 30.0f;
         }
         // slimyee
         if (curMonsterType == monsterType.green_slimyee || curMonsterType == monsterType.red_slimyee 
                                                         || curMonsterType == monsterType.nightMonster)
         {
-            speed = 2.0f;
-            attackCoolTime = 1.0f;
+            //speed = 2.0f;
         }
         // longyee
         else if (curMonsterType == monsterType.green_longyee || curMonsterType == monsterType.red_longyee)
         {
-            speed = 3.0f;
-            attackCoolTime = 3.0f;
+            //speed = 3.0f;
         }
 
         spawnPoint = this.transform.position;

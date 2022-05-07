@@ -18,7 +18,6 @@ public class RunAwayTarget : Node
     {
         //Debug.Log("[이민호] 도망 노드에 들어옴");
         Transform player = (Transform)GetData("target");
-        float runSpeed;
         Vector3 dirToPlayer = _transform.position - player.position;
         Vector3 newPos = _transform.position + dirToPlayer;
 
