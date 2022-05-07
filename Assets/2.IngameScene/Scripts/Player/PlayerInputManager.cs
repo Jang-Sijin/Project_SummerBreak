@@ -117,7 +117,7 @@ public class PlayerInputManager : MonoBehaviour
                     player.Climb_Idle();
                 }
             }
-            else if (playerstatus.currentStamina > 0 && GlideDoingCheck)
+            else if (GlideDoingCheck)
             { 
                 GlideTrail_Left.SetActive(true);
                 GlideTrail_Right.SetActive(true);

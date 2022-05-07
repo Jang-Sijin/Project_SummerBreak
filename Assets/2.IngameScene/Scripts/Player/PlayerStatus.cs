@@ -100,19 +100,11 @@ public class PlayerStatus : MonoBehaviour
                 playerStaminaImageArray[i].color = new Color(255, 255, 255, 0);
             }
         }
-        
-        for (int i = 0; i < (int)currentMaxstamina / 10; ++i)
+
+        for (int i = 0; i < (int) currentMaxstamina / 10; ++i)
         {
-            if (i <= (int)(currentStamina / 10) - 1)
-            {
-                playerStaminaImageArray[i].color = new Color(255, 255, 255, 255);
-            }
-            else
-            {
-                playerStaminaImageArray[i].color = new Color(0, 0, 0, 255);
-            }
+            playerStaminaImageArray[i].fillAmount = (currentStamina - (i * 10.0f)) * 0.1f;
         }
-        
         
     }
 

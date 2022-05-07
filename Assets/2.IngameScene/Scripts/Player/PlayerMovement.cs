@@ -202,12 +202,7 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log($"MoveCheck : {moveCheck}");
         if (moveCheck == true)
         {
-            
-            if (playerstatus.currentStamina > 0)
-            {
-                StartCoroutine(TakeStamina(1.0f));
-            }
-            
+
             moveDirection = new Vector3(direction.x, 0, direction.y);
             
             Vector3 velocity = moveDirection * 3.0f;
@@ -618,13 +613,6 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
     }
     
-    
-    IEnumerator TakeStamina(float value)
-    {
-        playerstatus.TakeStamina(value);
-        yield return new WaitForSeconds(100.0f);
-    }
-
     
     IEnumerator HitBlink()
     {
