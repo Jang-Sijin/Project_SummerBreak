@@ -10,7 +10,10 @@ public class MapOpenTrigger : MonoBehaviour
 
     public void SetActiveMapPiece()
     {
-        mapPiece.SetActive(true);
+        if (mapPiece != null)
+        {
+            mapPiece.SetActive(true);
+        }
     }
 
     public GameObject GetMapPiece()

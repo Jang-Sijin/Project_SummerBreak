@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class PlayerStatus : MonoBehaviour
 {
-    
-    
     public enum item
     {
         nothing,
@@ -31,6 +31,12 @@ public class PlayerStatus : MonoBehaviour
     private GameObject equipmentSlotObj;
 
     private Slot equipmentSlot;
+
+    private PlayerUI playerUI;
+
+    private Image[] playerHpImageArray;
+
+    private Image[] playerStaminaImageArray;
     
     public bool DebugMod = false;
     void Awake()
@@ -49,6 +55,9 @@ public class PlayerStatus : MonoBehaviour
     private void Start()
     {
         equipmentSlot = equipmentSlotObj.GetComponent<Slot>();
+        playerUI = GameManager.instance.PlayerUI.GetComponent<PlayerUI>();
+        playerHpImageArray = playerUI.GetHpImageArray();
+        playerStaminaImageArray = playerUI.GetStaminaImageArray();
     }
 
     private void Update()
@@ -67,6 +76,36 @@ public class PlayerStatus : MonoBehaviour
         {
             currentItem = item.nothing;
         }
+
+        for (int i = 0; i < 10; ++i)
+        {
+            if (i <= (int)(currentHealth / 10) - 1)
+            {
+                playerHpImageArray[i].color = new Color(255, 255, 255, 255);
+            }
+            else
+            {
+                playerHpImageArray[i].color = new Color(255, 255, 255, 0);
+            }
+        }
+        
+        for (int i = 0; i < 10; ++i)
+        {
+            if (i <= (int)(currentMaxstamina / 10) - 1)
+            {
+                playerStaminaImageArray[i].color = new Color(255, 255, 255, 255);
+            }
+            else
+            {
+                playerStaminaImageArray[i].color = new Color(255, 255, 255, 0);
+            }
+        }
+
+        for (int i = 0; i < (int) currentMaxstamina / 10; ++i)
+        {
+            playerStaminaImageArray[i].fillAmount = (currentStamina - (i * 10.0f)) * 0.1f;
+        }
+        
     }
 
     public void UpgradeCurMaxStamina(float stamina)
@@ -89,7 +128,19 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
-
+    public void HealHealth(float value)
+    {
+        if (currentHealth + value >= maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        else
+        {
+            currentHealth += value;
+        }
+        
+    }   
+    
     public void HitHealth(float damageValue)
     {
         currentHealth -= damageValue;
@@ -109,6 +160,11 @@ public class PlayerStatus : MonoBehaviour
         {
             currentStamina += 10.0f;
         }
+    }
+
+    public void HealMaxStamina()
+    {
+        currentMaxstamina += 10.0f;
     }
     //Getter
     public float GetCurHealth()
