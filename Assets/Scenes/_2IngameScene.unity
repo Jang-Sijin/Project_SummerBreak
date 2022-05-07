@@ -25313,11 +25313,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6460424114261381239, guid: 7d694e900ce110c4a8680a14a52df903, type: 3}
   m_PrefabInstance: {fileID: 1006236821}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1010390873 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4723679028991041174, guid: 949f8496ef2d4db44bb3c83d933ff8a2, type: 3}
-  m_PrefabInstance: {fileID: 3581913998295851794}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1010709819
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45323,6 +45318,7 @@ GameObject:
   - component: {fileID: 1772180695}
   - component: {fileID: 1772180694}
   - component: {fileID: 1772180693}
+  - component: {fileID: 1772180703}
   - component: {fileID: 1772180692}
   - component: {fileID: 1772180691}
   m_Layer: 7
@@ -45580,6 +45576,7 @@ MonoBehaviour:
   opitionUi: {fileID: 1199510360534256942}
   LiftDragTextObj: {fileID: 299614096}
   QuaterTextObj: {fileID: 2104008424}
+  slidingCheck: 0
 --- !u!114 &1772180698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45654,6 +45651,28 @@ Transform:
   m_Father: {fileID: 539247326}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -162.416, z: 0}
+--- !u!114 &1772180703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772180690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9071f012fd95fe459d8534587ef71f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberPad1KeyDown: 0
+  numberPad2KeyDown: 0
+  numberPad3KeyDown: 0
+  numberPad4KeyDown: 0
+  numberPad5KeyDown: 0
+  landMarkSpawnerPoint1: {fileID: 0}
+  landMarkSpawnerPoint2: {fileID: 0}
+  landMarkSpawnerPoint3: {fileID: 0}
+  landMarkSpawnerPoint4: {fileID: 0}
+  landMarkSpawnerPoint5: {fileID: 0}
 --- !u!1001 &1780304328
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51780,7 +51799,7 @@ PrefabInstance:
     - target: {fileID: 1488061041806598368, guid: 501a34b243d3d24448684538449481d8, type: 3}
       propertyPath: mapPiece
       value: 
-      objectReference: {fileID: 1010390873}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 501a34b243d3d24448684538449481d8, type: 3}
 --- !u!4 &2031955883 stripped
