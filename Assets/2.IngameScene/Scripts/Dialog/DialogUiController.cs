@@ -51,8 +51,8 @@ public class DialogUiController : MonoBehaviour
 		SetActiveButtonObjects(false);
 		SetActiveTextObjects(false);
 		
-		// yesBtn.onClick.AddListener(ClickAcceptButton);
-		// noBtn.onClick.AddListener(ClickCancelButton);
+		yesBtn.onClick.AddListener(ClickAcceptButton);
+		noBtn.onClick.AddListener(ClickCancelButton);
 	}
 
 	public void SetActiveTextObjects(bool visible)
@@ -140,18 +140,17 @@ public class DialogUiController : MonoBehaviour
 		//
 	}
 
-	//public void ClickAcceptButton()
-	//{
-	//	// 다이얼로그 yes 버튼을 눌렀을 경우 // 대화 종료 이벤트 발생
-	//	
-	//	if (PlayerEventSystem.instance.GetNearGameObject().CompareTag("ShopNpc"))
-	//	{
-	//		ShopSystem.instance.OpenShopCanvas();
-	//	}
-	//}
+	public void ClickAcceptButton()
+	{
+		// 다이얼로그 yes 버튼을 눌렀을 경우 // 대화 종료 이벤트 발생
+		if (PlayerEventSystem.instance.GetNearGameObject().CompareTag("ShopNpc"))
+		{
+			ShopSystem.instance.OpenShopCanvas();
+		}
+	}
 
-	//public void ClickCancelButton()
-	//{
-	//	// 다이얼로그 No 버튼을 눌렀을 경우 // 대화 종료 이벤트 발생
-	//}
+	public void ClickCancelButton()
+	{
+		// 다이얼로그 No 버튼을 눌렀을 경우 // 대화 종료 이벤트 발생
+	}
 }

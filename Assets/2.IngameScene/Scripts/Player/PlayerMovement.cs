@@ -534,7 +534,7 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(transform.position, -checkDirection, out hit, 1.0f,layerMask))
         {
 
-            Debug.Log($"[이민호] 됨"); 
+            // Debug.Log($"[이민호] 됨"); 
             m_rigidbody.isKinematic = false;
             m_rigidbody.position = Vector3.Lerp(m_rigidbody.position, hit.point + hit.normal * 0.5f, 
                 5f * Time.fixedDeltaTime);

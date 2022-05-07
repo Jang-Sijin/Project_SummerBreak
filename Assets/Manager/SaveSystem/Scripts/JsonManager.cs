@@ -191,7 +191,7 @@ public class JsonManager : MonoBehaviour
     // 선택된 세이브 파일이 있는지 확인하는 함수 // 세이브 파일 있음: true, 세이브 파일 없음: false
     public bool CheckSaveFile()
     {
-        print($"[장시진] CheckSaveFile:{SaveDataDictionary.selectSaveData.name}?");
+        // print($"[장시진] CheckSaveFile:{SaveDataDictionary.selectSaveData.name}");
         // 선택된 세이브 파일이 없을 때 // null 값 또는 "" 값이있는 문자열을 확인하려면 C#에서 string.IsNullOrEmpty() 메서드를 사용할 수 있습니다. 문자열이 비어 있거나 널이면 true 를 리턴.
         if (SaveDataDictionary.selectSaveData == null || SaveDataDictionary.selectSaveData.name == clearSlotName || string.IsNullOrEmpty(SaveDataDictionary.selectSaveData.name))
         {
