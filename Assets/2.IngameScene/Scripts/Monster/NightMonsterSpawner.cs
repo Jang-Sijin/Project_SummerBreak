@@ -42,26 +42,30 @@ public class NightMonsterSpawner : MonoBehaviour
     private bool dayCheck = false;
 
     private PlayerMovement playerMovement;
-
+    private PlayerEventSystem playerEventSystem;
     private void Start()
     {
+        playerEventSystem = GameManager.instance.playerGameObject.GetComponent<PlayerEventSystem>();
         playerMovement = GameManager.instance.playerGameObject.GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < spawnMonsters.Count; ++i)
+        if (!playerEventSystem.GetIsLandMarkArea())
         {
-            if (spawnMonsters[i] == null)
+            for (int i = 0; i < spawnMonsters.Count; ++i)
             {
-                spawnMonsters.RemoveAt(i);
+                if (spawnMonsters[i] == null)
+                {
+                    spawnMonsters.RemoveAt(i);
+                }
             }
-        }
-        
-        if (playerMovement.isGrounded && SpawnTrigger() && !hasBeenCollected)
-        {
-            Spawn();
+
+            if (playerMovement.isGrounded && SpawnTrigger() && !hasBeenCollected)
+            {
+                Spawn();
+            }
         }
     }
     private bool SpawnTrigger()
