@@ -32,13 +32,24 @@ public class RandomMove : Node
         if (_randomMoveCounter >= _randomMoveTime)
         {
             _randomMoveCounter = 0.0f;
-            _slimyeeBt.randomTargetGoal = _monsterManager.RandomPoint( SlimyeeBT.guardSpeed * 3);
+            _slimyeeBt.randomTargetGoal = _monsterManager.RandomPoint(SlimyeeBT.guardSpeed * 5) - _transform.position;
+            _slimyeeBt.randomTargetGoal.y = 0.0f;
+            _slimyeeBt.randomTargetGoal = _slimyeeBt.randomTargetGoal.normalized;
         }
 
-        _transform.position = Vector3.MoveTowards(_transform.position, _slimyeeBt.randomTargetGoal,
-            SlimyeeBT.guardSpeed* Time.deltaTime);
-        _transform.LookAt(_slimyeeBt.randomTargetGoal);
-        Debug.Log("[이민호] 몬스터 랜덤이동");
+        Rigidbody rigidbody = _transform.GetComponent<Rigidbody>();
+        rigidbody.velocity = _slimyeeBt.randomTargetGoal * SlimyeeBT.guardSpeed;
+        Quaternion rot = Quaternion.LookRotation(_slimyeeBt.randomTargetGoal);
+
+        _transform.rotation = rot;
+        
+        
+        
+        //_transform.position = Vector3.MoveTowards(_transform.position, _slimyeeBt.randomTargetGoal,
+        //    SlimyeeBT.guardSpeed* Time.deltaTime);
+        
+        //_transform.LookAt(_slimyeeBt.randomTargetGoal);
+        //Debug.Log("[이민호] 몬스터 랜덤이동");
 
         state = NodeState.RUNNING;
         return state;

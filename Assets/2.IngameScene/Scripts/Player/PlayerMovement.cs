@@ -182,6 +182,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Flap()
     {
+        isClimbedUp = false;
         curspeed = playerstatus.walkSpeed;
         currentState = playerState.flapState;
         _animator.Rebind();
@@ -207,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 velocity = moveDirection * curspeed;
             velocity.y = m_rigidbody.velocity.y;
             float angle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
-            Debug.Log("[이민호] 공중이동");
+            //Debug.Log("[이민호] 공중이동");
             m_rigidbody.velocity = velocity;
             m_rigidbody.rotation = Quaternion.Euler(0, angle, 0);
         }
@@ -563,6 +564,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isGrounded && isClimbed && !climbFlap)
         {
             slidingCheck = true;
+            isClimbedUp = false;
             currentState = playerState.sliding;
         }
         else
@@ -642,7 +644,7 @@ public class PlayerMovement : MonoBehaviour
             playerDir.y = 0.0f;
             playerDir = playerDir.normalized;
             //Debug.DrawRay(this.transform.position,playerDir * 1.0f,Color.red,1.0f);
-            Vector3 climbUpDirection = playerDir * 2.0f + jumpDirection;
+            Vector3 climbUpDirection = playerDir * 4.0f + jumpDirection;
             m_rigidbody.velocity = climbUpDirection;
             //m_rigidbody.AddForce(jumpDirection,ForceMode.VelocityChange);
         }
