@@ -29,13 +29,13 @@ public class JsonManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-        } 
+            // DontDestroyOnLoad(instance);
+        }
         else
-        { 
+        {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(instance);
-        
+
         LoadInit();
     }
     #endregion Singleton

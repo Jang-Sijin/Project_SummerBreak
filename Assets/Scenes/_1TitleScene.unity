@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 96482a5838c08044fafcd3e2317de1c0, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 12c041659f5c49147972cf72b0178821, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -1247,6 +1247,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!82 &326172362 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7372860551218250738, guid: e666f664eb90e5e4c9e3e609f0ca9550, type: 3}
+  m_PrefabInstance: {fileID: 913929896}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &326172363 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7372860551218250737, guid: e666f664eb90e5e4c9e3e609f0ca9550, type: 3}
+  m_PrefabInstance: {fileID: 913929896}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c978aa8b4985b4d86f5dde6d18f77d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &356025724 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4809646009039579248, guid: 8945b16913ba30f4abe18c5b090a0a03, type: 3}
@@ -2626,11 +2642,11 @@ PlayableDirector:
   - key: {fileID: 5200481838736131561, guid: e091b0e52d9b0364787bae0ec0e16cf3, type: 2}
     value: {fileID: 1019738466}
   - key: {fileID: -3545221696137684148, guid: e091b0e52d9b0364787bae0ec0e16cf3, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 326172362}
   - key: {fileID: 9287099575165853, guid: e091b0e52d9b0364787bae0ec0e16cf3, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 326172362}
   - key: {fileID: -8309382831747008909, guid: e091b0e52d9b0364787bae0ec0e16cf3, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 326172362}
   - key: {fileID: -1076954292433204645, guid: e091b0e52d9b0364787bae0ec0e16cf3, type: 2}
     value: {fileID: 1350770126}
   - key: {fileID: -2283266019693662299, guid: e091b0e52d9b0364787bae0ec0e16cf3, type: 2}
@@ -6057,7 +6073,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 326172363}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: BgSoundVolume
         m_Mode: 0
@@ -6065,7 +6081,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 0.5
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -7965,15 +7981,15 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: _1.TitleScene.Script.SoundManager, Assembly-CSharp
+      - m_Target: {fileID: 326172363}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: SfxSoundVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 0.5
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
