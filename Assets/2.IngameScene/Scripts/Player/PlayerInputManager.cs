@@ -41,7 +41,7 @@ public class PlayerInputManager : MonoBehaviour
     private Stopwatch swMove = new Stopwatch();
     private Stopwatch swSpace = new Stopwatch();
     private float flapSpendStamina = 10.0f;
-    
+    private bool isDialoged = false;
 
     public bool EnableLog;
 
@@ -241,7 +241,7 @@ public class PlayerInputManager : MonoBehaviour
         }
         else if (context.performed)
         {
-            if (!player.climbFlap && !player.hited && !player.attacked)
+            if (!isDialoged && !player.climbFlap && !player.hited && !player.attacked)
             {
                 moveDoingCheck = true;
                 moveDirection = context.ReadValue<Vector2>();
@@ -287,7 +287,11 @@ public class PlayerInputManager : MonoBehaviour
         playerstatus.TakeStamina(value);
         yield return new WaitForSeconds(100.0f);
     }
-    
+
+    public void IsDialogActive(bool value)
+    {
+        isDialoged = value;
+    }
 
     
     // input Space
@@ -303,14 +307,14 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
 
-            if (!player.hited &&!player.attacked && !player.isSwim && !player.isGrounded && playerstatus.currentStamina > 0.0f)
+            if (!isDialoged && !player.hited &&!player.attacked && !player.isSwim && !player.isGrounded && playerstatus.currentStamina > 0.0f)
             {
                 FlapDoingCheck = true;
                 spaceClickCheck = true;
                 if (EnableLog)
                     Debug.Log("[이민호] Flap : " + context.phase.ToString());   
             }
-            else if (!player.hited && !player.attacked && (player.isGrounded || player.isSwim))
+            else if (!isDialoged && !player.hited && !player.attacked && (player.isGrounded || player.isSwim))
             {
                 JumpDoingCheck = true;
                 spaceClickCheck = true;

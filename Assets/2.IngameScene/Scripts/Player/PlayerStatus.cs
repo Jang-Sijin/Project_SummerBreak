@@ -37,6 +37,8 @@ public class PlayerStatus : MonoBehaviour
     private Image[] playerHpImageArray;
 
     private Image[] playerStaminaImageArray;
+
+    private Image[] playerMaxStaminaImageArray;
     
     public bool DebugMod = false;
     void Awake()
@@ -58,6 +60,7 @@ public class PlayerStatus : MonoBehaviour
         playerUI = GameManager.instance.PlayerUI.GetComponent<PlayerUI>();
         playerHpImageArray = playerUI.GetHpImageArray();
         playerStaminaImageArray = playerUI.GetStaminaImageArray();
+        playerMaxStaminaImageArray = playerUI.GetMaxStaminaImageArray();
     }
 
     private void Update()
@@ -93,10 +96,12 @@ public class PlayerStatus : MonoBehaviour
         {
             if (i <= (int)(currentMaxstamina / 10) - 1)
             {
+                playerMaxStaminaImageArray[i].color = new Color(255, 255, 255, 255);
                 playerStaminaImageArray[i].color = new Color(255, 255, 255, 255);
             }
             else
             {
+                playerMaxStaminaImageArray[i].color = new Color(255, 255, 255, 0);
                 playerStaminaImageArray[i].color = new Color(255, 255, 255, 0);
             }
         }
