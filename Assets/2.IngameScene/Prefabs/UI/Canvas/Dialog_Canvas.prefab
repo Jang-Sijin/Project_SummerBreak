@@ -138,7 +138,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &5639026916631964483
 MonoBehaviour:
@@ -378,8 +378,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DialogUiController, Assembly-CSharp
-        m_MethodName: CanvasClose
+        m_TargetAssemblyTypeName: DialogSystem, Assembly-CSharp
+        m_MethodName: CloseDialogUi
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1143,8 +1143,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DialogUiController, Assembly-CSharp
-        m_MethodName: CanvasClose
+        m_TargetAssemblyTypeName: DialogSystem, Assembly-CSharp
+        m_MethodName: CloseDialogUi
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

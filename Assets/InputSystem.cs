@@ -8,16 +8,26 @@ public class InputSystem : MonoBehaviour
     public KeyCode option;
 
     [Header("게임 옵션 오브젝트")]
-    [SerializeField]
-    private GameObject opTionUI;
+    [SerializeField] private GameObject optionUI;
+    [SerializeField] private GameObject inventoryUICanvas;
+    
+    [SerializeField] private GameObject shopUICanvas;
+    [SerializeField] private GameObject dialogUICanvas;
+    
     public static bool showOptionUI = false;
-    private bool isOptionUIOpen = false;
+
+    private bool isOpenOptionUI = false;
+    private bool isOpenInventoryUI = false;
 
     private void Update()
     {
         if (Input.GetKeyDown(option))
         {
-            showOptionUI = !showOptionUI;
+            if (shopUICanvas.gameObject.activeSelf != true &&
+                dialogUICanvas.gameObject.activeSelf != true)
+            {
+                showOptionUI = !showOptionUI;
+            }
         }
 
         if (showOptionUI)
@@ -32,25 +42,37 @@ public class InputSystem : MonoBehaviour
 
     private void OptionUIOpen()
     {
-        if (isOptionUIOpen)
+        if (isOpenOptionUI)
             return;
         else
         {
-            opTionUI.SetActive(true);
-            isOptionUIOpen = true;
+            optionUI.SetActive(true);
+            isOpenOptionUI = true;
             GameManager.instance.InGameTimeStop();
+
+            if (isOpenInventoryUI == true)
+            {
+                inventoryUICanvas.SetActive(true);
+                isOpenInventoryUI = false;
+            }
         }
     }
     
     private void OptionUIClose()
     {
-        if (!isOptionUIOpen)
+        if (!isOpenOptionUI)
             return;
         else
         {
-            opTionUI.SetActive(false);
-            isOptionUIOpen = false;
+            optionUI.SetActive(false);
+            isOpenOptionUI = false;
             GameManager.instance.InGameTimeStart();
+
+            if (inventoryUICanvas.gameObject.activeSelf == true)
+            {
+                isOpenInventoryUI = true;
+                inventoryUICanvas.SetActive(false);
+            }
         }
     }
 }

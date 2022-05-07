@@ -180,7 +180,7 @@ public class DialogSystem : MonoBehaviour
 			{
 				// 대사가 더 이상 없을 경우 확인 버튼 또는 퀘스트 수락, 퀘스트 거절 버튼을 활성화
 				dialogUi.SetActiveButtonObjects(true);
-				CloseDialogUi();
+				CloseObjDialogUi();
 				return true;
 			}
 		}
@@ -190,7 +190,7 @@ public class DialogSystem : MonoBehaviour
 	private void SetNextDialog(List<ObjDialogDBEntity> dialogList)
 	{
 		// 1. 대화 UI창이 활성화가 안되었으면 활성화한다.
-		OpenDialogUi();
+		OpenObjDialogUi();
 		
 		// 2. 대사가 시작될 때는 Arrow UI가 나오지 않도록 설정
 		dialogUi.SetActiveArrowObject(false);
@@ -246,6 +246,16 @@ public class DialogSystem : MonoBehaviour
 				_getNpcVirtualCameraObj.gameObject.SetActive(true);
 		}
 	}
+	
+	private void OpenObjDialogUi()
+	{
+		// 캔버스가 활성화되어 있지 않으면 실행
+		if (dialogUi.npcDialogCanvas.gameObject.activeSelf == false)
+		{
+			dialogUi.CanvasOpen();
+			dialogUi.SetActiveTextObjects(true);
+		}
+	}
 
 	public void CloseDialogUi()
 	{
@@ -261,11 +271,15 @@ public class DialogSystem : MonoBehaviour
 			if(_getNpcVirtualCameraObj != null)
 				_getNpcVirtualCameraObj.gameObject.SetActive(false);
 		}
-		
-		// 플레이어가 만약 상점 다이얼로그를 종료하였다면 상점 UI를 출력한다.
-		if (PlayerEventSystem.instance.GetNearGameObject().CompareTag("ShopNpc"))
+	}
+	
+	public void CloseObjDialogUi()
+	{
+		// 캔버스가 활성화되어 있으면 UI를 비활성화 되도록 변경
+		if (dialogUi.npcDialogCanvas.gameObject.activeSelf == true)
 		{
-			ShopSystem.instance.OpenShopCanvas();
+			dialogUi.CanvasClose();
+			dialogUi.SetActiveTextObjects(false);
 		}
 	}
 
