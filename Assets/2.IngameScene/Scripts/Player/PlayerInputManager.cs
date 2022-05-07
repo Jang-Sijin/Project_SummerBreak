@@ -43,7 +43,10 @@ public class PlayerInputManager : MonoBehaviour
 
     public bool EnableLog;
 
-    
+    private float slideTime = 1.5f;
+    [SerializeField]
+    private float slideCounter = 0f;
+    private Vector3 lastPlayerPos;
     private void Awake()
     {
         player = GetComponent<PlayerMovement>();
@@ -142,6 +145,23 @@ public class PlayerInputManager : MonoBehaviour
 
     private void Update()
     {
+        if (player.slidingCheck)
+        {
+            if (player.transform.position == lastPlayerPos)
+            {
+                slideCounter += Time.deltaTime;
+                if (slideCounter >= slideTime)
+                {
+                    player.slidingCheck = false;
+                    slideCounter = 0.0f;
+                }
+                
+            }
+            else
+            {
+                slideCounter = 0.0f;
+            }
+        }
         player.CheckForClimb();
         if (player.hited)
         {
@@ -231,6 +251,8 @@ public class PlayerInputManager : MonoBehaviour
         {
             player.isSwim = false;
         }
+
+        lastPlayerPos = player.transform.position;
     }
 
     // input WASD
@@ -271,7 +293,7 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
 
-            if (!player.hited && player.isGrounded && playerstatus.currentItem != PlayerStatus.item.nothing)
+            if (!isDialoged && !player.hited && player.isGrounded && playerstatus.currentItem != PlayerStatus.item.nothing)
             {
                 player.Equipment();
             }
