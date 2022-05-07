@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 using UnityEngine.VFX;
@@ -102,6 +103,8 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField] private GameObject LiftDragTextObj;
     [SerializeField] private GameObject QuaterTextObj;
+
+    public bool slidingCheck = false;
     
     void Awake()
     {
@@ -402,6 +405,11 @@ public class PlayerMovement : MonoBehaviour
             m_rigidbody.position = translateWater;
             m_rigidbody.useGravity = false;
             m_rigidbody.velocity = Vector3.zero;
+            
+            if (slidingCheck)
+            {
+                slidingCheck = false;
+            }
         }
 
     }
@@ -460,6 +468,11 @@ public class PlayerMovement : MonoBehaviour
                      isSlope;
         if (playerstatus.currentStamina < playerstatus.currentMaxstamina && isGrounded)
         {
+            if (slidingCheck)
+            {
+                slidingCheck = false;
+            }
+
             StartCoroutine(HealStamina(1.0f));
         }
         //isGrounded = Physics.CheckSphere(transform.position, 0.1f, layerMask) || isSlope;
@@ -548,7 +561,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isGrounded && isClimbed && !climbFlap)
         {
+            slidingCheck = true;
             currentState = playerState.sliding;
+        }
+        else
+        {
+            slidingCheck = false;
         }
     }
 

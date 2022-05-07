@@ -101,7 +101,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             if (ClimbDoingCheck)
             {
-                if (playerstatus.currentStamina > 0 && moveDoingCheck)
+                if ((playerstatus.GetDebugMod() == true || playerstatus.currentStamina > 0) && moveDoingCheck)
                 {
                     Vector2 input = player.SquareToCircle(new Vector2(moveDirection.x, moveDirection.y));
                     //Debug.Log($"moveDir{moveDirection}input: {input}");
@@ -123,7 +123,7 @@ public class PlayerInputManager : MonoBehaviour
                 player.Glider(moveDirection, moveDoingCheck);
                 
             } 
-            else if(FlapDoingCheck)
+            else if((playerstatus.GetDebugMod() == true || playerstatus.currentStamina > 0) && FlapDoingCheck)
             {
                 player.Flap();
                 FlapDoingCheck = false;
@@ -157,6 +157,11 @@ public class PlayerInputManager : MonoBehaviour
         else
         {
             walkEffect.SetActive(false);
+        }
+
+        if (player.currentState != PlayerMovement.playerState.sliding)
+        {
+            player.slidingCheck = false;
         }
         
         if (player.isClimbedUp)
@@ -240,7 +245,7 @@ public class PlayerInputManager : MonoBehaviour
         }
         else if (context.performed)
         {
-            if (!isDialoged && !player.climbFlap && !player.hited && !player.attacked)
+            if (!player.slidingCheck && !isDialoged && !player.climbFlap && !player.hited && !player.attacked)
             {
                 moveDoingCheck = true;
                 moveDirection = context.ReadValue<Vector2>();
@@ -306,7 +311,7 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
 
-            if (!isDialoged && !player.hited &&!player.attacked && !player.isSwim && !player.isGrounded && playerstatus.currentStamina > 0.0f)
+            if (!isDialoged && !player.hited &&!player.attacked && !player.isSwim && !player.isGrounded)
             {
                 FlapDoingCheck = true;
                 spaceClickCheck = true;
