@@ -103,8 +103,14 @@ public class PlayerStatus : MonoBehaviour
             if (equipmentSlot.item.itemName == "소드")
             {
                 currentItem = item.attack;
-                //currentItem = item.interaction_sleep;
-                //currentItem = item.interaction_quillPen;
+            }
+            else if (equipmentSlot.item.itemName == "폭신침낭")
+            {
+                currentItem = item.interaction_sleep;
+            }
+            else if (equipmentSlot.item.itemName == "검은깃펜")
+            {
+                currentItem = item.interaction_quillPen;
             }
         }
         else
