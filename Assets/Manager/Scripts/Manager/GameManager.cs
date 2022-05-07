@@ -150,6 +150,11 @@ public class GameManager : MonoBehaviour
         timeController.SetInGameTime(hour);
     }
 
+    public void SetTimeMultiplier(int timeSpeed)
+    {
+        timeController.SetTimeMultiplier(timeSpeed);
+    }
+    
     private void InitLoadSaveData()
     {
         // 로드할 데이터가 있을 때

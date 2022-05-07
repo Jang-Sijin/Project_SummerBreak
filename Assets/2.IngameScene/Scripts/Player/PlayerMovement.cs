@@ -97,6 +97,12 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField] private GameObject opitionUi;
     
+    private bool glideLiftDrag = true;
+    private bool glideQuater = true;
+    
+    [SerializeField] private GameObject LiftDragTextObj;
+    [SerializeField] private GameObject QuaterTextObj;
+    
     void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody>();
@@ -121,6 +127,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void SetDebugMod(bool value)
+    {
+        glideQuater = value;
+        glideLiftDrag = value;
+    }
+    
     public void Jump(Vector2 direction)
     {
             currentState = playerState.jumpState;
@@ -172,8 +184,12 @@ public class PlayerMovement : MonoBehaviour
         flapEffect.Reinit();
         flapEffect.Play();
         Vector3 jumpDirection = new Vector3(0.0f, flapPower, 0.0f);
-        playerstatus.TakeStamina(10.0f);
-        Debug.Log("[이민호] 플랩");
+        if (playerstatus.GetDebugMod() == false)
+        {
+            playerstatus.TakeStamina(10.0f);
+        }
+
+        //Debug.Log("[이민호] 플랩");
         m_rigidbody.velocity = Vector3.zero;
         m_rigidbody.AddForce(jumpDirection,ForceMode.Impulse);
     }
@@ -242,49 +258,56 @@ public class PlayerMovement : MonoBehaviour
                 {
                     lastRollRotation = m_rigidbody.rotation.eulerAngles.y;
                     float curTime = Time.time - startTime;
-                    Vector3 finalRotation = Quaternion.Slerp(lerpStartRotation, newRotation, curTime / LerpTime)
-                        .eulerAngles;
-                    //m_rigidbody.rotation = finalRotation;
-                    float increaseOrDecrease = finalRotation.y - lastRollRotation; // 나중방향과 현재방향의 각도의 증감분
-                    //Debug.Log($"[이민호]curTime: {curTime}, LerpTime: {LerpTime}");
-                    if (increaseOrDecrease < 0)
+                    Quaternion finalRotation = Quaternion.Slerp(lerpStartRotation, newRotation, curTime / LerpTime);
+                    if (!glideQuater)
                     {
-                        RLcheck = false;
-                    }
-                    else if (increaseOrDecrease > 0)
-                    {
-                        RLcheck = true;
-                    }
-
-                    if (curTime / LerpTime <= 0.5555f)
-                    {
-                        if (!RLcheck)
-                        {
-                            rollAngle += 2f;
-                        }
-                        else
-                        {   
-                            rollAngle -= 2f;
-                        }
-                        
-                        //Debug.Log("[이민호] Roll 회전");
+                        m_rigidbody.rotation = finalRotation;
                     }
                     else
                     {
-                        if (!RLcheck)
+                        Vector3 final = finalRotation.eulerAngles;
+                        float increaseOrDecrease = final.y - lastRollRotation; // 나중방향과 현재방향의 각도의 증감분
+                        //Debug.Log($"[이민호]curTime: {curTime}, LerpTime: {LerpTime}");
+                        if (increaseOrDecrease < 0)
                         {
-                            rollAngle -= 2f;
+                            RLcheck = false;
+                        }
+                        else if (increaseOrDecrease > 0)
+                        {
+                            RLcheck = true;
+                        }
+
+                        if (curTime / LerpTime <= 0.5555f)
+                        {
+                            if (!RLcheck)
+                            {
+                                rollAngle += 2f;
+                            }
+                            else
+                            {
+                                rollAngle -= 2f;
+                            }
+
+                            //Debug.Log("[이민호] Roll 회전");
                         }
                         else
                         {
-                            rollAngle += 2f;
+                            if (!RLcheck)
+                            {
+                                rollAngle -= 2f;
+                            }
+                            else
+                            {
+                                rollAngle += 2f;
+                            }
+                            //Debug.Log("[이민호] Roll 원상복구회전");
                         }
-                        //Debug.Log("[이민호] Roll 원상복구회전");
+
+                        rollAngle = Mathf.Clamp(rollAngle, -65.0f, 65.0f);
+                        final.z = rollAngle;
+
+                        m_rigidbody.rotation = Quaternion.Euler(final);
                     }
-                    rollAngle = Mathf.Clamp(rollAngle, -65.0f, 65.0f);
-                    finalRotation.z = rollAngle;
-                    
-                    m_rigidbody.rotation = Quaternion.Euler(finalRotation);
                     //Debug.Log($"[이민호] rotation:{m_rigidbody.rotation}, new:{newRotation}");
                 }
             }
@@ -299,12 +322,20 @@ public class PlayerMovement : MonoBehaviour
             float lift = Mathf.Cos( Mathf.PI / 4 );
             float drag = Mathf.Sin( Mathf.PI / 4 );
             // 양력과 항력이 적용된 급하강
-            m_rigidbody.AddForce(new Vector3(moveDirection.x * Mathf.Abs(m_rigidbody.velocity.y) * drag / lift
-                                , m_rigidbody.velocity.y * drag / lift
-                                , moveDirection.z * Mathf.Abs(m_rigidbody.velocity.y)) * drag / lift, ForceMode.Acceleration);
+            if (glideLiftDrag)
+            {
+                m_rigidbody.AddForce(new Vector3(moveDirection.x * Mathf.Abs(m_rigidbody.velocity.y) * drag / lift
+                    , m_rigidbody.velocity.y * drag / lift
+                    , moveDirection.z * Mathf.Abs(m_rigidbody.velocity.y)) * drag / lift, ForceMode.Acceleration);
+            }
             // 중력 가속도만 적용된 급하강
-            //m_rigidbody.AddForce(new Vector3(moveDirection.x, m_rigidbody.velocity.y,moveDirection.z),ForceMode.Acceleration);
-            Quaternion newRotation = Quaternion.LookRotation(velocity);
+            else
+            {
+                m_rigidbody.AddForce(new Vector3(moveDirection.x, m_rigidbody.velocity.y, moveDirection.z),
+                    ForceMode.Acceleration);
+            }
+
+            //Quaternion newRotation = Quaternion.LookRotation(velocity);
             //m_rigidbody.rotation = Quaternion.Slerp(m_rigidbody.rotation, newRotation, Time.deltaTime * 5.0f);
             //m_rigidbody.rotation = Quaternion.Slerp(m_rigidbody.rotation, newRotation, 1.0f);
             
@@ -312,6 +343,34 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void GlideLiftDragActive()
+    {
+        if (!glideLiftDrag)
+        {
+            glideLiftDrag = true;
+            LiftDragTextObj.SetActive(false);
+        }
+        else
+        {
+            glideLiftDrag = false;
+            LiftDragTextObj.SetActive(true);
+        }
+    }
+
+    public void GlideQuaterActive()
+    {
+        if (!glideQuater)
+        {
+            glideQuater = true;
+            QuaterTextObj.SetActive(false);
+        }
+        else
+        {
+            glideQuater = false;
+            QuaterTextObj.SetActive(true);
+        }
+    }
+    
     public void isSwimed()
     {
         if (inWater)

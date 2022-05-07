@@ -106,8 +106,7 @@ public class PlayerInputManager : MonoBehaviour
                     Vector2 input = player.SquareToCircle(new Vector2(moveDirection.x, moveDirection.y));
                     //Debug.Log($"moveDir{moveDirection}input: {input}");
                     player.Climbing(input);
-                    
-                    if (playerstatus.currentStamina > 0)
+                    if (playerstatus.GetDebugMod() == false && playerstatus.currentStamina > 0)
                     {
                         StartCoroutine(TakeStamina(1.0f));
                     }

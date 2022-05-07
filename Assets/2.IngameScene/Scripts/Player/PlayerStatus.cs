@@ -30,6 +30,13 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] 
     private GameObject equipmentSlotObj;
 
+    [SerializeField] 
+    private GameObject DebugModTextObj;
+    [SerializeField] 
+    private GameObject DebugModGlideButton;
+    [SerializeField] 
+    private GameObject DebugModQuaterButtton;
+    
     private Slot equipmentSlot;
 
     private PlayerUI playerUI;
@@ -40,7 +47,10 @@ public class PlayerStatus : MonoBehaviour
 
     private Image[] playerMaxStaminaImageArray;
     
-    public bool DebugMod = false;
+    [SerializeField]
+    private bool DebugMod = false;
+    
+    
     void Awake()
     {
         currentHealth = maxHealth;
@@ -61,6 +71,28 @@ public class PlayerStatus : MonoBehaviour
         playerHpImageArray = playerUI.GetHpImageArray();
         playerStaminaImageArray = playerUI.GetStaminaImageArray();
         playerMaxStaminaImageArray = playerUI.GetMaxStaminaImageArray();
+    }
+    
+    public void DebugModActive()
+    {
+        if (DebugMod == false)
+        {
+            DebugMod = true;
+            DebugModTextObj.SetActive(true);
+            DebugModGlideButton.SetActive(true);
+            DebugModQuaterButtton.SetActive(true);
+            GameManager.instance.SetTimeMultiplier(2000);
+        }
+        else
+        {
+            PlayerMovement playerMovement = this.GetComponent<PlayerMovement>();
+            playerMovement.SetDebugMod(false);
+            DebugMod = false;
+            DebugModTextObj.SetActive(false);
+            DebugModGlideButton.SetActive(false);
+            DebugModQuaterButtton.SetActive(false);
+            GameManager.instance.SetTimeMultiplier(540);
+        }
     }
 
     private void Update()
@@ -113,11 +145,6 @@ public class PlayerStatus : MonoBehaviour
         
     }
 
-    public void UpgradeCurMaxStamina(float stamina)
-    {
-        currentMaxstamina += stamina;
-    }
-    
     public void TakeStamina(float stamina)
     {
         //Debug.Log("[이민호]현재 스태미나 : " + currentStamina);
@@ -169,7 +196,11 @@ public class PlayerStatus : MonoBehaviour
 
     public void HealMaxStamina()
     {
-        currentMaxstamina += 10.0f;
+
+        if (currentMaxstamina < 100)
+        {
+            currentMaxstamina += 10.0f;
+        }
     }
     //Getter
     public float GetCurHealth()
@@ -177,6 +208,10 @@ public class PlayerStatus : MonoBehaviour
         return currentHealth;
     }
 
+    public bool GetDebugMod()
+    {
+        return DebugMod;
+    }
     public float GetCurStamina()
     {
         return currentStamina;
