@@ -18,6 +18,7 @@ public class SlimyeeBT : BTTree
     public bool guardCheck = false;
     public bool aloneCheck = false;
     public Vector3 randomTargetGoal = Vector3.zero;
+    public bool isGrounded = false;
     protected override Node SetUpTree()
     {
         Node root = new Selector(new List<Node>

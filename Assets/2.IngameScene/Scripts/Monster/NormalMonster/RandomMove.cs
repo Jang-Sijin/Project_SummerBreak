@@ -24,27 +24,35 @@ public class RandomMove : Node
 
     public override NodeState Evaluate()
     {
-        _randomMoveCounter += Time.deltaTime;
-        _animator.SetBool("Chasting", true);
-        _animator.SetBool("Attack", false);
-        _animator.SetBool("Idle", false);
-        _animator.SetBool("Hit", false);
-        if (_randomMoveCounter >= _randomMoveTime)
+        
+        if (_slimyeeBt.isGrounded == false)
         {
-            _randomMoveCounter = 0.0f;
-            _slimyeeBt.randomTargetGoal = _monsterManager.RandomPoint(SlimyeeBT.guardSpeed * 5) - _transform.position;
-            _slimyeeBt.randomTargetGoal.y = 0.0f;
-            _slimyeeBt.randomTargetGoal = _slimyeeBt.randomTargetGoal.normalized;
+            _slimyeeBt.isGrounded = Physics.Raycast(_transform.position, -Vector3.up, 0.2f);
+        }
+        else
+        {
+            _randomMoveCounter += Time.deltaTime;
+            _animator.SetBool("Chasting", true);
+            _animator.SetBool("Attack", false);
+            _animator.SetBool("Idle", false);
+            _animator.SetBool("Hit", false);
+            if (_randomMoveCounter >= _randomMoveTime)
+            {
+                _randomMoveCounter = 0.0f;
+                _slimyeeBt.randomTargetGoal =
+                    _monsterManager.RandomPoint(SlimyeeBT.guardSpeed * 5) - _transform.position;
+                _slimyeeBt.randomTargetGoal.y = 0.0f;
+                _slimyeeBt.randomTargetGoal = _slimyeeBt.randomTargetGoal.normalized;
+            }
+
+            Rigidbody rigidbody = _transform.GetComponent<Rigidbody>();
+            rigidbody.velocity = _slimyeeBt.randomTargetGoal * SlimyeeBT.guardSpeed;
+            Quaternion rot = Quaternion.LookRotation(_slimyeeBt.randomTargetGoal);
+
+            _transform.rotation = rot;
         }
 
-        Rigidbody rigidbody = _transform.GetComponent<Rigidbody>();
-        rigidbody.velocity = _slimyeeBt.randomTargetGoal * SlimyeeBT.guardSpeed;
-        Quaternion rot = Quaternion.LookRotation(_slimyeeBt.randomTargetGoal);
 
-        _transform.rotation = rot;
-        
-        
-        
         //_transform.position = Vector3.MoveTowards(_transform.position, _slimyeeBt.randomTargetGoal,
         //    SlimyeeBT.guardSpeed* Time.deltaTime);
         
