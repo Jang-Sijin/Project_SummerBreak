@@ -44,7 +44,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.08, y: 2, z: 2}
+  m_Size: {x: 1, y: 2, z: 2}
   m_Center: {x: 0, y: 1, z: 0.5}
 --- !u!114 &6846563412476332074
 MonoBehaviour:
@@ -59,7 +59,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogDB: {fileID: 11400000, guid: 8acb37ca59c1ce9449df66ce1310f278, type: 2}
-  dialogID: 0
+  dialogID: 10016
+  npcVirtualCameraObj: {fileID: 0}
+  npcAnimator: {fileID: 5958495062253940516}
   useDialogList: []
 --- !u!65 &277611402209792688
 BoxCollider:
@@ -155,5 +157,10 @@ GameObject:
 --- !u!4 &311029179400156510 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5f66974f425443946a7d73f29c0e4cb8, type: 3}
+  m_PrefabInstance: {fileID: 277611402209792693}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5958495062253940516 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 5f66974f425443946a7d73f29c0e4cb8, type: 3}
   m_PrefabInstance: {fileID: 277611402209792693}
   m_PrefabAsset: {fileID: 0}
