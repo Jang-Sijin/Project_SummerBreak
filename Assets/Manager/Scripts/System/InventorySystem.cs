@@ -133,20 +133,20 @@ public class InventorySystem : MonoBehaviour
 
     public void UpdateInventoryToShopInventorySlots()
     {
-        try
-        {
-            shopEquipmentSlot = equipmentSlot;
-        
-            for (int i = 0; i < itemSlots.Length; ++i)
-            {
-                shopItemSlots[i] = itemSlots[i];
-            }
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("UpdateInventoryToShopInventorySlots 예외 발생");
-            throw;
-        }
+        // try
+        // {
+        //     shopEquipmentSlot = equipmentSlot;
+        // 
+        //     for (int i = 0; i < itemSlots.Length; ++i)
+        //     {
+        //         shopItemSlots[i] = itemSlots[i];
+        //     }
+        // }
+        // catch (Exception e)
+        // {
+        //     Console.WriteLine("UpdateInventoryToShopInventorySlots 예외 발생");
+        //     throw;
+        // }
     }
     
     public void UpdateShopInventoryToInventorySlots()

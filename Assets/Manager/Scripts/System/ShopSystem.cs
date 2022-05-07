@@ -35,6 +35,9 @@ public class ShopSystem : MonoBehaviour
     [SerializeField] private GameObject shopBuyRequestNoButton;
     [SerializeField] private GameObject shopBuyRequestFailUI;
     
+    [Header("플레이어 코인 UI 설정")]
+    [SerializeField] private GameObject playerCoinUI;
+    
     [Header("상점 아이템 슬롯 리스트")] 
     [SerializeField] private ShopItem[] shopItemList;
     [Header("인벤토리 슬롯 리스트")] 
@@ -224,5 +227,6 @@ public class ShopSystem : MonoBehaviour
     public void OpenShopCanvas()
     {
         shopCanvas.gameObject.SetActive(true);
+        playerCoinUI.SetActive(true);
     }
 }

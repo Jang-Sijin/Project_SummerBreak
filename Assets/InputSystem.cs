@@ -9,8 +9,9 @@ public class InputSystem : MonoBehaviour
 
     [Header("게임 옵션 오브젝트")]
     [SerializeField] private GameObject optionUI;
-    [SerializeField] private GameObject inventoryUICanvas;
+    [SerializeField] private GameObject playerCoinUI;
     
+    [SerializeField] private GameObject inventoryUICanvas;
     [SerializeField] private GameObject shopUICanvas;
     [SerializeField] private GameObject dialogUICanvas;
     
@@ -47,6 +48,7 @@ public class InputSystem : MonoBehaviour
         else
         {
             optionUI.SetActive(true);
+            playerCoinUI.SetActive(true);
             isOpenOptionUI = true;
             GameManager.instance.InGameTimeStop();
 
@@ -65,6 +67,7 @@ public class InputSystem : MonoBehaviour
         else
         {
             optionUI.SetActive(false);
+            playerCoinUI.SetActive(false);
             isOpenOptionUI = false;
             GameManager.instance.InGameTimeStart();
 
