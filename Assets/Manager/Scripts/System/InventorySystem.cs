@@ -16,6 +16,11 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private GameObject shopInventorySlotsParent;
     [SerializeField] private GameObject shopInventoryEquipmentSlot;
 
+    [Header("상점 인벤토리 설정")]
+    [SerializeField] private Item sword;
+    [SerializeField] private Item pen;
+    [SerializeField] private Item bag;
+
     private Slot[] itemSlots;
     private Slot equipmentSlot;
     private Slot[] shopItemSlots;
@@ -46,6 +51,11 @@ public class InventorySystem : MonoBehaviour
         // 해당 오브젝트의 자식 slot 오브젝트를 itemSlots 배열에 할당한다.
         itemSlots = inventorySlotsParent.GetComponentsInChildren<Slot>();
         equipmentSlot = inventoryEquipmentSlot.GetComponent<Slot>();
+        
+        // [임시 빌드용 디폴트 아이템] // 나중에 제대로 함수 추가 필요
+        itemSlots[9].AddItem(sword);
+        itemSlots[10].AddItem(pen);
+        itemSlots[11].AddItem(bag);
         
         shopItemSlots = shopInventorySlotsParent.GetComponentsInChildren<Slot>();
         shopEquipmentSlot = shopInventoryEquipmentSlot.GetComponent<Slot>();
