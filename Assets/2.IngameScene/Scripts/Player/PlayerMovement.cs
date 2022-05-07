@@ -147,6 +147,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
+        isClimbedUp = false;
         if (curspeed != playerstatus.runSpeed)
         {
             currentState = playerState.walkState;
@@ -175,11 +176,13 @@ public class PlayerMovement : MonoBehaviour
         {
             currentState = playerState.failState;
             climbFlap = false;
+            isClimbedUp = false;
         }
     }
 
     public void Flap()
     {
+        isClimbedUp = false;
         curspeed = playerstatus.walkSpeed;
         currentState = playerState.flapState;
         _animator.Rebind();
@@ -553,7 +556,6 @@ public class PlayerMovement : MonoBehaviour
     {
         m_rigidbody.useGravity = true;
         m_rigidbody.isKinematic = false;
-        isClimbedUp = false;
         checkDirection = Vector3.zero;
     }
 
@@ -562,6 +564,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isGrounded && isClimbed && !climbFlap)
         {
             slidingCheck = true;
+            isClimbedUp = false;
             currentState = playerState.sliding;
         }
         else
@@ -574,7 +577,7 @@ public class PlayerMovement : MonoBehaviour
     {
         int layerMask = (1 << LayerMask.NameToLayer("Grounded"));
         Vector3 HeadPostion = transform.position + transform.up.normalized * 1.3f;
-        Debug.DrawRay(HeadPostion, transform.forward.normalized * 1.0f, Color.red);
+        //Debug.DrawRay(HeadPostion, transform.forward.normalized * 1.0f, Color.red);
         if (!Physics.Raycast(HeadPostion, transform.forward.normalized, 1.0f,layerMask))
         {
             return true;
@@ -612,7 +615,7 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(transform.position, -checkDirection, out hit, 1.0f,layerMask))
         {
 
-            // Debug.Log($"[이민호] 됨"); 
+            //Debug.Log($"[이민호] 됨");
             m_rigidbody.isKinematic = false;
             m_rigidbody.position = Vector3.Lerp(m_rigidbody.position, hit.point + hit.normal * 0.5f, 
                 5f * Time.fixedDeltaTime);
@@ -632,11 +635,16 @@ public class PlayerMovement : MonoBehaviour
             _animator.Play("Flap");
             flapEffect.Reinit();
             climbFlap = true;
+            currentState = playerState.flapState;
             flapEffect.Play();
             //Debug.Log("[이민호] 플랩");
             m_rigidbody.velocity = Vector3.zero;
             Vector3 jumpDirection = Vector3.up * 6.0f;
-            Vector3 climbUpDirection = transform.forward + jumpDirection;
+            Vector3 playerDir = transform.forward;
+            playerDir.y = 0.0f;
+            playerDir = playerDir.normalized;
+            //Debug.DrawRay(this.transform.position,playerDir * 1.0f,Color.red,1.0f);
+            Vector3 climbUpDirection = playerDir * 4.0f + jumpDirection;
             m_rigidbody.velocity = climbUpDirection;
             //m_rigidbody.AddForce(jumpDirection,ForceMode.VelocityChange);
         }

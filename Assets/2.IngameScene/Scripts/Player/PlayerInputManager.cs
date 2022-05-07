@@ -290,6 +290,7 @@ public class PlayerInputManager : MonoBehaviour
     {
         playerstatus.TakeStamina(value);
         yield return new WaitForSeconds(100.0f);
+        
     }
 
     public void IsDialogActive(bool value)

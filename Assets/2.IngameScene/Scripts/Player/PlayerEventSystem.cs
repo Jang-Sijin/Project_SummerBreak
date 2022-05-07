@@ -17,6 +17,8 @@ public class PlayerEventSystem : MonoBehaviour
     private bool eKeyDown; // e버튼(상호작용)
     // [플레이어 근처에 있는 오브젝트]
     private GameObject nearObject;
+
+    private bool isLandMarkArea = false;
     
     #region Singleton
     public static PlayerEventSystem instance; // PlayerEventSystem 싱글톤으로 관리
@@ -63,9 +65,13 @@ public class PlayerEventSystem : MonoBehaviour
             }
             else if (nearObject.CompareTag("LandMarkObj"))
             {
-                MapOpenTrigger mapOpenTrigger = nearObject.GetComponent<MapOpenTrigger>();
-                mapOpenTrigger.SetActiveMapPiece();
-                
+                PlayerStatus playerStatus = GameManager.instance.playerGameObject.GetComponent<PlayerStatus>();
+                if (playerStatus.currentItem == PlayerStatus.item.interaction_quillPen)
+                {
+                    MapOpenTrigger mapOpenTrigger = nearObject.GetComponent<MapOpenTrigger>();
+                    mapOpenTrigger.SetActiveMapPiece();
+                }
+
                 // 다이얼로그 시작 코루틴 시작
                 ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
                 objDialogTrigger.EnterPlayer();
@@ -94,6 +100,12 @@ public class PlayerEventSystem : MonoBehaviour
         {
             // print($"[장시진]: Player-NPC Collider 충돌 성공 -> 상호작용 가능");
             nearObject = other.gameObject;
+        }
+
+        if (!isLandMarkArea && other.CompareTag("LandMarkArea"))
+        {
+            //Debug.Log("안임");
+            isLandMarkArea = true;
         }
     }
 
@@ -141,8 +153,19 @@ public class PlayerEventSystem : MonoBehaviour
             objDialogTrigger.StopCoroutine("StartDialog");
             nearObject = null;
         }
+        
+        if (isLandMarkArea && other.CompareTag("LandMarkArea"))
+        {
+            //Debug.Log("나옴");
+            isLandMarkArea = false;
+        }
     }
 
+    public bool GetIsLandMarkArea()
+    {
+        return isLandMarkArea;
+    }
+    
     public GameObject GetNearGameObject()
     {
         return nearObject;
