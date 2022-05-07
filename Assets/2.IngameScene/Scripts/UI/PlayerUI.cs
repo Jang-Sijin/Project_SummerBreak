@@ -10,7 +10,9 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private GameObject playerStaminaImageArrayParent;
     [SerializeField] private TextMeshProUGUI playerCoinTextMesh;
 
+    [SerializeField]
     private Image[] playerHpImageArray;
+    [SerializeField]
     private Image[] playerStaminaImageArray;
 
     private void Start()
@@ -26,4 +28,15 @@ public class PlayerUI : MonoBehaviour
     {
         playerCoinTextMesh.text = InventorySystem.instance.playerCoinCount.ToString();
     }
+
+    public Image[] GetHpImageArray()
+    {
+        return playerHpImageArray;
+    }
+
+    public Image[] GetStaminaImageArray()
+    {
+        return playerStaminaImageArray;
+    }
+    
 }

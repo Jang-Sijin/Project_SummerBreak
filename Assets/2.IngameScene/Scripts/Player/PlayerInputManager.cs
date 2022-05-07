@@ -101,7 +101,7 @@ public class PlayerInputManager : MonoBehaviour
         {
             if (ClimbDoingCheck)
             {
-                if (moveDoingCheck)
+                if (playerstatus.currentStamina > 0 && moveDoingCheck)
                 {
                     Vector2 input = player.SquareToCircle(new Vector2(moveDirection.x, moveDirection.y));
                     //Debug.Log($"moveDir{moveDirection}input: {input}");
@@ -123,10 +123,6 @@ public class PlayerInputManager : MonoBehaviour
                 GlideTrail_Right.SetActive(true);
                 player.Glider(moveDirection, moveDoingCheck);
                 
-                if (playerstatus.currentStamina > 0)
-                {
-                    StartCoroutine(TakeStamina(1.0f));
-                }
             } 
             else if(FlapDoingCheck)
             {
@@ -309,9 +305,6 @@ public class PlayerInputManager : MonoBehaviour
 
             if (!player.hited &&!player.attacked && !player.isSwim && !player.isGrounded && playerstatus.currentStamina > 0.0f)
             {
-                if(!playerstatus.DebugMod)
-                    playerstatus.TakeStamina(flapSpendStamina);
-                
                 FlapDoingCheck = true;
                 spaceClickCheck = true;
                 if (EnableLog)
