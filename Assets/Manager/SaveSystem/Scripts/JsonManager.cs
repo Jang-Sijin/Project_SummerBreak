@@ -13,7 +13,7 @@ public static class SaveDataDictionary
 public class JsonManager : MonoBehaviour
 {
     [Header("↓ 현재 설정된 세이브 파일 위치(dataPath)")]
-    [SerializeField] private string dataPath = "/SaveFile/savefile.json";
+    [SerializeField] private string dataPath = "/savefile.json";
     
     private int saveDataSlotCount = 10;
     private string currentSelectBtnName;
@@ -42,12 +42,12 @@ public class JsonManager : MonoBehaviour
 
     public void LoadInit()
     {
-        string filePath = $"{Application.dataPath + dataPath}";
+        string filePath = $"{Application.persistentDataPath + dataPath}";
         FileInfo fileInfo = new FileInfo(filePath);
 
         if (fileInfo.Exists)
         {
-            string jdata = File.ReadAllText(Application.dataPath + dataPath);
+            string jdata = File.ReadAllText(Application.persistentDataPath + dataPath);
             SaveDataDictionary.saveDataDictionary = JsonConvert.DeserializeObject<Dictionary<string, SaveInfo>>(jdata);
         }
         else
@@ -55,7 +55,7 @@ public class JsonManager : MonoBehaviour
             // 새로운 세이브 파일을 생성한다.
             CreateJsonFile();
             
-            string jdata = File.ReadAllText(Application.dataPath + dataPath);
+            string jdata = File.ReadAllText(Application.persistentDataPath + dataPath);
             SaveDataDictionary.saveDataDictionary = JsonConvert.DeserializeObject<Dictionary<string, SaveInfo>>(jdata);
         }
     }
@@ -97,7 +97,7 @@ public class JsonManager : MonoBehaviour
 
             // Formatting.Indented -> Json 자동으로 라인/들여쓰기 적용 [참고: https://www.csharpstudy.com/Data/Json-beautifier.aspx]
             string jdata = JsonConvert.SerializeObject(SaveDataDictionary.saveDataDictionary, Formatting.Indented);
-            File.WriteAllText(Application.dataPath + dataPath, jdata);
+            File.WriteAllText(Application.persistentDataPath + dataPath, jdata);
             print($"[장시진] {slotName}, {saveName} Save Success!!!");
             
             SaveSlot currentSaveSlot = GameObject.Find(slotName).GetComponent<SaveSlot>();
@@ -128,7 +128,7 @@ public class JsonManager : MonoBehaviour
         }
 
         string jdata = JsonConvert.SerializeObject(createData, Formatting.Indented);
-        File.WriteAllText(Application.dataPath + dataPath, jdata);
+        File.WriteAllText(Application.persistentDataPath + dataPath, jdata);
         
         print($"[장시진] Save Slot All Clear!!!");
         // print(jdata); // Success Check Print
@@ -146,7 +146,7 @@ public class JsonManager : MonoBehaviour
                 "");
         
         string jdata = JsonConvert.SerializeObject(SaveDataDictionary.saveDataDictionary, Formatting.Indented);
-        File.WriteAllText(Application.dataPath + dataPath, jdata);
+        File.WriteAllText(Application.persistentDataPath + dataPath, jdata);
         
         print($"[장시진] {slotName} 슬롯의 데이터를 초기화!!!");
     }
@@ -161,7 +161,7 @@ public class JsonManager : MonoBehaviour
     {
         // dataDictionary에 있는 slotName의 위치의 세이브 데이터를 가져온다.
         string jdata = JsonConvert.SerializeObject(SaveDataDictionary.saveDataDictionary, Formatting.Indented);
-        File.WriteAllText(Application.dataPath + dataPath, jdata);
+        File.WriteAllText(Application.persistentDataPath + dataPath, jdata);
         
         print($"[장시진] {slotName} 슬롯의 데이터를 초기화!!!");
     }

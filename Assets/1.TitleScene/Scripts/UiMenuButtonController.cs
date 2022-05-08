@@ -14,8 +14,9 @@ namespace _1.TitleScene.Script
         public void LoadStartButton()
         {
             SoundManager.instance.SfxPlay("LoadStartButton", loadStartAudioClip);
+            JsonManager.instance.Load();
             SceneLoaderManager.instance.LoadGameScene();
-            XMLManager.instance.LoadByXML();
+            // XMLManager.instance.LoadByXML();
         }
 
         public void StartButton()

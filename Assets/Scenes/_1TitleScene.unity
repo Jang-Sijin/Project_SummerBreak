@@ -1896,17 +1896,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &442865539 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4136848031801081685, guid: 082849f99bba97043be3b81e9f7ae231, type: 3}
-  m_PrefabInstance: {fileID: 6166271570603537404}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcf9abf09714efd4b9c10a7d092fc202, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &482947509
 GameObject:
   m_ObjectHideFlags: 0
@@ -3641,14 +3630,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7372860551218250737, guid: e666f664eb90e5e4c9e3e609f0ca9550, type: 3}
-      propertyPath: backGroundList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7372860551218250737, guid: e666f664eb90e5e4c9e3e609f0ca9550, type: 3}
-      propertyPath: backGroundList.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: afcbfc61c5c62f3479c19b5421fcb12b, type: 3}
     - target: {fileID: 7372860551218250739, guid: e666f664eb90e5e4c9e3e609f0ca9550, type: 3}
       propertyPath: m_Name
       value: SoundManager
@@ -10674,13 +10655,29 @@ PrefabInstance:
     m_TransformParent: {fileID: 1031910457}
     m_Modifications:
     - target: {fileID: 759949186, guid: 453ab319bae87294183dea42c79c7054, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 759949186, guid: 453ab319bae87294183dea42c79c7054, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 442865539}
+      objectReference: {fileID: 1031910458}
     - target: {fileID: 759949186, guid: 453ab319bae87294183dea42c79c7054, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1031910458}
+    - target: {fileID: 759949186, guid: 453ab319bae87294183dea42c79c7054, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadStartButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 759949186, guid: 453ab319bae87294183dea42c79c7054, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: LoadStartButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 759949186, guid: 453ab319bae87294183dea42c79c7054, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: _1.TitleScene.Script.UiMenuButtonController, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1261458904, guid: 453ab319bae87294183dea42c79c7054, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
