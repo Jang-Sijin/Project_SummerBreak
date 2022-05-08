@@ -19,6 +19,12 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField]
     private GameObject GlideTrail_Left;
 
+    [SerializeField]
+    private GameObject Slide_Left;
+    
+    [SerializeField]
+    private GameObject Slide_Right;
+
     [SerializeField] 
     private GameObject walkEffect;
     
@@ -162,6 +168,18 @@ public class PlayerInputManager : MonoBehaviour
                 slideCounter = 0.0f;
             }
         }
+
+        if (player.currentState == PlayerMovement.playerState.sliding)
+        {
+            Slide_Left.SetActive(true);
+            Slide_Right.SetActive(true);
+        }
+        else
+        {
+            Slide_Left.SetActive(false);
+            Slide_Right.SetActive(false);
+        }
+        
         player.CheckForClimb();
         if (player.hited)
         {
