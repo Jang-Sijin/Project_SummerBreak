@@ -90,21 +90,17 @@ public class PlayerEventSystem : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (!other.CompareTag("Item"))
-        {
-            // 트리거가 발생 UI(E키)를 활성화(출력)한다.
-            interactionText.gameObject.SetActive(true);
-        }
-
         if (other.CompareTag("QuestNpc") || other.CompareTag("DialogObj") || other.CompareTag("ShopNpc") || other.CompareTag("LandMarkObj"))
         {
             // print($"[장시진]: Player-NPC Collider 충돌 성공 -> 상호작용 가능");
             nearObject = other.gameObject;
+            
+            // 트리거가 발생 UI(E키)를 활성화(출력)한다.
+            interactionText.gameObject.SetActive(true);
         }
 
         if (!isLandMarkArea && other.CompareTag("LandMarkArea"))
         {
-            //Debug.Log("안임");
             isLandMarkArea = true;
         }
     }
@@ -126,6 +122,9 @@ public class PlayerEventSystem : MonoBehaviour
             DialogSystem.instance.ResetDialog(); // Dialog UI 초기화
             npcDialogTrigger.StopCoroutine("StartDialog");
             nearObject = null;
+            
+            // 트리거가 발생 UI(E키)를 비활성화(출력X)한다.
+            interactionText.gameObject.SetActive(false);
         }
         else if (other.CompareTag("DialogObj"))
         {
@@ -134,6 +133,9 @@ public class PlayerEventSystem : MonoBehaviour
             DialogSystem.instance.ResetDialog(); // Dialog UI 초기화
             objDialogTrigger.StopCoroutine("StartDialog");
             nearObject = null;
+            
+            // 트리거가 발생 UI(E키)를 비활성화(출력X)한다.
+            interactionText.gameObject.SetActive(false);
         }
         else if (other.CompareTag("ShopNpc"))
         {
@@ -144,6 +146,9 @@ public class PlayerEventSystem : MonoBehaviour
             DialogSystem.instance.ResetDialog(); // Dialog UI 초기화
             npcDialogTrigger.StopCoroutine("StartDialog");
             nearObject = null;
+            
+            // 트리거가 발생 UI(E키)를 비활성화(출력X)한다.
+            interactionText.gameObject.SetActive(false);
         }
         else if (other.CompareTag("LandMarkObj"))
         {
@@ -152,11 +157,13 @@ public class PlayerEventSystem : MonoBehaviour
             DialogSystem.instance.ResetDialog(); // Dialog UI 초기화
             objDialogTrigger.StopCoroutine("StartDialog");
             nearObject = null;
+            
+            // 트리거가 발생 UI(E키)를 비활성화(출력X)한다.
+            interactionText.gameObject.SetActive(false);
         }
         
         if (isLandMarkArea && other.CompareTag("LandMarkArea"))
         {
-            //Debug.Log("나옴");
             isLandMarkArea = false;
         }
     }

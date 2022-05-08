@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InputSystem : MonoBehaviour
@@ -15,10 +13,16 @@ public class InputSystem : MonoBehaviour
     [SerializeField] private GameObject shopUICanvas;
     [SerializeField] private GameObject dialogUICanvas;
     
-    public static bool showOptionUI = false;
+    public bool showOptionUI;
+    private bool isOpenOptionUI;
+    private bool isOpenInventoryUI;
 
-    private bool isOpenOptionUI = false;
-    private bool isOpenInventoryUI = false;
+    private void Awake()
+    {
+        showOptionUI = false;
+        isOpenOptionUI = false;
+        isOpenInventoryUI = false;
+    }
 
     private void Update()
     {
