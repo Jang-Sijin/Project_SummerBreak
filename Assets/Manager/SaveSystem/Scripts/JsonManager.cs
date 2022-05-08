@@ -74,6 +74,12 @@ public class JsonManager : MonoBehaviour
         }
     }
 
+    public void ResetLoadData()
+    {
+        // 인게임에서 빠져나올 때 타이틀 씬에서 선택한 슬롯의 내용을 초기화한다.
+        SaveDataDictionary.selectSaveData = null;
+    }
+
     public void Save(string slotName, string saveName)
     {
         //foreach (var data in SaveDataDictionary.saveDataDictionary)

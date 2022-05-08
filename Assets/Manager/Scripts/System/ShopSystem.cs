@@ -164,31 +164,42 @@ public class ShopSystem : MonoBehaviour
         // selectShopItem
         if (selectShopItem != null)
         {
-            // 1.상점에서 판매하는 아이템이 0보다 클 경우(구매할 수 있는 조건) + 2.플레이어가 소지하고 있는 코인이 선택한 상점 슬롯의 아이템의 가격(코인)보다 크거나 같을 때 (구매할 수 있는 조건)
-            if ((selectShopItem.itemCount > 0) && (InventorySystem.instance.playerCoinCount >= selectShopItem.itemPrice))
+            foreach (var shopItemSlot in shopItemSlots)
             {
-                // 해당 아이템을 인벤토리에 추가한다. (1개 구매)
-                InventorySystem.instance.AcquireItem(selectShopItem.item, 1);
-                
-                // 플레이어가 소지중인 코인의 개수를 아이템의 가격만큼 감소한다.
-                InventorySystem.instance.playerCoinCount -= selectShopItem.itemPrice;
+                if (shopItemSlot.item.itemName == selectShopItem.item.itemName)
+                {
+                    // 1.상점에서 판매하는 아이템이 0보다 클 경우(구매할 수 있는 조건) + 2.플레이어가 소지하고 있는 코인이 선택한 상점 슬롯의 아이템의 가격(코인)보다 크거나 같을 때 (구매할 수 있는 조건)
+                    if ((shopItemSlot.itemCount > 0) && (InventorySystem.instance.playerCoinCount >= selectShopItem.itemPrice))
+                    {
+                        // 상점에서 해당 아이템의 판매 개수를 감소한다. 이후 상점 아이템 개수 텍스트를 갱신시킨다.
+                        shopItemSlot.SetSlotCount(-1);
 
-                // 플레이어 UI (코인의 개수 출력 이미지 텍스트)를 갱신한다. 
-                PlayerUI playerUI = GameManager.instance.PlayerUI.GetComponent<PlayerUI>();
-                playerUI.UpdatePlayerCoinCountUI();
+                        // 해당 아이템을 인벤토리에 추가한다. (1개 구매)
+                        InventorySystem.instance.AcquireItem(selectShopItem.item, 1);
 
-                // 활성화된 RequestUI를 비활성화 한다.
-                shopBuyRequestUI.SetActive(false);
-            }
-            else
-            {
-                // 1.아이템 개수 소진으로 아이템 구매 불가능. or 2.플레이어 소지 코인의 개수가 부족하여 아이템 구매 불가능.
-                
-                // 활성화된 RequestUI를 비활성화 한다.
-                shopBuyRequestUI.SetActive(false);
-                
-                // 활성화된 RequestFailUI를 활성화 한다.
-                shopBuyRequestFailUI.SetActive(true);
+                        // 플레이어가 소지중인 코인의 개수를 아이템의 가격만큼 감소한다.
+                        InventorySystem.instance.playerCoinCount -= selectShopItem.itemPrice;
+
+                        // 플레이어 UI (코인의 개수 출력 이미지 텍스트)를 갱신한다. 
+                        PlayerUI playerUI = GameManager.instance.PlayerUI.GetComponent<PlayerUI>();
+                        playerUI.UpdatePlayerCoinCountUI();
+
+                        // 활성화된 RequestUI를 비활성화 한다.
+                        shopBuyRequestUI.SetActive(false);
+                    }
+                    else
+                    {
+                        // 1.아이템 개수 소진으로 아이템 구매 불가능. or 2.플레이어 소지 코인의 개수가 부족하여 아이템 구매 불가능.
+
+                        // 활성화된 RequestUI를 비활성화 한다.
+                        shopBuyRequestUI.SetActive(false);
+
+                        // 활성화된 RequestFailUI를 활성화 한다.
+                        shopBuyRequestFailUI.SetActive(true);
+                    }
+
+                    break;
+                }
             }
         }
         else
