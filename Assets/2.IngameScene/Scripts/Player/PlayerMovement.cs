@@ -101,6 +101,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject QuaterTextObj;
 
     public bool slidingCheck = false;
+
+    public bool checkMonsterFollow = false;
     
     void Awake()
     {
@@ -380,6 +382,10 @@ public class PlayerMovement : MonoBehaviour
             d_fromWaterSurface = waterSurface - transform.position.y;
             d_fromWaterSurface = Mathf.Clamp(d_fromWaterSurface, float.MinValue, waterSurface);
             isSwim = d_fromWaterSurface >= swimLevel;
+            if (isSwim)
+            {
+                checkMonsterFollow = true;
+            }
         }
         else
         {
@@ -474,6 +480,12 @@ public class PlayerMovement : MonoBehaviour
 
             StartCoroutine(HealStamina(1.0f));
         }
+
+        if (isGrounded)
+        {
+            checkMonsterFollow = false;
+        }
+        
         //isGrounded = Physics.CheckSphere(transform.position, 0.1f, layerMask) || isSlope;
         if (!isClimbed && (inWater == false || isGrounded))
         {
