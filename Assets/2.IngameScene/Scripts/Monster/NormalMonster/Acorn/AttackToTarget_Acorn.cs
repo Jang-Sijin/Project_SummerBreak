@@ -9,12 +9,14 @@ public class AttackToTarget_Acorn : Node
     private PlayerMovement playerMovement;
     private Rigidbody _rigidbody;
     private MonsterManager _monsterManager;
-
+    private Transform _transform;
+    
     private float _attackTime = 0.5f;
     private float _attackCounter = 0.0f;
 
     public AttackToTarget_Acorn(Transform transform)
     {
+        _transform = transform;
         _monsterManager = transform.GetComponent<MonsterManager>();
         _animator = transform.GetComponent<Animator>();
         _rigidbody = transform.GetComponent<Rigidbody>();
@@ -39,6 +41,22 @@ public class AttackToTarget_Acorn : Node
         else
         {
             damageValue = SlimyeeBT.damageValue;
+        }
+        
+        if (_attackCounter >= _attackTime)
+        {
+            //Debug.Log("[이민호] 도토토리가 공격함");
+            
+            _animator.SetBool("Attack", true);
+            _animator.SetBool("Idle", false);
+            
+            _rigidbody.AddForce(_transform.forward * 10.0f,ForceMode.Impulse);
+            
+            bool targetIsDead = false;
+            if (!targetIsDead)
+            {
+                _attackCounter = 0f;
+            }
         }
         
         

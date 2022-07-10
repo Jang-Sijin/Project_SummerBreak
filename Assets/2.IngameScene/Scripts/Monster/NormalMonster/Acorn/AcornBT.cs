@@ -9,7 +9,7 @@ public class AcornBT : BTTree
     public static float damageValue = 10.0f;
     public static float runAwaySpeed = 2.0f;
     
-    public static float attackRange = 0.7f;
+    public static float attackRange = 1.5f;
     public static float fovRange = 6.0f;
     public static float guardFovRange = 10.0f;
     public static float socialityRange = 20.0f;
@@ -50,7 +50,8 @@ public class AcornBT : BTTree
             // Attack
             new Sequence(new List<Node>
             {
-               new CheckAttackRange(transform)
+               new CheckAttackRange(transform),
+               new AttackToTarget_Acorn(transform)
             }),
             // Follow
             new Sequence(new List<Node>
