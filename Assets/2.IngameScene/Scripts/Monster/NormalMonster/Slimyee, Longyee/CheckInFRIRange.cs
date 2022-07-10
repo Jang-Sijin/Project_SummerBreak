@@ -4,11 +4,9 @@ using BehaviorTree;
 public class CheckInFRIRange : Node
 {
     private Transform _transform;
-    private SlimyeeBT _slimyeeBt;
     public CheckInFRIRange(Transform transform)
     {
         _transform = transform;
-        _slimyeeBt = transform.GetComponent<SlimyeeBT>();
     }
 
     public override NodeState Evaluate()

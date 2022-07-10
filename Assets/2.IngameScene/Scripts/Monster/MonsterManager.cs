@@ -12,7 +12,9 @@ public class MonsterManager : MonoBehaviour
         green_slimyee,
         red_slimyee,
         green_longyee,
-        red_longyee
+        red_longyee,
+        acorn,
+        clam
     }
 
     public monsterType curMonsterType;
@@ -45,23 +47,22 @@ public class MonsterManager : MonoBehaviour
     private bool dead = false;
     void Start()
     {
-        // 01
-        if (curMonsterType == monsterType.green_slimyee || curMonsterType == monsterType.nightMonster)
+        // HP 01 
+        if (curMonsterType == monsterType.green_slimyee || curMonsterType == monsterType.nightMonster 
+                                                        || curMonsterType == monsterType.clam)
         {
             health = 10.0f;
-            //damgeValue = 10.0f;
         }
-        // 02
-        else if (curMonsterType == monsterType.green_longyee || curMonsterType == monsterType.red_slimyee)
+        // HP 02
+        else if (curMonsterType == monsterType.green_longyee || curMonsterType == monsterType.red_slimyee 
+                                                             || curMonsterType == monsterType.acorn)
         {
             health = 20.0f;
-            //damgeValue = 20.0f;
         }
-        // 03
+        // HP 03
         else if(curMonsterType == monsterType.red_longyee)
         {
             health = 30.0f;
-            //damgeValue = 30.0f;
         }
         // slimyee
         if (curMonsterType == monsterType.green_slimyee || curMonsterType == monsterType.red_slimyee 

@@ -28,9 +28,20 @@ public class CheckAttackRange : Node
             return state;
         }
         
-        float attackRange = _monsterManager.curMonsterType == MonsterManager.monsterType.nightMonster
-            ? NightMonsterBT.attackRange
-            : SlimyeeBT.attackRange;
+        float attackRange;
+        
+        if (_monsterManager.curMonsterType == MonsterManager.monsterType.nightMonster)
+        {
+            attackRange = NightMonsterBT.attackRange;
+        }
+        else if (_monsterManager.curMonsterType == MonsterManager.monsterType.acorn)
+        {
+            attackRange = AcornBT.attackRange;
+        }
+        else
+        {
+            attackRange = SlimyeeBT.attackRange;
+        }
         
         if (Vector3.Distance(_transform.position, target_transform.position) 
           <= attackRange)

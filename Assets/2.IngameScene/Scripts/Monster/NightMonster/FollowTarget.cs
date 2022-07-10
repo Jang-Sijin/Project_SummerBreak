@@ -19,9 +19,20 @@ public class FollowTarget : Node
 
     public override NodeState Evaluate()
     {
-        float speed = _monsterManager.curMonsterType == MonsterManager.monsterType.nightMonster
-            ? NightMonsterBT.speed
-            : SlimyeeBT.speed;
+        float speed = 0.0f;
+        
+        if (_monsterManager.curMonsterType == MonsterManager.monsterType.nightMonster)
+        {
+            speed = NightMonsterBT.speed;
+        }
+        else if (_monsterManager.curMonsterType == MonsterManager.monsterType.acorn)
+        {
+            speed = AcornBT.speed;
+        }
+        else
+        {
+            speed = SlimyeeBT.speed;
+        }
         
         Transform target_transform = (Transform) GetData("target");
         

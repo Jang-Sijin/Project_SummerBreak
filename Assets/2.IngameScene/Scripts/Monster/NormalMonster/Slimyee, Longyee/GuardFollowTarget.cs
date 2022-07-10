@@ -16,8 +16,6 @@ public class GuardFollowTarget : Node
 
     public override NodeState Evaluate()
     {
-        
-        
         target_transform = (Transform) GetData("target");
         
         if (Vector3.Distance(_transform.position, target_transform.position) > 0.1f)
@@ -29,7 +27,6 @@ public class GuardFollowTarget : Node
             _transform.position = Vector3.MoveTowards(_transform.position, target_transform.position,
                 SlimyeeBT.guardSpeed * Time.deltaTime);
             _transform.LookAt(target_transform.position);
-            
         }
         
         state = NodeState.RUNNING;

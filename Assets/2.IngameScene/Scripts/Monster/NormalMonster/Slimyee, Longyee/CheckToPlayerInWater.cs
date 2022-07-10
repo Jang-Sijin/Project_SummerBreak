@@ -4,11 +4,9 @@ using UnityEngine;
 public class CheckToPlayerInWater : Node
 {
     private PlayerMovement playerMovement;
-    private SlimyeeBT slimyeeBt;
 
     public CheckToPlayerInWater(Transform transform)
     {
-        slimyeeBt = transform.GetComponent<SlimyeeBT>();
     }
 
     public override NodeState Evaluate()
