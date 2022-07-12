@@ -50,9 +50,9 @@ public class AcornBT : BTTree
             // Attack
             new Sequence(new List<Node>
             {
-               new CheckAttackRange(transform),
-               new AttackToTarget_Acorn(transform)
-            }),
+                new CheckAttackRange(transform),
+                new AttackToTarget_Acorn(transform)
+                }),
             // Follow
             new Sequence(new List<Node>
             {
@@ -62,6 +62,7 @@ public class AcornBT : BTTree
             }),
             // Random Move
             new RandomMove_Acorn(transform)
+
         });
 
         return root;

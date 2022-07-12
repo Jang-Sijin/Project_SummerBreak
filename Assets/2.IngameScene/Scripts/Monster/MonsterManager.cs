@@ -40,11 +40,18 @@ public class MonsterManager : MonoBehaviour
 
     private bool inCameravisible = false;
 
+    [SerializeField] 
+    private Animator animator;
+
+    [SerializeField] 
+    private bool attacking = false;
     //status
     //private float damgeValue;
     //private float speed;
 
     private bool dead = false;
+    
+    
     void Start()
     {
         // HP 01 
@@ -76,6 +83,7 @@ public class MonsterManager : MonoBehaviour
             //speed = 3.0f;
         }
 
+        animator = GetComponent<Animator>();
         spawnPoint = this.transform.position;
         m_rigidbody = GetComponent<Rigidbody>();
         spawnLoot = GetComponent<SpawnLoot>();
@@ -87,10 +95,13 @@ public class MonsterManager : MonoBehaviour
 
     private void Update()
     {
+        attacking = animator.GetBool("Attack");
+        
         if (!dead)
         {
             MonsterVisible();
         }
+
     }
 
     private void MonsterVisible()
@@ -174,6 +185,11 @@ public class MonsterManager : MonoBehaviour
         }
     }
 
+    public void DashAttack()
+    {
+        
+    }
+
     public void MonsterHitStart()
     {
         bodyMaterial.SetFloat("RedLv", 0.1f);
@@ -185,7 +201,9 @@ public class MonsterManager : MonoBehaviour
         bodyMaterial.SetFloat("RedLv", 0.0f);
         eyeMaterial.SetFloat("RedLv",0.0f);
     }
-
+    
+    
+    
     private IEnumerator KnockCo(Rigidbody monster)
     {
         if (monster != null)
