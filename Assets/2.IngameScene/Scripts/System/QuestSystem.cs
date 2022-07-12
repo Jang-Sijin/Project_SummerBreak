@@ -9,7 +9,9 @@ public class QuestSystem : MonoBehaviour
 
     [Header("↓ Quest Accept Animation Canvas 오브젝트를 연결해주세요.")]
     [SerializeField] private GameObject questAcceptAnimeCanvas;
-    
+
+    public QuestAcceptTimeline _QuestAcceptTimeline { get; private set; }
+
     public int playerProgressQuest { get; set; }
 
     private List<QuestDBEntity> questList; // Excel QuestDBSheet의 DB리스트
@@ -34,6 +36,8 @@ public class QuestSystem : MonoBehaviour
     
     private void Start()
     {
+        _QuestAcceptTimeline = GetComponentInChildren<QuestAcceptTimeline>();
+        
         // Excel QuestDBSheet의 리스트들을 questList에 추가한다.
         questList = dialogDB.QuestDBSheet.ToList();
         
