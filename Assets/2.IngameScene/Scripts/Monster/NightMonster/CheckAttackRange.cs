@@ -38,6 +38,10 @@ public class CheckAttackRange : Node
         {
             attackRange = AcornBT.attackRange;
         }
+        else if (_monsterManager.curMonsterType == MonsterManager.monsterType.clam)
+        {
+            attackRange = ClamBT.attackRange;
+        }
         else
         {
             attackRange = SlimyeeBT.attackRange;

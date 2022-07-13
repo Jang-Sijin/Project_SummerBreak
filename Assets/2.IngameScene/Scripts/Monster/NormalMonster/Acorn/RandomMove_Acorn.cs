@@ -36,13 +36,13 @@ public class RandomMove_Acorn : Node
             {
                 _randomMoveCounter = 0.0f;
                 _acornBt.randomTargetGoal =
-                    _monsterManager.RandomPoint(SlimyeeBT.guardSpeed * 5) - _transform.position;
+                    _monsterManager.RandomPoint(AcornBT.guardSpeed * 5) - _transform.position;
                 _acornBt.randomTargetGoal.y = 0.0f;
                 _acornBt.randomTargetGoal = _acornBt.randomTargetGoal.normalized;
             }
 
             Rigidbody rigidbody = _transform.GetComponent<Rigidbody>();
-            rigidbody.velocity = _acornBt.randomTargetGoal * SlimyeeBT.guardSpeed;
+            rigidbody.velocity = _acornBt.randomTargetGoal * AcornBT.guardSpeed;
             Quaternion rot = Quaternion.LookRotation(_acornBt.randomTargetGoal);
 
             _transform.rotation = rot;

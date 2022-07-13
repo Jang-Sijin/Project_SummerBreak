@@ -5,7 +5,7 @@ using BehaviorTree;
 public class AcornBT : BTTree
 {
     public static float speed = 2f;
-    public static float guardSpeed = 1.0f;
+    public static float guardSpeed = 2.0f;
     public static float damageValue = 10.0f;
     public static float runAwaySpeed = 2.0f;
     

@@ -27,7 +27,7 @@ public class RunAwayTarget_Acorn : Node
         _animator.SetBool("Idle", false);
         _animator.SetBool("Hit", false);
         
-        state = NodeState.FAILURE;
+        state = NodeState.RUNNING;
         return state;
     }
 }

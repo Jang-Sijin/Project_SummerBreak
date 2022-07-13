@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 2297151150283947966}
   m_Layer: 0
   m_Name: NightMonster_Longyee
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -424,6 +424,8 @@ MonoBehaviour:
   checkHit: 0
   bodyRenderer: {fileID: 2297151148667744510}
   eyeRenderer: {fileID: 2297151148924340623}
+  animator: {fileID: 0}
+  attacking: 0
 --- !u!65 &2297151150283947964
 BoxCollider:
   m_ObjectHideFlags: 0

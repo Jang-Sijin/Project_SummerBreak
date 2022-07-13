@@ -46,15 +46,15 @@ public class AttackToTarget_Acorn : Node
         if (_attackCounter >= _attackTime)
         {
             //Debug.Log("[이민호] 도토토리가 공격함");
-            
-            _animator.SetBool("Attack", true);
-            _animator.SetBool("Idle", false);
-            
-            _rigidbody.AddForce(_transform.forward * 10.0f,ForceMode.Impulse);
-            
+            if (_monsterManager.attacking == false)
+            {
+                _monsterManager.DashAttack();
+            }
+
             bool targetIsDead = false;
             if (!targetIsDead)
             {
+                _monsterManager.attacking = false;
                 _attackCounter = 0f;
             }
         }

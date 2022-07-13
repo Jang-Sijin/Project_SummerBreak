@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -43,14 +44,15 @@ public class MonsterManager : MonoBehaviour
     [SerializeField] 
     private Animator animator;
 
-    [SerializeField] 
-    private bool attacking = false;
+    public bool attacking = false;
     //status
     //private float damgeValue;
     //private float speed;
 
     private bool dead = false;
-    
+
+
+    private PlayerMovement _playerMovement;
     
     void Start()
     {
@@ -82,28 +84,32 @@ public class MonsterManager : MonoBehaviour
         {
             //speed = 3.0f;
         }
-
+        
         animator = GetComponent<Animator>();
         spawnPoint = this.transform.position;
         m_rigidbody = GetComponent<Rigidbody>();
         spawnLoot = GetComponent<SpawnLoot>();
         bodyMaterial = bodyRenderer.material;
         eyeMaterial = eyeRenderer.material;
+        _playerMovement = 
+            GameManager.instance.playerGameObject.GetComponent<PlayerMovement>();
         bodyMaterial.SetFloat("RedLv", 0.0f);
         eyeMaterial.SetFloat("RedLv",0.0f);
     }
 
     private void Update()
     {
-        attacking = animator.GetBool("Attack");
         
         if (!dead)
         {
             MonsterVisible();
         }
 
+        
     }
 
+    
+    
     private void MonsterVisible()
     {
         //Camera mainCamera = Camera.main;
@@ -164,7 +170,19 @@ public class MonsterManager : MonoBehaviour
         //Gizmos.DrawWireSphere(this.transform.position,1.0f);
         
     }
-    
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")
+                && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.95f)
+            {
+                _playerMovement.HitStart(AcornBT.damageValue, m_rigidbody);
+            }
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Equipment_Attack"))
@@ -187,7 +205,20 @@ public class MonsterManager : MonoBehaviour
 
     public void DashAttack()
     {
-        
+        attacking = true;
+        animator.SetBool("Attack", true);
+        animator.SetBool("Idle", false);
+
+        StartCoroutine(AttackCo(m_rigidbody));
+    }
+
+    private IEnumerator AttackCo(Rigidbody monster)
+    {
+        if (monster != null)
+        {
+            yield return new WaitForSeconds(0.5f);
+            monster.AddForce(transform.forward * 10.0f, ForceMode.Impulse);
+        }
     }
 
     public void MonsterHitStart()
