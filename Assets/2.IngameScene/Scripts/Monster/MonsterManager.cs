@@ -51,6 +51,9 @@ public class MonsterManager : MonoBehaviour
 
     private bool dead = false;
 
+    
+    public GameObject bullet;
+    public GameObject bulletTransform;
 
     private PlayerMovement _playerMovement;
     
@@ -108,8 +111,6 @@ public class MonsterManager : MonoBehaviour
         
     }
 
-    
-    
     private void MonsterVisible()
     {
         //Camera mainCamera = Camera.main;
@@ -152,7 +153,7 @@ public class MonsterManager : MonoBehaviour
         
         Vector3 randomPoint = spawnPoint + Random.insideUnitSphere * range;
 
-        Debug.DrawRay(randomPoint, Vector3.up, Color.red, 1);
+        //Debug.DrawRay(randomPoint, Vector3.up, Color.red, 1);
         StartCoroutine(moveCoolTime());
         
         return randomPoint;
@@ -202,6 +203,14 @@ public class MonsterManager : MonoBehaviour
             StartCoroutine(KnockCo(m_rigidbody));
         }
     }
+    private IEnumerator KnockCo(Rigidbody monster)
+    {
+        if (monster != null)
+        {
+            yield return new WaitForSeconds(knockTime);
+            monster.velocity = Vector3.zero;
+        }
+    }
 
     public void DashAttack()
     {
@@ -212,6 +221,13 @@ public class MonsterManager : MonoBehaviour
         StartCoroutine(AttackCo(m_rigidbody));
     }
 
+    public void ShootBullet()
+    {
+        GameObject newBullet = Instantiate(bullet, bulletTransform.transform.position, transform.rotation);
+        Rigidbody newBulletRigid = newBullet.GetComponent<Rigidbody>();
+        newBulletRigid.AddForce(transform.forward * 5.0f, ForceMode.Impulse);
+    }
+    
     private IEnumerator AttackCo(Rigidbody monster)
     {
         if (monster != null)
@@ -235,12 +251,4 @@ public class MonsterManager : MonoBehaviour
     
     
     
-    private IEnumerator KnockCo(Rigidbody monster)
-    {
-        if (monster != null)
-        {
-            yield return new WaitForSeconds(knockTime);
-            monster.velocity = Vector3.zero;
-        }
-    }
 }

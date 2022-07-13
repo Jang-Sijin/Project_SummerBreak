@@ -141,7 +141,7 @@ Transform:
   m_GameObject: {fileID: 5877909038743054352}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_Children:
   - {fileID: 172906256198180384}
   - {fileID: 7086165835212494176}
@@ -218,6 +218,10 @@ MonoBehaviour:
   checkHit: 0
   bodyRenderer: {fileID: 4200936590498979598}
   eyeRenderer: {fileID: 4996140226941124734}
+  animator: {fileID: 0}
+  attacking: 0
+  bullet: {fileID: 0}
+  bulletTransform: {fileID: 0}
 --- !u!114 &8090094087283445622
 MonoBehaviour:
   m_ObjectHideFlags: 0

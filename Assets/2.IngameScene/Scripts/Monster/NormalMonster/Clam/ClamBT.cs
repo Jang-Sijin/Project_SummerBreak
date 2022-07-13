@@ -8,7 +8,7 @@ public class ClamBT : BTTree
     
     public static float damageValue = 10.0f;
     
-    public static float attackRange = 1.5f;
+    public static float attackRange = 10.0f;
     public static float fovRange = 6.0f;
     public static float guardFovRange = 10.0f;
     public static float socialityRange = 20.0f;
@@ -36,7 +36,8 @@ public class ClamBT : BTTree
             // Attack
             new Sequence(new List<Node>
             {
-                new CheckAttackRange(transform)
+                new CheckAttackRange(transform),
+                new AttackToTarget_Clam(transform)
             }),
             // FOV
             new Sequence(new List<Node>

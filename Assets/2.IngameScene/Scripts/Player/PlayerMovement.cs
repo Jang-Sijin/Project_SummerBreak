@@ -103,6 +103,8 @@ public class PlayerMovement : MonoBehaviour
     public bool slidingCheck = false;
 
     public bool checkMonsterFollow = false;
+
+    private bool hitClam = false;
     
     void Awake()
     {
@@ -688,8 +690,13 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(HitBlink());
             Vector3 differnce = transform.position - monsterRigidbody.transform.position;
             differnce = differnce.normalized * 5.0f;
-            m_rigidbody.AddForce(differnce,ForceMode.Impulse);
+            m_rigidbody.AddForce(differnce, ForceMode.Impulse);
         }
+    }
+
+    public void HitToClam()
+    {
+        hitClam = true;
     }
     
     IEnumerator HitInvincible()
