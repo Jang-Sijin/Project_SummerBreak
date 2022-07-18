@@ -42,6 +42,7 @@ public class QuestMenu : MonoBehaviour
             _questMenuSlotList.Add(entity.QuestID, createSlot);
             createSlot.name = questSlotPrefabResources.name; // 오브젝트명의 (Clone) 삭제
             createSlot.transform.SetParent(_questSlotListPanel, true); // _questSlotListPanel에 Slot을 추가
+            createSlot.transform.SetAsFirstSibling(); // 생성된 오브젝트UI를 가장 위에 추가되도록 변경해준다. 
 
             // 퀘스트 ID와 Title이름으로 슬롯을 구성한다.
             QuestSlot createQuestSlot = createSlot.GetComponent<QuestSlot>();
