@@ -45,7 +45,8 @@ public struct ObjDialogDBEntity
 public struct QuestDBEntity
 {
 	public int QuestID;
-	public int DialogID;
+	public int StartDialogID;
+	public int EndDialogID;
 	public int QuestType;
 	public string NpcName;
 	public string QuestTitle;

@@ -12,7 +12,9 @@ public class DialogSystem : MonoBehaviour
 	[SerializeField] private bool isAutoStart = true; // 자동 시작 여부
 	
 	[Header("↓NpcDialogSystem 오브젝트를 연결해주세요.")]
-	[SerializeField] private DialogUiController dialogUi; // 대화창(DialogCanvas) UI 컨트롤
+	[SerializeField] private DialogUiController _dialogUiController; // 대화창(DialogCanvas) UI 컨트롤
+
+	public DialogUiController DialogUiController { get { return _dialogUiController; } }
 
 	private bool _isFirst = true; // 최초 1회만 호출하기 위한 변수
 	private int _currentDialogIndex = -1; // 현재 대사 순번
@@ -40,7 +42,7 @@ public class DialogSystem : MonoBehaviour
 
 	private void Setup()
 	{
-		dialogUi.Init();
+		_dialogUiController.Init();
 	}
 
 	#region NPC Dialog
@@ -71,10 +73,10 @@ public class DialogSystem : MonoBehaviour
 
 				// 타이핑 효과를 중지하고, 현재 대사 전체를 출력한다
 				StopCoroutine("OnTypingText");
-				dialogUi.dialogText.text = dialogList[_currentDialogIndex].Dialog;
+				_dialogUiController.dialogText.text = dialogList[_currentDialogIndex].Dialog;
 
 				// 대사가 완료되었을 때 출력되는 커서 활성화
-				dialogUi.SetActiveArrowObject(true);
+				_dialogUiController.SetActiveArrowObject(true);
 
 				return false;
 			}
@@ -86,8 +88,7 @@ public class DialogSystem : MonoBehaviour
 			}
 			else
 			{
-				// 대사가 더 이상 없을 경우 확인 버튼 또는 퀘스트 수락, 퀘스트 거절 버튼을 활성화
-				dialogUi.SetActiveButtonObjects(true);
+				// 대사가 더 이상 없을 경우 true 반환
 				return true;
 			}
 		}
@@ -100,16 +101,16 @@ public class DialogSystem : MonoBehaviour
 		OpenDialogUi();
 		
 		// 2. 대사가 시작될 때는 Arrow UI가 나오지 않도록 설정
-		dialogUi.SetActiveArrowObject(false);
+		_dialogUiController.SetActiveArrowObject(false);
 		
 		// 3. 다음 대사를 진행할 수 있도록 Index증가
 		_currentDialogIndex++;
 
 		// 4. 현재 화자 이름 텍스트 설정
-		dialogUi.nameText.text = dialogList[_currentDialogIndex].Name;
+		_dialogUiController.nameText.text = dialogList[_currentDialogIndex].Name;
 		
 		// 5. 현재 화자의 대사 텍스트 설정
-		dialogUi.dialogText.text = dialogList[_currentDialogIndex].Dialog;
+		_dialogUiController.dialogText.text = dialogList[_currentDialogIndex].Dialog;
 		
 		// 6. 타이핑 효과 코루틴 실행
 		StartCoroutine("OnTypingText", dialogList);
@@ -123,7 +124,7 @@ public class DialogSystem : MonoBehaviour
 		// 텍스트의 끝까지 // 텍스트를 한글자씩 타이핑치듯 재생
 		while ( index <= dialogList[_currentDialogIndex].Dialog.Length )
 		{
-			dialogUi.dialogText.text = dialogList[_currentDialogIndex].Dialog.Substring(0, index);
+			_dialogUiController.dialogText.text = dialogList[_currentDialogIndex].Dialog.Substring(0, index);
 
 			index++;
 		
@@ -133,7 +134,7 @@ public class DialogSystem : MonoBehaviour
 		_isTypingEffect = false;
 
 		// 대사가 완료되었을 때 출력되는 화살표 애니메이션 오브젝트 활성화
-		dialogUi.SetActiveArrowObject(true);
+		_dialogUiController.SetActiveArrowObject(true);
 	}
 
 	#endregion
@@ -163,10 +164,10 @@ public class DialogSystem : MonoBehaviour
 
 				// 타이핑 효과를 중지하고, 현재 대사 전체를 출력한다
 				StopCoroutine("OnTypingText");
-				dialogUi.dialogText.text = dialogList[_currentDialogIndex].ObjectDialog;
+				_dialogUiController.dialogText.text = dialogList[_currentDialogIndex].ObjectDialog;
 
 				// 대사가 완료되었을 때 출력되는 커서 활성화
-				dialogUi.SetActiveArrowObject(true);
+				_dialogUiController.SetActiveArrowObject(true);
 
 				return false;
 			}
@@ -179,7 +180,7 @@ public class DialogSystem : MonoBehaviour
 			else
 			{
 				// 대사가 더 이상 없을 경우 확인 버튼 또는 퀘스트 수락, 퀘스트 거절 버튼을 활성화
-				dialogUi.SetActiveButtonObjects(true);
+				// _dialogUiController.SetActiveButtonObjects(true);
 				CloseObjDialogUi();
 				return true;
 			}
@@ -193,16 +194,16 @@ public class DialogSystem : MonoBehaviour
 		OpenObjDialogUi();
 		
 		// 2. 대사가 시작될 때는 Arrow UI가 나오지 않도록 설정
-		dialogUi.SetActiveArrowObject(false);
+		_dialogUiController.SetActiveArrowObject(false);
 		
 		// 3. 다음 대사를 진행할 수 있도록 Index증가
 		_currentDialogIndex++;
 
 		// 4. 현재 화자 이름 텍스트 설정
-		dialogUi.nameText.text = dialogList[_currentDialogIndex].Name;
+		_dialogUiController.nameText.text = dialogList[_currentDialogIndex].Name;
 		
 		// 5. 현재 화자의 대사 텍스트 설정
-		dialogUi.dialogText.text = dialogList[_currentDialogIndex].ObjectDialog;
+		_dialogUiController.dialogText.text = dialogList[_currentDialogIndex].ObjectDialog;
 		
 		// 6. 타이핑 효과 코루틴 실행
 		StartCoroutine("OnTypingText", dialogList);
@@ -216,7 +217,7 @@ public class DialogSystem : MonoBehaviour
 		// 텍스트의 끝까지 // 텍스트를 한글자씩 타이핑치듯 재생
 		while ( index <= dialogList[_currentDialogIndex].ObjectDialog.Length )
 		{
-			dialogUi.dialogText.text = dialogList[_currentDialogIndex].ObjectDialog.Substring(0, index);
+			_dialogUiController.dialogText.text = dialogList[_currentDialogIndex].ObjectDialog.Substring(0, index);
 
 			index++;
 		
@@ -226,7 +227,7 @@ public class DialogSystem : MonoBehaviour
 		_isTypingEffect = false;
 
 		// 대사가 완료되었을 때 출력되는 화살표 애니메이션 오브젝트 활성화
-		dialogUi.SetActiveArrowObject(true);
+		_dialogUiController.SetActiveArrowObject(true);
 	}
 
 	#endregion
@@ -234,10 +235,10 @@ public class DialogSystem : MonoBehaviour
 	private void OpenDialogUi()
 	{
 		// 캔버스가 활성화되어 있지 않으면 실행
-		if (dialogUi.npcDialogCanvas.gameObject.activeSelf == false)
+		if (_dialogUiController.npcDialogCanvas.gameObject.activeSelf == false)
 		{
-			dialogUi.CanvasOpen();
-			dialogUi.SetActiveTextObjects(true);
+			_dialogUiController.CanvasOpen();
+			_dialogUiController.SetActiveTextObjects(true);
 			
 			// NPC 애니메이션 시작, 시네마신 카메라 on
 			if(_getNpcAnimator != null)
@@ -250,20 +251,20 @@ public class DialogSystem : MonoBehaviour
 	private void OpenObjDialogUi()
 	{
 		// 캔버스가 활성화되어 있지 않으면 실행
-		if (dialogUi.npcDialogCanvas.gameObject.activeSelf == false)
+		if (_dialogUiController.npcDialogCanvas.gameObject.activeSelf == false)
 		{
-			dialogUi.CanvasOpen();
-			dialogUi.SetActiveTextObjects(true);
+			_dialogUiController.CanvasOpen();
+			_dialogUiController.SetActiveTextObjects(true);
 		}
 	}
 
 	public void CloseDialogUi()
 	{
 		// 캔버스가 활성화되어 있으면 UI를 비활성화 되도록 변경
-		if (dialogUi.npcDialogCanvas.gameObject.activeSelf == true)
+		if (_dialogUiController.npcDialogCanvas.gameObject.activeSelf == true)
 		{
-			dialogUi.CanvasClose();
-			dialogUi.SetActiveTextObjects(false);
+			_dialogUiController.CanvasClose();
+			_dialogUiController.SetActiveTextObjects(false);
 			
 			// NPC 애니메이션 종료, 시네마신 카메라 off
 			if(_getNpcAnimator != null)
@@ -276,10 +277,10 @@ public class DialogSystem : MonoBehaviour
 	public void CloseObjDialogUi()
 	{
 		// 캔버스가 활성화되어 있으면 UI를 비활성화 되도록 변경
-		if (dialogUi.npcDialogCanvas.gameObject.activeSelf == true)
+		if (_dialogUiController.npcDialogCanvas.gameObject.activeSelf == true)
 		{
-			dialogUi.CanvasClose();
-			dialogUi.SetActiveTextObjects(false);
+			_dialogUiController.CanvasClose();
+			_dialogUiController.SetActiveTextObjects(false);
 		}
 	}
 

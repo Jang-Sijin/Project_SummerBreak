@@ -17,12 +17,13 @@ public class NpcDialogTrigger : MonoBehaviour
     private List<NpcDialogDBEntity> npcDialogList; // ExcelDB에 있는 NPC 다이얼로그 리스트
     public int SaveDialogID { get; set; } // 퀘스트 시작하기 전 DialogID
 
-    [Header("↓[Debug] 대화 목록 확인용 리스트")]
+    // [Header("↓[Debug] 대화 목록 확인용 리스트")]
     // [SerializeField] private SortedDictionary<int, NpcDialogDBEntity> dialogDBList; // 대화 출력을 원하는 퀘스트ID 선택
     // [SerializeField] private List<NpcDialogDBEntity> useDialogList; // 선택한 퀘스트ID의 대사 목록 리스트
     // [SerializeField] private SortedDictionary<int, NpcDialogDBEntity> useDialogList; // 선택한 퀘스트ID의 대사 목록 리스트
 
-    private bool isExitDialog = true; // false: 다이얼로그 실행중, true: 다이얼로그 종료됨.
+    public bool IsExitDialog { get { return _isExitDialog; } }
+    private bool _isExitDialog = true; // false: 다이얼로그 실행중, true: 다이얼로그 종료됨.
 
     private void Awake()
     {
@@ -51,28 +52,77 @@ public class NpcDialogTrigger : MonoBehaviour
 
     private IEnumerator StartDialog()
     { 
-        if (QuestSystem.instance.ReturnProgressQuestDialogID() % dialogID < 100) // 1. 현재 진행중인 퀘스트를 가지고 있는 NPC일 경우
+        // 1. 퀘스트 대화 (현재 진행중인 퀘스트를 가지고 있는 NPC일 경우)
+        if (QuestSystem.instance.IsProgressQuest == false && QuestSystem.instance.ReturnProgressQuestDB().StartDialogID % dialogID < 100 ||
+            (QuestSystem.instance.IsProgressQuest == true && QuestSystem.instance.ReturnProgressQuestDB().EndDialogID % dialogID < 100))
         {
             QuestSystem.instance.PrintProgressQuestDB();
-            
-            yield return new WaitUntil(() =>
-                isExitDialog = DialogSystem.instance.UpdateDialog(npcDialogList
-                    .Where(dialogDB => dialogDB.DialogID == QuestSystem.instance.ReturnProgressQuestDialogID()).ToList(), npcAnimator, npcVirtualCameraObj));
-            
+            // 퀘스트 다이얼로그가 시작된 상태로 변경한다.
+            QuestSystem.instance.IsQuestDialog = false;
+
+            // 시작 퀘스트일 때
+            if (QuestSystem.instance.IsProgressQuest == false &&
+                QuestSystem.instance.ReturnProgressQuestDB().StartDialogID % dialogID < 100)
+            {
+                yield return new WaitUntil(() =>
+                    _isExitDialog = DialogSystem.instance.UpdateDialog(npcDialogList
+                            .Where(dialogDB => dialogDB.DialogID == QuestSystem.instance.ReturnProgressQuestDB().StartDialogID).ToList(), npcAnimator, npcVirtualCameraObj));
+            }
+            // 완료 퀘스트일 때
+            else if (QuestSystem.instance.IsProgressQuest == true &&
+                     QuestSystem.instance.ReturnProgressQuestDB().EndDialogID % dialogID < 100)
+            {
+                yield return new WaitUntil(() =>
+                    _isExitDialog = DialogSystem.instance.UpdateDialog(npcDialogList
+                        .Where(dialogDB => dialogDB.DialogID == QuestSystem.instance.ReturnProgressQuestDB().EndDialogID).ToList(), npcAnimator, npcVirtualCameraObj));
+            }
+
             // ★다음 다이얼 로그를 출력한다.
-            //if (isExitDialog) // true: 대화 끝남, false: 대화중
-            //{
-            //    SetNextDialog();
-            //}
+           if (_isExitDialog) // true: 대화 끝남, false: 대화중
+           {
+               if (QuestSystem.instance.IsProgressQuest == false &&
+                   QuestSystem.instance.ReturnProgressQuestDB().StartDialogID % dialogID < 100)
+               {
+                   QuestSystem.instance.IsProgressQuest = true;
+                   
+                   // 퀘스트 수락 버튼 UI(수락)버튼 출력
+                   DialogSystem.instance.DialogUiController.SetActiveButtonObjects(true);
+               }
+               else if (QuestSystem.instance.IsProgressQuest == true &&
+                        QuestSystem.instance.ReturnProgressQuestDB().EndDialogID % dialogID < 100)
+               {
+                   QuestSystem.instance.IsProgressQuest = false;
+
+                   // 퀘스트 클리어 처리.
+                   QuestSystem.instance.CompleteQuest();
+                   
+                   // 다음 퀘스트ID를 위한 셋팅을 수행한다.
+                   QuestSystem.instance.SetNextQuest();
+                   
+                   // 퀘스트 클리어 시 수락 버튼이 안나오고 다이얼 로그 UI가 종료되도록 한다.  
+                   DialogSystem.instance.CloseDialogUi();
+               }
+           }
         }
         else // 2.일반 대화
         {
             // setQuestID에 해당되는 Dialog 리스트를 매개변수로 보낸다. // Linq
             yield return new WaitUntil(() =>
-                isExitDialog = DialogSystem.instance.UpdateDialog(npcDialogList
+                _isExitDialog = DialogSystem.instance.UpdateDialog(npcDialogList
                     .Where(dialogDB => dialogDB.DialogID == SaveDialogID).ToList(), npcAnimator, npcVirtualCameraObj));
             
-            // print($"isExitDialog:{isExitDialog}");
+            if (_isExitDialog) // true: 대화 끝남, false: 대화중
+            {
+                // 일반 대화는 모든 대화 출력 후 다이얼로그 UI를 SetActive false를 해준다.
+                // DialogSystem.instance.CloseObjDialogUi();
+                DialogSystem.instance.CloseDialogUi();
+                
+                // [일반 대화 예외 이벤트] - 상점 NPC
+                if (PlayerEventSystem.instance.GetNearGameObject().CompareTag("ShopNpc")) // 상호작용한 NPC가 ShopNpc일 경우
+                {
+                    ShopSystem.instance.OpenShopCanvas();
+                }
+            }
         }
     }
     
@@ -84,10 +134,5 @@ public class NpcDialogTrigger : MonoBehaviour
         // 저장된 기본 다이얼로그 ID값을 1증가시켜 다음 다이얼로그ID로 변경해준다.(퀘스트 다이얼로그 제외)
         if(findCount != 0 && SaveDialogID % dialogID < 90)
             SaveDialogID++;
-    }
-
-    public bool GetCheckExitDialog()
-    {
-        return isExitDialog;
     }
 }
