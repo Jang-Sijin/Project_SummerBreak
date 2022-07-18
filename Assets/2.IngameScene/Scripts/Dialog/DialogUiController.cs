@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using TMPro;
 using UnityEngine.UI;
 
@@ -12,11 +8,10 @@ public class DialogUiController : MonoBehaviour
 	[Header("[다이얼로그 UI]")]
 	[Header("다이얼로그가 끝난 후 이벤트 등록은 해당 스크립트에 구현")]
 	public Canvas npcDialogCanvas;				// 캔버스 UI
-	public TextMeshProUGUI nameText;		// 현재 대사중인 캐릭터 이름 출력 Text UI
-	public TextMeshProUGUI dialogText;	// 대화창 Image UI
+	public TextMeshProUGUI nameText;			// 현재 대사중인 캐릭터 이름 출력 Text UI
+	public TextMeshProUGUI dialogText;			// 대화창 Image UI
 	public GameObject objectArrow;				// 대사가 완료되었을 때 출력되는 커서 오브젝트
 	public Button yesBtn;						// 퀘스트 수락
-	public Button noBtn;						// 퀘스트 거절
 
 #if UNITY_EDITOR
 	//private void OnValidate()
@@ -38,7 +33,6 @@ public class DialogUiController : MonoBehaviour
 		Debug.Assert(dialogText, $"dialogText is null");
 		Debug.Assert(objectArrow, $"objectArrow is null");
 		Debug.Assert(yesBtn, $"yesBtn is null");
-		Debug.Assert(noBtn, $"noBtn is null");
 	}
 
 	public void Init()
@@ -52,7 +46,6 @@ public class DialogUiController : MonoBehaviour
 		SetActiveTextObjects(false);
 		
 		yesBtn.onClick.AddListener(ClickAcceptButton);
-		noBtn.onClick.AddListener(ClickCancelButton);
 	}
 
 	public void SetActiveTextObjects(bool visible)
@@ -69,7 +62,6 @@ public class DialogUiController : MonoBehaviour
 	public void SetActiveButtonObjects(bool visible)
 	{
 		yesBtn.gameObject.SetActive(visible);
-		noBtn.gameObject.SetActive(visible);
 	}
 	
 	public void CanvasOpen()
@@ -122,7 +114,7 @@ public class DialogUiController : MonoBehaviour
 		//AddQeust 해서
 		//Quest ID만 추가시켜주면
 		//Type
-
+		
 		// Monster 
 		// Event _dieEvent;
 		// _dieEvent();
@@ -142,15 +134,18 @@ public class DialogUiController : MonoBehaviour
 
 	public void ClickAcceptButton()
 	{
-		// 다이얼로그 yes 버튼을 눌렀을 경우 // 대화 종료 이벤트 발생
-		if (PlayerEventSystem.instance.GetNearGameObject().CompareTag("ShopNpc"))
+		// 퀘스트 다이얼로그가 끝난 뒤 수락 버튼을 눌렀을 경우 AcceptQuest 함수를 수행한다.
+		if (QuestSystem.instance.IsProgressQuest == true)
 		{
-			ShopSystem.instance.OpenShopCanvas();
+			// 퀘스트 받을 때
+			QuestSystem.instance.AcceptQuest();
 		}
 	}
 
 	public void ClickCancelButton()
 	{
+		// [No 버튼는 기획 설계상 삭제되었습니다. 다음 업데이트에서 해당 함수 삭제 필요.]
 		// 다이얼로그 No 버튼을 눌렀을 경우 // 대화 종료 이벤트 발생
+		// QuestSystem.instance.IsQuestDialog = false;
 	}
 }

@@ -3963,7 +3963,6 @@ Transform:
   - {fileID: 1853269398}
   - {fileID: 1196077467}
   - {fileID: 1311321461}
-  - {fileID: 1134616335}
   - {fileID: 2134355979}
   - {fileID: 505005649}
   m_Father: {fileID: 0}
@@ -5690,6 +5689,10 @@ PrefabInstance:
       value: 3.28
       objectReference: {fileID: 0}
     - target: {fileID: 6846563412476332074, guid: edfdf2e80a7564347b254198d471add9, type: 3}
+      propertyPath: dialogID
+      value: 13000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6846563412476332074, guid: edfdf2e80a7564347b254198d471add9, type: 3}
       propertyPath: npcVirtualCameraObj
       value: 
       objectReference: {fileID: 1618937990}
@@ -6360,7 +6363,7 @@ Transform:
   - {fileID: 737423837}
   - {fileID: 559224479}
   m_Father: {fileID: 1234391933}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &307217582
 PrefabInstance:
@@ -11111,7 +11114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144715926165309655, guid: 6bde89914c853414b90bf1fad8794e17, type: 3}
       propertyPath: dialogID
-      value: 10003
+      value: 11100
       objectReference: {fileID: 0}
     - target: {fileID: 9144715926165309655, guid: 6bde89914c853414b90bf1fad8794e17, type: 3}
       propertyPath: npcAnimator
@@ -11703,7 +11706,7 @@ Transform:
   - {fileID: 2081124129}
   - {fileID: 255644628}
   m_Father: {fileID: 173792728}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &505766187 stripped
 Transform:
@@ -12091,7 +12094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3889947665387540063, guid: 9ce725e0f6357224bad335432f1be939, type: 3}
       propertyPath: dialogID
-      value: 10009
+      value: 11500
       objectReference: {fileID: 0}
     - target: {fileID: 3889947665387540063, guid: 9ce725e0f6357224bad335432f1be939, type: 3}
       propertyPath: npcAnimator
@@ -12720,36 +12723,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8521117551283200676, guid: 9ce725e0f6357224bad335432f1be939, type: 3}
   m_PrefabInstance: {fileID: 510776548}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &512120943
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 512120944}
-  m_Layer: 0
-  m_Name: Item (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &512120944
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 512120943}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 122.09209, y: 14.997252, z: 115.56389}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1234391933}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &512191312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13898,7 +13871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 282859294353292507, guid: 8285a05900c467b42a21de92211a6ac4, type: 3}
       propertyPath: dialogID
-      value: 10011
+      value: 11600
       objectReference: {fileID: 0}
     - target: {fileID: 282859294353292507, guid: 8285a05900c467b42a21de92211a6ac4, type: 3}
       propertyPath: npcAnimator
@@ -16991,7 +16964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5084623462928740228, guid: 66ef83f38098cb74a837d6a9d038967e, type: 3}
       propertyPath: dialogID
-      value: 10008
+      value: 11400
       objectReference: {fileID: 0}
     - target: {fileID: 5084623462928740228, guid: 66ef83f38098cb74a837d6a9d038967e, type: 3}
       propertyPath: npcAnimator
@@ -19886,7 +19859,7 @@ Transform:
   - {fileID: 487879894}
   - {fileID: 1520129107}
   m_Father: {fileID: 1234391933}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &777497421
 PrefabInstance:
@@ -22487,7 +22460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 899030831081843395, guid: f6ef5551177f6ed408e7c4993703e6df, type: 3}
       propertyPath: dialogID
-      value: 10012
+      value: 11700
       objectReference: {fileID: 0}
     - target: {fileID: 899030831081843395, guid: f6ef5551177f6ed408e7c4993703e6df, type: 3}
       propertyPath: npcAnimator
@@ -24168,7 +24141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4729403412115257121, guid: 37ab59afe6f97574fbe879f6ddf8ad48, type: 3}
       propertyPath: dialogID
-      value: 10019
+      value: 14000
       objectReference: {fileID: 0}
     - target: {fileID: 4729403412115257121, guid: 37ab59afe6f97574fbe879f6ddf8ad48, type: 3}
       propertyPath: npcAnimator
@@ -25535,7 +25508,7 @@ GameObject:
   m_Component:
   - component: {fileID: 990834819}
   m_Layer: 0
-  m_Name: ALL_ITEM
+  m_Name: All_Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27524,7 +27497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144715926165309655, guid: 6bde89914c853414b90bf1fad8794e17, type: 3}
       propertyPath: dialogID
-      value: 10004
+      value: 11200
       objectReference: {fileID: 0}
     - target: {fileID: 9144715926165309655, guid: 6bde89914c853414b90bf1fad8794e17, type: 3}
       propertyPath: npcAnimator
@@ -29152,7 +29125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2993910692407695876, guid: 07b8a68afe597134c9e76af4d577b423, type: 3}
       propertyPath: dialogID
-      value: 10005
+      value: 11300
       objectReference: {fileID: 0}
     - target: {fileID: 2993910692407695876, guid: 07b8a68afe597134c9e76af4d577b423, type: 3}
       propertyPath: npcAnimator
@@ -31208,36 +31181,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3a831f5915417343ba17d1d09eb1ec0, type: 3}
---- !u!1 &1134616334
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1134616335}
-  m_Layer: 0
-  m_Name: Item (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1134616335
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1134616334}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 125.19484, y: 9.998167, z: 151.81544}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 173792728}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1144553556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34203,7 +34146,6 @@ Transform:
   - {fileID: 49309335}
   - {fileID: 628132188}
   - {fileID: 2091531400}
-  - {fileID: 512120944}
   - {fileID: 306016962}
   - {fileID: 763057575}
   m_Father: {fileID: 0}
@@ -34477,6 +34419,10 @@ PrefabInstance:
     - target: {fileID: 277611401181702709, guid: edfdf2e80a7564347b254198d471add9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6846563412476332074, guid: edfdf2e80a7564347b254198d471add9, type: 3}
+      propertyPath: dialogID
+      value: 12000
       objectReference: {fileID: 0}
     - target: {fileID: 6846563412476332074, guid: edfdf2e80a7564347b254198d471add9, type: 3}
       propertyPath: npcVirtualCameraObj
@@ -35697,7 +35643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6503156787787569952, guid: 3c4618d243399e74faab6b56245c5cc2, type: 3}
       propertyPath: dialogID
-      value: 10017
+      value: 12100
       objectReference: {fileID: 0}
     - target: {fileID: 6503156787787569952, guid: 3c4618d243399e74faab6b56245c5cc2, type: 3}
       propertyPath: npcAnimator
@@ -47501,7 +47447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2477569126443030290, guid: 63d10b18472b1814095dd66969ae8a44, type: 3}
       propertyPath: dialogID
-      value: 10014
+      value: 11800
       objectReference: {fileID: 0}
     - target: {fileID: 2477569126443030290, guid: 63d10b18472b1814095dd66969ae8a44, type: 3}
       propertyPath: npcAnimator
@@ -56130,7 +56076,7 @@ Transform:
   - {fileID: 1240099967}
   - {fileID: 695215182}
   m_Father: {fileID: 173792728}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2134900315
 PrefabInstance:
@@ -57003,6 +56949,10 @@ PrefabInstance:
     - target: {fileID: 220324384490140063, guid: 79912949202e4cf4fa6261f80b58bc57, type: 3}
       propertyPath: m_Name
       value: NPC_Captain
+      objectReference: {fileID: 0}
+    - target: {fileID: 4614204198747547207, guid: 79912949202e4cf4fa6261f80b58bc57, type: 3}
+      propertyPath: dialogID
+      value: 11000
       objectReference: {fileID: 0}
     - target: {fileID: 4614204198747547207, guid: 79912949202e4cf4fa6261f80b58bc57, type: 3}
       propertyPath: npcVirtualCameraObj

@@ -9,6 +9,7 @@ public class ExcelDB : ScriptableObject
 	public List<DialogDBEntity> TutorialSheet; // Tutorial 시트
 	public List<NpcDialogDBEntity> DialogSheet; // NPC 다이얼로그 시트
 	public List<ObjDialogDBEntity> ObjectDialogSheet; // Object 다이얼로그(정보 출력) 시트
+	public List<QuestDBEntity> QuestDBSheet; // 퀘스트 DB 시트
 } 
 
 //////////////////////////////////////////////////////////
@@ -38,4 +39,17 @@ public struct ObjDialogDBEntity
 	public int DialogID;
 	public string Name;
 	public string ObjectDialog;
+}
+
+[System.Serializable]
+public struct QuestDBEntity
+{
+	public int QuestID;
+	public int StartDialogID;
+	public int EndDialogID;
+	public int QuestType;
+	public string NpcName;
+	public string QuestTitle;
+	public string QuestContent;
+	public string QuestReward;
 }

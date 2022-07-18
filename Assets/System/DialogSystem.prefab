@@ -47,7 +47,6 @@ MonoBehaviour:
   dialogID: 1
   npcVirtualCameraObj: {fileID: 0}
   npcAnimator: {fileID: 0}
-  useDialogList: []
 --- !u!1 &2427527033994381297
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +128,6 @@ MonoBehaviour:
   dialogText: {fileID: 0}
   objectArrow: {fileID: 0}
   yesBtn: {fileID: 0}
-  noBtn: {fileID: 0}
 --- !u!1001 &2427527034609413586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -139,6 +137,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1833213474880874124, guid: c86c6090113f17e47821d5ea18acc991, type: 3}
       propertyPath: dialogUi
+      value: 
+      objectReference: {fileID: 2427527034253137547}
+    - target: {fileID: 1833213474880874124, guid: c86c6090113f17e47821d5ea18acc991, type: 3}
+      propertyPath: _dialogUiController
       value: 
       objectReference: {fileID: 2427527034253137547}
     - target: {fileID: 1833213474880874125, guid: c86c6090113f17e47821d5ea18acc991, type: 3}
