@@ -82,37 +82,33 @@ public class JsonManager : MonoBehaviour
 
     public void Save(string slotName, string saveName)
     {
-        //foreach (var data in SaveDataDictionary.saveDataDictionary)
-        //{
-        //    print($"[장시진] {data.Key}, {data.Value}");
-        //    print($"[장시진] name:{data.Value.name}, position:{data.Value.position}, rotation:{data.Value.rotation}, hp:{data.Value.hp}, stamina:{data.Value.stamina},");
-        //}
-        
+        if (string.IsNullOrEmpty(slotName))
+        {
+            print("[장시진] 선택된 세이브 슬롯이 없습니다. 세이브 슬롯을 다시 선택해주세요.");
+            return;
+        }
+
         print($"[장시진] slotName:{slotName}, saveName:{saveName}");
         print($"[장시진] {SaveDataDictionary.saveDataDictionary[slotName]}");
-        if (!string.IsNullOrEmpty(slotName))
-        {
-            SaveDataDictionary.saveDataDictionary[slotName] = new SaveInfo(
+        
+        SaveDataDictionary.saveDataDictionary[slotName] = new SaveInfo(
                 saveName,
                 GameManager.instance.playerGameObject.transform.position,
                 GameManager.instance.playerGameObject.transform.rotation.eulerAngles,
-                0,
-                0,
+                (int)GameManager.instance.playerGameObject.GetComponent<PlayerStatus>().currentHealth,
+                (int)GameManager.instance.playerGameObject.GetComponent<PlayerStatus>().currentMaxstamina,
+                (int)GameManager.instance.playerGameObject.GetComponent<PlayerStatus>().currentStamina,
+                InventorySystem.instance.playerCoinCount,
                 DateTime.Now.ToString("yyyy.MM.dd ") + DateTime.Now.ToString("HH:mm:ss tt ") +
                 DateTime.Now.DayOfWeek.ToString().ToUpper().Substring(0, 3));
 
-            // Formatting.Indented -> Json 자동으로 라인/들여쓰기 적용 [참고: https://www.csharpstudy.com/Data/Json-beautifier.aspx]
-            string jdata = JsonConvert.SerializeObject(SaveDataDictionary.saveDataDictionary, Formatting.Indented);
-            File.WriteAllText(Application.persistentDataPath + dataPath, jdata);
-            print($"[장시진] {slotName}, {saveName} Save Success!!!");
-            
-            SaveSlot currentSaveSlot = GameObject.Find(slotName).GetComponent<SaveSlot>();
-            currentSaveSlot.UpdateSlotText();
-        }
-        else
-        {
-            print("[장시진] 선택된 세이브 슬롯이 없습니다. 세이브 슬롯을 다시 선택해주세요.");
-        }
+        // Formatting.Indented -> Json 자동으로 라인/들여쓰기 적용 [참고: https://www.csharpstudy.com/Data/Json-beautifier.aspx]
+        string jdata = JsonConvert.SerializeObject(SaveDataDictionary.saveDataDictionary, Formatting.Indented);
+        File.WriteAllText(Application.persistentDataPath + dataPath, jdata);
+        print($"[장시진] {slotName}, {saveName} Save Success!!!");
+        
+        SaveSlot currentSaveSlot = GameObject.Find(slotName).GetComponent<SaveSlot>();
+        currentSaveSlot.UpdateSlotText();
     }
 
     // ClearJsonFile 메서드는 Json SaveFile 최초 생성 시 수행해주면 됩니다. 
@@ -129,7 +125,9 @@ public class JsonManager : MonoBehaviour
                 new Vector3(0,0,0), 
                 new Vector3(0,0,0), 
                 0, 
-                0, 
+                0,
+                0,
+                0,
                 "");
         }
 
@@ -149,6 +147,8 @@ public class JsonManager : MonoBehaviour
                 new Vector3(0,0,0), 
                 0, 
                 0, 
+                0,
+                0,
                 "");
         
         string jdata = JsonConvert.SerializeObject(SaveDataDictionary.saveDataDictionary, Formatting.Indented);
@@ -177,7 +177,8 @@ public class JsonManager : MonoBehaviour
         foreach (var data in SaveDataDictionary.saveDataDictionary)
         {
             print($"{data.Key}, {data.Value}");
-            print($"name:{data.Value.name}, position:{data.Value.position}, rotation:{data.Value.rotation}, hp:{data.Value.hp}, stamina:{data.Value.stamina},");
+            print($"name:{data.Value.name}, position:{data.Value.position}, rotation:{data.Value.rotation}, hp:{data.Value.hp}, max stamina:{data.Value.maxStamina}, stamina:{data.Value.currentStamina}," +
+                  $"{data.Value.saveTime}");
         }
     }
     

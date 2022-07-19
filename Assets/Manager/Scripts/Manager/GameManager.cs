@@ -173,7 +173,10 @@ public class GameManager : MonoBehaviour
             // 플레이어 데이터 로드
             playerGameObject.transform.position = saveinfo.position;
             playerGameObject.transform.rotation = Quaternion.Euler(saveinfo.rotation);
-            
+            playerGameObject.GetComponent<PlayerStatus>().currentHealth = saveinfo.hp;
+            playerGameObject.GetComponent<PlayerStatus>().currentMaxstamina = saveinfo.maxStamina;
+            playerGameObject.GetComponent<PlayerStatus>().currentStamina = saveinfo.currentStamina;
+            InventorySystem.instance.LoadInventoryCoin(saveinfo.playerCoinCount);
             return;
         }
         
