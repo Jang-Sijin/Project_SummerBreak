@@ -16,7 +16,7 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private GameObject shopInventorySlotsParent;
     [SerializeField] private GameObject shopInventoryEquipmentSlot;
 
-    [Header("상점 인벤토리 설정")]
+    [Header("테스트 모드 인벤토리 설정")]
     [SerializeField] private Item sword;
     [SerializeField] private Item pen;
     [SerializeField] private Item bag;
@@ -116,6 +116,15 @@ public class InventorySystem : MonoBehaviour
         color = equipmentSlot.GetComponent<Image>().color;
         color.a = alpha;
         equipmentSlot.GetComponent<Image>().color = color;
+    }
+
+    public void LoadInventoryCoin(int coinCount)
+    {
+        playerCoinCount = coinCount;
+        PlayerUI getPlayerUI = playerUI.GetComponent<PlayerUI>();
+        getPlayerUI.UpdatePlayerCoinCountUI();
+
+        return;
     }
 
     public void CheckSlotList()
