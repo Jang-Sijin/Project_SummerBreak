@@ -35,10 +35,10 @@ public class LootDrop : MonoBehaviour
                 Random.Range(150f, 250f), Random.Range(-150f, 150f)) * Time.deltaTime);
             rb.MoveRotation(rb.rotation * deltaRotation);
 
-            if (velocity.y < -4f)
-                velocity.y = -4f;
+            if (velocity.y < -6f)
+                velocity.y = -6f;
             else
-                velocity -= Vector3.up * 5 * Time.deltaTime;
+                velocity -= Vector3.up * 8 * Time.deltaTime;
 
             if (Mathf.Abs(rb.position.y - startPosition.y) < 0.25f && velocity.y < 0f)
             {
