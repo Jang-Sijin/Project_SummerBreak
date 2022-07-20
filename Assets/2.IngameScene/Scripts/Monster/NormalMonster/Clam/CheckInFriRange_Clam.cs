@@ -23,7 +23,7 @@ public class CheckInFriRange_Clam : Node
 
         if (t != null && colliders.Length == 1)
         {
-            Debug.Log("[이민호] 주변에 몬스터 있음");
+            //Debug.Log("[이민호] 주변에 몬스터 있음");
             state = NodeState.SUCCESS;
             return state;
         }

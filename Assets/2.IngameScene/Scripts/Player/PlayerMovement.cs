@@ -675,8 +675,6 @@ public class PlayerMovement : MonoBehaviour
             invincible = false;
             bodyMaterial.SetFloat("RedLv", 0.0f);
             capeMaterial.SetFloat("RedLv",0.0f);
-            this.transform.position = respawnPoint.transform.position;
-            playerstatus.ReSetCurHealth();
         }
         else if (!invincible)
         {

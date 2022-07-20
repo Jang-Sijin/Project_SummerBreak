@@ -56,6 +56,9 @@ public class MonsterManager : MonoBehaviour
     public GameObject bulletTransform;
 
     private PlayerMovement _playerMovement;
+
+    [SerializeField] 
+    private ParticleSystem _Hitparticle;
     
     void Start()
     {
@@ -135,10 +138,13 @@ public class MonsterManager : MonoBehaviour
     }
     public void TakeHit()
     {
-        health -= 10.0f;
-        //Debug.Log($"[이민호] 몬스터 체력: {health}");
-        bool isDead = health <= 0;
+        float damage = Random.Range(8, 12);
 
+        health -= damage;
+        
+        Debug.Log($"[이민호] 몬스터 체력: {health}");
+        bool isDead = health <= 0;
+        
         if (isDead)
         {
             VisualEffect newExplodeEffect = Instantiate(explodeEffect, transform.position, transform.rotation);
@@ -182,13 +188,22 @@ public class MonsterManager : MonoBehaviour
                 _playerMovement.HitStart(AcornBT.damageValue, m_rigidbody);
             }
         }
-    }
 
+        if (other.gameObject.CompareTag("Equipment_Attack"))
+        {
+            Debug.Log("[이민호] 호호우");
+        }
+        
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Equipment_Attack"))
         {
             checkHit = true;
+            ParticleSystem newParticle = Instantiate(_Hitparticle, transform.position,
+                transform.rotation);
+            newParticle.Play();
         }
     }
     

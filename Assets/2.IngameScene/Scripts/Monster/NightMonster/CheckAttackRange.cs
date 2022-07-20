@@ -60,7 +60,7 @@ public class CheckAttackRange : Node
             _animator.SetBool("Hit", false);
             
             
-            Debug.Log("[이민호] 공격 범위에 있음");
+            //Debug.Log("[이민호] 공격 범위에 있음");
             state = NodeState.SUCCESS;
             return state;
         }
