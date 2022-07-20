@@ -189,6 +189,11 @@ MonoBehaviour:
   checkHit: 0
   bodyRenderer: {fileID: 5702118903337021582}
   eyeRenderer: {fileID: 7706766815071793995}
+  animator: {fileID: 0}
+  attacking: 0
+  bullet: {fileID: 0}
+  bulletTransform: {fileID: 0}
+  _Hitparticle: {fileID: 4208949226998896771, guid: 268f53f6671210c498db0dd3f051aa33, type: 3}
 --- !u!65 &1356473699542273546
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -230,10 +235,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cba3c9c392959042b06556ea9416232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterManager: {fileID: 0}
   guardCheck: 0
   aloneCheck: 0
   randomTargetGoal: {x: 0, y: 0, z: 0}
+  isGrounded: 0
+  playerInWater: 0
 --- !u!114 &7002979033523251424
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -101,6 +101,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject QuaterTextObj;
 
     public bool slidingCheck = false;
+
+    public bool checkMonsterFollow = false;
+
+    private bool hitClam = false;
     
     void Awake()
     {
@@ -380,6 +384,10 @@ public class PlayerMovement : MonoBehaviour
             d_fromWaterSurface = waterSurface - transform.position.y;
             d_fromWaterSurface = Mathf.Clamp(d_fromWaterSurface, float.MinValue, waterSurface);
             isSwim = d_fromWaterSurface >= swimLevel;
+            if (isSwim)
+            {
+                checkMonsterFollow = true;
+            }
         }
         else
         {
@@ -474,6 +482,12 @@ public class PlayerMovement : MonoBehaviour
 
             StartCoroutine(HealStamina(1.0f));
         }
+
+        if (isGrounded)
+        {
+            checkMonsterFollow = false;
+        }
+        
         //isGrounded = Physics.CheckSphere(transform.position, 0.1f, layerMask) || isSlope;
         if (!isClimbed && (inWater == false || isGrounded))
         {
@@ -661,8 +675,6 @@ public class PlayerMovement : MonoBehaviour
             invincible = false;
             bodyMaterial.SetFloat("RedLv", 0.0f);
             capeMaterial.SetFloat("RedLv",0.0f);
-            this.transform.position = respawnPoint.transform.position;
-            playerstatus.ReSetCurHealth();
         }
         else if (!invincible)
         {
@@ -676,8 +688,13 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(HitBlink());
             Vector3 differnce = transform.position - monsterRigidbody.transform.position;
             differnce = differnce.normalized * 5.0f;
-            m_rigidbody.AddForce(differnce,ForceMode.Impulse);
+            m_rigidbody.AddForce(differnce, ForceMode.Impulse);
         }
+    }
+
+    public void HitToClam()
+    {
+        hitClam = true;
     }
     
     IEnumerator HitInvincible()

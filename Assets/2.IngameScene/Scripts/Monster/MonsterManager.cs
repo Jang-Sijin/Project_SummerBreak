@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -12,7 +13,9 @@ public class MonsterManager : MonoBehaviour
         green_slimyee,
         red_slimyee,
         green_longyee,
-        red_longyee
+        red_longyee,
+        acorn,
+        clam
     }
 
     public monsterType curMonsterType;
@@ -38,30 +41,43 @@ public class MonsterManager : MonoBehaviour
 
     private bool inCameravisible = false;
 
+    [SerializeField] 
+    private Animator animator;
+
+    public bool attacking = false;
     //status
     //private float damgeValue;
     //private float speed;
 
     private bool dead = false;
+
+    
+    public GameObject bullet;
+    public GameObject bulletTransform;
+
+    private PlayerMovement _playerMovement;
+
+    [SerializeField] 
+    private ParticleSystem _Hitparticle;
+    
     void Start()
     {
-        // 01
-        if (curMonsterType == monsterType.green_slimyee || curMonsterType == monsterType.nightMonster)
+        // HP 01 
+        if (curMonsterType == monsterType.green_slimyee || curMonsterType == monsterType.nightMonster 
+                                                        || curMonsterType == monsterType.clam)
         {
             health = 10.0f;
-            //damgeValue = 10.0f;
         }
-        // 02
-        else if (curMonsterType == monsterType.green_longyee || curMonsterType == monsterType.red_slimyee)
+        // HP 02
+        else if (curMonsterType == monsterType.green_longyee || curMonsterType == monsterType.red_slimyee 
+                                                             || curMonsterType == monsterType.acorn)
         {
             health = 20.0f;
-            //damgeValue = 20.0f;
         }
-        // 03
+        // HP 03
         else if(curMonsterType == monsterType.red_longyee)
         {
             health = 30.0f;
-            //damgeValue = 30.0f;
         }
         // slimyee
         if (curMonsterType == monsterType.green_slimyee || curMonsterType == monsterType.red_slimyee 
@@ -74,22 +90,28 @@ public class MonsterManager : MonoBehaviour
         {
             //speed = 3.0f;
         }
-
+        
+        animator = GetComponent<Animator>();
         spawnPoint = this.transform.position;
         m_rigidbody = GetComponent<Rigidbody>();
         spawnLoot = GetComponent<SpawnLoot>();
         bodyMaterial = bodyRenderer.material;
         eyeMaterial = eyeRenderer.material;
+        _playerMovement = 
+            GameManager.instance.playerGameObject.GetComponent<PlayerMovement>();
         bodyMaterial.SetFloat("RedLv", 0.0f);
         eyeMaterial.SetFloat("RedLv",0.0f);
     }
 
     private void Update()
     {
+        
         if (!dead)
         {
             MonsterVisible();
         }
+
+        
     }
 
     private void MonsterVisible()
@@ -116,10 +138,13 @@ public class MonsterManager : MonoBehaviour
     }
     public void TakeHit()
     {
-        health -= 10.0f;
-        //Debug.Log($"[이민호] 몬스터 체력: {health}");
-        bool isDead = health <= 0;
+        float damage = Random.Range(8, 12);
 
+        health -= damage;
+        
+        Debug.Log($"[이민호] 몬스터 체력: {health}");
+        bool isDead = health <= 0;
+        
         if (isDead)
         {
             VisualEffect newExplodeEffect = Instantiate(explodeEffect, transform.position, transform.rotation);
@@ -134,7 +159,7 @@ public class MonsterManager : MonoBehaviour
         
         Vector3 randomPoint = spawnPoint + Random.insideUnitSphere * range;
 
-        Debug.DrawRay(randomPoint, Vector3.up, Color.red, 1);
+        //Debug.DrawRay(randomPoint, Vector3.up, Color.red, 1);
         StartCoroutine(moveCoolTime());
         
         return randomPoint;
@@ -152,12 +177,33 @@ public class MonsterManager : MonoBehaviour
         //Gizmos.DrawWireSphere(this.transform.position,1.0f);
         
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")
+                && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.95f)
+            {
+                _playerMovement.HitStart(AcornBT.damageValue, m_rigidbody);
+            }
+        }
+
+        if (other.gameObject.CompareTag("Equipment_Attack"))
+        {
+            Debug.Log("[이민호] 호호우");
+        }
+        
+    }
     
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Equipment_Attack"))
         {
             checkHit = true;
+            ParticleSystem newParticle = Instantiate(_Hitparticle, transform.position,
+                transform.rotation);
+            newParticle.Play();
         }
     }
     
@@ -172,6 +218,39 @@ public class MonsterManager : MonoBehaviour
             StartCoroutine(KnockCo(m_rigidbody));
         }
     }
+    private IEnumerator KnockCo(Rigidbody monster)
+    {
+        if (monster != null)
+        {
+            yield return new WaitForSeconds(knockTime);
+            monster.velocity = Vector3.zero;
+        }
+    }
+
+    public void DashAttack()
+    {
+        attacking = true;
+        animator.SetBool("Attack", true);
+        animator.SetBool("Idle", false);
+
+        StartCoroutine(AttackCo(m_rigidbody));
+    }
+
+    public void ShootBullet()
+    {
+        GameObject newBullet = Instantiate(bullet, bulletTransform.transform.position, transform.rotation);
+        Rigidbody newBulletRigid = newBullet.GetComponent<Rigidbody>();
+        newBulletRigid.AddForce(transform.forward * 5.0f, ForceMode.Impulse);
+    }
+    
+    private IEnumerator AttackCo(Rigidbody monster)
+    {
+        if (monster != null)
+        {
+            yield return new WaitForSeconds(0.5f);
+            monster.AddForce(transform.forward * 10.0f, ForceMode.Impulse);
+        }
+    }
 
     public void MonsterHitStart()
     {
@@ -184,13 +263,7 @@ public class MonsterManager : MonoBehaviour
         bodyMaterial.SetFloat("RedLv", 0.0f);
         eyeMaterial.SetFloat("RedLv",0.0f);
     }
-
-    private IEnumerator KnockCo(Rigidbody monster)
-    {
-        if (monster != null)
-        {
-            yield return new WaitForSeconds(knockTime);
-            monster.velocity = Vector3.zero;
-        }
-    }
+    
+    
+    
 }

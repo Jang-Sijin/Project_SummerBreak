@@ -381,7 +381,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curMonsterType: 0
   health: 0
-  sociality: 0
   explodeEffect: {fileID: 769732789284740328}
   thrust: 10
   knockTime: 4
@@ -390,6 +389,11 @@ MonoBehaviour:
   checkHit: 0
   bodyRenderer: {fileID: 2241047334551454368}
   eyeRenderer: {fileID: 4040929263519624307}
+  animator: {fileID: 0}
+  attacking: 0
+  bullet: {fileID: 0}
+  bulletTransform: {fileID: 0}
+  _Hitparticle: {fileID: 4208949226998896771, guid: 268f53f6671210c498db0dd3f051aa33, type: 3}
 --- !u!65 &6403910201658220750
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -431,7 +435,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f4920c236460a4a827d845513a93e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPoint: {fileID: 0}
 --- !u!114 &7111785919389056034
 MonoBehaviour:
   m_ObjectHideFlags: 0

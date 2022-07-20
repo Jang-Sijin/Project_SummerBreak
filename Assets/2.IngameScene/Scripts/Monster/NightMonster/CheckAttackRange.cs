@@ -28,21 +28,39 @@ public class CheckAttackRange : Node
             return state;
         }
         
-        float attackRange = _monsterManager.curMonsterType == MonsterManager.monsterType.nightMonster
-            ? NightMonsterBT.attackRange
-            : SlimyeeBT.attackRange;
+        float attackRange;
+        
+        if (_monsterManager.curMonsterType == MonsterManager.monsterType.nightMonster)
+        {
+            attackRange = NightMonsterBT.attackRange;
+        }
+        else if (_monsterManager.curMonsterType == MonsterManager.monsterType.acorn)
+        {
+            attackRange = AcornBT.attackRange;
+        }
+        else if (_monsterManager.curMonsterType == MonsterManager.monsterType.clam)
+        {
+            attackRange = ClamBT.attackRange;
+        }
+        else
+        {
+            attackRange = SlimyeeBT.attackRange;
+        }
         
         if (Vector3.Distance(_transform.position, target_transform.position) 
           <= attackRange)
         {
-            
-            _animator.SetBool("Chasting", false);
+            if (_monsterManager.curMonsterType != MonsterManager.monsterType.clam)
+            {
+                _animator.SetBool("Chasting", false);
+            }
+
             _animator.SetBool("Attack", false);
             _animator.SetBool("Idle", true);
             _animator.SetBool("Hit", false);
             
             
-            //Debug.Log("[이민호] 범위에 있음");
+            //Debug.Log("[이민호] 공격 범위에 있음");
             state = NodeState.SUCCESS;
             return state;
         }

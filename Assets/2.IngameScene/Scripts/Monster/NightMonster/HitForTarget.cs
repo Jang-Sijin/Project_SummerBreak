@@ -20,8 +20,11 @@ public class HitForTarget : Node
         //Debug.Log("[이민호]타격함2");
         monsterManager.KnockBack();
         monsterManager.TakeHit();
-        
-        _animator.SetBool("Chasting", false);
+
+        if (monsterManager.curMonsterType != MonsterManager.monsterType.clam)
+        {
+            _animator.SetBool("Chasting", false);
+        }
         _animator.SetBool("Attack", false);
         _animator.SetBool("Idle", false);
         _animator.SetBool("Hit", true);

@@ -18,6 +18,7 @@ public class SlimyeeBT : BTTree
     public bool aloneCheck = false;
     public Vector3 randomTargetGoal = Vector3.zero;
     public bool isGrounded = false;
+    public bool playerInWater = false;
     protected override Node SetUpTree()
     {
         Node root = new Selector(new List<Node>
@@ -53,6 +54,7 @@ public class SlimyeeBT : BTTree
             // Follow
             new Sequence(new List<Node>
             {
+                new CheckToPlayerInWater(transform),
                 new CheckInFOVRange(transform),
                 new FollowTarget(transform)
             }),

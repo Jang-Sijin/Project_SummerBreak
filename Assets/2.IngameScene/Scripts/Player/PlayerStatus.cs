@@ -45,7 +45,8 @@ public class PlayerStatus : MonoBehaviour
     
     [SerializeField]
     private bool DebugMod = false;
-    
+
+    private PlayerMovement _playerMovement;
     
     void Awake()
     {
@@ -62,6 +63,7 @@ public class PlayerStatus : MonoBehaviour
 
     private void Start()
     {
+        _playerMovement = GetComponent<PlayerMovement>();
         equipmentSlot = equipmentSlotObj.GetComponent<Slot>();
         playerUI = GameManager.instance.PlayerUI.GetComponent<PlayerUI>();
         playerHpImageArray = playerUI.GetHpImageArray();
@@ -93,7 +95,11 @@ public class PlayerStatus : MonoBehaviour
 
     private void Update()
     {
-        
+        if (currentHealth <= 0.0f)
+        {
+            this.transform.position = _playerMovement.respawnPoint.transform.position;
+            ReSetCurHealth();
+        }
         if (equipmentSlot.item != null)
         {
             if (equipmentSlot.item.itemName == "소드")

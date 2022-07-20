@@ -11,6 +11,9 @@ public class PlayerEquipmentManager : MonoBehaviour
     public GameObject equipmentAttack;
 
     private CapsuleCollider colliderAttack;
+
+    [SerializeField] 
+    private GameObject _gameObject;
     
     private void Awake()
     {
@@ -20,6 +23,7 @@ public class PlayerEquipmentManager : MonoBehaviour
         colliderAttack = equipmentAttack.GetComponent<CapsuleCollider>();
 
         colliderAttack.enabled = false;
+        _gameObject.SetActive(false);
     }
     
     // Update is called once per frame
@@ -55,12 +59,14 @@ public class PlayerEquipmentManager : MonoBehaviour
     public void AttackAwake()
     {
         m_player.attacked = true;
+        _gameObject.SetActive(true);
     }
 
     public void AttackCancel()
     {
         m_player.currentState = PlayerMovement.playerState.Ground_idleState;
         m_player.attacked = false;
+        _gameObject.SetActive(false);
     }
     
 }
