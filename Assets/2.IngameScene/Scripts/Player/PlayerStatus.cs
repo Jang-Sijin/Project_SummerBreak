@@ -102,16 +102,19 @@ public class PlayerStatus : MonoBehaviour
         }
         if (equipmentSlot.item != null)
         {
-            if (equipmentSlot.item.itemName == "소드")
+            if (equipmentSlot.item.itemName == "작은 검")
             {
+                Debug.Log($"[이민호] 소드 장착 ");
                 currentItem = item.attack;
             }
             else if (equipmentSlot.item.itemName == "폭신침낭")
             {
+                Debug.Log($"[이민호] 침남 장착 ");
                 currentItem = item.interaction_sleep;
             }
             else if (equipmentSlot.item.itemName == "검은깃펜")
             {
+                Debug.Log($"[이민호] 깃털 장착 ");
                 currentItem = item.interaction_quillPen;
             }
         }
