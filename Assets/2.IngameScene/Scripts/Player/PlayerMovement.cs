@@ -105,6 +105,8 @@ public class PlayerMovement : MonoBehaviour
     public bool checkMonsterFollow = false;
 
     private bool hitClam = false;
+
+    [SerializeField] private float climpSpeed = 3.5f;
     
     void Awake()
     {
@@ -654,7 +656,7 @@ public class PlayerMovement : MonoBehaviour
             playerDir.y = 0.0f;
             playerDir = playerDir.normalized;
             //Debug.DrawRay(this.transform.position,playerDir * 1.0f,Color.red,1.0f);
-            Vector3 climbUpDirection = playerDir * 4.0f + jumpDirection;
+            Vector3 climbUpDirection = playerDir * climpSpeed + jumpDirection;
             m_rigidbody.velocity = climbUpDirection;
             //m_rigidbody.AddForce(jumpDirection,ForceMode.VelocityChange);
         }

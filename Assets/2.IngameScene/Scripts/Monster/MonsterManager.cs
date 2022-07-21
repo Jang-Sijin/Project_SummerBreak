@@ -59,6 +59,9 @@ public class MonsterManager : MonoBehaviour
 
     [SerializeField] 
     private ParticleSystem _Hitparticle;
+
+    [SerializeField] 
+    private GameObject damageText;
     
     void Start()
     {
@@ -142,7 +145,8 @@ public class MonsterManager : MonoBehaviour
 
         health -= damage;
         
-        Debug.Log($"[이민호] 몬스터 체력: {health}");
+        //Debug.Log($"[이민호] 몬스터 체력: {health}");
+
         bool isDead = health <= 0;
         
         if (isDead)
@@ -152,7 +156,25 @@ public class MonsterManager : MonoBehaviour
             Destroy(newExplodeEffect.gameObject, 0.5f);
             spawnLoot.spawnLoot = true;
         }
+        else
+        {
+            if (damageText)
+            {
+                ShowDamgeText(damage);
+            }
+        }
     }
+
+    private void ShowDamgeText(float damgeValue)
+    {
+        GameObject gameObj = Instantiate(damageText, transform.position, Quaternion.identity, transform);
+        
+        TextMesh textMesh = gameObj.GetComponent<TextMesh>();
+        
+        textMesh.text = damgeValue.ToString();
+    }
+    
+    
 
     public Vector3 RandomPoint(float range)
     {
@@ -188,12 +210,6 @@ public class MonsterManager : MonoBehaviour
                 _playerMovement.HitStart(AcornBT.damageValue, m_rigidbody);
             }
         }
-
-        if (other.gameObject.CompareTag("Equipment_Attack"))
-        {
-            Debug.Log("[이민호] 호호우");
-        }
-        
     }
     
     private void OnTriggerEnter(Collider other)
