@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 4462635327861346405}
   - component: {fileID: 2805332862095028659}
   - component: {fileID: 5977885017059582880}
+  - component: {fileID: 1409973387}
   m_Layer: 0
   m_Name: Starfish
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2805332862095028656}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
@@ -115,8 +116,22 @@ LODGroup:
   - screenRelativeHeight: 0.1
     fadeTransitionWidth: 0
     renderers:
-    - renderer: {fileID: 1498416160788358227, guid: fb16b420a5e50b244aba0e2a3f91a240, type: 3}
+    - renderer: {fileID: 4462635327861346405}
   m_Enabled: 1
+--- !u!114 &1409973387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2805332862095028656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b3ea519015e5445be8e65c1b61b141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDB: {fileID: 11400000, guid: 737a96f642a712d45a7f8b01f4e84ece, type: 2}
+  takeItemAudioClip: {fileID: 8300000, guid: 0cf800d049619d946b0d874a36e79bd1, type: 3}
 --- !u!1 &3039897373097322720
 GameObject:
   m_ObjectHideFlags: 0
