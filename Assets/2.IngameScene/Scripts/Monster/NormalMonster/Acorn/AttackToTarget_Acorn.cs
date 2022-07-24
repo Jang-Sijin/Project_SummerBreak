@@ -26,7 +26,11 @@ public class AttackToTarget_Acorn : Node
     {
         Transform _lastTarget = (Transform) GetData("target");
         playerMovement = _lastTarget.GetComponent<PlayerMovement>();
-        _attackCounter += Time.deltaTime;
+        
+        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
+            _attackCounter += Time.deltaTime;
+        }
         _animator.SetBool("Attack", false);
         _animator.SetBool("Idle", true);
         float damageValue;

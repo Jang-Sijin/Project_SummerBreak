@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Experimental.TerrainAPI;
 using UnityEngine.VFX;
 
 public class PlayerMovement : MonoBehaviour
@@ -105,6 +106,8 @@ public class PlayerMovement : MonoBehaviour
     public bool checkMonsterFollow = false;
 
     private bool hitClam = false;
+
+    [SerializeField] private float climpSpeed = 3.5f;
     
     void Awake()
     {
@@ -654,7 +657,7 @@ public class PlayerMovement : MonoBehaviour
             playerDir.y = 0.0f;
             playerDir = playerDir.normalized;
             //Debug.DrawRay(this.transform.position,playerDir * 1.0f,Color.red,1.0f);
-            Vector3 climbUpDirection = playerDir * 4.0f + jumpDirection;
+            Vector3 climbUpDirection = playerDir * climpSpeed + jumpDirection;
             m_rigidbody.velocity = climbUpDirection;
             //m_rigidbody.AddForce(jumpDirection,ForceMode.VelocityChange);
         }
@@ -678,6 +681,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (!invincible)
         {
+            this.gameObject.layer = LayerMask.NameToLayer("Player_invincible");
             hited = true;
             invincible = true;
             bodyMaterial.SetFloat("RedLv", 0.1f);
@@ -701,6 +705,7 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
         invincible = false;
+        this.gameObject.layer = LayerMask.NameToLayer("Player");
     }
     
     
