@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.VFX;
 using Random = UnityEngine.Random;
@@ -169,7 +170,7 @@ public class MonsterManager : MonoBehaviour
     {
         GameObject gameObj = Instantiate(damageText, transform.position, Quaternion.identity, transform);
         
-        TextMesh textMesh = gameObj.GetComponent<TextMesh>();
+        TextMeshPro textMesh = gameObj.GetComponent<TextMeshPro>();
         
         textMesh.text = damgeValue.ToString();
     }
