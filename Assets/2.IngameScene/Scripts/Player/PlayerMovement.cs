@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Experimental.TerrainAPI;
 using UnityEngine.VFX;
 
 public class PlayerMovement : MonoBehaviour
@@ -680,6 +681,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (!invincible)
         {
+            this.gameObject.layer = LayerMask.NameToLayer("Player_invincible");
             hited = true;
             invincible = true;
             bodyMaterial.SetFloat("RedLv", 0.1f);
@@ -703,6 +705,7 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
         invincible = false;
+        this.gameObject.layer = LayerMask.NameToLayer("Player");
     }
     
     
