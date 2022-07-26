@@ -42,7 +42,7 @@ public class QuestSystem : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            // DontDestroyOnLoad(instance);
+            // DontDestroyOnLoad(Instance);
         } 
         else
         {

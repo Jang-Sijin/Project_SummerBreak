@@ -83,7 +83,7 @@ public class PlayerEventSystem : MonoBehaviour
                 npcDialogTrigger.EnterPlayer();
                 
                 // 상점 UI 출력
-                // ShopSystem.instance.OpenShopCanvas();
+                // ShopSystem.Instance.OpenShopCanvas();
             }
         }
     }

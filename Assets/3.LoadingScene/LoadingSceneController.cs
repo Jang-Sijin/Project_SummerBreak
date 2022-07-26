@@ -7,26 +7,26 @@
 //
 // public class LoadingSceneController : MonoBehaviour
 // {
-//     private static LoadingSceneController instance;
+//     private static LoadingSceneController Instance;
 //
 //     public static LoadingSceneController Instance
 //     {
 //         get
 //         {
-//             if (instance == null)
+//             if (Instance == null)
 //             {
 //                 var obj = FindObjectOfType<LoadingSceneController>();
 //
 //                 if (obj != null)
 //                 {
-//                     instance = obj;
+//                     Instance = obj;
 //                 }
 //                 else
 //                 {
-//                     instance = Create();
+//                     Instance = Create();
 //                 }
 //             }
-//             return instance;
+//             return Instance;
 //         }
 //     }
 //

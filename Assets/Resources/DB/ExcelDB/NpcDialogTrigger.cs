@@ -114,7 +114,7 @@ public class NpcDialogTrigger : MonoBehaviour
             if (_isExitDialog) // true: 대화 끝남, false: 대화중
             {
                 // 일반 대화는 모든 대화 출력 후 다이얼로그 UI를 SetActive false를 해준다.
-                // DialogSystem.instance.CloseObjDialogUi();
+                // DialogSystem.Instance.CloseObjDialogUi();
                 DialogSystem.instance.CloseDialogUi();
                 
                 // [일반 대화 예외 이벤트] - 상점 NPC

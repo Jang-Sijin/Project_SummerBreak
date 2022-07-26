@@ -29,7 +29,7 @@ public class JsonManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            // DontDestroyOnLoad(instance);
+            // DontDestroyOnLoad(Instance);
         }
         else
         {

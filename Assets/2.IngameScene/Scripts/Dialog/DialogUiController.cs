@@ -146,6 +146,6 @@ public class DialogUiController : MonoBehaviour
 	{
 		// [No 버튼는 기획 설계상 삭제되었습니다. 다음 업데이트에서 해당 함수 삭제 필요.]
 		// 다이얼로그 No 버튼을 눌렀을 경우 // 대화 종료 이벤트 발생
-		// QuestSystem.instance.IsQuestDialog = false;
+		// QuestSystem.Instance.IsQuestDialog = false;
 	}
 }

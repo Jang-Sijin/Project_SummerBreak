@@ -30,7 +30,7 @@ public class SceneLoaderManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            // DontDestroyOnLoad(instance);
+            // DontDestroyOnLoad(Instance);
         } 
         else
         { 

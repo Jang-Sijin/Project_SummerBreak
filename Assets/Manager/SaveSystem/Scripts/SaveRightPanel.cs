@@ -16,7 +16,7 @@ public class SaveRightPanel : MonoBehaviour
         if (_currentClickSlot != null)
         {
             print($"{_currentClickSlot} ClickSaveButton");
-            // JsonManager.instance.Save(); //_currentClickSlot
+            // JsonManager.Instance.Save(); //_currentClickSlot
 
             SaveSlot currentSaveSlot = GameObject.Find(_currentClickSlot).GetComponent<SaveSlot>();
             currentSaveSlot.UpdateSlotText();

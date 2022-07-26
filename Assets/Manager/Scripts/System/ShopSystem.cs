@@ -263,7 +263,7 @@ public class ShopSystem : MonoBehaviour
                 InventorySystem.instance.FindSetCountInventorySlotItem(itemDB.item.itemName, -1);
                 
                 // 상점 Canvas가 오픈될 때 판매UI에 있는 인벤토리 슬롯 리스트를 인벤토리 아이템 리스트로 셋팅한다. 
-                // InventorySystem.instance.InitShopSaleInventorySlots(ref saleInventoryEquipmentSlot, ref saleInventorySlots);            
+                // InventorySystem.Instance.InitShopSaleInventorySlots(ref saleInventoryEquipmentSlot, ref saleInventorySlots);            
 
                 // 상점 판매UI에서 선택한 슬롯의 정보를 초기화한다.
                 selectSaleShopItem = null;

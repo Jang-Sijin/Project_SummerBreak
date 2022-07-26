@@ -15,29 +15,29 @@ public class UIButtonController : MonoBehaviour
 
     public void ClickButton()
     {
-        SoundManagerOld.instance.SfxPlay("ClickButton", clickAudioClip);
+        SoundManager.Instance.SfxPlay("ClickButton", clickAudioClip);
     }
     
     public void BackButton()
     {
-        SoundManagerOld.instance.SfxPlay("BackButton", backAudioClip);
+        SoundManager.Instance.SfxPlay("BackButton", backAudioClip);
     }
 
     public void QuitButton()
     {
-        SoundManagerOld.instance.SfxPlay("ClickButton", quitAudioClip);
+        SoundManager.Instance.SfxPlay("ClickButton", quitAudioClip);
     }
 
 
     public void SaveButton()
     {
-        SoundManagerOld.instance.SfxPlay("ClickButton", clickAudioClip);
+        SoundManager.Instance.SfxPlay("ClickButton", clickAudioClip);
     }
     
     public void SaveAndQuitButton()
     {
-        SoundManagerOld.instance.SfxPlay("ClickButton", clickAudioClip);
-        // XMLManager.instance.SaveByMXL();
+        SoundManager.Instance.SfxPlay("ClickButton", clickAudioClip);
+        // XMLManager.Instance.SaveByMXL();
         
         Application.Quit();
     }
