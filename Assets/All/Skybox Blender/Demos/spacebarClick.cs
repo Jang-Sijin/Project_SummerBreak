@@ -8,12 +8,12 @@ public class spacebarClick : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space)){
-            skyboxScript.SkyboxBlend();
+            skyboxScript.SkyboxBlend(true);
         }
 
         //stop blending
-        if(Input.GetKeyDown(KeyCode.E)) {
+        /*if(Input.GetKeyDown(KeyCode.E)) {
             skyboxScript.StopSkyboxBlend(false);
-        }
+        }*/
     }
 }
