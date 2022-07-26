@@ -18,6 +18,8 @@ public class SkipCutScene : MonoBehaviour
 
     private void OnSkip()
     {
+        print("Button Click");
+        
         // 스킵 버튼이 눌렸을 때
         if (!_isSkip)
         {
