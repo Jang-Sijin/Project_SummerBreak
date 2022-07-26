@@ -12,18 +12,20 @@ public class FootSteps : MonoBehaviour
     private AudioClip[] DirtClips;
     [SerializeField]
     private AudioClip[] SnowClips;
+    [SerializeField]
+    private AudioClip[] WoodClips;
 
     private AudioSource audioSource;
-    private TerrainDetector terrainDetector0;
+    private TerrainDetector terrainDetector;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        terrainDetector0 = new TerrainDetector(transform.position);
+        terrainDetector = new TerrainDetector();
     }
     private void Step()
     {
-        AudioClip clip = GetRandomClip(terrainDetector0);
+        AudioClip clip = GetRandomClip(terrainDetector);
         audioSource.PlayOneShot(clip);
 
     }
@@ -36,21 +38,23 @@ public class FootSteps : MonoBehaviour
         {
             case 0:
             case 1:
-            case 7:
-            case 9:
+            case 6:
+            case 8:
                 return grassClips[UnityEngine.Random.Range(0, grassClips.Length)];
             case 2:
-            case 5:
+            case 10:
                 return SandClips[UnityEngine.Random.Range(0, SandClips.Length)];
             case 3:
             case 4:
                 return StoneClips[UnityEngine.Random.Range(0, StoneClips.Length)];
-            case 6:
-            case 8:
+            case 5:
+            case 7:
             default:
                 return DirtClips[UnityEngine.Random.Range(0, DirtClips.Length)];
-            case 10:
+            case 9:
                 return SnowClips[UnityEngine.Random.Range(0, SnowClips.Length)];
+            case 11:
+                return WoodClips[UnityEngine.Random.Range(0, WoodClips.Length)];
         }
         
     }
