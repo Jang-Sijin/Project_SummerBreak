@@ -7,7 +7,8 @@ public class ShopItem : ScriptableObject
 {
     public int itemCount;
     public Item item;
-    public int itemPrice;
+    public int buyItemPrice;
+    public int saleItemPrice;
 }
 
 // MonoBehaviour: 유니티 게임오브젝트 컴포넌트에 스크립터를 부착해야 해당 스크립터의 효력이 생긴다.
