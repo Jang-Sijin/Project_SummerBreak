@@ -13,7 +13,7 @@ namespace _1.TitleScene.Script
 
         public void LoadStartButton()
         {
-            SoundManager.instance.SfxPlay("LoadStartButton", loadStartAudioClip);
+            SoundManagerOld.instance.SfxPlay("LoadStartButton", loadStartAudioClip);
             JsonManager.instance.Load();
             SceneLoaderManager.instance.LoadGameScene();
             // XMLManager.instance.LoadByXML();
@@ -21,24 +21,24 @@ namespace _1.TitleScene.Script
 
         public void StartButton()
         {
-            SoundManager.instance.SfxPlay("StartButton", startAudioClip);
+            SoundManagerOld.instance.SfxPlay("StartButton", startAudioClip);
             SceneLoaderManager.instance.LoadGameScene();
         }
 
         public void ClickButton()
         {
-            SoundManager.instance.SfxPlay("ClickButton", clickAudioClip);
+            SoundManagerOld.instance.SfxPlay("ClickButton", clickAudioClip);
         }
 
         public void QuitButton()
         {
-            SoundManager.instance.SfxPlay("ClickButton", quitAudioClip);
+            SoundManagerOld.instance.SfxPlay("ClickButton", quitAudioClip);
             Application.Quit();
         }
     
         public void BackButton()
         {
-            SoundManager.instance.SfxPlay("BackButton", backAudioClip);
+            SoundManagerOld.instance.SfxPlay("BackButton", backAudioClip);
         }
     }
 }

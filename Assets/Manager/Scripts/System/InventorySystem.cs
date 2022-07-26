@@ -11,10 +11,6 @@ public class InventorySystem : MonoBehaviour
     [Header("인벤토리 설정")]
     [SerializeField] private GameObject inventorySlotsParent;
     [SerializeField] private GameObject inventoryEquipmentSlot;
-    
-    [Header("상점 인벤토리 설정")]
-    [SerializeField] private GameObject shopInventorySlotsParent;
-    [SerializeField] private GameObject shopInventoryEquipmentSlot;
 
     [Header("테스트 모드 인벤토리 설정")]
     [SerializeField] private Item sword;
@@ -23,9 +19,7 @@ public class InventorySystem : MonoBehaviour
 
     private Slot[] itemSlots;
     private Slot equipmentSlot;
-    private Slot[] shopItemSlots;
-    private Slot shopEquipmentSlot;
-    
+
     [Header("플레이어가 획득한 코인 개수")]
     public int playerCoinCount;
     
@@ -56,9 +50,17 @@ public class InventorySystem : MonoBehaviour
         itemSlots[9].AddItem(sword);
         itemSlots[10].AddItem(pen);
         itemSlots[11].AddItem(bag);
+    }
+
+    // parameter1이 양수면 코인 개수 +, 음수면 코인 개수 - 
+    public void SetPlayerCoinCount(int count)
+    {
+        playerCoinCount += count;
         
-        shopItemSlots = shopInventorySlotsParent.GetComponentsInChildren<Slot>();
-        shopEquipmentSlot = shopInventoryEquipmentSlot.GetComponent<Slot>();
+        // UI 갱신
+        PlayerUI getPlayerUI = playerUI.GetComponent<PlayerUI>();
+        getPlayerUI.UpdatePlayerCoinCountUI();
+        return;
     }
 
     // 아이템을 획득했을 때 인벤토리에 데이터(아이템)을 저장한다.
@@ -149,32 +151,43 @@ public class InventorySystem : MonoBehaviour
             slots[i] = itemSlots[i];
         }
     }
-
-    public void UpdateInventoryToShopInventorySlots()
+    
+    // 인벤토리에 있는 아이템의 정보들을 상점 판매 UI 리스트(슬롯)에 초기화 합니다.
+    public void InitShopSaleInventorySlots(ref SaleSlot saleEquipmentSlot, ref SaleSlot[] saleSlots)
     {
-        // try
-        // {
-        //     shopEquipmentSlot = equipmentSlot;
-        // 
-        //     for (int i = 0; i < itemSlots.Length; ++i)
-        //     {
-        //         shopItemSlots[i] = itemSlots[i];
-        //     }
-        // }
-        // catch (Exception e)
-        // {
-        //     Console.WriteLine("UpdateInventoryToShopInventorySlots 예외 발생");
-        //     throw;
-        // }
+        // 판매 아이템 리스트 셋팅 - 장비창 
+        if (equipmentSlot != null)
+        {
+            saleEquipmentSlot.InitSetItem(equipmentSlot);
+        }
+
+        // 판매 아이템 리스트 셋팅 - 일반 슬롯
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+            if (itemSlots[i].item != null)
+            {
+                saleSlots[i].InitSetItem(itemSlots[i]);
+            }
+        }
     }
     
-    public void UpdateShopInventoryToInventorySlots()
+    // parameter1의 아이템 이름으로 인벤토리 슬롯을 검색하여 획득한 아이템을 찾아서 parameter2 만큼 아이템 개수를 변경한다.
+    public void FindSetCountInventorySlotItem(string itemName, int count = -1)
     {
-        equipmentSlot = shopEquipmentSlot;
-        
-        for (int i = 0; i < shopItemSlots.Length; ++i)
+        if (equipmentSlot.item != null && equipmentSlot.item.itemName == itemName)
         {
-            itemSlots[i] = shopItemSlots[i];
+            equipmentSlot.SetSlotCount(count);
+            return;
         }
+
+        foreach (var itemSlot in itemSlots)
+        {
+            if (itemSlot.item != null && itemSlot.item.itemName == itemName)
+            {
+                itemSlot.SetSlotCount(count);
+                break;
+            }
+        }
+        return;
     }
 }

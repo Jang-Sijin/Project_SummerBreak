@@ -67,8 +67,10 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SetMouseCursor());
         
         // 사운드바 슬라이드 위치 설정
-        bgSoundSlider.value = SoundManager.instance.GetBgSoundVolumeValue();
-        effectSoundSlider.value = SoundManager.instance.GetSfxSoundVolumeValue();
+        // bgSoundSlider.value = SoundManagerOld.instance.GetBgSoundVolumeValue();
+        // effectSoundSlider.value = SoundManagerOld.instance.GetSfxSoundVolumeValue();
+        
+        SoundManager.Instance.PlayBGM(SoundPath.bgmStage1);
     }
 
     // 인게임 시간 정지
@@ -179,8 +181,18 @@ public class GameManager : MonoBehaviour
             InventorySystem.instance.LoadInventoryCoin(saveinfo.playerCoinCount);
             return;
         }
+
+        StartCoroutine(LoadSoundFiles());
         
         print($"[장시진] 불러올 데이터가 없습니다. 새로운 게임을 시작합니다.");
         return;
+    }
+
+    private IEnumerator LoadSoundFiles()
+    {
+         // 로딩
+         SoundManager.Instance.LoadBGM(SoundPath.bgmStage1);
+         SoundManager.Instance.LoadSound(SoundPath.sfxMouseClick);
+         yield return new WaitForSeconds(0.1f);
     }
 }
