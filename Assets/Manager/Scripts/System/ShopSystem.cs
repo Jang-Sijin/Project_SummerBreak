@@ -207,7 +207,7 @@ public class ShopSystem : MonoBehaviour
                     InventorySystem.instance.AcquireItem(selectBuyShopItem.item, 1);
 
                     // 플레이어가 소지중인 코인의 개수를 아이템의 가격만큼 감소한다.
-                    InventorySystem.instance.SetPlayerCoinCount(selectBuyShopItem.buyItemPrice);
+                    InventorySystem.instance.SetPlayerCoinCount(-(selectBuyShopItem.buyItemPrice));
 
                     // 플레이어 UI (코인의 개수 출력 이미지 텍스트)를 갱신한다. 
                     PlayerUI playerUI = GameManager.instance.PlayerUI.GetComponent<PlayerUI>();
