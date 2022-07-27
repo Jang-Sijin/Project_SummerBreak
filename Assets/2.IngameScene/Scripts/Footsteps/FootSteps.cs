@@ -14,6 +14,8 @@ public class FootSteps : MonoBehaviour
     private AudioClip[] SnowClips;
     [SerializeField]
     private AudioClip[] WoodClips;
+    [SerializeField]
+    private AudioClip[] WaterClips;
 
     private AudioSource audioSource;
     private TerrainDetector terrainDetector;
@@ -42,7 +44,6 @@ public class FootSteps : MonoBehaviour
             case 8:
                 return grassClips[UnityEngine.Random.Range(0, grassClips.Length)];
             case 2:
-            case 10:
                 return SandClips[UnityEngine.Random.Range(0, SandClips.Length)];
             case 3:
             case 4:
@@ -55,6 +56,9 @@ public class FootSteps : MonoBehaviour
                 return SnowClips[UnityEngine.Random.Range(0, SnowClips.Length)];
             case 11:
                 return WoodClips[UnityEngine.Random.Range(0, WoodClips.Length)];
+            case 10:
+                return WaterClips[UnityEngine.Random.Range(0, WaterClips.Length)];
+
         }
         
     }

@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 6864797741361077823}
   - component: {fileID: 6864797741361077816}
   - component: {fileID: 4734346380582614337}
+  - component: {fileID: 6730495596527677766}
   m_Layer: 0
   m_Name: NPC_Mob02_1
   m_TagString: QuestNpc
@@ -40,7 +41,7 @@ Transform:
   m_GameObject: {fileID: 6864797741361077822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_Children:
   - {fileID: 6399070064134275601}
   m_Father: {fileID: 0}
@@ -73,7 +74,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogDB: {fileID: 11400000, guid: 8acb37ca59c1ce9449df66ce1310f278, type: 2}
   dialogID: 0
-  useDialogList: []
+  npcVirtualCameraObj: {fileID: 0}
+  npcAnimator: {fileID: 1021820708813183083}
+--- !u!205 &6730495596527677766
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6864797741361077822}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.00026503205, y: 0.76586366, z: 0.015254766}
+  m_Size: 4
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 5007890336824413259}
+  m_Enabled: 1
 --- !u!1001 &6864797741402433018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147,5 +168,15 @@ GameObject:
 --- !u!4 &6399070064134275601 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cb33ba65025d3014197dfb15d62a4761, type: 3}
+  m_PrefabInstance: {fileID: 6864797741402433018}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1021820708813183083 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: cb33ba65025d3014197dfb15d62a4761, type: 3}
+  m_PrefabInstance: {fileID: 6864797741402433018}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &5007890336824413259 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1890157893034305969, guid: cb33ba65025d3014197dfb15d62a4761, type: 3}
   m_PrefabInstance: {fileID: 6864797741402433018}
   m_PrefabAsset: {fileID: 0}

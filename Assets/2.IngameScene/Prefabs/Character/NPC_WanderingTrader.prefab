@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 277611401181702709}
   - component: {fileID: 277611401181702710}
   - component: {fileID: 6846563412476332074}
+  - component: {fileID: 3085234304289948669}
   m_Layer: 0
   m_Name: NPC_WanderingTrader
   m_TagString: QuestNpc
@@ -59,10 +60,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogDB: {fileID: 11400000, guid: 8acb37ca59c1ce9449df66ce1310f278, type: 2}
-  dialogID: 10016
+  dialogID: 0
   npcVirtualCameraObj: {fileID: 0}
   npcAnimator: {fileID: 5958495062253940516}
-  useDialogList: []
+--- !u!205 &3085234304289948669
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277611401181702708}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.0033762753, y: 0.80400944, z: -0.039822996}
+  m_Size: 4
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 5765719892369738499}
+    - renderer: {fileID: 535493207296871898}
+    - renderer: {fileID: 2298810802338526871}
+  m_Enabled: 1
 --- !u!65 &277611402209792688
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -162,5 +183,20 @@ Transform:
 --- !u!95 &5958495062253940516 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 5f66974f425443946a7d73f29c0e4cb8, type: 3}
+  m_PrefabInstance: {fileID: 277611402209792693}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5765719892369738499 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -3181311924888790602, guid: 5f66974f425443946a7d73f29c0e4cb8, type: 3}
+  m_PrefabInstance: {fileID: 277611402209792693}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &535493207296871898 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 338951007910272879, guid: 5f66974f425443946a7d73f29c0e4cb8, type: 3}
+  m_PrefabInstance: {fileID: 277611402209792693}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &2298810802338526871 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2034855345291519010, guid: 5f66974f425443946a7d73f29c0e4cb8, type: 3}
   m_PrefabInstance: {fileID: 277611402209792693}
   m_PrefabAsset: {fileID: 0}

@@ -1096,6 +1096,7 @@ GameObject:
   - component: {fileID: 6374891574100975752}
   - component: {fileID: 6374891574100975753}
   - component: {fileID: 6503156787787569952}
+  - component: {fileID: 7141337184094353487}
   m_Layer: 0
   m_Name: NPC_SickOldMan
   m_TagString: QuestNpc
@@ -1144,8 +1145,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogDB: {fileID: 11400000, guid: 8acb37ca59c1ce9449df66ce1310f278, type: 2}
-  dialogID: 0
-  useDialogList: []
+  dialogID: 12100
+  npcVirtualCameraObj: {fileID: 0}
+  npcAnimator: {fileID: 653795683140123305}
+--- !u!205 &7141337184094353487
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6374891574100975735}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.006317973, y: 0.7306325, z: 0.19302022}
+  m_Size: 4
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 6153790376466933476}
+    - renderer: {fileID: 7299105185146824691}
+    - renderer: {fileID: 6372117815039797195}
+  m_Enabled: 1
 --- !u!1 &7066739921349478294
 GameObject:
   m_ObjectHideFlags: 0

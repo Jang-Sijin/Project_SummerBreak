@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4027053652598240154}
   - component: {fileID: 4027053652598240155}
   - component: {fileID: 5084623462928740228}
+  - component: {fileID: 6998727731493526421}
   m_Layer: 0
   m_Name: NPC_ShopOwner
   m_TagString: ShopNpc
@@ -62,6 +63,25 @@ MonoBehaviour:
   dialogID: 11400
   npcVirtualCameraObj: {fileID: 0}
   npcAnimator: {fileID: 7388263336215099289}
+--- !u!205 &6998727731493526421
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4027053652598240157}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.056306988, y: 0.6781789, z: 0.24873172}
+  m_Size: 4
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 5529079978372678036}
+  m_Enabled: 1
 --- !u!65 &4027053652587055607
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -965,5 +985,10 @@ Transform:
 --- !u!95 &7388263336215099289 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: aa87ae5e3b7649f4d9bdf49df76e9ffe, type: 3}
+  m_PrefabInstance: {fileID: 4027053652587055624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &5529079978372678036 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -335013462708794468, guid: aa87ae5e3b7649f4d9bdf49df76e9ffe, type: 3}
   m_PrefabInstance: {fileID: 4027053652587055624}
   m_PrefabAsset: {fileID: 0}

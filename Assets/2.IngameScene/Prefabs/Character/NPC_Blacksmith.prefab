@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1574493117483890210}
   - component: {fileID: 1574493117483890211}
   - component: {fileID: 2477569126443030290}
+  - component: {fileID: 1960747982817425705}
   m_Layer: 0
   m_Name: NPC_Blacksmith
   m_TagString: QuestNpc
@@ -62,6 +63,30 @@ MonoBehaviour:
   dialogID: 11800
   npcVirtualCameraObj: {fileID: 0}
   npcAnimator: {fileID: 4950349395955978416}
+--- !u!205 &1960747982817425705
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574493117483890209}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.009658873, y: 0.79484636, z: 0.12231769}
+  m_Size: 4
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 3548396813943608312}
+    - renderer: {fileID: 387987512091470540}
+    - renderer: {fileID: 4327919845104904726}
+    - renderer: {fileID: 5886944224997268764}
+    - renderer: {fileID: 4120770446051792488}
+    - renderer: {fileID: 5400758180687910470}
+  m_Enabled: 1
 --- !u!65 &1574493116927716652
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1005,5 +1030,35 @@ Transform:
 --- !u!95 &4950349395955978416 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 2e50ae085a735c94eb9b517c70cb4f00, type: 3}
+  m_PrefabInstance: {fileID: 1574493116927716641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3548396813943608312 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -6564056655305457959, guid: 2e50ae085a735c94eb9b517c70cb4f00, type: 3}
+  m_PrefabInstance: {fileID: 1574493116927716641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &387987512091470540 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -8017584140633651219, guid: 2e50ae085a735c94eb9b517c70cb4f00, type: 3}
+  m_PrefabInstance: {fileID: 1574493116927716641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4327919845104904726 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3014708115134302007, guid: 2e50ae085a735c94eb9b517c70cb4f00, type: 3}
+  m_PrefabInstance: {fileID: 1574493116927716641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5886944224997268764 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4930062464428142653, guid: 2e50ae085a735c94eb9b517c70cb4f00, type: 3}
+  m_PrefabInstance: {fileID: 1574493116927716641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4120770446051792488 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3239869094393969481, guid: 2e50ae085a735c94eb9b517c70cb4f00, type: 3}
+  m_PrefabInstance: {fileID: 1574493116927716641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &5400758180687910470 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -2365830341862212761, guid: 2e50ae085a735c94eb9b517c70cb4f00, type: 3}
   m_PrefabInstance: {fileID: 1574493116927716641}
   m_PrefabAsset: {fileID: 0}

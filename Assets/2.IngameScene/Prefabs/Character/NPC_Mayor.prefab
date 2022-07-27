@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4001199812785747762}
   - component: {fileID: 4001199812785747763}
   - component: {fileID: 2993910692407695876}
+  - component: {fileID: 3588215694236146166}
   m_Layer: 0
   m_Name: NPC_Mayor
   m_TagString: QuestNpc
@@ -62,6 +63,27 @@ MonoBehaviour:
   dialogID: 11300
   npcVirtualCameraObj: {fileID: 0}
   npcAnimator: {fileID: 7416737741140218570}
+--- !u!205 &3588215694236146166
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4001199812785747761}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.03495431, y: 0.8337183, z: 0.027290598}
+  m_Size: 4
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 5861515331861700914}
+    - renderer: {fileID: 8013057250779087221}
+    - renderer: {fileID: 8653307697326436721}
+  m_Enabled: 1
 --- !u!65 &4001199813367820126
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -985,5 +1007,20 @@ Transform:
 --- !u!95 &7416737741140218570 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 37e9df755d6e91844bb243df182ea596, type: 3}
+  m_PrefabInstance: {fileID: 4001199813367820123}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5861515331861700914 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1810632711199879575, guid: 37e9df755d6e91844bb243df182ea596, type: 3}
+  m_PrefabInstance: {fileID: 4001199813367820123}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8013057250779087221 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -2831911929303552466, guid: 37e9df755d6e91844bb243df182ea596, type: 3}
+  m_PrefabInstance: {fileID: 4001199813367820123}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8653307697326436721 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5733547999023226410, guid: 37e9df755d6e91844bb243df182ea596, type: 3}
   m_PrefabInstance: {fileID: 4001199813367820123}
   m_PrefabAsset: {fileID: 0}

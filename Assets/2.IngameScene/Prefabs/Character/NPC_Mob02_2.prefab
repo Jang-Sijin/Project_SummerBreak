@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 2097416115518642085}
   - component: {fileID: 2097416115518642082}
   - component: {fileID: 282859294353292507}
+  - component: {fileID: 5455031863263420889}
   m_Layer: 0
   m_Name: NPC_Mob02_2
   m_TagString: QuestNpc
@@ -75,6 +76,25 @@ MonoBehaviour:
   dialogID: 11600
   npcVirtualCameraObj: {fileID: 0}
   npcAnimator: {fileID: 5508202999901753841}
+--- !u!205 &5455031863263420889
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2097416115518642084}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.00026652217, y: 0.7658633, z: 0.015255541}
+  m_Size: 4
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 513608608841713105}
+  m_Enabled: 1
 --- !u!1001 &2097416115459337312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -985,5 +1005,10 @@ Transform:
 --- !u!95 &5508202999901753841 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: cb33ba65025d3014197dfb15d62a4761, type: 3}
+  m_PrefabInstance: {fileID: 2097416115459337312}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &513608608841713105 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1890157893034305969, guid: cb33ba65025d3014197dfb15d62a4761, type: 3}
   m_PrefabInstance: {fileID: 2097416115459337312}
   m_PrefabAsset: {fileID: 0}

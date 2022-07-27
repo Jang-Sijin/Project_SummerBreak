@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 220324384490140062}
   - component: {fileID: 220324384490140065}
   - component: {fileID: 4614204198747547207}
+  - component: {fileID: 2022533246923736499}
   m_Layer: 0
   m_Name: NPC_Captain
   m_TagString: QuestNpc
@@ -62,6 +63,26 @@ MonoBehaviour:
   dialogID: 11000
   npcVirtualCameraObj: {fileID: 0}
   npcAnimator: {fileID: 5936916893725159379}
+--- !u!205 &2022533246923736499
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220324384490140063}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.000090271235, y: 0.7984614, z: 0.08174124}
+  m_Size: 4
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 8392764883617256886}
+    - renderer: {fileID: 5464567795184707322}
+  m_Enabled: 1
 --- !u!1 &1139364585028808467
 GameObject:
   m_ObjectHideFlags: 0

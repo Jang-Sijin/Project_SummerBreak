@@ -32,7 +32,7 @@ public class SoundManager : MonoBehaviour
         Mixer.SetFloat("BackGroundSound", Mathf.Log10(BGstartVolumeValue) * 20);
         Mixer.SetFloat("SFXSound", Mathf.Log10(SFXstartVolumeValue) * 20);
 
-        PlayBGM(0);
+        //PlayBGM(0);
         // SoundManagerOld.Instance.PlaySFX();
         // SoundManagerOld.Instance.PlayBGM();
         // SoundManagerOld.Instance.PlaySFX();

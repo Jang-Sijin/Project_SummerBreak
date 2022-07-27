@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 1208776149141906726}
   - component: {fileID: 2764816816947148375}
   - component: {fileID: 3508552450859928248}
+  - component: {fileID: 144391810289489060}
   m_Layer: 0
   m_Name: NPC_Witch
   m_TagString: Untagged
@@ -90,10 +91,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogDB: {fileID: 11400000, guid: 8acb37ca59c1ce9449df66ce1310f278, type: 2}
-  dialogID: 0
+  dialogID: 13100
   npcVirtualCameraObj: {fileID: 0}
   npcAnimator: {fileID: 5248970566620094696}
-  useDialogList: []
+--- !u!205 &144391810289489060
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769924297229640265}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.3743984, y: 0.8509249, z: 0.013658345}
+  m_Size: 4
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 19465778542450602}
+    - renderer: {fileID: 8809349803340082086}
+    - renderer: {fileID: 8474755850247929854}
+  m_Enabled: 1
 --- !u!1 &1130971185693609780
 GameObject:
   m_ObjectHideFlags: 0
