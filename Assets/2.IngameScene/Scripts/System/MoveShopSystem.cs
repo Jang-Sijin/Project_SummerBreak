@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopSystem : MonoBehaviour
+public class MoveShopSystem : MonoBehaviour
 {
     // [프리팹 셋팅]
     [Header("상점 캔버스")] 
@@ -67,9 +67,9 @@ public class ShopSystem : MonoBehaviour
     private Image shopBuyButtonImage;
     private Image shopSaleButtonImage;
 
-    #region Shop System 싱글톤 설정
+    #region Move Shop System 싱글톤 설정
 
-    public static ShopSystem instance; // Game Manager을 싱글톤으로 관리
+    public static MoveShopSystem instance; // Game Manager을 싱글톤으로 관리
 
     private void Awake()
     {
