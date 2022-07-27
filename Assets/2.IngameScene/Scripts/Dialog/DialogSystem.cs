@@ -22,7 +22,10 @@ public class DialogSystem : MonoBehaviour
 
 	private Animator _getNpcAnimator;
 	private GameObject _getNpcVirtualCameraObj;
-	
+
+	public bool IsActiveDialog { get { return isActiveDialog; } }
+	private bool isActiveDialog = false; // false: 대화 X상태, true: 대화 O상태
+
 	#region Singleton
 	public static DialogSystem instance; // DialogSystem을 싱글톤으로 관리
 	private void Awake()
@@ -37,6 +40,14 @@ public class DialogSystem : MonoBehaviour
 
 	private void Start()
 	{
+		if (DialogSystem.instance.IsActiveDialog)
+		{
+			// 현재 대화중. 움직이지 않는 코드 처리
+		}
+		else
+		{
+			
+		}
 		Setup();
 	}
 
@@ -62,6 +73,7 @@ public class DialogSystem : MonoBehaviour
 			if ( isAutoStart ) SetNextDialog(dialogList);
 
 			_isFirst = false;
+			isActiveDialog = true;
 		}
 
 		if (Input.GetMouseButtonDown(0)) // 마우스 버튼을 누르면 조건 실행
@@ -88,6 +100,7 @@ public class DialogSystem : MonoBehaviour
 			}
 			else
 			{
+				isActiveDialog = false;
 				// 대사가 더 이상 없을 경우 true 반환
 				return true;
 			}
@@ -153,6 +166,7 @@ public class DialogSystem : MonoBehaviour
 			if ( isAutoStart ) SetNextDialog(dialogList);
 
 			_isFirst = false;
+			isActiveDialog = true;
 		}
 
 		if (Input.GetMouseButtonDown(0)) // 마우스 버튼을 누르면 조건 실행
@@ -179,9 +193,14 @@ public class DialogSystem : MonoBehaviour
 			}
 			else
 			{
-				// 대사가 더 이상 없을 경우 확인 버튼 또는 퀘스트 수락, 퀘스트 거절 버튼을 활성화
+				// [★대사가 더 이상 없을 경우★] //
+				// 확인 버튼 또는 퀘스트 수락, 퀘스트 거절 버튼을 활성화
+				
 				// _dialogUiController.SetActiveButtonObjects(true);
+				isActiveDialog = false;
 				CloseObjDialogUi();
+				ActiveLandMarkAnimation();
+				
 				return true;
 			}
 		}
@@ -291,5 +310,16 @@ public class DialogSystem : MonoBehaviour
 		_currentDialogIndex = -1; // 현재 대사 순번
 		_isTypingEffect = false; // 텍스트 타이핑 효과를 재생중인지
 		CloseDialogUi();
+	}
+
+	private void ActiveLandMarkAnimation()
+	{
+		if(PlayerEventSystem.instance.NearObject.CompareTag("LandMarkObj"))
+		{
+			// 랜드마크 컷씬 타임라인/애니메이션을 출력한다.
+			// PlayableDirector pd;
+			// pd = Get  PlayableDirector
+			// pd.Play();
+		}
 	}
 }

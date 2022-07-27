@@ -16,6 +16,7 @@ public class PlayerEventSystem : MonoBehaviour
     // [키 입력 체크]
     private bool eKeyDown; // e버튼(상호작용)
     // [플레이어 근처에 있는 오브젝트]
+    public GameObject NearObject { get { return nearObject; } }
     private GameObject nearObject;
 
     private bool isLandMarkArea = false;

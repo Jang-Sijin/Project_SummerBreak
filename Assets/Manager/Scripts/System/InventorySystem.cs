@@ -190,4 +190,23 @@ public class InventorySystem : MonoBehaviour
         }
         return;
     }
+    
+    // findItemName과 같은 아이템이 인벤토리에 존재하는지 확인한다. true: 있음, false: 없음
+    public bool FindInventorySlotItem(string findItemName)
+    {
+        if (equipmentSlot.item != null && equipmentSlot.item.itemName == findItemName)
+        {
+            return true;
+        }
+
+        foreach (var itemSlot in itemSlots)
+        {
+            if (itemSlot.item != null && itemSlot.item.itemName == findItemName)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
