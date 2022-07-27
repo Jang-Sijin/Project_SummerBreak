@@ -10,8 +10,10 @@ public class SnowTrigger : MonoBehaviour
     [SerializeField] 
     private ParticleSystem snowParticle;
 
+    private PlayerStatus _playerStatus;
     private void Start()
     {
+        _playerStatus = GameManager.instance.playerGameObject.GetComponent<PlayerStatus>();
         snowParticle.Stop();
     }
 
@@ -19,6 +21,7 @@ public class SnowTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            _playerStatus.playerInPeak = true;
             snowParticle.Play();
         }
     }
@@ -27,6 +30,7 @@ public class SnowTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            _playerStatus.playerInPeak = false;
             snowParticle.Stop();
         }
     }
