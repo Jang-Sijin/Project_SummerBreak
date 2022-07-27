@@ -9752,7 +9752,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 15, y: 76.47, z: -0.002}
 --- !u!114 &351131317
 MonoBehaviour:
@@ -12829,6 +12829,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 0.09, z: 10}
   m_Center: {x: 0, y: -0.045, z: 0}
+--- !u!198 &443279619 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4389000060652547222, guid: 3e6bd566f7872bd47a4201e865fd6a23, type: 3}
+  m_PrefabInstance: {fileID: 438379805}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &443879240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22204,6 +22209,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 785563790}
     m_Modifications:
+    - target: {fileID: 535542162997733995, guid: 99479dc37af321c45936c5513e8d2d37, type: 3}
+      propertyPath: loot.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 535542162997733995, guid: 99479dc37af321c45936c5513e8d2d37, type: 3}
+      propertyPath: loot.Array.data[0]
+      value: 
+      objectReference: {fileID: 3719753758182797601, guid: 12f9ad1b97c5f584dab73ac07c4aad04, type: 3}
     - target: {fileID: 4633627749673510854, guid: 99479dc37af321c45936c5513e8d2d37, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -27237,7 +27250,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 39
+  m_RootOrder: 40
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &895698132
 PrefabInstance:
@@ -44599,7 +44612,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1280402146}
   - component: {fileID: 1280402145}
-  - component: {fileID: 1280402144}
   m_Layer: 0
   m_Name: SkyboxBlender_WhitePeak
   m_TagString: Untagged
@@ -44607,19 +44619,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1280402144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1280402143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3ab109d36aeec1458ecb166fb02046e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skyboxScript: {fileID: 1280402145}
 --- !u!114 &1280402145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53017,6 +53016,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 785563790}
     m_Modifications:
+    - target: {fileID: 535542162997733995, guid: 99479dc37af321c45936c5513e8d2d37, type: 3}
+      propertyPath: loot.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 535542162997733995, guid: 99479dc37af321c45936c5513e8d2d37, type: 3}
+      propertyPath: loot.Array.data[0]
+      value: 
+      objectReference: {fileID: 7600625946725073331, guid: eb514711c091b06478c1dede76b9c8b3, type: 3}
+    - target: {fileID: 535542162997733995, guid: 99479dc37af321c45936c5513e8d2d37, type: 3}
+      propertyPath: loot.Array.data[1]
+      value: 
+      objectReference: {fileID: 7600625946725073331, guid: eb514711c091b06478c1dede76b9c8b3, type: 3}
+    - target: {fileID: 535542162997733995, guid: 99479dc37af321c45936c5513e8d2d37, type: 3}
+      propertyPath: loot.Array.data[2]
+      value: 
+      objectReference: {fileID: 7600625946725073331, guid: eb514711c091b06478c1dede76b9c8b3, type: 3}
+    - target: {fileID: 535542162997733995, guid: 99479dc37af321c45936c5513e8d2d37, type: 3}
+      propertyPath: loot.Array.data[3]
+      value: 
+      objectReference: {fileID: 4868614413706996353, guid: 319c50e38ccc32f46a2dd591fe62b6c7, type: 3}
+    - target: {fileID: 535542162997733995, guid: 99479dc37af321c45936c5513e8d2d37, type: 3}
+      propertyPath: loot.Array.data[4]
+      value: 
+      objectReference: {fileID: 5339170437708461637, guid: c9708d791086b7048bfda9439738d919, type: 3}
+    - target: {fileID: 535542162997733995, guid: 99479dc37af321c45936c5513e8d2d37, type: 3}
+      propertyPath: loot.Array.data[5]
+      value: 
+      objectReference: {fileID: 3719753758182797601, guid: 12f9ad1b97c5f584dab73ac07c4aad04, type: 3}
     - target: {fileID: 4633627749673510854, guid: 99479dc37af321c45936c5513e8d2d37, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -59027,6 +59054,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1711357672}
   - component: {fileID: 1711357673}
+  - component: {fileID: 1711357674}
   m_Layer: 0
   m_Name: LandMarkCoillier
   m_TagString: LandMarkArea
@@ -59061,6 +59089,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 50, y: 60, z: 55}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1711357674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711357671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed5922e374cae404dad8ecfd323d49b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snowParticle: {fileID: 443279619}
 --- !u!1 &1711480301
 GameObject:
   m_ObjectHideFlags: 0
@@ -61140,6 +61181,7 @@ MonoBehaviour:
   DebugModGlideButton: {fileID: 2143912262}
   DebugModQuaterButtton: {fileID: 453249560}
   DebugMod: 0
+  playerInPeak: 0
 --- !u!114 &1772180696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65839,7 +65881,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1920684544
 PrefabInstance:
@@ -66184,7 +66226,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2020549957101284674, guid: a0d998ce251c4984380e16d7fd1e6da3, type: 3}
       propertyPath: m_RootOrder
-      value: 40
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 2020549957101284674, guid: a0d998ce251c4984380e16d7fd1e6da3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -67835,7 +67877,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1987887798}
   - component: {fileID: 1987887797}
-  - component: {fileID: 1987887799}
   m_Layer: 0
   m_Name: SkyboxBlender
   m_TagString: Untagged
@@ -67880,19 +67921,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 47
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1987887799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1987887796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84382eff0c600a94a88b856d2f764312, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skyboxScript: {fileID: 1987887797}
 --- !u!1001 &1991538569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71392,7 +71420,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 31
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2102908281
 PrefabInstance:
@@ -73852,7 +73880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1089270435974170992, guid: 81be0d87db9bab948945ec2db4b48a0d, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1089270435974170992, guid: 81be0d87db9bab948945ec2db4b48a0d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -73971,7 +73999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1210442377075796306, guid: eb6c743bf8320bf47831fb3864608354, type: 3}
       propertyPath: m_RootOrder
-      value: 25
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 1210442377075796306, guid: eb6c743bf8320bf47831fb3864608354, type: 3}
       propertyPath: m_AnchorMax.x
@@ -74781,7 +74809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2452393992348195451, guid: bcf6e380817fa064798e51fb4f2e19ac, type: 3}
       propertyPath: m_RootOrder
-      value: 32
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 2452393992348195451, guid: bcf6e380817fa064798e51fb4f2e19ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -74843,6 +74871,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5698882480783404254, guid: bcf6e380817fa064798e51fb4f2e19ac, type: 3}
+      propertyPath: peakSkyboxBlender
+      value: 
+      objectReference: {fileID: 1280402145}
+    - target: {fileID: 5698882480783404254, guid: bcf6e380817fa064798e51fb4f2e19ac, type: 3}
+      propertyPath: dayNightSkyboxBlender
+      value: 
+      objectReference: {fileID: 1987887797}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcf6e380817fa064798e51fb4f2e19ac, type: 3}
 --- !u!4 &2468001811242154200

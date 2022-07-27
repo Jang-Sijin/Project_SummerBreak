@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 4633627749673510854}
   - component: {fileID: 4766048798458146696}
   - component: {fileID: 3139759745575157143}
+  - component: {fileID: 535542162997733995}
   m_Layer: 0
   m_Name: ChestBox
   m_TagString: Untagged
@@ -145,7 +146,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5406047228976364924}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: e6a56bbe097fa6344900a12b74050450, type: 3}
   m_Controller: {fileID: 9100000, guid: 8bf85dcba5c36bc45bb1ce5c02056898, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -155,6 +156,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &535542162997733995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406047228976364924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43684431f8ab2d74f9ee40bfda77a019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loot: []
+  spawnPoint: {fileID: 4633627749673510854}
+  spawnLoot: 0
 --- !u!1 &8335839598698602965
 GameObject:
   m_ObjectHideFlags: 0

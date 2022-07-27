@@ -47,6 +47,8 @@ public class PlayerStatus : MonoBehaviour
     private bool DebugMod = false;
 
     private PlayerMovement _playerMovement;
+
+    public bool playerInPeak = false;
     
     void Awake()
     {

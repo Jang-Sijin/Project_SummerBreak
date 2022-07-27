@@ -60,6 +60,14 @@ public class TimeController : MonoBehaviour
 
     private TimeSpan sunsetTime;
 
+    
+    // 변수 작성자: 이민호
+    private PlayerStatus _playerStatus;
+    
+    private bool playDayBGM = false;
+    private bool playNightBGM = false;
+    private bool playPeakBGM = false;
+    private DateTime peakTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,16 +75,79 @@ public class TimeController : MonoBehaviour
 
         sunriseTime = TimeSpan.FromHours(sunriseHour);
         sunsetTime = TimeSpan.FromHours(sunsetHour);
+        
+        // 작성자: 이민호
+        peakTime = DateTime.Now.Date + TimeSpan.FromHours(22);
+        _playerStatus = GameManager.instance.playerGameObject.GetComponent<PlayerStatus>();
+        UpdateBGMOfTime();
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateTimeOfDay();
-        RotateSun();
+        if (!_playerStatus.playerInPeak)
+        {
+            UpdateTimeOfDay();
+            RotateSun();
+        }
+        else if(_playerStatus.playerInPeak)
+        {
+            float peakSunLightRotation;
+            
+            if (timeText != null)
+            {
+                timeText.text = peakTime.ToString("HH:mm");
+            }
+            
+            TimeSpan sunsetToSunriseDuration = CalculateTimeDifference(sunsetTime, sunriseTime);
+            TimeSpan timeSinceSunset = CalculateTimeDifference(sunsetTime, currentTime.TimeOfDay);
+
+            double percentage = timeSinceSunset.TotalMinutes / sunsetToSunriseDuration.TotalMinutes;
+
+            peakSunLightRotation = Mathf.Lerp(180, 360, (float)percentage);
+            
+            sunLight.transform.rotation = Quaternion.AngleAxis(peakSunLightRotation, Vector3.right);
+        }
+
         UpdateLightSettings();
+        
+        UpdateBGMOfTime();
     }
 
+    // 작성자: 이민호 
+    private void UpdateBGMOfTime()
+    {
+        if (!_playerStatus.playerInPeak)
+        {
+            if(!playDayBGM && currentTime.Hour >= 5 && currentTime.Hour <= 19)
+            {
+                playNightBGM = false;
+                playDayBGM = true;
+                playPeakBGM = false;
+                Debug.Log("[이민호] 낮 BGM 재생");
+                SoundManager.Instance.PlayBGM(0);
+            }
+            
+            if (!playNightBGM && ((currentTime.Hour < 5 && currentTime.Hour >= 0) || (currentTime.Hour >= 20 && currentTime.Hour <= 23)))
+            {
+                
+                playNightBGM = true;
+                playDayBGM = false;
+                playPeakBGM = false;
+                Debug.Log("[이민호] 밤 BGM 재생");
+                SoundManager.Instance.PlayBGM(1);
+            }
+        }
+        else if(!playPeakBGM)
+        {
+            playNightBGM = false;
+            playDayBGM = false;
+            playPeakBGM = true;
+            Debug.Log("[이민호] 하얀정상 BGM 재생");
+            SoundManager.Instance.PlayBGM(2);
+        }
+    }
+    
     private void UpdateTimeOfDay()
     {
         currentTime = currentTime.AddSeconds(Time.deltaTime * timeMultiplier);
