@@ -77,7 +77,7 @@ public class PlayerEventSystem : MonoBehaviour
                 ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
                 objDialogTrigger.EnterPlayer();
             }
-            else if (nearObject.CompareTag("ShopNpc"))
+            else if (nearObject.CompareTag("ShopNpc") || nearObject.CompareTag("MoveShopNPC"))
             {
                 // 다이얼로그 시작 코루틴 시작
                 NpcDialogTrigger npcDialogTrigger = nearObject.GetComponent<NpcDialogTrigger>();
@@ -91,7 +91,7 @@ public class PlayerEventSystem : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("QuestNpc") || other.CompareTag("DialogObj") || other.CompareTag("ShopNpc") || other.CompareTag("LandMarkObj"))
+        if (other.CompareTag("QuestNpc") || other.CompareTag("DialogObj") || other.CompareTag("ShopNpc") || other.CompareTag("MoveShopNPC") || other.CompareTag("LandMarkObj"))
         {
             // print($"[장시진]: Player-NPC Collider 충돌 성공 -> 상호작용 가능");
             nearObject = other.gameObject;
@@ -138,7 +138,7 @@ public class PlayerEventSystem : MonoBehaviour
             // 트리거가 발생 UI(E키)를 비활성화(출력X)한다.
             interactionText.gameObject.SetActive(false);
         }
-        else if (other.CompareTag("ShopNpc"))
+        else if (other.CompareTag("ShopNpc") || other.CompareTag("MoveShopNPC"))
         {
             // print($"[장시진]: Player-NPC Collider 충돌 실패 -> 상호작용 불가능");
             

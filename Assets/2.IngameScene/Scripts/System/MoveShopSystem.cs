@@ -17,7 +17,7 @@ public class MoveShopSystem : MonoBehaviour
     [Header("상점 슬롯 설정")] 
     [SerializeField] private GameObject shopSlotsParent;
 
-    [Header("상점 인벤토리 슬롯 설정")] 
+    [Header("상점 판매 인벤토리 슬롯 설정")] 
     [SerializeField] private GameObject shopInventoryEquipmentSlot;
     [SerializeField] private GameObject shopInventorySlotsParent;
 
@@ -45,7 +45,7 @@ public class MoveShopSystem : MonoBehaviour
     [Header("플레이어 코인 UI 설정")] 
     [SerializeField] private GameObject playerCoinUI;
 
-    [Header("일반상점 구매/판매 아이템DB 리스트")] 
+    [Header("이동상점 구매/판매 아이템DB 리스트")] 
     [SerializeField] private ShopItem[] shopItemList;
 
     // [상점 구매UI]
@@ -118,7 +118,7 @@ public class MoveShopSystem : MonoBehaviour
         }
         catch (Exception e)
         {
-            Console.WriteLine("ShopSystem InitShopItemList [" + e + "] 오류가 발생하였습니다.");
+            Console.WriteLine("MoveShopSystem InitShopItemList [" + e + "] 오류가 발생하였습니다.");
             throw;
         }
     }

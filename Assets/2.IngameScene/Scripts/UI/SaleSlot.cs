@@ -91,7 +91,15 @@ public class SaleSlot : MonoBehaviour, IPointerClickHandler
         {
             if (item != null && isMouseLeftClick)
             {
-                ShopSystem.instance.OpenRequestSaleUI(item);
+                if (PlayerEventSystem.instance.NearObject.CompareTag("ShopNpc"))
+                {
+                    ShopSystem.instance.OpenRequestSaleUI(item);
+                }
+                else if (PlayerEventSystem.instance.NearObject.CompareTag("MoveShopNPC"))
+                {
+                    MoveShopSystem.instance.OpenRequestSaleUI(item);
+                }
+
                 print($"{isMouseLeftClick}");
             }
             else

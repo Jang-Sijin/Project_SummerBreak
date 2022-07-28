@@ -122,6 +122,10 @@ public class NpcDialogTrigger : MonoBehaviour
                 {
                     ShopSystem.instance.OpenShopCanvas();
                 }
+                else if (PlayerEventSystem.instance.GetNearGameObject().CompareTag("MoveShopNPC"))
+                {
+                    MoveShopSystem.instance.OpenShopCanvas();
+                }
             }
         }
     }
