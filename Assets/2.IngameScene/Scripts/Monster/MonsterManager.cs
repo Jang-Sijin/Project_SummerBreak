@@ -159,6 +159,8 @@ public class MonsterManager : MonoBehaviour
         }
         else
         {
+            SoundManager.Instance.PlaySFX(1);
+            
             if (damageText)
             {
                 ShowDamgeText(damage);

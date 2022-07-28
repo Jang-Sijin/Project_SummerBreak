@@ -27,6 +27,8 @@ public class PlayerInputManager : MonoBehaviour
 
     [SerializeField] 
     private GameObject walkEffect;
+    [SerializeField] 
+    private GameObject peakWalkEffect;
     
     [SerializeField]
     private bool moveDoingCheck;
@@ -53,6 +55,7 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField]
     private float slideCounter = 0f;
     private Vector3 lastPlayerPos;
+    
     private void Awake()
     {
         player = GetComponent<PlayerMovement>();
@@ -93,12 +96,11 @@ public class PlayerInputManager : MonoBehaviour
         }
         else if (player.isSwim && !player.isGrounded)
         {
-            if (JumpDoingCheck)
+            if((playerstatus.GetDebugMod() == true || playerstatus.currentStamina > 0) && FlapDoingCheck)
             {
-                //Debug.Log("[이민호] 수중점프");
-                player.Jump(moveDirection);
+                player.Flap();
+                FlapDoingCheck = false;
             }
-
             if (!JumpDoingCheck)
             {
                 player.SwimMove(moveDirection, moveDoingCheck);
@@ -151,6 +153,8 @@ public class PlayerInputManager : MonoBehaviour
 
     private void Update()
     {
+        isDialoged = DialogSystem.instance.IsActiveDialog;
+        
         if (player.slidingCheck)
         {
             if (player.transform.position == lastPlayerPos)
@@ -188,10 +192,20 @@ public class PlayerInputManager : MonoBehaviour
         }
         if (player.isGrounded && moveDoingCheck)
         {
-            walkEffect.SetActive(true);
+            if (playerstatus.playerInPeak)
+            {
+                peakWalkEffect.SetActive(true);
+                walkEffect.SetActive(false);
+            }
+            else
+            {
+                walkEffect.SetActive(true);
+                peakWalkEffect.SetActive(false);
+            }
         }
         else
         {
+            peakWalkEffect.SetActive(false);
             walkEffect.SetActive(false);
         }
 
@@ -350,14 +364,14 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
 
-            if (!isDialoged && !player.hited &&!player.attacked && !player.isSwim && !player.isGrounded)
+            if (!isDialoged && !player.hited &&!player.attacked && (player.isSwim || !player.isGrounded))
             {
                 FlapDoingCheck = true;
                 spaceClickCheck = true;
                 if (EnableLog)
                     Debug.Log("[이민호] Flap : " + context.phase.ToString());   
             }
-            else if (!isDialoged && !player.hited && !player.attacked && (player.isGrounded || player.isSwim))
+            else if (!isDialoged && !player.hited && !player.attacked && player.isGrounded)
             {
                 JumpDoingCheck = true;
                 spaceClickCheck = true;

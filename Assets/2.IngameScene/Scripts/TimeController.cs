@@ -68,6 +68,7 @@ public class TimeController : MonoBehaviour
     private bool playNightBGM = false;
     private bool playPeakBGM = false;
     private DateTime peakTime;
+    private DateTime questTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -78,6 +79,7 @@ public class TimeController : MonoBehaviour
         
         // 작성자: 이민호
         peakTime = DateTime.Now.Date + TimeSpan.FromHours(22);
+        questTime = DateTime.Now.Date + TimeSpan.FromHours(12);
         _playerStatus = GameManager.instance.playerGameObject.GetComponent<PlayerStatus>();
         UpdateBGMOfTime();
     }
@@ -85,10 +87,23 @@ public class TimeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_playerStatus.playerInPeak)
+        if (QuestSystem.instance.playerProgressQuestID < 5)
         {
-            UpdateTimeOfDay();
-            RotateSun();
+            float questSunLightRotation;
+            
+            if (timeText != null)
+            {
+                timeText.text = questTime.ToString("HH:mm");
+            }
+            
+            TimeSpan sunriseToSunsetDuration = CalculateTimeDifference(sunriseTime, sunsetTime);
+            TimeSpan timeSinceSunrise = CalculateTimeDifference(sunriseTime, currentTime.TimeOfDay);
+
+            double percentage = timeSinceSunrise.TotalMinutes / sunriseToSunsetDuration.TotalMinutes;
+
+            questSunLightRotation = Mathf.Lerp(0, 180, (float)percentage);
+            
+            sunLight.transform.rotation = Quaternion.AngleAxis(questSunLightRotation, Vector3.right);
         }
         else if(_playerStatus.playerInPeak)
         {
@@ -107,6 +122,11 @@ public class TimeController : MonoBehaviour
             peakSunLightRotation = Mathf.Lerp(180, 360, (float)percentage);
             
             sunLight.transform.rotation = Quaternion.AngleAxis(peakSunLightRotation, Vector3.right);
+        }
+        else
+        {
+            UpdateTimeOfDay();
+            RotateSun();
         }
 
         UpdateLightSettings();

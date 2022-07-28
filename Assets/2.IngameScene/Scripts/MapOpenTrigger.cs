@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +9,15 @@ public class MapOpenTrigger : MonoBehaviour
     [SerializeField]
     private GameObject mapPiece;
 
+    [SerializeField] 
+    private bool mapPieceable;
+
     public void SetActiveMapPiece()
     {
         if (mapPiece != null)
         {
             mapPiece.SetActive(true);
+            mapPieceable = true;
         }
     }
 
@@ -20,5 +25,10 @@ public class MapOpenTrigger : MonoBehaviour
     {
         return mapPiece;
     }
-    
+
+    public bool GetMapPieceable()
+    {
+        return mapPieceable;
+    }
+
 }
