@@ -11,6 +11,7 @@ public class InputSystem : MonoBehaviour
     
     [SerializeField] private GameObject inventoryUICanvas;
     [SerializeField] private GameObject shopUICanvas;
+    [SerializeField] private GameObject moveShopUICanvas;
     [SerializeField] private GameObject dialogUICanvas;
     
     public bool showOptionUI;
@@ -29,7 +30,8 @@ public class InputSystem : MonoBehaviour
         if (Input.GetKeyDown(option))
         {
             if (shopUICanvas.gameObject.activeSelf != true &&
-                dialogUICanvas.gameObject.activeSelf != true)
+                dialogUICanvas.gameObject.activeSelf != true &&
+                moveShopUICanvas.gameObject.activeSelf != true )
             {
                 showOptionUI = !showOptionUI;
             }

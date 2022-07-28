@@ -19,11 +19,7 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
     // 필요한 컴포넌트
     [SerializeField] private TMP_Text itemCountText; // 상점에서 판매중인 아이템의 개수 텍스트
     [SerializeField] private TMP_Text itemPriceText; // 상점에서 판매중인 아이템의 가격 텍스트
-    
-    [Header("아래 TMP_Text: Inventory 하위 오브젝트에 있는 이름과 동일한 오브젝트를 연결해 주세요.")]
-    [SerializeField] private TMP_Text item_ShowName_Text; // 아이템의 이름(정보)을 보여주는 텍스트
-    [SerializeField] private TMP_Text item_ShowInfo_Text; // 아이템의 내용(정보)를 보여주는 텍스트
-    
+
     // 마우스 좌버튼 클릭 체크 (아이템 선택 유/무)
     private bool isMouseLeftClick;
 
@@ -67,7 +63,14 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
         {
             if (item != null && isMouseLeftClick)
             {
-                ShopSystem.instance.OpenRequestBuyUI(item);
+                if (PlayerEventSystem.instance.NearObject.CompareTag("ShopNpc"))
+                {
+                    ShopSystem.instance.OpenRequestBuyUI(item);
+                }
+                else if (PlayerEventSystem.instance.NearObject.CompareTag("MoveShopNPC"))
+                {
+                    MoveShopSystem.instance.OpenRequestBuyUI(item);
+                }
                 print($"{isMouseLeftClick}");
             }
             else
