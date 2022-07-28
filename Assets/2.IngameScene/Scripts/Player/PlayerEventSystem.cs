@@ -14,7 +14,7 @@ public class PlayerEventSystem : MonoBehaviour
     private GameObject interactionText; // 상호작용이 가능할 때 출력되는 UI Text
 
     // [키 입력 체크]
-    private bool eKeyDown; // e버튼(상호작용)
+    private bool KeyDown; // 버튼(상호작용)
     // [플레이어 근처에 있는 오브젝트]
     public GameObject NearObject { get { return nearObject; } }
     private GameObject nearObject;
@@ -45,12 +45,12 @@ public class PlayerEventSystem : MonoBehaviour
     private void GetInput()
     {
         // 상호작용 버튼인 e Key를 눌렀을 때
-        eKeyDown = Input.GetButtonDown("Interaction");
+        KeyDown = Input.GetButtonDown("Interaction");
     }
 
     private void Interaction()
     {
-        if (eKeyDown && nearObject != null)
+        if (KeyDown && nearObject != null)
         {
             if (nearObject.CompareTag("QuestNpc"))
             {
