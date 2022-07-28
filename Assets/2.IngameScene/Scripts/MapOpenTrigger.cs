@@ -1,17 +1,35 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class MapOpenTrigger : MonoBehaviour
 {
+
+    public int landMarkNumber;
     
     [SerializeField]
     private GameObject mapPiece;
 
     [SerializeField] 
+    private GameObject landMarkCutScene;
+    [SerializeField] 
+    private GameObject cutSceneComPlite;
+    
+    [SerializeField] 
     private bool mapPieceable;
 
+    [SerializeField] private bool cutSceneStarted = false;
+    
+    private PlayerStatus _playerStatus;
+    private void Start()
+    {
+        _playerStatus = GameManager.instance.playerGameObject.GetComponent<PlayerStatus>();
+    }
+
+    [SerializeField]
     public void SetActiveMapPiece()
     {
         if (mapPiece != null)
@@ -21,11 +39,19 @@ public class MapOpenTrigger : MonoBehaviour
         }
     }
 
-    public GameObject GetMapPiece()
-    {
-        return mapPiece;
-    }
 
+    public void StartCutScene()
+    {
+        if (landMarkCutScene != null && GetMapPieceable() && !cutSceneStarted)
+        {
+            cutSceneStarted = true;
+            PlayableDirector _cutScene;
+            _cutScene = landMarkCutScene.GetComponent<PlayableDirector>();
+            _cutScene.Play();
+            _playerStatus.landMarkEnable[landMarkNumber - 1] = true;
+        }
+    }
+    
     public bool GetMapPieceable()
     {
         return mapPieceable;

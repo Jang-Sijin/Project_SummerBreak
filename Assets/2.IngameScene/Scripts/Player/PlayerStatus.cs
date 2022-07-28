@@ -50,6 +50,8 @@ public class PlayerStatus : MonoBehaviour
 
     public bool playerInPeak = false;
     
+    public bool[] landMarkEnable = new bool[5];
+    
     void Awake()
     {
         currentHealth = maxHealth;
@@ -97,6 +99,7 @@ public class PlayerStatus : MonoBehaviour
 
     private void Update()
     {
+        
         if (currentHealth <= 0.0f)
         {
             this.transform.position = _playerMovement.respawnPoint.transform.position;
