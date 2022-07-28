@@ -48,6 +48,7 @@ public class PlayerEquipmentManager : MonoBehaviour
 
     public void AttackStart()
     {
+        SoundManager.Instance.PlaySFX(0);
         colliderAttack.enabled = true;
     }
 

@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
     private bool hitClam = false;
 
     [SerializeField] private float climpSpeed = 3.5f;
-    
+
     void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody>();
@@ -143,7 +143,15 @@ public class PlayerMovement : MonoBehaviour
     {
             currentState = playerState.jumpState;
             Vector3 jumpDirection = new Vector3(0.0f, jumpPower, 0.0f);
-            jumpEffect.Play();
+            if (!playerstatus.playerInPeak)
+            {
+                jumpEffect.Play();
+            }
+            else
+            {
+                flapEffect.Reinit();
+                flapEffect.Play();
+            }
             //Debug.Log("[이민호] 점프함");
             m_rigidbody.AddForce(jumpDirection, ForceMode.Impulse);
     }
@@ -458,10 +466,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 GameManager.instance.SetInGameTime(7);
             }
-            else if (playerstatus.currentItem == PlayerStatus.item.interaction_quillPen)
-            {
-                
-            }
         }
     }
 
@@ -681,6 +685,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (!invincible)
         {
+            SoundManager.Instance.PlaySFX(1);
             this.gameObject.layer = LayerMask.NameToLayer("Player_invincible");
             hited = true;
             invincible = true;
@@ -729,7 +734,7 @@ public class PlayerMovement : MonoBehaviour
             capeRenderer.enabled = true;
         }
     }
-    
+
     public void HitEnd()
     {
         hited = false;
