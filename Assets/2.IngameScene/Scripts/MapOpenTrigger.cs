@@ -44,11 +44,11 @@ public class MapOpenTrigger : MonoBehaviour
     {
         if (landMarkCutScene != null && GetMapPieceable() && !cutSceneStarted)
         {
+            _playerStatus.landMarkEnable[landMarkNumber - 1] = true;
             cutSceneStarted = true;
             PlayableDirector _cutScene;
             _cutScene = landMarkCutScene.GetComponent<PlayableDirector>();
             _cutScene.Play();
-            _playerStatus.landMarkEnable[landMarkNumber - 1] = true;
         }
     }
     
