@@ -12,7 +12,6 @@ public class ChangeSkyBox : MonoBehaviour
 
     private int curInTime = 0;
     private int lastInTime = 0;
-    private int changeSky = 0;
 
     private bool isChangedSkybox = false;
     private bool isChangedPeak = false;

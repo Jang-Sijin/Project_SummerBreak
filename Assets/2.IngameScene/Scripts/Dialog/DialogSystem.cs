@@ -195,6 +195,7 @@ public class DialogSystem : MonoBehaviour
 			{
 				// [★대사가 더 이상 없을 경우★] //
 				// 확인 버튼 또는 퀘스트 수락, 퀘스트 거절 버튼을 활성화
+				// 1. 몇번째 랜드마크 표지판인지, 몇번째 지도가 그려졌는지
 				
 				// _dialogUiController.SetActiveButtonObjects(true);
 				isActiveDialog = false;
@@ -316,6 +317,7 @@ public class DialogSystem : MonoBehaviour
 	{
 		if(PlayerEventSystem.instance.NearObject.CompareTag("LandMarkObj"))
 		{
+			PlayerEventSystem.instance.NearObject.GetComponent<MapOpenTrigger>().StartCutScene();
 			// 랜드마크 컷씬 타임라인/애니메이션을 출력한다.
 			// PlayableDirector pd;
 			// pd = Get  PlayableDirector

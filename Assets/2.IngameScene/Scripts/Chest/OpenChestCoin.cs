@@ -14,9 +14,6 @@ public class OpenChestCoin : MonoBehaviour
 
     public bool spawnLoot = false;
 
-    private int coinCount = -1;
-    
-
     void Update()
     {
         if (spawnLoot && !hasBeenCollected)
