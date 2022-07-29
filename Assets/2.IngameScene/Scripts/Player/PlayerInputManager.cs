@@ -29,6 +29,9 @@ public class PlayerInputManager : MonoBehaviour
     private GameObject walkEffect;
     [SerializeField] 
     private GameObject peakWalkEffect;
+
+    [SerializeField] 
+    private GameObject waterRipple;
     
     [SerializeField]
     private bool moveDoingCheck;
@@ -279,11 +282,21 @@ public class PlayerInputManager : MonoBehaviour
             GlideTrail_Right.SetActive(false);
         }
 
+        if (!player.isSwim)
+        {
+            waterRipple.GetComponent<ParticleSystem>().Stop();
+            waterRipple.SetActive(false);
+        }
+        else
+        {
+            waterRipple.SetActive(true);
+            waterRipple.GetComponent<ParticleSystem>().Play();
+        }
+        
         if (!player.inWater)
         {
             player.isSwim = false;
         }
-
         lastPlayerPos = player.transform.position;
     }
 

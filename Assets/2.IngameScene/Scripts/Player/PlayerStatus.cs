@@ -50,6 +50,9 @@ public class PlayerStatus : MonoBehaviour
 
     public bool playerInPeak = false;
     
+    public bool[] landMarkEnable = new bool[5];
+
+    [SerializeField] private string checkToChangeEquipment = null;
     void Awake()
     {
         currentHealth = maxHealth;
@@ -95,34 +98,50 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
+    
     private void Update()
     {
+        
         if (currentHealth <= 0.0f)
         {
             this.transform.position = _playerMovement.respawnPoint.transform.position;
             ReSetCurHealth();
         }
-        if (equipmentSlot.item != null)
+
+
+        if (equipmentSlot.item == null)
         {
-            if (equipmentSlot.item.itemName == "작은 검")
-            {
-                Debug.Log($"[이민호] 소드 장착 ");
-                currentItem = item.attack;
-            }
-            else if (equipmentSlot.item.itemName == "폭신침낭")
-            {
-                Debug.Log($"[이민호] 침남 장착 ");
-                currentItem = item.interaction_sleep;
-            }
-            else if (equipmentSlot.item.itemName == "검은깃펜")
-            {
-                Debug.Log($"[이민호] 깃털 장착 ");
-                currentItem = item.interaction_quillPen;
-            }
+            currentItem = item.nothing;
+            checkToChangeEquipment = null;
         }
         else
         {
-            currentItem = item.nothing;
+            if (equipmentSlot.item.itemName != checkToChangeEquipment)
+            {
+                if (equipmentSlot.item.itemName == "작은 검")
+                {
+                    Debug.Log("[이민호] 작은 검 장착");
+                    currentItem = item.attack;
+                    checkToChangeEquipment = equipmentSlot.item.itemName;
+                }
+                else if (equipmentSlot.item.itemName == "폭신침낭")
+                {
+                    Debug.Log("[이민호] 폭신침낭 장착");
+                    currentItem = item.interaction_sleep;
+                    checkToChangeEquipment = equipmentSlot.item.itemName;
+                }
+                else if (equipmentSlot.item.itemName == "검은깃펜")
+                {
+                    Debug.Log("[이민호] 검은 깃펫 장착");
+                    currentItem = item.interaction_quillPen;
+                    checkToChangeEquipment = equipmentSlot.item.itemName;
+                }
+                else
+                {
+                    currentItem = item.nothing;
+                    checkToChangeEquipment = null;
+                }
+            }
         }
 
         for (int i = 0; i < 10; ++i)
