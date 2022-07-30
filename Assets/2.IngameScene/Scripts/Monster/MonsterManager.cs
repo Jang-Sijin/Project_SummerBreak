@@ -153,8 +153,8 @@ public class MonsterManager : MonoBehaviour
         if (isDead)
         {
             VisualEffect newExplodeEffect = Instantiate(explodeEffect, transform.position, transform.rotation);
-            newExplodeEffect.Play();
-            Destroy(newExplodeEffect.gameObject, 0.5f);
+            
+            Destroy(newExplodeEffect.gameObject);
             spawnLoot.spawnLoot = true;
         }
         else

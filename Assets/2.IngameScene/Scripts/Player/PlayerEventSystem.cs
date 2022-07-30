@@ -89,12 +89,16 @@ public class PlayerEventSystem : MonoBehaviour
                 // 상점 UI 출력
                 // ShopSystem.Instance.OpenShopCanvas();
             }
+            else if (nearObject.CompareTag("ChestObj"))
+            {
+                nearObject.GetComponent<Animator>().SetBool("IsOpen", true);
+            }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("QuestNpc") || other.CompareTag("DialogObj") || other.CompareTag("ShopNpc") || other.CompareTag("MoveShopNPC") || other.CompareTag("LandMarkObj"))
+        if (other.CompareTag("QuestNpc") || other.CompareTag("DialogObj") || other.CompareTag("ShopNpc") || other.CompareTag("MoveShopNPC") || other.CompareTag("LandMarkObj") || other.CompareTag("ChestObj"))
         {
             // print($"[장시진]: Player-NPC Collider 충돌 성공 -> 상호작용 가능");
             nearObject = other.gameObject;
@@ -163,6 +167,13 @@ public class PlayerEventSystem : MonoBehaviour
             nearObject = null;
             
             // 트리거가 발생 UI(E키)를 비활성화(출력X)한다.
+            interactionText.gameObject.SetActive(false);
+        }
+        else if (other.CompareTag("ChestObj"))
+        {
+            
+            
+            nearObject = null;
             interactionText.gameObject.SetActive(false);
         }
         

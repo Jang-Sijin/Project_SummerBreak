@@ -15,14 +15,10 @@ public class MapOpenTrigger : MonoBehaviour
 
     [SerializeField] 
     private GameObject landMarkCutScene;
-    [SerializeField] 
-    private GameObject cutSceneComPlite;
     
     [SerializeField] 
     private bool mapPieceable;
 
-    [SerializeField] private bool cutSceneStarted = false;
-    
     private PlayerStatus _playerStatus;
     private void Start()
     {
@@ -42,10 +38,10 @@ public class MapOpenTrigger : MonoBehaviour
 
     public void StartCutScene()
     {
-        if (landMarkCutScene != null && GetMapPieceable() && !cutSceneStarted)
+        if (landMarkCutScene != null && GetMapPieceable()
+            && _playerStatus.landMarkEnable[landMarkNumber - 1] == false)
         {
             _playerStatus.landMarkEnable[landMarkNumber - 1] = true;
-            cutSceneStarted = true;
             PlayableDirector _cutScene;
             _cutScene = landMarkCutScene.GetComponent<PlayableDirector>();
             _cutScene.Play();
