@@ -57,7 +57,6 @@ GameObject:
   - component: {fileID: 2927273950147203316}
   - component: {fileID: 2658364343290417651}
   - component: {fileID: 3962476679089888609}
-  - component: {fileID: 7341058265197957742}
   - component: {fileID: 2994854068446470029}
   - component: {fileID: 3217830390850885194}
   - component: {fileID: 5931320222482353065}
@@ -168,21 +167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDB: {fileID: 11400000, guid: 7394651cda7ab9042a13ede9403a31fc, type: 2}
   takeItemAudioClip: {fileID: 8300000, guid: 0cf800d049619d946b0d874a36e79bd1, type: 3}
---- !u!114 &7341058265197957742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3719753758182797601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 624879eb99abd0c4ba8c72b9ce29e5f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  degreesPerSecond: 40
-  amplitude: 0.1
-  frequency: 1
 --- !u!65 &2994854068446470029
 BoxCollider:
   m_ObjectHideFlags: 0

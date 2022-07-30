@@ -11,16 +11,19 @@ public class SnowTrigger : MonoBehaviour
     private ParticleSystem snowParticle;
 
     private PlayerStatus _playerStatus;
+
+    private bool startSnow = false;
     private void Start()
     {
         _playerStatus = GameManager.instance.playerGameObject.GetComponent<PlayerStatus>();
         snowParticle.Stop();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (!startSnow && other.gameObject.CompareTag("Player"))
         {
+            startSnow = true;
             _playerStatus.playerInPeak = true;
             snowParticle.Play();
         }
@@ -30,6 +33,7 @@ public class SnowTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            startSnow = false;
             _playerStatus.playerInPeak = false;
             snowParticle.Stop();
         }
