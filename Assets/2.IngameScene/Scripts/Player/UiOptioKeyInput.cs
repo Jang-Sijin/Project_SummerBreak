@@ -16,7 +16,7 @@ public class UiOptioKeyInput : MonoBehaviour
     [SerializeField] private GameObject saveMenu;
     [SerializeField] private GameObject keyMenu;
     [SerializeField] private GameObject audioMenu;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +60,7 @@ public class UiOptioKeyInput : MonoBehaviour
         {
             eKeyDown = Input.GetButtonDown("OptionPre");
         }
-
+        
     }
     
     private void Interaction()
@@ -69,10 +69,12 @@ public class UiOptioKeyInput : MonoBehaviour
         if (qKeyDown)
         {
             NextMenu();
+            SoundManager.Instance.PlaySFX(3);
         }
         else if (eKeyDown)
         {
             PreMenu();
+            SoundManager.Instance.PlaySFX(3);
         }
 
         if (menuList[menuList.Count - 1].activeSelf && !InventoryUi.activeSelf)

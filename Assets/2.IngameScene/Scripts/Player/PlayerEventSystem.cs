@@ -68,10 +68,10 @@ public class PlayerEventSystem : MonoBehaviour
             {
                 PlayerStatus playerStatus = GameManager.instance.playerGameObject.GetComponent<PlayerStatus>();
                 if (playerStatus.currentItem == PlayerStatus.item.interaction_quillPen &&
-                    InventorySystem.instance.FindInventorySlotItem("잉크") &&
+                    InventorySystem.instance.FindInventorySlotItem("깜깜잉크") &&
                     !nearObject.GetComponent<MapOpenTrigger>().GetMapPieceable())
                 {
-                    InventorySystem.instance.FindSetCountInventorySlotItem("잉크", -1);
+                    InventorySystem.instance.FindSetCountInventorySlotItem("깜깜잉크", -1);
                     MapOpenTrigger mapOpenTrigger = nearObject.GetComponent<MapOpenTrigger>();
                     mapOpenTrigger.SetActiveMapPiece();
                 }

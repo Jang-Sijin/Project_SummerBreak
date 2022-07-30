@@ -57,7 +57,7 @@ public class InputSystem : MonoBehaviour
             playerCoinUI.SetActive(true);
             isOpenOptionUI = true;
             GameManager.instance.InGameTimeStop();
-
+            SoundManager.Instance.PlaySFX(4);
             if (isOpenInventoryUI == true)
             {
                 inventoryUICanvas.SetActive(true);
@@ -76,7 +76,7 @@ public class InputSystem : MonoBehaviour
             playerCoinUI.SetActive(false);
             isOpenOptionUI = false;
             GameManager.instance.InGameTimeStart();
-
+            SoundManager.Instance.PlaySFX(4);
             if (inventoryUICanvas.gameObject.activeSelf == true)
             {
                 isOpenInventoryUI = true;
