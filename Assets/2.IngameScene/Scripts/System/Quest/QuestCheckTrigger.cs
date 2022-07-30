@@ -104,11 +104,17 @@ public class QuestCheckTrigger : MonoBehaviour
 
     private IEnumerator QuestEventHandler_1()
     {
-        // 완료가 가능한 조건으로 변경한다. (1. NPC와의 대화만으로 퀘스트가 완료되는 조건) [1. 퀘스트 클리어 가능]
-        _isCanComplete = true;
-        
+
         while (true)
         {
+            // 완료가 가능한 조건으로 변경한다. (1. NPC와의 대화만으로 퀘스트가 완료되는 조건) [1. 퀘스트 클리어 가능]
+            if (_progressQuestEntity.QuestID == 3)
+            {
+                // 깃펜을 장비한 상태에서 햇빛마을에 있는 분수대를 지도에 그려보고 촌장 제라드에게 다시 방문하자.
+                bool landMarkEnable = GameManager.instance.playerGameObject.GetComponent<PlayerStatus>().landMarkEnable[0];
+                _isCanComplete = (landMarkEnable == true) ? true : false;
+            }
+            
             // EndDialogID를 가지고 있는 NPC와 대화하면 퀘스트를 완료한다. [2. 퀘스트 완료 및 보상]
             if (QuestSystem.instance.IsProgressQuest == true && _isComplete == true)
             {
@@ -131,7 +137,7 @@ public class QuestCheckTrigger : MonoBehaviour
             // 완료가 가능한 조건을 체크한다. (1. NPC와의 대화만으로 퀘스트가 완료되는 조건) [1. 퀘스트 클리어 가능]
             if (_progressQuestEntity.QuestID == 2)
             {
-                _isCanComplete = InventorySystem.instance.FindInventorySlotItem("잉크") > 0 ? true : false;
+                _isCanComplete = InventorySystem.instance.FindInventorySlotItem("깜깜잉크") > 0 ? true : false;
             }
             else if (_progressQuestEntity.QuestID == 5)
             {

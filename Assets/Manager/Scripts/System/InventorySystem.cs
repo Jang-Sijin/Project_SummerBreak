@@ -13,9 +13,7 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private GameObject inventoryEquipmentSlot;
 
     [Header("테스트 모드 인벤토리 설정")]
-    [SerializeField] private Item sword;
     [SerializeField] private Item pen;
-    [SerializeField] private Item bag;
 
     private Slot[] itemSlots;
     private Slot equipmentSlot;
@@ -47,9 +45,9 @@ public class InventorySystem : MonoBehaviour
         equipmentSlot = inventoryEquipmentSlot.GetComponent<Slot>();
         
         // [임시 빌드용 디폴트 아이템] // 나중에 제대로 함수 추가 필요
-        itemSlots[9].AddItem(sword);
-        itemSlots[10].AddItem(pen);
-        itemSlots[11].AddItem(bag);
+        // itemSlots[9].AddItem(sword);
+        // itemSlots[10].AddItem(bag);
+        itemSlots[11].AddItem(pen);
     }
 
     // parameter1이 양수면 코인 개수 +, 음수면 코인 개수 - 
@@ -69,15 +67,15 @@ public class InventorySystem : MonoBehaviour
         // 획득한 아이템 == 코인
         if (Item.ItemType.Coin == item.itemType)
         {
-            if (item.name == "1코인")
+            if (item.itemName == "1코인")
             {
                 playerCoinCount += count;
             }
-            else if (item.name == "5코인")
+            else if (item.itemName == "5코인")
             {
                 playerCoinCount += (count * 5);
             }
-            else if (item.name == "10코인")
+            else if (item.itemName == "10코인")
             {
                 playerCoinCount += (count * 10);
             }

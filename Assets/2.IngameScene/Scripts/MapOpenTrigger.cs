@@ -17,7 +17,7 @@ public class MapOpenTrigger : MonoBehaviour
     private GameObject landMarkCutScene;
     
     [SerializeField] 
-    private bool mapPieceable;
+    private bool mapPieceAble;
 
     private PlayerStatus _playerStatus;
     private void Start()
@@ -31,26 +31,30 @@ public class MapOpenTrigger : MonoBehaviour
         if (mapPiece != null)
         {
             mapPiece.SetActive(true);
-            mapPieceable = true;
+            mapPieceAble = true;
         }
     }
 
 
     public void StartCutScene()
     {
-        if (landMarkCutScene != null && GetMapPieceable()
+        if (landMarkCutScene != null 
+            && GetMapPieceable()
             && _playerStatus.landMarkEnable[landMarkNumber - 1] == false)
         {
             _playerStatus.landMarkEnable[landMarkNumber - 1] = true;
-            PlayableDirector _cutScene;
-            _cutScene = landMarkCutScene.GetComponent<PlayableDirector>();
-            _cutScene.Play();
+            PlayableDirector cutScene = landMarkCutScene.GetComponent<PlayableDirector>();
+            cutScene.Play();
+        }
+        else if (landMarkCutScene == null) // 컷씬 없음: 4번 랜드마크
+        {
+            _playerStatus.landMarkEnable[landMarkNumber - 1] = true;
         }
     }
     
     public bool GetMapPieceable()
     {
-        return mapPieceable;
+        return mapPieceAble;
     }
 
 }
