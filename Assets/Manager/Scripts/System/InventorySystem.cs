@@ -69,7 +69,19 @@ public class InventorySystem : MonoBehaviour
         // 획득한 아이템 == 코인
         if (Item.ItemType.Coin == item.itemType)
         {
-            playerCoinCount += count;
+            if (item.name == "1코인")
+            {
+                playerCoinCount += count;
+            }
+            else if (item.name == "5코인")
+            {
+                playerCoinCount += (count * 5);
+            }
+            else if (item.name == "10코인")
+            {
+                playerCoinCount += (count * 10);
+            }
+                
             PlayerUI getPlayerUI = playerUI.GetComponent<PlayerUI>();
             getPlayerUI.UpdatePlayerCoinCountUI();
             return;
@@ -191,22 +203,22 @@ public class InventorySystem : MonoBehaviour
         return;
     }
     
-    // findItemName과 같은 아이템이 인벤토리에 존재하는지 확인한다. true: 있음, false: 없음
-    public bool FindInventorySlotItem(string findItemName)
+    // findItemName과 같은 아이템이 인벤토리에 존재하는지 확인한다. [아이템의 개수를 반환합니다. // 아이템이 없으면 0을 반환]
+    public int FindInventorySlotItem(string findItemName)
     {
         if (equipmentSlot.item != null && equipmentSlot.item.itemName == findItemName)
         {
-            return true;
+            return equipmentSlot.itemCount;
         }
 
         foreach (var itemSlot in itemSlots)
         {
             if (itemSlot.item != null && itemSlot.item.itemName == findItemName)
             {
-                return true;
+                return itemSlot.itemCount;
             }
         }
 
-        return false;
+        return 0;
     }
 }

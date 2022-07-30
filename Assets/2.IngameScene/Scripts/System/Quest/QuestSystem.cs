@@ -5,7 +5,7 @@ using UnityEngine;
 public class QuestSystem : MonoBehaviour
 {
     [Header("↓Excel DB Scriptable 오브젝트를 연결해주세요.[차후 Manager(싱글턴)으로 등록할 수 있도록 구조 변경 필요!]")] 
-    [SerializeField] private ExcelDB dialogDB; // Import Excel File
+    [SerializeField] private ExcelDB excelDB; // Import Excel File
     
     [Header("↓MenuUI - Quest_Menu를 연결해주세요.")]
     [SerializeField] private QuestMenu _questMenu;
@@ -17,6 +17,9 @@ public class QuestSystem : MonoBehaviour
 
     public List<QuestDBEntity> QuestDBList { get { return _questList; } }
     private List<QuestDBEntity> _questList; // Excel QuestDBSheet의 DB리스트
+
+    public QuestCheckTrigger QuestCheckTrigger { get { return _questCheckTrigger; } }
+    private QuestCheckTrigger _questCheckTrigger;
     
     // 퀘스트 대화가 끝났음을 확인하는 변수
     public bool IsQuestDialog
@@ -26,7 +29,7 @@ public class QuestSystem : MonoBehaviour
     }
     private bool _isQuestDialog = false; // false: 퀘스트 대화가 아닐 때, true: 퀘스트 대화일 때
 
-    // 플레이어가 퀘스트를 받아되어 (시작전,진행중) 상태로 변경한다.
+    // 플레이어가 퀘스트를 받아되어 (시작전:false ,진행중:true) 상태로 변경한다.
     public bool IsProgressQuest
     {
         set { _isProgressQuest = value; }
@@ -59,10 +62,11 @@ public class QuestSystem : MonoBehaviour
 
     private void Init()
     {
+        _questCheckTrigger = GetComponent<QuestCheckTrigger>();
         QuestAnimationTimeline = GetComponentInChildren<QuestAnimationTimeline>();
         
         // Excel QuestDBSheet의 리스트들을 questList에 추가한다.
-        _questList = dialogDB.QuestDBSheet.ToList();
+        _questList = excelDB.QuestDBSheet.ToList();
         
         if (JsonManager.instance.CheckSaveFile() == true)
         {
@@ -99,10 +103,13 @@ public class QuestSystem : MonoBehaviour
         _isProgressQuest = true;
         // 퀘스트 다이얼로그가 종료된 상태로 변경한다.
         _isQuestDialog = false;
+        
+        // 진행중인 퀘스트의 완료가 가능한지 조건을 체크한다. (코루틴)
+        _questCheckTrigger.StartCheckQuest(_playerProgressQuestID,_questList);
     }
     
     // 퀘스트를 완료하였을 때 콜백
-    public void CompleteQuest()
+    public void CompleteQuestUI()
     {
         // 퀘스트 UI List에 있는 QuestSlot을 클리어 상태로 변경시켜준다.
         GameObject questSlot;
