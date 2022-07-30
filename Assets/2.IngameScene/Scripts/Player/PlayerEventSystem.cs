@@ -68,7 +68,7 @@ public class PlayerEventSystem : MonoBehaviour
             {
                 PlayerStatus playerStatus = GameManager.instance.playerGameObject.GetComponent<PlayerStatus>();
                 if (playerStatus.currentItem == PlayerStatus.item.interaction_quillPen &&
-                    InventorySystem.instance.FindInventorySlotItem("깜깜잉크") &&
+                    (InventorySystem.instance.FindInventorySlotItem("깜깜잉크") > 0) &&
                     !nearObject.GetComponent<MapOpenTrigger>().GetMapPieceable())
                 {
                     InventorySystem.instance.FindSetCountInventorySlotItem("깜깜잉크", -1);
