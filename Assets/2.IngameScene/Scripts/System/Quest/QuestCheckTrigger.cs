@@ -104,7 +104,6 @@ public class QuestCheckTrigger : MonoBehaviour
 
     private IEnumerator QuestEventHandler_1()
     {
-
         while (true)
         {
             // 완료가 가능한 조건으로 변경한다. (1. NPC와의 대화만으로 퀘스트가 완료되는 조건) [1. 퀘스트 클리어 가능]
@@ -150,7 +149,7 @@ public class QuestCheckTrigger : MonoBehaviour
             }
             else if (_progressQuestEntity.QuestID == 7)
             {
-                _isCanComplete = InventorySystem.instance.FindInventorySlotItem("민트 불가사리") >= 15 ? true : false;
+                _isCanComplete = InventorySystem.instance.FindInventorySlotItem("민트 불가사리") >= 10 ? true : false;
             }
             else if (_progressQuestEntity.QuestID == 9)
             {
@@ -193,7 +192,7 @@ public class QuestCheckTrigger : MonoBehaviour
                 {
                     // [퀘스트7]
                     // [퀘스트 완료를 위한 아이템 소모]
-                    InventorySystem.instance.FindSetCountInventorySlotItem("민트 불가사리", -15);
+                    InventorySystem.instance.FindSetCountInventorySlotItem("민트 불가사리", -10);
                     
                     QuestCompleteProcess();
                 }

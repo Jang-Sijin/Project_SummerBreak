@@ -52,7 +52,6 @@ public class Bullet : MonoBehaviour
         newExplodeEffect.Play();
         if (other.gameObject.tag == "Player")
         {
-            _playerMovement.HitToClam();
             _playerMovement.HitStart(ClamBT.damageValue, m_rigidbody);
         }
         
