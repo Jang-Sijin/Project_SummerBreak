@@ -60580,7 +60580,7 @@ MonoBehaviour:
   SlidingCheck: 0
   EnableLog: 0
   slideCounter: 0
-  takeStamina: 0.1
+  takeStamina: 0.25
 --- !u!114 &1772180697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68686,11 +68686,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlankPostSign01
       objectReference: {fileID: 0}
+    - target: {fileID: 766095822745898665, guid: 501a34b243d3d24448684538449481d8, type: 3}
+      propertyPath: m_TagString
+      value: DialogObj
+      objectReference: {fileID: 0}
     - target: {fileID: 1488061041806598368, guid: 501a34b243d3d24448684538449481d8, type: 3}
       propertyPath: mapPiece
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1488061041806598368, guid: 501a34b243d3d24448684538449481d8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 501a34b243d3d24448684538449481d8, type: 3}
 --- !u!4 &2031955883 stripped
 Transform:
