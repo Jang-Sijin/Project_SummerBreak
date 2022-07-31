@@ -71,14 +71,26 @@ public class PlayerEventSystem : MonoBehaviour
                     (InventorySystem.instance.FindInventorySlotItem("깜깜잉크") > 0) &&
                     !nearObject.GetComponent<MapOpenTrigger>().GetMapPieceable())
                 {
+                    // 다이얼로그 시작 코루틴 시작
+                    ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
+                    objDialogTrigger.EnterPlayer();
+                    
+                    if (nearObject.GetComponent<MapOpenTrigger>().landMarkNumber == 5)
+                    {
+                        for (int i = 0; i < 4; ++i)
+                        {
+                            if (playerStatus.landMarkEnable[i] == false)
+                            {
+                                Debug.Log("[이민호] 지도를 다 못채움");
+                                return;
+                            }
+                        }
+                    }
                     InventorySystem.instance.FindSetCountInventorySlotItem("깜깜잉크", -1);
                     MapOpenTrigger mapOpenTrigger = nearObject.GetComponent<MapOpenTrigger>();
                     mapOpenTrigger.SetActiveMapPiece();
                 }
 
-                // 다이얼로그 시작 코루틴 시작
-                ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
-                objDialogTrigger.EnterPlayer();
             }
             else if (nearObject.CompareTag("ShopNpc") || nearObject.CompareTag("MoveShopNPC"))
             {

@@ -42,6 +42,17 @@ public class MapOpenTrigger : MonoBehaviour
             && GetMapPieceable()
             && _playerStatus.landMarkEnable[landMarkNumber - 1] == false)
         {
+            if (landMarkNumber == 5)
+            {
+                for (int i = 0; i < landMarkNumber - 1; ++i)
+                {
+                    if (_playerStatus.landMarkEnable[i] == false)
+                    {
+                        Debug.Log("[이민호] 지도를 다 못채움");
+                        return;
+                    }
+                }
+            }
             _playerStatus.landMarkEnable[landMarkNumber - 1] = true;
             PlayableDirector cutScene = landMarkCutScene.GetComponent<PlayableDirector>();
             cutScene.Play();
