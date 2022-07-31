@@ -53,7 +53,6 @@ public class PlayerMovement : MonoBehaviour
 
     private float startTime = 0.0f;
     private float LerpTime = 0.0f;
-    // private float lastTime = 0.0f;
     public bool lastFrameLerp;
     public bool currentFrameLerp;
     public Vector3 lastFrameLerpDirection;
@@ -104,8 +103,6 @@ public class PlayerMovement : MonoBehaviour
     public bool slidingCheck = false;
 
     public bool checkMonsterFollow = false;
-
-    private bool hitClam = false;
 
     [SerializeField] private float climpSpeed = 3.5f;
 
@@ -701,11 +698,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void HitToClam()
-    {
-        hitClam = true;
-    }
-    
     IEnumerator HitInvincible()
     {
         yield return new WaitForSeconds(2.0f);

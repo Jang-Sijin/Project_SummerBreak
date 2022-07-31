@@ -6,12 +6,10 @@ public class MapPiecesController : MonoBehaviour
 {
 
     [SerializeField] private List<GameObject> mapPiece = new List<GameObject>();
-
-    [SerializeField]
+    
     public bool[] landMarkEnable = new bool[5];
     
-    
-        #region Singleton
+    #region Singleton
         public static MapPiecesController instance; // PlayerEventSystem 싱글톤으로 관리
         private void Awake()
         {
@@ -21,10 +19,15 @@ public class MapPiecesController : MonoBehaviour
                 instance = this;
             }
         }
-        #endregion Singleton
-    
-        
-    
+    #endregion Singleton
+
+    public void LoadMap(bool[] setLandMarkEnable)
+    {
+        landMarkEnable = setLandMarkEnable;
+
+        MapInit();
+    }
+
     public void MapInit()
     {
         for (int i = 0; i < mapPiece.Count; ++i)

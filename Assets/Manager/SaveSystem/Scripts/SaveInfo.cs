@@ -27,13 +27,14 @@ public class SaveInfo
     public int[] inventoryItemCount;
     public int questProgressID;
     public bool isProgressQuest;
+    public bool[] landMarkEnableArray;
 
     public SaveInfo()
     {
         
     }
     public SaveInfo(string name, string saveTime, Vector3 position, Vector3 rotation, int hp, int maxStamina, int currentStamina, int playerCoinCount, Slot saveEquipmentSlot, Slot[] saveInventorySlots
-    , int saveQuestProgressID, bool saveIsProgressQuest)
+    , int saveQuestProgressID, bool saveIsProgressQuest, bool[] saveLandMarkEnableArray)
     {
         this.name = name;
         this.saveTime = saveTime;
@@ -56,5 +57,8 @@ public class SaveInfo
         // 퀘스트
         this.questProgressID = saveQuestProgressID;
         this.isProgressQuest = saveIsProgressQuest;
+        
+        // 랜드마크
+        landMarkEnableArray = saveLandMarkEnableArray;
     }
 }

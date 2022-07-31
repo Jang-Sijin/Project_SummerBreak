@@ -186,7 +186,8 @@ public class GameManager : MonoBehaviour
         playerGameObject.GetComponent<PlayerStatus>().currentStamina = saveinfo.currentStamina;
         InventorySystem.instance.LoadInventory(saveinfo.playerCoinCount, saveinfo.equipmentName, saveinfo.equipmentCount, saveinfo.inventoryItemName, saveinfo.inventoryItemCount);
         QuestSystem.instance.LoadQuestData(saveinfo.questProgressID, saveinfo.isProgressQuest);
-        
+        MapPiecesController.instance.LoadMap(saveinfo.landMarkEnableArray);
+
         return;
     }
 }

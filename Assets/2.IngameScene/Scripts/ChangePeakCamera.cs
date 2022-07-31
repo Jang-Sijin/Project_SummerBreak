@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ChangePeakCamera : MonoBehaviour
 {
-    
     [SerializeField] 
     private GameObject camera;
 
