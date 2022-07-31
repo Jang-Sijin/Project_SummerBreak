@@ -174,7 +174,6 @@ public class PlayerEventSystem : MonoBehaviour
         }
         else if (other.CompareTag("LandMarkObj"))
         {
-
             ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
             DialogSystem.instance.ResetDialog(); // Dialog UI 초기화
             objDialogTrigger.StopCoroutine("StartDialog");
@@ -185,8 +184,6 @@ public class PlayerEventSystem : MonoBehaviour
         }
         else if (other.CompareTag("ChestObj"))
         {
-            
-            
             nearObject = null;
             interactionText.gameObject.SetActive(false);
         }

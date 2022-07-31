@@ -107,7 +107,7 @@ public class NpcDialogTrigger : MonoBehaviour
         {
             QuestSystem.instance.PrintProgressQuestDB();
             // 퀘스트 다이얼로그가 시작된 상태로 변경한다.
-            QuestSystem.instance.IsQuestDialog = false;
+            QuestSystem.instance.IsQuestDialog = true;
 
             // 시작 퀘스트일 때
             if (QuestSystem.instance.IsProgressQuest == false &&
@@ -127,6 +127,14 @@ public class NpcDialogTrigger : MonoBehaviour
                     _isExitDialog = DialogSystem.instance.UpdateDialog(npcDialogList
                         .Where(dialogDB => dialogDB.DialogID == QuestSystem.instance.ReturnProgressQuestDB().EndDialogID).ToList(), npcAnimator, npcVirtualCameraObj));
             }
+            // 현재 완료가 불가능할 때
+            else if (QuestSystem.instance.IsProgressQuest == true &&
+                     QuestSystem.instance.ReturnProgressQuestDB().EndDialogID % dialogID < 100 &&
+                     QuestSystem.instance.QuestCheckTrigger.IsCanComplete == false)
+            {
+                yield return new WaitUntil(() =>
+                    _isExitDialog = DialogSystem.instance.UpdateDialog(npcDialogList.Where(dialogDB => dialogDB.DialogID == SaveDialogID).ToList(), npcAnimator, npcVirtualCameraObj));
+            }
 
             // ★다음 다이얼 로그를 출력한다.
            if (_isExitDialog) // true: 대화 끝남, false: 대화중
@@ -139,6 +147,8 @@ public class NpcDialogTrigger : MonoBehaviour
                    // 퀘스트 수락 버튼 UI(수락)버튼 출력
                    DialogSystem.instance.DialogUiController.SetActiveButtonObjects(true);
                    Debug.Log("[장시진] 퀘스트 수락");
+                   showQuestMarkText.SetActive(false);
+                   SaveDialogID++;
                }
                else if (QuestSystem.instance.IsProgressQuest == true &&
                         QuestSystem.instance.ReturnProgressQuestDB().EndDialogID % dialogID < 100 &&
@@ -149,12 +159,23 @@ public class NpcDialogTrigger : MonoBehaviour
 
                    QuestSystem.instance.QuestCheckTrigger.IsComplete = true;
                    Debug.Log("[장시진] 퀘스트 완료");
+                   showQuestMarkText.SetActive(false);
+                   SaveDialogID++;
                }
-               showQuestMarkText.SetActive(false);
+               else if (QuestSystem.instance.IsProgressQuest == true &&
+                        QuestSystem.instance.ReturnProgressQuestDB().EndDialogID % dialogID < 100 &&
+                        QuestSystem.instance.QuestCheckTrigger.IsCanComplete == false) // 퀘스트를 완료할 수 없는 조건일 때
+               {
+                   // 퀘스트 클리어 시 수락 버튼이 안나오고 다이얼 로그 UI가 종료되도록 한다.  
+                   DialogSystem.instance.CloseDialogUi();
+               }
            }
         }
         else // 2.일반 대화
         {
+            // 퀘스트 다이얼로그가 시작된 상태로 변경한다.
+            QuestSystem.instance.IsQuestDialog = false;
+            
             // setQuestID에 해당되는 Dialog 리스트를 매개변수로 보낸다. // Linq
             yield return new WaitUntil(() =>
                 _isExitDialog = DialogSystem.instance.UpdateDialog(npcDialogList
