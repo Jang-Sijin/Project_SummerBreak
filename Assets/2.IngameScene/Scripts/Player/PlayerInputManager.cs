@@ -58,6 +58,8 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField]
     private float slideCounter = 0f;
     private Vector3 lastPlayerPos;
+
+    [SerializeField] private float takeStamina = 0.1f;
     
     private void Awake()
     {
@@ -120,7 +122,7 @@ public class PlayerInputManager : MonoBehaviour
                     player.Climbing(input);
                     if (playerstatus.GetDebugMod() == false && playerstatus.currentStamina > 0)
                     {
-                        StartCoroutine(TakeStamina(1.0f));
+                        StartCoroutine(TakeStamina(takeStamina));
                     }
                 }
                 else
@@ -284,13 +286,11 @@ public class PlayerInputManager : MonoBehaviour
 
         if (!player.isSwim)
         {
-            waterRipple.GetComponent<ParticleSystem>().Stop();
             waterRipple.SetActive(false);
         }
         else
         {
             waterRipple.SetActive(true);
-            waterRipple.GetComponent<ParticleSystem>().Play();
         }
         
         if (!player.inWater)

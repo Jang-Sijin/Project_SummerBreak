@@ -66,20 +66,22 @@ public class PlayerEventSystem : MonoBehaviour
             }
             else if (nearObject.CompareTag("LandMarkObj"))
             {
+                
+                // 다이얼로그 시작 코루틴 시작
+                ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
+                objDialogTrigger.EnterPlayer();
+                
                 PlayerStatus playerStatus = GameManager.instance.playerGameObject.GetComponent<PlayerStatus>();
                 if (playerStatus.currentItem == PlayerStatus.item.interaction_quillPen &&
                     (InventorySystem.instance.FindInventorySlotItem("깜깜잉크") > 0) &&
                     !nearObject.GetComponent<MapOpenTrigger>().GetMapPieceable())
                 {
-                    // 다이얼로그 시작 코루틴 시작
-                    ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
-                    objDialogTrigger.EnterPlayer();
                     
                     if (nearObject.GetComponent<MapOpenTrigger>().landMarkNumber == 5)
                     {
                         for (int i = 0; i < 4; ++i)
                         {
-                            if (playerStatus.landMarkEnable[i] == false)
+                            if (MapPiecesController.instance.landMarkEnable[i] == false)
                             {
                                 Debug.Log("[이민호] 지도를 다 못채움");
                                 return;

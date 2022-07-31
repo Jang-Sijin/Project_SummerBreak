@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.VFX;
 using Random = UnityEngine.Random;
@@ -153,8 +154,8 @@ public class MonsterManager : MonoBehaviour
         if (isDead)
         {
             VisualEffect newExplodeEffect = Instantiate(explodeEffect, transform.position, transform.rotation);
-            
-            Destroy(newExplodeEffect.gameObject);
+            newExplodeEffect.Play();
+            Destroy(newExplodeEffect.gameObject, 1);
             spawnLoot.spawnLoot = true;
         }
         else
@@ -223,6 +224,7 @@ public class MonsterManager : MonoBehaviour
             ParticleSystem newParticle = Instantiate(_Hitparticle, transform.position,
                 transform.rotation);
             newParticle.Play();
+            Destroy(newParticle.gameObject, 1);
         }
     }
     
