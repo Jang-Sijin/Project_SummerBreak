@@ -28,14 +28,17 @@ public class SoundManager : MonoBehaviour
     public static float SFXstartVolumeValue = 0.5f; // 효과음 사운드 크기 초기값은 0.5로 설정
     private void Start()
     {
-        // 배경음, 효과음 초기값 설정
-        Mixer.SetFloat("BackGroundSound", Mathf.Log10(BGstartVolumeValue) * 20);
-        Mixer.SetFloat("SFXSound", Mathf.Log10(SFXstartVolumeValue) * 20);
-
-        //PlayBGM(0);
-        // SoundManagerOld.Instance.PlaySFX();
-        // SoundManagerOld.Instance.PlayBGM();
-        // SoundManagerOld.Instance.PlaySFX();
+        if (PlayerPrefs.HasKey("BgmVolumeValue") && PlayerPrefs.HasKey("BgmVolumeValue"))
+        {
+            Mixer.SetFloat("BackGroundSound", PlayerPrefs.GetFloat("BgmVolumeValue"));
+            Mixer.SetFloat("SFXSound", PlayerPrefs.GetFloat("BgmVolumeValue"));
+        }
+        else
+        {
+            // 배경음, 효과음 초기값 설정
+            Mixer.SetFloat("BackGroundSound", Mathf.Log10(BGstartVolumeValue) * 20);
+            Mixer.SetFloat("SFXSound", Mathf.Log10(SFXstartVolumeValue) * 20);
+        }
     }
     #region Singleton
     public static SoundManager Instance; // Sound Manager을 싱글톤으로 관리
@@ -45,13 +48,12 @@ public class SoundManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(Instance);
-            
+
             // SceneManager.sceneLoaded += OnSceneLoaded;
         } 
         else
         { 
-            Destroy(gameObject);
+            // Destroy(gameObject);
         }
     }
     #endregion Singleton
@@ -63,6 +65,11 @@ public class SoundManager : MonoBehaviour
     {
         BgmSource.clip = _bgmDB.soundAudioClip[soundIndex];
         BgmSource.Play();
+    }
+
+    public void StopBGM()
+    {
+        BgmSource.Stop();
     }
     
     public void PlayBGM(string soundName)
@@ -139,12 +146,16 @@ public class SoundManager : MonoBehaviour
     {
         // mixer의 볼륨은 log scale값으로 설정되어 있다.
         Mixer.SetFloat("BackGroundSound", Mathf.Log10(volumeValue) * 20);
+        
+        PlayerPrefs.SetFloat("BgmVolumeValue", Mathf.Log10(volumeValue) * 20);
     }
     // 효과음 컨트롤
     public void SfxSoundVolume(float volumeValue)
     {
         // mixer의 볼륨은 log scale값으로 설정되어 있다.
         Mixer.SetFloat("SFXSound", Mathf.Log10(volumeValue) * 20);
+        
+        PlayerPrefs.SetFloat("SfxVolumeValue", Mathf.Log10(volumeValue) * 20);
     }
     public float GetBgSoundVolumeValue()
     {

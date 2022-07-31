@@ -58,8 +58,8 @@ public class GameManager : MonoBehaviour
         InitMouseEvent();
 
         // 사운드바 슬라이드 위치 설정
-        // bgSoundSlider.value = SoundManagerOld.Instance.GetBgSoundVolumeValue();
-        // effectSoundSlider.value = SoundManagerOld.Instance.GetSfxSoundVolumeValue();
+        bgSoundSlider.value = SoundManager.Instance.GetBgSoundVolumeValue();
+        effectSoundSlider.value = SoundManager.Instance.GetSfxSoundVolumeValue();
     }
 
     // 인게임 시간 정지
