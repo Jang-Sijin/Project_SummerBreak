@@ -43,9 +43,6 @@ public class QuestSystem : MonoBehaviour
             GameObject questSlot;
             _questMenu.QuestMenuSlotList.TryGetValue(_playerProgressQuestID, out questSlot);
             questSlot.SetActive(true);
-            
-            // 진행중인 퀘스트의 완료가 가능한지 조건을 체크한다. (코루틴)
-            _questCheckTrigger.StartCheckQuest(_playerProgressQuestID, _questList);
         }
     }
     

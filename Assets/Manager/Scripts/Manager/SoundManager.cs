@@ -28,10 +28,10 @@ public class SoundManager : MonoBehaviour
     public static float SFXstartVolumeValue = 0.5f; // 효과음 사운드 크기 초기값은 0.5로 설정
     private void Start()
     {
-        if (PlayerPrefs.HasKey("BgmVolumeValue") && PlayerPrefs.HasKey("BgmVolumeValue"))
+        if (PlayerPrefs.HasKey("BgmVolumeValue") && PlayerPrefs.HasKey("SfxVolumeValue"))
         {
             Mixer.SetFloat("BackGroundSound", PlayerPrefs.GetFloat("BgmVolumeValue"));
-            Mixer.SetFloat("SFXSound", PlayerPrefs.GetFloat("BgmVolumeValue"));
+            Mixer.SetFloat("SFXSound", PlayerPrefs.GetFloat("SfxVolumeValue"));
         }
         else
         {
