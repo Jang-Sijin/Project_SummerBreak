@@ -28,6 +28,11 @@ public class OpenChestCoin : MonoBehaviour
     {
         spawnLoot = true;
     }
+
+    public void StartChestOpenSFX()
+    {
+        SoundManager.Instance.PlaySFX(5);
+    }
     
     private void Loot()
     {
