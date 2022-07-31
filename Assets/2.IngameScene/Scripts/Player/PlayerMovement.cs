@@ -734,4 +734,9 @@ public class PlayerMovement : MonoBehaviour
         capeMaterial.SetFloat("RedLv",0.0f);
         currentState = playerState.Ground_idleState;
     }
+
+    public void SetInvincible(bool value)
+    {
+        invincible = value;
+    }
 }

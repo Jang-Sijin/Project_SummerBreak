@@ -77,6 +77,7 @@ public class PlayerInputManager : MonoBehaviour
         player.isSwimed();
         player.Swim_idle();
 
+        
         if (player.isGrounded)
         {
             //freeClimb.CancelClimb();
@@ -159,6 +160,8 @@ public class PlayerInputManager : MonoBehaviour
     private void Update()
     {
         isDialoged = DialogSystem.instance.IsActiveDialog;
+
+        player.SetInvincible(isDialoged);
         
         if (player.slidingCheck)
         {
