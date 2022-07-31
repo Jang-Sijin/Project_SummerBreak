@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2fdcf1e42fe19740a17af7b9b2ff085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dayNightSkyboxBlender: {fileID: 0}
+  peakSkyboxBlender: {fileID: 0}
 --- !u!1 &2452393992050611154
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +92,7 @@ MonoBehaviour:
   startHour: 12
   timeText: {fileID: 0}
   sunLight: {fileID: 2452393992713717260}
-  sunriseHour: 7
+  sunriseHour: 6
   sunsetHour: 20.5
   dayAmbientLight: {r: 0.56078434, g: 0.6039216, b: 0.68235296, a: 0}
   nightAmbientLight: {r: 0.039215688, g: 0.19218943, b: 0.39215687, a: 0}

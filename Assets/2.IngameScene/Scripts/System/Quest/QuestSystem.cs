@@ -37,12 +37,16 @@ public class QuestSystem : MonoBehaviour
             questSlot.GetComponent<QuestSlot>().SetCompleteQuestUIActive(true);
         }
 
+        // 퀘스트를 받은 상태이면
         if (_isProgressQuest)
         {
             // 퀘스트 UI List에 있는 QuestSlot을 보이는 상태로 변경시켜준다.
             GameObject questSlot;
             _questMenu.QuestMenuSlotList.TryGetValue(_playerProgressQuestID, out questSlot);
             questSlot.SetActive(true);
+            
+            // 퀘스트 조건이 실시간으로 체크된다.
+            _questCheckTrigger.StartCheckQuest(_playerProgressQuestID,_questList);
         }
     }
     
