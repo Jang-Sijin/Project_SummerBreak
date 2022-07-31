@@ -21,6 +21,9 @@ public class InventorySystem : MonoBehaviour
     [Header("플레이어가 획득한 코인 개수")]
     public int playerCoinCount;
     
+    [Header("아이템 DB 리스트")]
+    [SerializeField] private ItemList ItemDB;
+
     #region Inventory System 싱글톤 설정
     public static InventorySystem instance; // Game Manager을 싱글톤으로 관리
     private void Awake()
@@ -40,13 +43,14 @@ public class InventorySystem : MonoBehaviour
 
     private void Start()
     {
+        if (JsonManager.instance.CheckSaveFile())
+            return;
+        
         // 해당 오브젝트의 자식 slot 오브젝트를 itemSlots 배열에 할당한다.
         itemSlots = inventorySlotsParent.GetComponentsInChildren<Slot>();
         equipmentSlot = inventoryEquipmentSlot.GetComponent<Slot>();
-        
+
         // [임시 빌드용 디폴트 아이템] // 나중에 제대로 함수 추가 필요
-        // itemSlots[9].AddItem(sword);
-        // itemSlots[10].AddItem(bag);
         itemSlots[11].AddItem(pen);
     }
 
@@ -130,11 +134,32 @@ public class InventorySystem : MonoBehaviour
         equipmentSlot.GetComponent<Image>().color = color;
     }
 
-    public void LoadInventoryCoin(int coinCount)
+    public void LoadInventory(int coinCount, string getEquipmentName, int getEquipmentCount, string[] getItemNames, int[] getItemCount)
     {
+        // 코인(재화)
         playerCoinCount = coinCount;
         PlayerUI getPlayerUI = playerUI.GetComponent<PlayerUI>();
         getPlayerUI.UpdatePlayerCoinCountUI();
+        
+        
+        // 해당 오브젝트의 자식 slot 오브젝트를 itemSlots 배열에 할당한다.
+        itemSlots = inventorySlotsParent.GetComponentsInChildren<Slot>();
+        equipmentSlot = inventoryEquipmentSlot.GetComponent<Slot>();
+        
+        
+        // 장비 슬롯
+        if (getEquipmentName != null)
+        {
+            var findItem = Array.Find(ItemDB.ItemDBList, item => item.itemName == getEquipmentName);
+            equipmentSlot.AddItem(findItem, getEquipmentCount);
+        }
+
+        for (int i = 0; i < getItemNames.Length; ++i)
+        {
+            var findItem = Array.Find(ItemDB.ItemDBList, item => item.itemName == getItemNames[i]);
+            
+            itemSlots[i].AddItem(findItem, getItemCount[i]);
+        }
 
         return;
     }
@@ -218,5 +243,15 @@ public class InventorySystem : MonoBehaviour
         }
 
         return 0;
+    }
+
+    public Slot SaveEquipmentSlot()
+    {
+        return equipmentSlot;
+    }
+    
+    public Slot[] SaveInventoryItems()
+    {
+        return itemSlots;
     }
 }

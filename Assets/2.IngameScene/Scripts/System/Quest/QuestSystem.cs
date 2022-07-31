@@ -12,7 +12,7 @@ public class QuestSystem : MonoBehaviour
 
     public QuestAnimationTimeline QuestAnimationTimeline { get; private set; }
 
-    public int playerProgressQuestID { get { return _playerProgressQuestID; } }
+    public int PlayerProgressQuestID { get { return _playerProgressQuestID; } set { _playerProgressQuestID = value; } }
     private int _playerProgressQuestID;
 
     public List<QuestDBEntity> QuestDBList { get { return _questList; } }
@@ -20,6 +20,34 @@ public class QuestSystem : MonoBehaviour
 
     public QuestCheckTrigger QuestCheckTrigger { get { return _questCheckTrigger; } }
     private QuestCheckTrigger _questCheckTrigger;
+
+    public void LoadQuestData(int setQuestID, bool setIsProgressQuest)
+    {
+        Init();
+        
+        _playerProgressQuestID = setQuestID;
+        _isProgressQuest = setIsProgressQuest;
+
+        for (int i = 1; i < _playerProgressQuestID; ++i)
+        {
+            // 퀘스트 UI List에 있는 QuestSlot을 보이는 상태로 변경시켜준다.
+            GameObject questSlot;
+            _questMenu.QuestMenuSlotList.TryGetValue(i, out questSlot);
+            questSlot.SetActive(true);
+            questSlot.GetComponent<QuestSlot>().SetCompleteQuestUIActive(true);
+        }
+
+        if (_isProgressQuest)
+        {
+            // 퀘스트 UI List에 있는 QuestSlot을 보이는 상태로 변경시켜준다.
+            GameObject questSlot;
+            _questMenu.QuestMenuSlotList.TryGetValue(_playerProgressQuestID, out questSlot);
+            questSlot.SetActive(true);
+            
+            // 진행중인 퀘스트의 완료가 가능한지 조건을 체크한다. (코루틴)
+            _questCheckTrigger.StartCheckQuest(_playerProgressQuestID, _questList);
+        }
+    }
     
     // 퀘스트 대화가 끝났음을 확인하는 변수
     public bool IsQuestDialog
@@ -57,7 +85,10 @@ public class QuestSystem : MonoBehaviour
     
     private void Start()
     {
-        Init();
+        if (!JsonManager.instance.CheckSaveFile())
+        {
+            Init();
+        }
     }
 
     private void Init()
@@ -68,17 +99,9 @@ public class QuestSystem : MonoBehaviour
         // Excel QuestDBSheet의 리스트들을 questList에 추가한다.
         _questList = excelDB.QuestDBSheet.ToList();
         
-        if (JsonManager.instance.CheckSaveFile() == true)
-        {
-            // 이전(세이브 파일)에 진행중이었던 퀘스트ID를 할당한다,
-            // ex) _playerProgressQuestID = 퀘스트ID
-        }
-        else
-        {
-            _playerProgressQuestID = 1; // 타이틀 화면에서 새로운 게임을 선택하였다면 QuestID 1번부터 시작한다. 
-        }
+        _playerProgressQuestID = 1; // 타이틀 화면에서 새로운 게임을 선택하였다면 QuestID 1번부터 시작한다. 
 
-        // UI - QuestMenu 정보를 QuestSystem에서 초기화를 해준다. // 게임 실행 시 UI가 SetActive False 상태라 자체 초기화가 안되는 현상 발생. 
+            // UI - QuestMenu 정보를 QuestSystem에서 초기화를 해준다. // 게임 실행 시 UI가 SetActive False 상태라 자체 초기화가 안되는 현상 발생. 
         _questMenu.Init();
     }
 

@@ -35,14 +35,7 @@ public class NpcDialogTrigger : MonoBehaviour
     {
         npcDialogList = dialogDB.DialogSheet.Where(excelDB => excelDB.DialogID % dialogID < 100).ToList(); // 예시) DialogID: 11000일 때 11000~11099까지 리스트에 저장
         
-        if (JsonManager.instance.CheckSaveFile() == true)
-        {
-            // 이전(세이브 파일)에 진행중이었던 다이얼로그ID를 할당한다,
-        }
-        else
-        {
-            SaveDialogID = dialogID; // 시작 시 DB Sheet에서의 첫 다이얼로그ID를 저장한다. 
-        }
+        SaveDialogID = dialogID; // 시작 시 DB Sheet에서의 첫 다이얼로그ID를 저장한다. 
     }
 
     public void EnterPlayer()

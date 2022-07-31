@@ -51,21 +51,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // [Debug]
-        // foreach (var data in SaveDataDictionary.saveDataDictionary)
-        // {
-        //     print($"{data.Key}, {data.Value}");
-        //     print($"name:{data.Value.name}, position:{data.Value.position}, rotation:{data.Value.rotation}, hp:{data.Value.hp}, stamina:{data.Value.stamina},");
-        // }
+        // 저장 데이터 불러오기
         InitLoadSaveData();
-            
-        // 시작시 마우스 커서 기본으로 설정
-        Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
-        // 시작시 마우스 위치 현재 마우스 위치로 설정
-        beforeMousePosition = Input.mousePosition;
-        // 마우스 커서 이미지 할당 (Default:기본)
-        StartCoroutine(SetMouseCursor());
         
+        // 마우스 이벤트 설정
+        InitMouseEvent();
+
         // 사운드바 슬라이드 위치 설정
         // bgSoundSlider.value = SoundManagerOld.Instance.GetBgSoundVolumeValue();
         // effectSoundSlider.value = SoundManagerOld.Instance.GetSfxSoundVolumeValue();
@@ -78,6 +69,16 @@ public class GameManager : MonoBehaviour
 
     // 게임 종료
     public void QuitGame() => Application.Quit();
+
+    private void InitMouseEvent()
+    {
+        // 시작시 마우스 커서 기본으로 설정
+        Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
+        // 시작시 마우스 위치 현재 마우스 위치로 설정
+        beforeMousePosition = Input.mousePosition;
+        // 마우스 커서 이미지 할당 (Default:기본)
+        StartCoroutine(SetMouseCursor());
+    }
 
     // 마우스 설정
     private IEnumerator SetMouseCursor()
@@ -164,23 +165,28 @@ public class GameManager : MonoBehaviour
     
     private void InitLoadSaveData()
     {
-        // 로드할 데이터가 있을 때
-        if (JsonManager.instance.CheckSaveFile())
+        // 로드할 데이터가 없을 때
+        if (!JsonManager.instance.CheckSaveFile())
         {
-            print($"[장시진] 불러올 데이터가 있습니다.");
-            SaveInfo saveinfo = JsonManager.instance.LoadSaveFile();
-
-            // 플레이어 데이터 로드
-            playerGameObject.transform.position = saveinfo.position;
-            playerGameObject.transform.rotation = Quaternion.Euler(saveinfo.rotation);
-            playerGameObject.GetComponent<PlayerStatus>().currentHealth = saveinfo.hp;
-            playerGameObject.GetComponent<PlayerStatus>().currentMaxstamina = saveinfo.maxStamina;
-            playerGameObject.GetComponent<PlayerStatus>().currentStamina = saveinfo.currentStamina;
-            InventorySystem.instance.LoadInventoryCoin(saveinfo.playerCoinCount);
+            Debug.Log($"[장시진] 불러올 데이터가 없습니다. 새로운 게임을 시작합니다.");
             return;
         }
 
-        print($"[장시진] 불러올 데이터가 없습니다. 새로운 게임을 시작합니다.");
+        // 다이얼로그 시스템 초기화
+        DialogSystem.instance.Setup();
+
+        print($"[장시진] 불러올 데이터가 있습니다.");
+        SaveInfo saveinfo = JsonManager.instance.LoadSaveFile();
+
+        // 플레이어 데이터 로드
+        playerGameObject.transform.position = saveinfo.position;
+        playerGameObject.transform.rotation = Quaternion.Euler(saveinfo.rotation);
+        playerGameObject.GetComponent<PlayerStatus>().currentHealth = saveinfo.hp;
+        playerGameObject.GetComponent<PlayerStatus>().currentMaxstamina = saveinfo.maxStamina;
+        playerGameObject.GetComponent<PlayerStatus>().currentStamina = saveinfo.currentStamina;
+        InventorySystem.instance.LoadInventory(saveinfo.playerCoinCount, saveinfo.equipmentName, saveinfo.equipmentCount, saveinfo.inventoryItemName, saveinfo.inventoryItemCount);
+        QuestSystem.instance.LoadQuestData(saveinfo.questProgressID, saveinfo.isProgressQuest);
+        
         return;
     }
 }

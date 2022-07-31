@@ -93,14 +93,17 @@ public class JsonManager : MonoBehaviour
         
         SaveDataDictionary.saveDataDictionary[slotName] = new SaveInfo(
                 saveName,
+                DateTime.Now.ToString("yyyy.MM.dd ") + DateTime.Now.ToString("HH:mm:ss tt ") + DateTime.Now.DayOfWeek.ToString().ToUpper().Substring(0, 3),
                 GameManager.instance.playerGameObject.transform.position,
                 GameManager.instance.playerGameObject.transform.rotation.eulerAngles,
                 (int)GameManager.instance.playerGameObject.GetComponent<PlayerStatus>().currentHealth,
                 (int)GameManager.instance.playerGameObject.GetComponent<PlayerStatus>().currentMaxstamina,
                 (int)GameManager.instance.playerGameObject.GetComponent<PlayerStatus>().currentStamina,
                 InventorySystem.instance.playerCoinCount,
-                DateTime.Now.ToString("yyyy.MM.dd ") + DateTime.Now.ToString("HH:mm:ss tt ") +
-                DateTime.Now.DayOfWeek.ToString().ToUpper().Substring(0, 3));
+                InventorySystem.instance.SaveEquipmentSlot(),
+                InventorySystem.instance.SaveInventoryItems(),
+                QuestSystem.instance.PlayerProgressQuestID,
+                QuestSystem.instance.IsProgressQuest);
 
         // Formatting.Indented -> Json 자동으로 라인/들여쓰기 적용 [참고: https://www.csharpstudy.com/Data/Json-beautifier.aspx]
         string jdata = JsonConvert.SerializeObject(SaveDataDictionary.saveDataDictionary, Formatting.Indented);
@@ -122,13 +125,18 @@ public class JsonManager : MonoBehaviour
             // transform은 JsonManager 오브젝트의 transform으로 설정합니다. (필수 확인: JsonManager 오브젝트의 위치(0,0,0), 회전(0,0,0)으로 설정해줘야 합니다.)
             createData[$"SaveSlot ({i})"] = new SaveInfo(
                 clearSlotName,
+                "",
                 new Vector3(0,0,0), 
                 new Vector3(0,0,0), 
                 0, 
                 0,
                 0,
                 0,
-                "");
+                null,
+                null,
+                1,
+                false
+            );
         }
 
         string jdata = JsonConvert.SerializeObject(createData, Formatting.Indented);
@@ -143,13 +151,18 @@ public class JsonManager : MonoBehaviour
         SaveDataDictionary.saveDataDictionary[slotName] = 
             new SaveInfo(
                 clearSlotName, 
+                "",
                 new Vector3(0,0,0), 
                 new Vector3(0,0,0), 
                 0, 
                 0, 
                 0,
                 0,
-                "");
+                null,
+                null,
+                1,
+                false
+            );
         
         string jdata = JsonConvert.SerializeObject(SaveDataDictionary.saveDataDictionary, Formatting.Indented);
         File.WriteAllText(Application.persistentDataPath + dataPath, jdata);
