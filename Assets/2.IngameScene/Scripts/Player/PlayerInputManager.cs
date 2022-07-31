@@ -284,13 +284,11 @@ public class PlayerInputManager : MonoBehaviour
 
         if (!player.isSwim)
         {
-            waterRipple.GetComponent<ParticleSystem>().Stop();
             waterRipple.SetActive(false);
         }
         else
         {
             waterRipple.SetActive(true);
-            waterRipple.GetComponent<ParticleSystem>().Play();
         }
         
         if (!player.inWater)

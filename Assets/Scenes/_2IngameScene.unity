@@ -44616,8 +44616,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 1772180702}
     m_Modifications:
     - target: {fileID: 309064030065062174, guid: c8948450f8ded6b4f9b9328b15b3df6f, type: 3}
-      propertyPath: playOnAwake
+      propertyPath: prewarm
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 309064030065062174, guid: c8948450f8ded6b4f9b9328b15b3df6f, type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 309064030065062174, guid: c8948450f8ded6b4f9b9328b15b3df6f, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].time
