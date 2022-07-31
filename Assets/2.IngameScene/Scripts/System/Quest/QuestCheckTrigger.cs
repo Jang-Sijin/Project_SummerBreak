@@ -111,7 +111,7 @@ public class QuestCheckTrigger : MonoBehaviour
             if (_progressQuestEntity.QuestID == 3)
             {
                 // 깃펜을 장비한 상태에서 햇빛마을에 있는 분수대를 지도에 그려보고 촌장 제라드에게 다시 방문하자.
-                bool landMarkEnable = GameManager.instance.playerGameObject.GetComponent<PlayerStatus>().landMarkEnable[0];
+                bool landMarkEnable = MapPiecesController.instance.landMarkEnable[0];
                 _isCanComplete = (landMarkEnable == true) ? true : false;
             }
             

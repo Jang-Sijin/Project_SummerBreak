@@ -81,7 +81,7 @@ public class PlayerEventSystem : MonoBehaviour
                     {
                         for (int i = 0; i < 4; ++i)
                         {
-                            if (playerStatus.landMarkEnable[i] == false)
+                            if (MapPiecesController.instance.landMarkEnable[i] == false)
                             {
                                 Debug.Log("[이민호] 지도를 다 못채움");
                                 return;

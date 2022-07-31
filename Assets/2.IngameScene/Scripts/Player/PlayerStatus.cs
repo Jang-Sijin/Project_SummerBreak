@@ -51,8 +51,6 @@ public class PlayerStatus : MonoBehaviour
     private PlayerMovement _playerMovement;
 
     public bool playerInPeak = false;
-    
-    public bool[] landMarkEnable = new bool[5];
 
     [SerializeField] private string checkToChangeEquipment = null;
     void Awake()
