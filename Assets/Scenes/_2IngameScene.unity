@@ -6491,6 +6491,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6679031108004514693, guid: 3fb1d65192ceaf349a963b7a2e44860c, type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6679031108004514695, guid: 3fb1d65192ceaf349a963b7a2e44860c, type: 3}
       propertyPath: m_Name
       value: WalkingSmoke_Right
@@ -63754,6 +63758,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -62.504
       objectReference: {fileID: 0}
+    - target: {fileID: 6679031108004514693, guid: 3fb1d65192ceaf349a963b7a2e44860c, type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6679031108004514695, guid: 3fb1d65192ceaf349a963b7a2e44860c, type: 3}
       propertyPath: m_Name
       value: WalkingSmoke_Left
@@ -68628,7 +68636,8 @@ PrefabInstance:
       propertyPath: mapPiece
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1488061041806598368, guid: 501a34b243d3d24448684538449481d8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 501a34b243d3d24448684538449481d8, type: 3}
 --- !u!4 &2031955883 stripped
 Transform:
