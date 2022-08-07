@@ -50,7 +50,7 @@ public class Bullet : MonoBehaviour
     {
         VisualEffect newExplodeEffect = Instantiate(explodeEffect, transform.position, transform.rotation);
         newExplodeEffect.Play();
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             _playerMovement.HitStart(ClamBT.damageValue, m_rigidbody);
         }

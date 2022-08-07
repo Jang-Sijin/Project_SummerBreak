@@ -380,7 +380,7 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
 
-            if (!isDialoged && !player.hited &&!player.attacked && (player.isSwim || !player.isGrounded))
+            if (!isDialoged && !player.hited &&!player.attacked && (!player.isSwim || !player.isGrounded))
             {
                 FlapDoingCheck = true;
                 spaceClickCheck = true;

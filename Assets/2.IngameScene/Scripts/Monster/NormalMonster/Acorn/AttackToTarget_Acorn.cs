@@ -52,7 +52,10 @@ public class AttackToTarget_Acorn : Node
             //Debug.Log("[이민호] 도토토리가 공격함");
             if (_monsterManager.attacking == false)
             {
-                _monsterManager.DashAttack();
+                if (_lastTarget.gameObject.layer == LayerMask.NameToLayer("Player"))
+                {
+                    _monsterManager.DashAttack();
+                }
             }
 
             bool targetIsDead = false;
