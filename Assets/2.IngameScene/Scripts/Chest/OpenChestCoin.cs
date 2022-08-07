@@ -13,7 +13,8 @@ public class OpenChestCoin : MonoBehaviour
     private bool hasBeenCollected = false;
 
     public bool spawnLoot = false;
-
+    
+    
     void Update()
     {
         if (spawnLoot && !hasBeenCollected)
@@ -26,6 +27,11 @@ public class OpenChestCoin : MonoBehaviour
     public void OpenStart()
     {
         spawnLoot = true;
+    }
+
+    public void StartChestOpenSFX()
+    {
+        SoundManager.Instance.PlaySFX(5);
     }
     
     private void Loot()

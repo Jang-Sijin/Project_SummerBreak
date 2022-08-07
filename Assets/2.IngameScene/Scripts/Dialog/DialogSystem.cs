@@ -40,18 +40,13 @@ public class DialogSystem : MonoBehaviour
 
 	private void Start()
 	{
-		if (DialogSystem.instance.IsActiveDialog)
+		if (!JsonManager.instance.CheckSaveFile())
 		{
-			// 현재 대화중. 움직이지 않는 코드 처리
+			Setup();
 		}
-		else
-		{
-			
-		}
-		Setup();
 	}
 
-	private void Setup()
+	public void Setup()
 	{
 		_dialogUiController.Init();
 	}

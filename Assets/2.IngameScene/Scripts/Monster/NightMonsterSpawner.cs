@@ -52,7 +52,7 @@ public class NightMonsterSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!playerEventSystem.GetIsLandMarkArea())
+        if (!playerEventSystem.GetIsLandMarkArea() && !DialogSystem.instance.IsActiveDialog)
         {
             for (int i = 0; i < spawnMonsters.Count; ++i)
             {

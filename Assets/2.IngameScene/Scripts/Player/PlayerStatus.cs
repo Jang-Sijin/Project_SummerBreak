@@ -32,6 +32,8 @@ public class PlayerStatus : MonoBehaviour
     private GameObject DebugModGlideButton;
     [SerializeField] 
     private GameObject DebugModQuaterButtton;
+    [SerializeField] 
+    private GameObject DebugModGetItemButton;
     
     private Slot equipmentSlot;
 
@@ -49,8 +51,6 @@ public class PlayerStatus : MonoBehaviour
     private PlayerMovement _playerMovement;
 
     public bool playerInPeak = false;
-    
-    public bool[] landMarkEnable = new bool[5];
 
     [SerializeField] private string checkToChangeEquipment = null;
     void Awake()
@@ -84,6 +84,7 @@ public class PlayerStatus : MonoBehaviour
             DebugModTextObj.SetActive(true);
             DebugModGlideButton.SetActive(true);
             DebugModQuaterButtton.SetActive(true);
+            DebugModGetItemButton.SetActive(true);
             GameManager.instance.SetTimeMultiplier(2000);
         }
         else
@@ -94,6 +95,7 @@ public class PlayerStatus : MonoBehaviour
             DebugModTextObj.SetActive(false);
             DebugModGlideButton.SetActive(false);
             DebugModQuaterButtton.SetActive(false);
+            DebugModGetItemButton.SetActive(false);
             GameManager.instance.SetTimeMultiplier(540);
         }
     }

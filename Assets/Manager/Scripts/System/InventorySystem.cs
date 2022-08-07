@@ -13,9 +13,7 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private GameObject inventoryEquipmentSlot;
 
     [Header("테스트 모드 인벤토리 설정")]
-    [SerializeField] private Item sword;
     [SerializeField] private Item pen;
-    [SerializeField] private Item bag;
 
     private Slot[] itemSlots;
     private Slot equipmentSlot;
@@ -23,6 +21,9 @@ public class InventorySystem : MonoBehaviour
     [Header("플레이어가 획득한 코인 개수")]
     public int playerCoinCount;
     
+    [Header("아이템 DB 리스트")]
+    [SerializeField] private ItemList ItemDB;
+
     #region Inventory System 싱글톤 설정
     public static InventorySystem instance; // Game Manager을 싱글톤으로 관리
     private void Awake()
@@ -42,14 +43,15 @@ public class InventorySystem : MonoBehaviour
 
     private void Start()
     {
+        if (JsonManager.instance.CheckSaveFile())
+            return;
+        
         // 해당 오브젝트의 자식 slot 오브젝트를 itemSlots 배열에 할당한다.
         itemSlots = inventorySlotsParent.GetComponentsInChildren<Slot>();
         equipmentSlot = inventoryEquipmentSlot.GetComponent<Slot>();
-        
+
         // [임시 빌드용 디폴트 아이템] // 나중에 제대로 함수 추가 필요
-        itemSlots[9].AddItem(sword);
-        itemSlots[10].AddItem(pen);
-        itemSlots[11].AddItem(bag);
+        itemSlots[11].AddItem(pen);
     }
 
     // parameter1이 양수면 코인 개수 +, 음수면 코인 개수 - 
@@ -69,7 +71,19 @@ public class InventorySystem : MonoBehaviour
         // 획득한 아이템 == 코인
         if (Item.ItemType.Coin == item.itemType)
         {
-            playerCoinCount += count;
+            if (item.itemName == "1코인")
+            {
+                playerCoinCount += count;
+            }
+            else if (item.itemName == "5코인")
+            {
+                playerCoinCount += (count * 5);
+            }
+            else if (item.itemName == "10코인")
+            {
+                playerCoinCount += (count * 10);
+            }
+                
             PlayerUI getPlayerUI = playerUI.GetComponent<PlayerUI>();
             getPlayerUI.UpdatePlayerCoinCountUI();
             return;
@@ -120,11 +134,32 @@ public class InventorySystem : MonoBehaviour
         equipmentSlot.GetComponent<Image>().color = color;
     }
 
-    public void LoadInventoryCoin(int coinCount)
+    public void LoadInventory(int coinCount, string getEquipmentName, int getEquipmentCount, string[] getItemNames, int[] getItemCount)
     {
+        // 코인(재화)
         playerCoinCount = coinCount;
         PlayerUI getPlayerUI = playerUI.GetComponent<PlayerUI>();
         getPlayerUI.UpdatePlayerCoinCountUI();
+        
+        
+        // 해당 오브젝트의 자식 slot 오브젝트를 itemSlots 배열에 할당한다.
+        itemSlots = inventorySlotsParent.GetComponentsInChildren<Slot>();
+        equipmentSlot = inventoryEquipmentSlot.GetComponent<Slot>();
+        
+        
+        // 장비 슬롯
+        if (getEquipmentName != null)
+        {
+            var findItem = Array.Find(ItemDB.ItemDBList, item => item.itemName == getEquipmentName);
+            equipmentSlot.AddItem(findItem, getEquipmentCount);
+        }
+
+        for (int i = 0; i < getItemNames.Length; ++i)
+        {
+            var findItem = Array.Find(ItemDB.ItemDBList, item => item.itemName == getItemNames[i]);
+            
+            itemSlots[i].AddItem(findItem, getItemCount[i]);
+        }
 
         return;
     }
@@ -191,22 +226,32 @@ public class InventorySystem : MonoBehaviour
         return;
     }
     
-    // findItemName과 같은 아이템이 인벤토리에 존재하는지 확인한다. true: 있음, false: 없음
-    public bool FindInventorySlotItem(string findItemName)
+    // findItemName과 같은 아이템이 인벤토리에 존재하는지 확인한다. [아이템의 개수를 반환합니다. // 아이템이 없으면 0을 반환]
+    public int FindInventorySlotItem(string findItemName)
     {
         if (equipmentSlot.item != null && equipmentSlot.item.itemName == findItemName)
         {
-            return true;
+            return equipmentSlot.itemCount;
         }
 
         foreach (var itemSlot in itemSlots)
         {
             if (itemSlot.item != null && itemSlot.item.itemName == findItemName)
             {
-                return true;
+                return itemSlot.itemCount;
             }
         }
 
-        return false;
+        return 0;
+    }
+
+    public Slot SaveEquipmentSlot()
+    {
+        return equipmentSlot;
+    }
+    
+    public Slot[] SaveInventoryItems()
+    {
+        return itemSlots;
     }
 }

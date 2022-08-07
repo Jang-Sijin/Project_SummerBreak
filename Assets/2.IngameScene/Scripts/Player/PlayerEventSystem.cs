@@ -66,19 +66,33 @@ public class PlayerEventSystem : MonoBehaviour
             }
             else if (nearObject.CompareTag("LandMarkObj"))
             {
+                
+                // 다이얼로그 시작 코루틴 시작
+                ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
+                objDialogTrigger.EnterPlayer();
+                
                 PlayerStatus playerStatus = GameManager.instance.playerGameObject.GetComponent<PlayerStatus>();
                 if (playerStatus.currentItem == PlayerStatus.item.interaction_quillPen &&
-                    InventorySystem.instance.FindInventorySlotItem("잉크") &&
+                    (InventorySystem.instance.FindInventorySlotItem("깜깜잉크") > 0) &&
                     !nearObject.GetComponent<MapOpenTrigger>().GetMapPieceable())
                 {
-                    InventorySystem.instance.FindSetCountInventorySlotItem("잉크", -1);
+                    
+                    if (nearObject.GetComponent<MapOpenTrigger>().landMarkNumber == 5)
+                    {
+                        for (int i = 0; i < 4; ++i)
+                        {
+                            if (MapPiecesController.instance.landMarkEnable[i] == false)
+                            {
+                                Debug.Log("[이민호] 지도를 다 못채움");
+                                return;
+                            }
+                        }
+                    }
+                    InventorySystem.instance.FindSetCountInventorySlotItem("깜깜잉크", -1);
                     MapOpenTrigger mapOpenTrigger = nearObject.GetComponent<MapOpenTrigger>();
                     mapOpenTrigger.SetActiveMapPiece();
                 }
 
-                // 다이얼로그 시작 코루틴 시작
-                ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
-                objDialogTrigger.EnterPlayer();
             }
             else if (nearObject.CompareTag("ShopNpc") || nearObject.CompareTag("MoveShopNPC"))
             {
@@ -89,12 +103,16 @@ public class PlayerEventSystem : MonoBehaviour
                 // 상점 UI 출력
                 // ShopSystem.Instance.OpenShopCanvas();
             }
+            else if (nearObject.CompareTag("ChestObj"))
+            {
+                nearObject.GetComponent<Animator>().SetBool("IsOpen", true);
+            }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("QuestNpc") || other.CompareTag("DialogObj") || other.CompareTag("ShopNpc") || other.CompareTag("MoveShopNPC") || other.CompareTag("LandMarkObj"))
+        if (other.CompareTag("QuestNpc") || other.CompareTag("DialogObj") || other.CompareTag("ShopNpc") || other.CompareTag("MoveShopNPC") || other.CompareTag("LandMarkObj") || other.CompareTag("ChestObj"))
         {
             // print($"[장시진]: Player-NPC Collider 충돌 성공 -> 상호작용 가능");
             nearObject = other.gameObject;
@@ -156,13 +174,17 @@ public class PlayerEventSystem : MonoBehaviour
         }
         else if (other.CompareTag("LandMarkObj"))
         {
-
             ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
             DialogSystem.instance.ResetDialog(); // Dialog UI 초기화
             objDialogTrigger.StopCoroutine("StartDialog");
             nearObject = null;
             
             // 트리거가 발생 UI(E키)를 비활성화(출력X)한다.
+            interactionText.gameObject.SetActive(false);
+        }
+        else if (other.CompareTag("ChestObj"))
+        {
+            nearObject = null;
             interactionText.gameObject.SetActive(false);
         }
         

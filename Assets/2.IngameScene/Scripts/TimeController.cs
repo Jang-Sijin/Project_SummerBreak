@@ -87,7 +87,7 @@ public class TimeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (QuestSystem.instance.playerProgressQuestID < 5)
+        if (QuestSystem.instance.PlayerProgressQuestID < 5)
         {
             float questSunLightRotation;
             

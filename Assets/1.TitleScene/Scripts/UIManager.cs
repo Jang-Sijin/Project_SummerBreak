@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,6 +13,14 @@ public class UIManager : MonoBehaviour
     private bool isMoveMouse = true;
     [SerializeField] private Texture2D cursorDefault;
     [SerializeField] private Texture2D cursorClick;
+    
+    [Header("사운드 믹서 설정")]
+    public AudioMixer Mixer;
+    [Header("사운드 슬라이드바 설정")]
+    [SerializeField] private Slider bgSoundSlider;
+    [SerializeField] private Slider effectSoundSlider;
+    private float BGstartVolumeValue = 0.5f; // 배경음 사운드 크기 초기값은 0.5로 설정
+    private float SFXstartVolumeValue = 0.5f; // 효과음 사운드 크기 초기값은 0.5로 설정
 
     private void Awake()
     {
@@ -21,7 +31,26 @@ public class UIManager : MonoBehaviour
         // 마우스 커서 이미지 할당 (Default:기본)
         StartCoroutine(SetMouseCursor());
     }
-    
+
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("BgmVolumeValue") && PlayerPrefs.HasKey("SfxVolumeValue"))
+        {
+            Mixer.SetFloat("BackGroundSound", PlayerPrefs.GetFloat("BgmVolumeValue"));
+            Mixer.SetFloat("SFXSound", PlayerPrefs.GetFloat("SfxVolumeValue"));
+        }
+        else
+        {
+            // 배경음, 효과음 초기값 설정
+            Mixer.SetFloat("BackGroundSound", Mathf.Log10(BGstartVolumeValue) * 20);
+            Mixer.SetFloat("SFXSound", Mathf.Log10(SFXstartVolumeValue) * 20);
+        }
+        
+        // 사운드바 슬라이드 위치 설정
+        bgSoundSlider.value = SoundManager.Instance.GetBgSoundVolumeValue();
+        effectSoundSlider.value = SoundManager.Instance.GetSfxSoundVolumeValue();
+    }
+
     // 마우스 설정
     private IEnumerator SetMouseCursor()
     {

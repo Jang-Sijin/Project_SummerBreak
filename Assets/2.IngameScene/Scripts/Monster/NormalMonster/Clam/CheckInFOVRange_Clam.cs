@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using BehaviorTree;
-using UnityEditor.U2D;
 
 
 public class CheckInFOVRange_Clam : Node

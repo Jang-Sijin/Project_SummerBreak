@@ -8,11 +8,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: P_Leaf01_LOD0
-  m_Shader: {fileID: -6465566751694194690, guid: 72726dead0099f04bacec03dc52dc1f1, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: ca2c523e611923a41850f0d54c83a734, type: 3}
   m_ShaderKeywords: BOOLEAN_04E7CBFCEB8A4D21BFFB5290882612D4_ON BOOLEAN_A755EEC42A7440C284306694860D10A3_ON
     BOOLEAN_E133D33A6AEA41079504B17ADBDE5FE6_ON
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
+  m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -20,6 +20,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - BaseColorTexture:
+        m_Texture: {fileID: 2800000, guid: 412e02e251d185f44adfb500c96f1fd7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -121,9 +125,11 @@ Material:
     - BOOLEAN_04E7CBFCEB8A4D21BFFB5290882612D4: 1
     - BOOLEAN_A755EEC42A7440C284306694860D10A3: 1
     - BOOLEAN_E133D33A6AEA41079504B17ADBDE5FE6: 1
-    - FingerprintStrength: 1.5
-    - FlatSurfaceStrength: -0.2
-    - SmoothnessStrength: 0.6
+    - FingerprintStrength: 1
+    - FlatSurfaceStrength: -0.15
+    - Fresnel: 10
+    - RedLv: 0
+    - SmoothnessStrength: 0.5
     - Vector1_4245aa0255434760a22d1e006dbe2e68: 1.2
     - Vector1_fb33790fb5224e43b5290da9ac049898: 0
     - Vector1_ff54299554d340d8878c5658ef5bce9c: 0.3
@@ -154,10 +160,11 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_1f6b97e51db74853ab9a671b7b63a3e0: {r: 0.34901962, g: 0.26527295, b: 0, a: 0}
-    - Color_e2a6c02d8805468eafb64000a208f6de: {r: 0.10538136, g: 0.5849056, b: 0, a: 0}
+    - Color_1f6b97e51db74853ab9a671b7b63a3e0: {r: 0, g: 0, b: 0, a: 0}
+    - Color_e2a6c02d8805468eafb64000a208f6de: {r: 0, g: 0.6320754, b: 0.15175341, a: 0}
+    - NormalTexScale: {r: 2, g: 2, b: 0, a: 0}
     - ShadowColor: {r: 0, g: 0, b: 0, a: 0}
-    - ShadowColor01: {r: 0.1764706, g: 0.49019608, b: 0, a: 0}
+    - ShadowColor01: {r: 0.014328952, g: 0.4339623, b: 0.12812778, a: 0}
     - ShadowColor02: {r: 0, g: 0, b: 0, a: 0}
     - TextureScale: {r: 2, g: 2, b: 0, a: 0}
     - Vector2_1564f9387c9d46eabeedfdc05404512d: {r: 1, g: 0, b: 0, a: 0}

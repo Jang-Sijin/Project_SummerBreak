@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class ChangePeakCamera : MonoBehaviour
 {
-    
     [SerializeField] 
     private GameObject camera;
 
     public bool triggerd;
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && !triggerd)
         {
