@@ -40,9 +40,9 @@ public class PlayerStatus : MonoBehaviour
     private PlayerUI playerUI;
 
     private Image[] playerHpImageArray;
-
+    [SerializeField] 
     private Image[] playerStaminaImageArray;
-
+    [SerializeField] 
     private Image[] playerMaxStaminaImageArray;
     
     [SerializeField]
@@ -160,7 +160,7 @@ public class PlayerStatus : MonoBehaviour
             }
         }
         
-        for (int i = 0; i < 10; ++i)
+        for (int i = 0; i < 13; ++i)
         {
             if (i <= (int)(currentMaxstamina / 10) - 1)
             {
@@ -233,7 +233,7 @@ public class PlayerStatus : MonoBehaviour
     public void HealMaxStamina()
     {
 
-        if (currentMaxstamina < 100)
+        if (currentMaxstamina < 130)
         {
             currentMaxstamina += 10.0f;
         }
