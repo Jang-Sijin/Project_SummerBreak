@@ -6,8 +6,8 @@ using UnityEngine.VFX;
 
 public class Bullet : MonoBehaviour
 {
-    public VisualEffect explodeEffect;
-
+    public ParticleSystem _particleSystem;
+    
     private PlayerMovement _playerMovement;
     private Rigidbody m_rigidbody;
     
@@ -48,13 +48,13 @@ public class Bullet : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
-        VisualEffect newExplodeEffect = Instantiate(explodeEffect, transform.position, transform.rotation);
+        ParticleSystem newExplodeEffect = Instantiate(_particleSystem, transform.position, transform.rotation);
         newExplodeEffect.Play();
-        if (other.gameObject.tag == "Player")
+        Destroy(newExplodeEffect.gameObject, 1);
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             _playerMovement.HitStart(ClamBT.damageValue, m_rigidbody);
         }
-        
         Destroy(gameObject);
     }
 }

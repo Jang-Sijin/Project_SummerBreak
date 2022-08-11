@@ -34,7 +34,11 @@ public class AtttackToTarget : Node
         if (_attackCounter >= _attackTime)
         {
             //Debug.Log("[이민호] 몬스터가 공격함");
-            playerMovement.HitStart(damageValue,_rigidbody);
+            if (_lastTarget.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                playerMovement.HitStart(damageValue, _rigidbody);
+            }
+
             _animator.SetBool("Attack", true);
             _animator.SetBool("Idle", false);
             bool targetIsDead = false;

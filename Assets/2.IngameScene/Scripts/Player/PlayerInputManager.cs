@@ -32,6 +32,7 @@ public class PlayerInputManager : MonoBehaviour
 
     [SerializeField] 
     private GameObject waterRipple;
+
     
     [SerializeField]
     private bool moveDoingCheck;
@@ -102,10 +103,10 @@ public class PlayerInputManager : MonoBehaviour
         }
         else if (player.isSwim && !player.isGrounded)
         {
-            if((playerstatus.GetDebugMod() == true || playerstatus.currentStamina > 0) && FlapDoingCheck)
+            if(JumpDoingCheck)
             {
-                player.Flap();
-                FlapDoingCheck = false;
+                player.Jump(moveDirection);
+                JumpDoingCheck = false;
             }
             if (!JumpDoingCheck)
             {
@@ -380,14 +381,14 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
 
-            if (!isDialoged && !player.hited &&!player.attacked && (player.isSwim || !player.isGrounded))
+            if (!isDialoged && !player.hited &&!player.attacked && (!player.isGrounded) && !player.isSwim)
             {
                 FlapDoingCheck = true;
                 spaceClickCheck = true;
                 if (EnableLog)
                     Debug.Log("[이민호] Flap : " + context.phase.ToString());   
             }
-            else if (!isDialoged && !player.hited && !player.attacked && player.isGrounded)
+            else if (!isDialoged && !player.hited && !player.attacked && (player.isGrounded || player.isSwim))
             {
                 JumpDoingCheck = true;
                 spaceClickCheck = true;
