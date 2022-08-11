@@ -380,14 +380,14 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
 
-            if (!isDialoged && !player.hited &&!player.attacked && (player.isSwim || !player.isGrounded))
+            if (!isDialoged && !player.hited &&!player.attacked && (!player.isGrounded))
             {
                 FlapDoingCheck = true;
                 spaceClickCheck = true;
                 if (EnableLog)
                     Debug.Log("[이민호] Flap : " + context.phase.ToString());   
             }
-            else if (!isDialoged && !player.hited && !player.attacked && player.isGrounded)
+            else if (!isDialoged && !player.hited && !player.attacked && (player.isGrounded || player.isSwim))
             {
                 JumpDoingCheck = true;
                 spaceClickCheck = true;

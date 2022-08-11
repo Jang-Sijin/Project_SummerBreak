@@ -675,6 +675,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (playerstatus.GetCurHealth() <= 0)
         {
+            Debug.Log("[이민호] 죽음");
             hited = false;
             invincible = false;
             bodyMaterial.SetFloat("RedLv", 0.0f);
@@ -682,6 +683,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (!invincible)
         {
+            Debug.Log("[이민호] 플레이어 피격");
             SoundManager.Instance.PlaySFX(1);
             this.gameObject.layer = LayerMask.NameToLayer("Player_invincible");
             hited = true;
@@ -700,7 +702,8 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator HitInvincible()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.0f);
+        Debug.Log("[이민호] 무적 해제");
         invincible = false;
         this.gameObject.layer = LayerMask.NameToLayer("Player");
     }

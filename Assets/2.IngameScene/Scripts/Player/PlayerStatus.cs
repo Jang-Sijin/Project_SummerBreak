@@ -52,6 +52,8 @@ public class PlayerStatus : MonoBehaviour
 
     public bool playerInPeak = false;
 
+    [SerializeField] private float resetHp;
+    
     [SerializeField] private string checkToChangeEquipment = null;
     void Awake()
     {
@@ -214,7 +216,7 @@ public class PlayerStatus : MonoBehaviour
     
     public void ReSetCurHealth()
     {
-        currentHealth = maxHealth / 2;
+        currentHealth = resetHp;
     }
     public void HealStamina()
     {
