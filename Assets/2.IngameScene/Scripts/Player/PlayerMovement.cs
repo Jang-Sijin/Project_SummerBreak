@@ -114,9 +114,6 @@ public class PlayerMovement : MonoBehaviour
     private bool isDead = false;
 
     [SerializeField] 
-    private GameObject dieCutScene;
-    
-    [SerializeField] 
     private GameObject reSpawnScene;
     
     void Awake()
@@ -692,13 +689,8 @@ public class PlayerMovement : MonoBehaviour
     public void HitStart(float damageValue, Rigidbody monsterRigidbody)
     {
         playerstatus.HitHealth(damageValue);
-        PlayableDirector dieCut = dieCutScene.GetComponent<PlayableDirector>();
         if (playerstatus.GetCurHealth() <= 0)
         {
-            if (!isDead)
-            {
-                dieCut.Play();
-            }
 
             currentState = playerState.die;
             Debug.Log("[이민호] 죽음");
@@ -756,7 +748,7 @@ public class PlayerMovement : MonoBehaviour
             capeRenderer.enabled = true;
         }
     }
-
+    
     public void HitEnd()
     {
         hited = false;
