@@ -108,8 +108,6 @@ public class PlayerStatus : MonoBehaviour
         
         if (currentHealth <= 0.0f)
         {
-            this.transform.position = _playerMovement.respawnPoint.transform.position;
-            ReSetCurHealth();
         }
 
 

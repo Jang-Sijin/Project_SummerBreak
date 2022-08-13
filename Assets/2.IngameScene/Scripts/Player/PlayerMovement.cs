@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Experimental.TerrainAPI;
+using UnityEngine.Playables;
 using UnityEngine.VFX;
 
 public class PlayerMovement : MonoBehaviour
@@ -20,7 +21,8 @@ public class PlayerMovement : MonoBehaviour
         climbing,
         sliding,
         attack,
-        hit
+        hit,
+        die
     }
     
     public playerState currentState;
@@ -108,6 +110,15 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float climpSpeed = 3.5f;
 
+    [SerializeField] 
+    private bool isDead = false;
+
+    [SerializeField] 
+    private GameObject dieCutScene;
+    
+    [SerializeField] 
+    private GameObject reSpawnScene;
+    
     void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody>();
@@ -122,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Ground_Idle()
     {
-        if (currentState != playerState.hit)
+        if (currentState != playerState.hit || currentState != playerState.die)
         {
             currentState = playerState.Ground_idleState;
             isClimbedUp = false;
@@ -680,13 +691,23 @@ public class PlayerMovement : MonoBehaviour
     
     public void HitStart(float damageValue, Rigidbody monsterRigidbody)
     {
+        playerstatus.HitHealth(damageValue);
+        PlayableDirector dieCut = dieCutScene.GetComponent<PlayableDirector>();
         if (playerstatus.GetCurHealth() <= 0)
         {
+            if (!isDead)
+            {
+                dieCut.Play();
+            }
+
+            currentState = playerState.die;
             Debug.Log("[이민호] 죽음");
+            this.gameObject.layer = LayerMask.NameToLayer("Player");
             hited = false;
             invincible = false;
             bodyMaterial.SetFloat("RedLv", 0.0f);
             capeMaterial.SetFloat("RedLv",0.0f);
+            isDead = true;
         }
         else if (!invincible)
         {
@@ -697,7 +718,6 @@ public class PlayerMovement : MonoBehaviour
             invincible = true;
             bodyMaterial.SetFloat("RedLv", 0.1f);
             capeMaterial.SetFloat("RedLv",0.1f);
-            playerstatus.HitHealth(damageValue);
             currentState = playerState.hit;
             StartCoroutine(HitInvincible());
             StartCoroutine(HitBlink());
@@ -745,6 +765,16 @@ public class PlayerMovement : MonoBehaviour
         currentState = playerState.Ground_idleState;
     }
 
+    public void DeadPlayerEnd()
+    {
+        PlayableDirector respawn = reSpawnScene.GetComponent<PlayableDirector>();
+        respawn.Play();
+        currentState = playerState.Ground_idleState;
+        isDead = false;
+        transform.position = respawnPoint.transform.position;
+        playerstatus.ReSetCurHealth();
+    }
+    
     public void SetInvincible(bool value)
     {
         invincible = value;
