@@ -761,14 +761,27 @@ public class PlayerMovement : MonoBehaviour
     {
         PlayableDirector respawn = reSpawnScene.GetComponent<PlayableDirector>();
         respawn.Play();
-        currentState = playerState.Ground_idleState;
-        isDead = false;
-        transform.position = respawnPoint.transform.position;
-        playerstatus.ReSetCurHealth();
     }
     
     public void SetInvincible(bool value)
     {
         invincible = value;
+    }
+
+    public void RespawnPlayer()
+    {
+        transform.position = respawnPoint.transform.position;
+        currentState = playerState.Ground_idleState;
+        playerstatus.ReSetCurHealth();
+    }
+
+    public void IsDeadedPlayer()
+    {
+        isDead = false;
+    }
+
+    public bool GetIsDead()
+    {
+        return isDead;
     }
 }

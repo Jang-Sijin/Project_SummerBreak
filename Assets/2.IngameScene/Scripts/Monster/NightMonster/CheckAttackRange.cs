@@ -30,7 +30,7 @@ public class CheckAttackRange : Node
         
         float attackRange;
         
-        if (_monsterManager.curMonsterType == MonsterManager.monsterType.nightMonster)
+        if (_monsterManager.curMonsterType == MonsterManager.monsterType.nightMonster_slimyee)
         {
             attackRange = NightMonsterBT.attackRange;
         }

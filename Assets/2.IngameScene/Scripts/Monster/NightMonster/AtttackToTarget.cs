@@ -29,14 +29,19 @@ public class AtttackToTarget : Node
         _attackCounter += Time.deltaTime;
         _animator.SetBool("Attack", false);
         _animator.SetBool("Idle", true);
-        float damageValue = _monsterManager.curMonsterType == MonsterManager.monsterType.nightMonster ?  
+        float damageValue = _monsterManager.curMonsterType == MonsterManager.monsterType.green_slimyee ?  
                 NightMonsterBT.damageValue : SlimyeeBT.damageValue;
         if (_attackCounter >= _attackTime)
         {
             //Debug.Log("[이민호] 몬스터가 공격함");
             if (_lastTarget.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                playerMovement.HitStart(damageValue, _rigidbody);
+                if (_monsterManager.curMonsterType == MonsterManager.monsterType.green_slimyee ||
+                    _monsterManager.curMonsterType == MonsterManager.monsterType.red_slimyee ||
+                    _monsterManager.curMonsterType == MonsterManager.monsterType.nightMonster_slimyee)
+                {
+                    playerMovement.HitStart(damageValue, _rigidbody);
+                }
             }
 
             _animator.SetBool("Attack", true);
