@@ -212,6 +212,7 @@ public class PlayerMovement : MonoBehaviour
         _animator.Play("Flap");
         flapEffect.Reinit();
         flapEffect.Play();
+        SoundManager.Instance.PlaySFX(8);
         Vector3 jumpDirection = new Vector3(0.0f, flapPower, 0.0f);
         if (playerstatus.GetDebugMod() == false)
         {
@@ -778,6 +779,11 @@ public class PlayerMovement : MonoBehaviour
     public void IsDeadedPlayer()
     {
         isDead = false;
+    }
+
+    public void StartDie()
+    {
+        SoundManager.Instance.PlaySFX(7);
     }
 
     public bool GetIsDead()
