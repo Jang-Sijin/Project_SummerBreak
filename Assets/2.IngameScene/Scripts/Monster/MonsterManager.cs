@@ -11,7 +11,8 @@ public class MonsterManager : MonoBehaviour
 
     public enum monsterType
     {
-        nightMonster,
+        nightMonster_slimyee,
+        nightMonster_longyee,
         green_slimyee,
         red_slimyee,
         green_longyee,
@@ -68,7 +69,7 @@ public class MonsterManager : MonoBehaviour
     void Start()
     {
         // HP 01 
-        if (curMonsterType == monsterType.green_slimyee || curMonsterType == monsterType.nightMonster 
+        if (curMonsterType == monsterType.green_slimyee || curMonsterType == monsterType.nightMonster_slimyee
                                                         || curMonsterType == monsterType.clam)
         {
             health = 10.0f;
@@ -86,7 +87,7 @@ public class MonsterManager : MonoBehaviour
         }
         // slimyee
         if (curMonsterType == monsterType.green_slimyee || curMonsterType == monsterType.red_slimyee 
-                                                        || curMonsterType == monsterType.nightMonster)
+                                                        || curMonsterType == monsterType.nightMonster_slimyee)
         {
             //speed = 2.0f;
         }
@@ -263,7 +264,18 @@ public class MonsterManager : MonoBehaviour
         Rigidbody newBulletRigid = newBullet.GetComponent<Rigidbody>();
         newBulletRigid.AddForce(transform.forward * 5.0f, ForceMode.Impulse);
     }
-    
+
+    public void AttackToPlayer()
+    {
+        GameObject target = GameManager.instance.playerGameObject;
+        if (Vector3.Distance(transform.position, target.transform.position) <= 0.7f)
+        {
+            if (target.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                _playerMovement.HitStart(10.0f, m_rigidbody);
+            }
+        }
+    }
     private IEnumerator AttackCo(Rigidbody monster)
     {
         if (monster != null)

@@ -21,7 +21,7 @@ public class FollowTarget : Node
     {
         float speed = 0.0f;
         
-        if (_monsterManager.curMonsterType == MonsterManager.monsterType.nightMonster)
+        if (_monsterManager.curMonsterType == MonsterManager.monsterType.nightMonster_slimyee)
         {
             speed = NightMonsterBT.speed;
         }
