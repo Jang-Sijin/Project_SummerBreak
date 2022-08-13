@@ -223,4 +223,10 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             }
         }
     }
+
+    private void OnDisable()
+    {
+        Color color = new Color(1, 1, 1, 0);
+        this.GetComponent<Image>().color = color;
+    }
 }

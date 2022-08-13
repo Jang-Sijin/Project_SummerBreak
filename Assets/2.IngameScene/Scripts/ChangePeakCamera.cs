@@ -6,7 +6,7 @@ using UnityEngine;
 public class ChangePeakCamera : MonoBehaviour
 {
     [SerializeField] 
-    private GameObject camera;
+    private GameObject _camera;
 
     public bool triggerd;
     private void OnTriggerStay(Collider other)
@@ -14,7 +14,7 @@ public class ChangePeakCamera : MonoBehaviour
         if (other.CompareTag("Player") && !triggerd)
         {
             triggerd = true;
-            camera.SetActive(true);
+            _camera.SetActive(true);
         }
     }
 
@@ -23,7 +23,7 @@ public class ChangePeakCamera : MonoBehaviour
         if (other.CompareTag("Player") && triggerd)
         {
             triggerd = false;
-            camera.SetActive(false);
+            _camera.SetActive(false);
         }
     }
 }
