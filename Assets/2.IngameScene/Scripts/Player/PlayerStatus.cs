@@ -112,14 +112,6 @@ public class PlayerStatus : MonoBehaviour
         
         if (currentHealth <= 0.0f)
         {
-            // 리스폰 컷씬 출력
-            _respawnCutScene.Play();
-            
-            // 리스폰 위치로 이동
-            this.transform.position = _playerMovement.respawnPoint.transform.position;
-            
-            // 리스폰 체력 설정
-            ReSetCurHealth();
         }
 
 

@@ -48,5 +48,7 @@ public class AnimationController : MonoBehaviour
             m_animation.SetBool("Climb_Idle",m_PlayerMovement.currentState == PlayerMovement.playerState.climb_idleState);
             
             m_animation.SetBool("Climbing",m_PlayerMovement.currentState == PlayerMovement.playerState.climbing);
+            
+            m_animation.SetBool("Dead",m_PlayerMovement.currentState == PlayerMovement.playerState.die);
     }
 }
