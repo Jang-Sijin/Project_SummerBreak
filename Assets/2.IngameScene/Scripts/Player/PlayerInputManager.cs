@@ -103,14 +103,14 @@ public class PlayerInputManager : MonoBehaviour
         }
         else if (player.isSwim && !player.isGrounded)
         {
+            if (!JumpDoingCheck)
+            {
+                player.SwimMove(moveDirection, moveDoingCheck);
+            }
             if(JumpDoingCheck)
             {
                 player.Jump(moveDirection);
                 JumpDoingCheck = false;
-            }
-            if (!JumpDoingCheck)
-            {
-                player.SwimMove(moveDirection, moveDoingCheck);
             }
         }
         else if (!player.isGrounded)
