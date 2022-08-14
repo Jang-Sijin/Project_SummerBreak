@@ -96,6 +96,7 @@ public class NpcDialogTrigger : MonoBehaviour
     public void EnterPlayer()
     {
         Debug.Log("[장시진] 대화 시작");
+        SoundManager.Instance.PlaySFX("DialogStart");
         StartCoroutine("StartDialog");
     }
 

@@ -22,6 +22,7 @@ public class ObjDialogTrigger : MonoBehaviour
 
     public void EnterPlayer()
     {
+        SoundManager.Instance.PlaySFX("DialogStart");
         StartCoroutine("StartDialog");
     }
 

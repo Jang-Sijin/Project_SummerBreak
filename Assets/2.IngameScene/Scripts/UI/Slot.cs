@@ -196,29 +196,110 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
 
         Slot CheckEqipmentSlot = equipmentSlot.GetComponent<Slot>();
         // 1.현재 슬롯이 장비 슬롯이면서 2.드래그 중인 아이템의 타입이 장비 아이템일 경우
-        if (this == CheckEqipmentSlot && DragSlot.instance.dragSlot.item.itemType == Item.ItemType.Equipment)
+        if (this == CheckEqipmentSlot && item == null && DragSlot.instance.dragSlot.item.itemType == Item.ItemType.Equipment)
         {
             AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
             
             if (copyItem != null)
             {
+                print("예외");
                 DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
             }
             else
             {
+                print("비어있는 장비슬롯에 장비 아이템 장착");
                 DragSlot.instance.dragSlot.ClearSlot();
             }
         }
-        else if (this != CheckEqipmentSlot) // 장비 슬롯이 아닐 때(일반 슬롯) 
+        else if (this == CheckEqipmentSlot && item != null && item.itemType == Item.ItemType.Equipment && DragSlot.instance.dragSlot.item.itemType == Item.ItemType.Equipment)
         {
             AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
-
+            
             if (copyItem != null)
             {
+                print("비어있지 않은 장비슬롯에 장비 아이템 장착");
                 DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
             }
             else
             {
+                print("예외");
+                DragSlot.instance.dragSlot.ClearSlot();
+            }
+        }
+        else if (this != CheckEqipmentSlot && item != null && item.itemType == Item.ItemType.Equipment && DragSlot.instance.dragSlot.item != null)
+        {
+            AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
+            
+            if (copyItem != null)
+            {
+                print("장비 아이템이 있는 일반슬롯과 드래그 중인 아이템과 교환");
+                DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
+            }
+            else
+            {
+                print("장비 copyItem null");
+                DragSlot.instance.dragSlot.ClearSlot();
+            }
+        }
+        else if (this != CheckEqipmentSlot && item != null && item.itemType != Item.ItemType.Equipment && DragSlot.instance.dragSlot.item.itemType != Item.ItemType.Equipment)
+        {
+            AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
+            
+            if (copyItem != null)
+            {
+                print("일반 아이템이 있는 일반슬롯과 드래그 중인 일반 아이템과 교환");
+                DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
+            }
+            else
+            {
+                print("장비 copyItem null");
+                DragSlot.instance.dragSlot.ClearSlot();
+            }
+        }
+        else if (this != CheckEqipmentSlot && item != null && item.itemType != Item.ItemType.Equipment && DragSlot.instance.dragSlot.item.itemType == Item.ItemType.Equipment && 
+                 CheckEqipmentSlot == null)
+        {
+            AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
+            
+            if (copyItem != null)
+            {
+                print("일반 아이템이 있는 일반슬롯과 장비 슬롯이 아닌 장비 아이템과 교환");
+                DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
+            }
+            else
+            {
+                print("장비 copyItem null");
+                DragSlot.instance.dragSlot.ClearSlot();
+            }
+        }
+        else if (this != CheckEqipmentSlot && item != null && item.itemType != Item.ItemType.Equipment && DragSlot.instance.dragSlot.item.itemType == Item.ItemType.Equipment && 
+                 CheckEqipmentSlot != null && CheckEqipmentSlot.item != DragSlot.instance.dragSlot.item)
+        {
+            AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
+            
+            if (copyItem != null)
+            {
+                print("일반 아이템이 있는 일반슬롯과 장비 슬롯이 아닌 장비 아이템과 교환");
+                DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
+            }
+            else
+            {
+                print("장비 copyItem null");
+                DragSlot.instance.dragSlot.ClearSlot();
+            }
+        }
+        else if(this != CheckEqipmentSlot && item == null) // 장비 슬롯x && 슬롯에 아이템x
+        {
+            AddItem(DragSlot.instance.dragSlot.item, DragSlot.instance.dragSlot.itemCount);
+            
+            if (copyItem != null)
+            {
+                print("장비 아이템 교환");
+                DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
+            }
+            else
+            {
+                print("비어있는 슬롯과 아이템 교환");
                 DragSlot.instance.dragSlot.ClearSlot();
             }
         }

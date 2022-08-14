@@ -110,6 +110,13 @@ public class SaleSlot : MonoBehaviour, IPointerClickHandler
         }
         else if (eventData.button == PointerEventData.InputButton.Left)
         {
+            if (item != null && item.itemInfo != null)
+            {
+                Debug.Log($"{item.itemInfo}");
+                item_ShowName_Text.text = item.itemName;
+                item_ShowInfo_Text.text = item.itemInfo;
+            }
+            
             if (item != null)
             {
                 isMouseLeftClick = true;
@@ -121,5 +128,12 @@ public class SaleSlot : MonoBehaviour, IPointerClickHandler
                 print($"{isMouseLeftClick}");
             }
         }
+        
+    }
+    
+    private void OnDisable()
+    {
+        Color color = new Color(1, 1, 1, 0);
+        this.GetComponent<Image>().color = color;
     }
 }

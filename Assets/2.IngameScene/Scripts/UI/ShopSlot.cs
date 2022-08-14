@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Image = UnityEngine.UI.Image;
 
-public class ShopSlot : MonoBehaviour, IPointerClickHandler
+public class ShopSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("마우스 위치")]
     private Vector3 _originMousePos;
@@ -19,6 +19,8 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
     // 필요한 컴포넌트
     [SerializeField] private TMP_Text itemCountText; // 상점에서 판매중인 아이템의 개수 텍스트
     [SerializeField] private TMP_Text itemPriceText; // 상점에서 판매중인 아이템의 가격 텍스트
+
+    [SerializeField] private ItemToolTip _itemToolTip;
 
     // 마우스 좌버튼 클릭 체크 (아이템 선택 유/무)
     private bool isMouseLeftClick;
@@ -92,5 +94,21 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
                 print($"{isMouseLeftClick}");
             }
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        _itemToolTip.ShowToolTip(item.itemName, item.itemInfo);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        _itemToolTip.HideToolTip();
+    }
+
+    private void OnDisable()
+    {
+        Color color = new Color(1, 1, 1, 0);
+        this.GetComponent<Image>().color = color;
     }
 }
