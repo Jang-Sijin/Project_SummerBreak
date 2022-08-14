@@ -34,7 +34,7 @@ public class AttackToTarget_Acorn : Node
         _animator.SetBool("Attack", false);
         _animator.SetBool("Idle", true);
         float damageValue;
-        if (_monsterManager.curMonsterType == MonsterManager.monsterType.nightMonster)
+        if (_monsterManager.curMonsterType == MonsterManager.monsterType.nightMonster_slimyee)
         {
             damageValue = NightMonsterBT.damageValue;
         }
