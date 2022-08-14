@@ -17,6 +17,8 @@ public class PlayerSpawnMove : MonoBehaviour
     private bool numberPad6KeyDown = false;
     [SerializeField]
     private bool numberPad7KeyDown = false;
+    [SerializeField]
+    private bool numberPad8KeyDown = false;
 
     private PlayerStatus playerStatus;
 
@@ -34,6 +36,8 @@ public class PlayerSpawnMove : MonoBehaviour
     private GameObject landMarkSpawnerPoint6;
     [SerializeField] 
     private GameObject landMarkSpawnerPoint7;
+    [SerializeField] 
+    private GameObject landMarkSpawnerPoint8;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +70,8 @@ public class PlayerSpawnMove : MonoBehaviour
         numberPad6KeyDown = Input.GetButtonDown("NumberPad6");
         
         numberPad7KeyDown = Input.GetButtonDown("NumberPad7");
+        
+        numberPad8KeyDown = Input.GetButtonDown("NumberPad8");
     }
 
     private void Interaction()
@@ -97,6 +103,10 @@ public class PlayerSpawnMove : MonoBehaviour
         else if (numberPad7KeyDown)
         {
             this.transform.position = landMarkSpawnerPoint7.transform.position;
+        }
+        else if (numberPad8KeyDown)
+        {
+            this.transform.position = landMarkSpawnerPoint8.transform.position;
         }
     }
 }
