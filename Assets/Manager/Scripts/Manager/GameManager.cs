@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
     [Header("사운드 슬라이드바 설정")]
     [SerializeField] private Slider bgSoundSlider;
     [SerializeField] private Slider effectSoundSlider;
+
+    [Header("필드 아이템 리스트")] 
+    public SaveItemList saveItemList;
     
     //---------------------------------------------------------------------------------
     
@@ -187,6 +190,7 @@ public class GameManager : MonoBehaviour
         InventorySystem.instance.LoadInventory(saveinfo.playerCoinCount, saveinfo.equipmentName, saveinfo.equipmentCount, saveinfo.inventoryItemName, saveinfo.inventoryItemCount);
         QuestSystem.instance.LoadQuestData(saveinfo.questProgressID, saveinfo.isProgressQuest);
         MapPiecesController.instance.LoadMap(saveinfo.landMarkEnableArray);
+        saveItemList.LoadMapItemList(saveinfo.fieldItemList);
 
         return;
     }
