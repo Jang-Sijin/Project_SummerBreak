@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -134,7 +135,7 @@ public class InventorySystem : MonoBehaviour
         equipmentSlot.GetComponent<Image>().color = color;
     }
 
-    public void LoadInventory(int coinCount, string getEquipmentName, int getEquipmentCount, string[] getItemNames, int[] getItemCount)
+    public void LoadInventory(int coinCount, Dictionary<string, int> getEquipment, Dictionary<string, int> getInventorySlotItems)
     {
         // 코인(재화)
         playerCoinCount = coinCount;
@@ -148,45 +149,34 @@ public class InventorySystem : MonoBehaviour
         
         
         // 장비 슬롯
-        if (getEquipmentName != null)
+        if (getEquipment != null)
         {
-            var findItem = Array.Find(ItemDB.ItemDBList, item => item.itemName == getEquipmentName);
-            equipmentSlot.AddItem(findItem, getEquipmentCount);
+            foreach (var equipment in getEquipment)
+            {
+                var findItem = Array.Find(ItemDB.ItemDBList, item => item.name == equipment.Key);
+
+                if (findItem != null)
+                {
+                    equipmentSlot.AddItem(findItem, equipment.Value);
+                    break;
+                }
+            }
         }
 
-        for (int i = 0; i < getItemNames.Length; ++i)
+        int i = 0;
+        foreach (var getItemIndex in getInventorySlotItems)
         {
-            var findItem = Array.Find(ItemDB.ItemDBList, item => item.itemName == getItemNames[i]);
-            
-            itemSlots[i].AddItem(findItem, getItemCount[i]);
+            Item findItem = Array.Find(ItemDB.ItemDBList, item => item.name == getItemIndex.Key);
+
+            if (findItem != null)
+            {
+                itemSlots[i++].AddItem(findItem, getItemIndex.Value);
+            }
         }
 
         return;
     }
 
-    public void CheckSlotList()
-    {
-        // 인벤토리 슬롯들과 장비 슬롯에 어떤 아이템이 들어가 있는지 확인한다. //
-        for (int i = 0; i < itemSlots.Length; i++)
-        {
-            
-        }
-    }
-
-    public void ExportInventorySlotsData(Slot[] slots)
-    {
-        if (slots.Length != itemSlots.Length)
-        {
-            print($"[장시진] 상점 인벤토리 크기와 플레이어 인벤토리 크기가 서로 다릅니다. ExportInventorySlotsData Func Err");
-            return;
-        }
-
-        for (int i = 0; i < itemSlots.Length; i++)
-        {
-            slots[i] = itemSlots[i];
-        }
-    }
-    
     // 인벤토리에 있는 아이템의 정보들을 상점 판매 UI 리스트(슬롯)에 초기화 합니다.
     public void InitShopSaleInventorySlots(ref SaleSlot saleEquipmentSlot, ref SaleSlot[] saleSlots)
     {

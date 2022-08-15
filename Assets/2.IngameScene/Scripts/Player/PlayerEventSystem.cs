@@ -105,7 +105,14 @@ public class PlayerEventSystem : MonoBehaviour
             }
             else if (nearObject.CompareTag("ChestObj"))
             {
-                nearObject.GetComponent<Animator>().SetBool("IsOpen", true);
+                // 1.상자 아이템을 여는 함수를 수행한다. -> 지금 상자를 열 수 있는가? 없는가?
+                // 2-1.열 수 있으면 애니메이션을 수행시키고 + 코인을 생성한다.
+                // 2-2.열 수 없으면 아무것도 수행되지 않는다.
+                
+                // 상호작용을 누르면 애니메이션 실행.
+                // 로직 처리는 어디서 하고 내가 원하는 조건인지 판단을 아예 할 수 없음. 게임 실행 도중에
+                
+                nearObject.GetComponent<OpenChestCoin>().CheckStateChestBox();
             }
         }
     }

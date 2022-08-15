@@ -105,7 +105,8 @@ public class JsonManager : MonoBehaviour
                 QuestSystem.instance.PlayerProgressQuestID,
                 QuestSystem.instance.IsProgressQuest,
                 MapPiecesController.instance.landMarkEnable,
-                GameManager.instance.saveItemList.SaveMapItemList());
+                GameManager.instance.saveItemList.SaveMapItemList(),
+                GameManager.instance.saveChestBoxList.SaveMapChestBoxList());
 
         // Formatting.Indented -> Json 자동으로 라인/들여쓰기 적용 [참고: https://www.csharpstudy.com/Data/Json-beautifier.aspx]
         string jdata = JsonConvert.SerializeObject(SaveDataDictionary.saveDataDictionary, Formatting.Indented);
@@ -139,6 +140,7 @@ public class JsonManager : MonoBehaviour
                 1,
                 false,
                 null,
+                null,
                 null
             );
         }
@@ -166,6 +168,7 @@ public class JsonManager : MonoBehaviour
                 null,
                 1,
                 false,
+                null,
                 null,
                 null
             );

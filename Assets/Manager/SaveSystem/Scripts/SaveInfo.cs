@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 //[Serializable]
@@ -22,21 +23,20 @@ public class SaveInfo
     public int maxStamina;
     public int currentStamina;
     public int playerCoinCount;
-    public string equipmentName;
-    public int equipmentCount;
-    public string[] inventoryItemName;
-    public int[] inventoryItemCount;
+    public Dictionary<string, int> equipmentItem;
+    public Dictionary<string, int> inventoryItem;
     public int questProgressID;
     public bool isProgressQuest;
     public bool[] landMarkEnableArray;
     public List<string> fieldItemList;
+    public Dictionary<string, bool> fieldChestBoxList;
 
     public SaveInfo()
     {
         
     }
     public SaveInfo(string name, string saveTime, Vector3 position, Vector3 rotation, int hp, int maxStamina, int currentStamina, int playerCoinCount, Slot saveEquipmentSlot, Slot[] saveInventorySlots
-    , int saveQuestProgressID, bool saveIsProgressQuest, bool[] saveLandMarkEnableArray, List<string> saveItemList)
+    , int saveQuestProgressID, bool saveIsProgressQuest, bool[] saveLandMarkEnableArray, List<string> saveItemList, Dictionary<string, bool> saveChestBoxList)
     {
         this.name = name;
         this.saveTime = saveTime;
@@ -46,30 +46,30 @@ public class SaveInfo
         this.maxStamina = maxStamina;
         this.currentStamina = currentStamina;
         this.playerCoinCount = playerCoinCount;
-
+        
         // 인벤토리
+        equipmentItem= new Dictionary<string, int>();
+        inventoryItem = new Dictionary<string, int>();
         if (saveEquipmentSlot != null && saveEquipmentSlot.item != null)
         {
-            this.equipmentName = saveEquipmentSlot.item.itemName;
-            this.equipmentCount = saveEquipmentSlot.itemCount;
+            Debug.Log(saveEquipmentSlot.item.name);
+            equipmentItem.Add(saveEquipmentSlot.item.name, saveEquipmentSlot.itemCount);
         }
         else
         {
-            this.equipmentName = null;
-            this.equipmentCount = 0;
+            equipmentItem.Add("null", 0);
         }
-
+        
         if (saveInventorySlots != null && saveInventorySlots.Length != 0)
         {
-            this.inventoryItemName = saveInventorySlots.Where(slot => slot.item != null)
-                .Select(slot => slot.item.itemName).ToArray();
-            this.inventoryItemCount = saveInventorySlots.Where(slot => slot.item != null).Select(slot => slot.itemCount)
-                .ToArray();
-        }
-        else
-        {
-            this.inventoryItemName = new string[12];
-            this.inventoryItemCount = new int[12];
+            foreach (var itemSlot in saveInventorySlots)
+            {
+                if (itemSlot.item != null)
+                {
+                    Debug.Log(itemSlot.item.name);
+                    inventoryItem.Add(itemSlot.item.name, itemSlot.itemCount);
+                }
+            }
         }
 
         // 퀘스트
@@ -81,5 +81,8 @@ public class SaveInfo
         
         // 필드 아이템 리스트
         fieldItemList = saveItemList;
+        
+        // 상자 Open/Close 리스트
+        fieldChestBoxList = saveChestBoxList;
     }
 }
