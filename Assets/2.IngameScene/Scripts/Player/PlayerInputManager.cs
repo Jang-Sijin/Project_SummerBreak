@@ -60,7 +60,11 @@ public class PlayerInputManager : MonoBehaviour
     private float slideCounter = 0f;
     private Vector3 lastPlayerPos;
 
-    [SerializeField] private float takeStamina = 0.1f;
+    [SerializeField] 
+    private float takeStamina = 0.1f;
+    
+    [SerializeField] 
+    private float takePeakStamina = 0.1f;
     
     private void Awake()
     {
@@ -124,7 +128,7 @@ public class PlayerInputManager : MonoBehaviour
                     player.Climbing(input);
                     if (playerstatus.GetDebugMod() == false && playerstatus.currentStamina > 0)
                     {
-                        StartCoroutine(TakeStamina(takeStamina));
+                        StartCoroutine(TakeStamina(playerstatus.playerInPeak ? takePeakStamina : takeStamina));
                     }
                 }
                 else
