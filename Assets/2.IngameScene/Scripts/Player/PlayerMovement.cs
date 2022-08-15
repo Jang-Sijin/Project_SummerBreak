@@ -216,7 +216,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 jumpDirection = new Vector3(0.0f, flapPower, 0.0f);
         if (playerstatus.GetDebugMod() == false)
         {
-            playerstatus.TakeStamina(10.0f);
+            playerstatus.TakeStamina(playerstatus.playerInPeak ? 20.0f : 10.0f);
         }
 
         //Debug.Log("[이민호] 플랩");
