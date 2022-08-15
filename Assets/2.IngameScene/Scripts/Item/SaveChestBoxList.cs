@@ -1,14 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SaveChestBoxList : MonoBehaviour
 {
-    private Dictionary<string, bool> chestBoxList = new Dictionary<string, bool>();
-
     public Dictionary<string, bool> SaveMapChestBoxList()
     {
         OpenChestCoin[] allChestBoxList = gameObject.GetComponentsInChildren<OpenChestCoin>();
+        Dictionary<string, bool> chestBoxList = new Dictionary<string, bool>();
 
         foreach (var boxObj in allChestBoxList)
         {

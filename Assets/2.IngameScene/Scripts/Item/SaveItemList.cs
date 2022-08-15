@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class SaveItemList : MonoBehaviour
 {
-    private List<string> allItemNameList = new List<string>();
-
-    
     // 현재 인게임 필드에 있는 획득 가능한 아이템들의 이름을 리스트로 반환한다. 
     public List<string> SaveMapItemList()
     {
         ItemPickUp[] allItemList = gameObject.GetComponentsInChildren<ItemPickUp>();
+        List<string> allItemNameList = new List<string>();
 
         foreach (var itemObj in allItemList)
         {
