@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour
 
     [Header("필드 아이템 리스트")] 
     public SaveItemList saveItemList;
+
+    [Header("필드 상자상태 리스트")] 
+    public SaveChestBoxList saveChestBoxList;
     
     //---------------------------------------------------------------------------------
     
@@ -187,10 +190,11 @@ public class GameManager : MonoBehaviour
         playerGameObject.GetComponent<PlayerStatus>().currentHealth = saveinfo.hp;
         playerGameObject.GetComponent<PlayerStatus>().currentMaxstamina = saveinfo.maxStamina;
         playerGameObject.GetComponent<PlayerStatus>().currentStamina = saveinfo.currentStamina;
-        InventorySystem.instance.LoadInventory(saveinfo.playerCoinCount, saveinfo.equipmentName, saveinfo.equipmentCount, saveinfo.inventoryItemName, saveinfo.inventoryItemCount);
+        InventorySystem.instance.LoadInventory(saveinfo.playerCoinCount, saveinfo.equipmentItem, saveinfo.inventoryItem);
         QuestSystem.instance.LoadQuestData(saveinfo.questProgressID, saveinfo.isProgressQuest);
         MapPiecesController.instance.LoadMap(saveinfo.landMarkEnableArray);
         saveItemList.LoadMapItemList(saveinfo.fieldItemList);
+        saveChestBoxList.LoadMapChestBoxList(saveinfo.fieldChestBoxList);
 
         return;
     }
