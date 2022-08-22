@@ -65,7 +65,8 @@ public class PlayerInputManager : MonoBehaviour
     
     [SerializeField] 
     private float takePeakStamina = 0.1f;
-    
+
+    [SerializeField] private GameObject shopUi;
     private void Awake()
     {
         player = GetComponent<PlayerMovement>();
@@ -164,6 +165,7 @@ public class PlayerInputManager : MonoBehaviour
 
     private void Update()
     {
+        
         isDialoged = DialogSystem.instance.IsActiveDialog;
 
         player.SetInvincible(isDialoged);
@@ -318,7 +320,7 @@ public class PlayerInputManager : MonoBehaviour
         }
         else if (context.performed)
         {
-            if (!player.GetIsDead() && !player.slidingCheck && !isDialoged && 
+            if (!shopUi.activeSelf && !player.GetIsDead() && !player.slidingCheck && !isDialoged && 
                 !player.climbFlap && !player.hited && !player.attacked)
             {
                 moveDoingCheck = true;
@@ -345,14 +347,10 @@ public class PlayerInputManager : MonoBehaviour
         if (context.started)
         {
             if (EnableLog)
-                Debug.Log(context.phase.ToString());
-
-            if (!player.GetIsDead() && !isDialoged && !player.hited && player.isGrounded && 
-                playerstatus.currentItem != PlayerStatus.item.nothing)
             {
-                player.Equipment();
+                Debug.Log("왼");
+                Debug.Log(context.phase.ToString());
             }
-            
         }
         else if (context.canceled)
         {
@@ -373,6 +371,30 @@ public class PlayerInputManager : MonoBehaviour
         isDialoged = value;
     }
 
+    public void OnRightCheck(InputAction.CallbackContext context)
+    {
+        
+        if (context.started)
+        {
+            if (EnableLog)
+            {
+                Debug.Log("오른");
+                Debug.Log(context.phase.ToString());
+            }
+
+            if (!shopUi.activeSelf && !player.GetIsDead() && !isDialoged && !player.hited && player.isGrounded && 
+                playerstatus.currentItem != PlayerStatus.item.nothing)
+            {
+                player.Equipment();
+            }
+            
+        }
+        else if (context.canceled)
+        {
+            if (EnableLog)
+                Debug.Log(context.phase.ToString());
+        }
+    }
     
     // input Space
     public void OnSpace(InputAction.CallbackContext context)
@@ -387,7 +409,7 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
 
-            if (!player.GetIsDead() && !isDialoged && !player.hited &&
+            if (!shopUi.activeSelf && !player.GetIsDead() && !isDialoged && !player.hited &&
                 !player.attacked && (!player.isGrounded) && !player.isSwim)
             {
                 FlapDoingCheck = true;
@@ -395,7 +417,7 @@ public class PlayerInputManager : MonoBehaviour
                 if (EnableLog)
                     Debug.Log("[이민호] Flap : " + context.phase.ToString());   
             }
-            else if (!player.GetIsDead() && !isDialoged && !player.hited && 
+            else if (!shopUi.activeSelf && !player.GetIsDead() && !isDialoged && !player.hited && 
                      !player.attacked && (player.isGrounded || player.isSwim))
             {
                 JumpDoingCheck = true;

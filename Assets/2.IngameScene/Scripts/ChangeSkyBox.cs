@@ -26,8 +26,11 @@ public class ChangeSkyBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
         if (!_playerStatus.playerInPeak)
         {
+            
             curInTime = GameManager.instance.GetInGameTime().Hour;
 
             if (curInTime != lastInTime)
@@ -35,21 +38,25 @@ public class ChangeSkyBox : MonoBehaviour
                 isChangedSkybox = false;
             }
             
+            if (isChangedPeak)
+            {
+                Debug.Log("[이민호] 정상에 나와서 스카이박스 변경");
+                isChangedPeak = false;
+                dayNightSkyboxBlender.SkyboxBlend(true);
+            }
+            
             if (!isChangedSkybox && (curInTime == 5 || curInTime == 7 || curInTime == 18 || curInTime == 20))
             {
+                Debug.Log("[이민호] 스카이박스 변경");
                 isChangedSkybox = true;
                 dayNightSkyboxBlender.SkyboxBlend(true);
                 lastInTime = curInTime;
             }
             
-            if (isChangedPeak)
-            {
-                isChangedPeak = false;
-                dayNightSkyboxBlender.SkyboxBlend(true);
-            }
         }
         else if (!isChangedPeak)
         {
+            Debug.Log("[이민호] 정상에 들어가 스카이박스 변경");
             isChangedPeak = true;
             peakSkyboxBlender.SkyboxBlend(true);
         }

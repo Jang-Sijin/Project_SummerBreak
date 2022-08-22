@@ -477,7 +477,10 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (playerstatus.currentItem == PlayerStatus.item.interaction_sleep)
             {
-                GameManager.instance.SetInGameTime(7);
+                if (GameManager.instance.GetInGameTime().Hour >= 20 || GameManager.instance.GetInGameTime().Hour <= 4)
+                {
+                    GameManager.instance.SetInGameTime(5);
+                }
             }
         }
     }
