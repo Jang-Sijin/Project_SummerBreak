@@ -96,7 +96,7 @@ public class PlayerStatus : MonoBehaviour
         else
         {
             PlayerMovement playerMovement = this.GetComponent<PlayerMovement>();
-            playerMovement.SetDebugMod(false);
+            playerMovement.SetDebugMod(true);
             DebugMod = false;
             DebugModTextObj.SetActive(false);
             DebugModGlideButton.SetActive(false);

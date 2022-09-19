@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Experimental.TerrainAPI;
 using UnityEngine.Playables;
 using UnityEngine.VFX;
 
@@ -98,7 +97,10 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField] private GameObject opitionUi;
     
+    [SerializeField]
     private bool glideLiftDrag = true;
+    
+    [SerializeField]
     private bool glideQuater = true;
     
     [SerializeField] private GameObject LiftDragTextObj;
