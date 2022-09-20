@@ -56,17 +56,18 @@ public class PlayerEventSystem : MonoBehaviour
             {
                 // 다이얼로그 시작 코루틴 시작
                 NpcDialogTrigger npcDialogTrigger = nearObject.GetComponent<NpcDialogTrigger>();
+                
                 npcDialogTrigger.EnterPlayer();
             }
             else if (nearObject.CompareTag("DialogObj"))
             {
                 // 다이얼로그 시작 코루틴 시작
                 ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
+                
                 objDialogTrigger.EnterPlayer();
             }
             else if (nearObject.CompareTag("LandMarkObj"))
             {
-                
                 // 다이얼로그 시작 코루틴 시작
                 ObjDialogTrigger objDialogTrigger = nearObject.GetComponent<ObjDialogTrigger>();
                 objDialogTrigger.EnterPlayer();
