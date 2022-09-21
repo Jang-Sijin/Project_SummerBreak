@@ -118,6 +118,10 @@ public class QuestSystem : MonoBehaviour
         // 퀘스트 UI List에 있는 QuestSlot을 보이는 상태로 변경시켜준다.
         GameObject questSlot;
         _questMenu.QuestMenuSlotList.TryGetValue(_playerProgressQuestID, out questSlot);
+        
+        if (questSlot.activeSelf)
+            return;
+        
         questSlot.SetActive(true);
         
         // 퀘스트 수락 애니메이션 출력

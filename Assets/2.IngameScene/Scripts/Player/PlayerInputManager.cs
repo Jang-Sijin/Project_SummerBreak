@@ -51,7 +51,7 @@ public class PlayerInputManager : MonoBehaviour
     
     private Stopwatch swMove = new Stopwatch();
     private Stopwatch swSpace = new Stopwatch();
-    private bool isDialoged = false;
+    // private bool isDialoged = false;
 
     public bool EnableLog;
 
@@ -166,9 +166,9 @@ public class PlayerInputManager : MonoBehaviour
     private void Update()
     {
         
-        isDialoged = DialogSystem.instance.IsActiveDialog;
+        //isDialoged = DialogSystem.instance.IsActiveDialog;
 
-        player.SetInvincible(isDialoged);
+        //player.SetInvincible(isDialoged);
         
         if (player.slidingCheck)
         {
@@ -320,7 +320,7 @@ public class PlayerInputManager : MonoBehaviour
         }
         else if (context.performed)
         {
-            if (!shopUi.activeSelf && !player.GetIsDead() && !player.slidingCheck && !isDialoged && 
+            if (!shopUi.activeSelf && !player.GetIsDead() && !player.slidingCheck && /*!isDialoged &&*/ 
                 !player.climbFlap && !player.hited && !player.attacked)
             {
                 moveDoingCheck = true;
@@ -366,10 +366,12 @@ public class PlayerInputManager : MonoBehaviour
         
     }
 
+    /*
     public void IsDialogActive(bool value)
     {
         isDialoged = value;
     }
+    */
 
     public void OnRightCheck(InputAction.CallbackContext context)
     {
@@ -382,7 +384,7 @@ public class PlayerInputManager : MonoBehaviour
                 Debug.Log(context.phase.ToString());
             }
 
-            if (!shopUi.activeSelf && !player.GetIsDead() && !isDialoged && !player.hited && player.isGrounded && 
+            if (!shopUi.activeSelf && !player.GetIsDead() && /*!isDialoged &&*/ !player.hited && player.isGrounded && 
                 playerstatus.currentItem != PlayerStatus.item.nothing)
             {
                 player.Equipment();
@@ -409,7 +411,7 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
 
-            if (!shopUi.activeSelf && !player.GetIsDead() && !isDialoged && !player.hited &&
+            if (!shopUi.activeSelf && !player.GetIsDead() && /*!isDialoged &&*/ !player.hited &&
                 !player.attacked && (!player.isGrounded) && !player.isSwim)
             {
                 FlapDoingCheck = true;
@@ -417,7 +419,7 @@ public class PlayerInputManager : MonoBehaviour
                 if (EnableLog)
                     Debug.Log("[이민호] Flap : " + context.phase.ToString());   
             }
-            else if (!shopUi.activeSelf && !player.GetIsDead() && !isDialoged && !player.hited && 
+            else if (!shopUi.activeSelf && !player.GetIsDead() && /*!isDialoged &&*/ !player.hited && 
                      !player.attacked && (player.isGrounded || player.isSwim))
             {
                 JumpDoingCheck = true;
@@ -438,5 +440,10 @@ public class PlayerInputManager : MonoBehaviour
             if (EnableLog)
                 Debug.Log(context.phase.ToString());
         }
+    }
+
+    public void OnChangeMoveState()
+    {
+        moveDoingCheck = !moveDoingCheck;
     }
 }

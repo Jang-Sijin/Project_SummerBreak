@@ -35,6 +35,8 @@ public class PlayerStatus : MonoBehaviour
     private GameObject DebugModQuaterButtton;
     [SerializeField] 
     private GameObject DebugModGetItemButton;
+    [SerializeField] 
+    private GameObject DebugModMoveButton;
     
     private Slot equipmentSlot;
 
@@ -91,6 +93,7 @@ public class PlayerStatus : MonoBehaviour
             DebugModGlideButton.SetActive(true);
             DebugModQuaterButtton.SetActive(true);
             DebugModGetItemButton.SetActive(true);
+            DebugModMoveButton.SetActive(true);
             GameManager.instance.SetTimeMultiplier(2000);
         }
         else
@@ -102,6 +105,7 @@ public class PlayerStatus : MonoBehaviour
             DebugModGlideButton.SetActive(false);
             DebugModQuaterButtton.SetActive(false);
             DebugModGetItemButton.SetActive(false);
+            DebugModMoveButton.SetActive(false);
             GameManager.instance.SetTimeMultiplier(540);
         }
     }
@@ -109,10 +113,11 @@ public class PlayerStatus : MonoBehaviour
     
     private void Update()
     {
-        
+        /*
         if (currentHealth <= 0.0f)
         {
         }
+        */
 
 
         if (equipmentSlot.item == null)

@@ -19,6 +19,9 @@ public class PlayerEventSystem : MonoBehaviour
     public GameObject NearObject { get { return nearObject; } }
     private GameObject nearObject;
 
+    // 현재 상호작용 중인지 체크 : false(상호작용 시작 전), false(상호작용 중)
+    private bool isInteraction = false;
+
     private bool isLandMarkArea = false;
     
     #region Singleton
@@ -50,7 +53,7 @@ public class PlayerEventSystem : MonoBehaviour
 
     private void Interaction()
     {
-        if (KeyDown && nearObject != null)
+        if (KeyDown && nearObject != null && !isInteraction)
         {
             if (nearObject.CompareTag("QuestNpc"))
             {
@@ -115,6 +118,8 @@ public class PlayerEventSystem : MonoBehaviour
                 
                 nearObject.GetComponent<OpenChestCoin>().CheckStateChestBox();
             }
+            
+            isInteraction = true;
         }
     }
 
@@ -155,6 +160,13 @@ public class PlayerEventSystem : MonoBehaviour
             
             // 트리거가 발생 UI(E키)를 비활성화(출력X)한다.
             interactionText.gameObject.SetActive(false);
+            
+            // 퀘스트 다이얼로그가 끝난 뒤 수락 버튼을 눌렀을 경우 AcceptQuest 함수를 수행한다.
+            if (QuestSystem.instance.IsQuestDialog && QuestSystem.instance.IsProgressQuest == true)
+            {
+                // 퀘스트 받을 때
+                QuestSystem.instance.AcceptQuest();
+            }
         }
         else if (other.CompareTag("DialogObj"))
         {
@@ -200,6 +212,8 @@ public class PlayerEventSystem : MonoBehaviour
         {
             isLandMarkArea = false;
         }
+        
+        isInteraction = false;
     }
 
     public bool GetIsLandMarkArea()
