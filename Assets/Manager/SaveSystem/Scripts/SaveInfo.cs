@@ -1,16 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
-
-//[Serializable]
-//public struct SaveSlotInfo()
-//{
-//    public string itemName;
-//    public int itemCount;
-//}
 
 [Serializable]
 public class SaveInfo
@@ -35,6 +25,7 @@ public class SaveInfo
     {
         
     }
+    
     public SaveInfo(string name, string saveTime, Vector3 position, Vector3 rotation, int hp, int maxStamina, int currentStamina, int playerCoinCount, Slot saveEquipmentSlot, Slot[] saveInventorySlots
     , int saveQuestProgressID, bool saveIsProgressQuest, bool[] saveLandMarkEnableArray, List<string> saveItemList, Dictionary<string, bool> saveChestBoxList)
     {
