@@ -21,8 +21,8 @@ public class SaveSlot : MonoBehaviour, IPointerClickHandler
 
     private void SetTextMeshPro()
     {
-        slotTitleNameText.text = SaveDataDictionary.saveDataDictionary[this.gameObject.name].name;
-        slotTimeText.text = SaveDataDictionary.saveDataDictionary[this.gameObject.name].saveTime;
+        slotTitleNameText.text = SaveDataDictionary.s_saveDataDictionary[this.gameObject.name].name;
+        slotTimeText.text = SaveDataDictionary.s_saveDataDictionary[this.gameObject.name].saveTime;
     }
 
     public void ClearSlot()

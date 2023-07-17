@@ -13,6 +13,8 @@ public enum QuestType
 
 public class QuestCheckTrigger : MonoBehaviour
 {
+    [SerializeField] private Item[] itemDB;
+    
     // 퀘스트 완료 트리거 //
     // ★Npc Dialog Trigger에서만 변경되는 값입니다.
     public bool IsComplete { get { return _isComplete; } set { _isComplete = value; } }
@@ -25,8 +27,6 @@ public class QuestCheckTrigger : MonoBehaviour
     
     private QuestDBEntity _progressQuestEntity = new QuestDBEntity();
 
-    [SerializeField] private Item[] itemDB;
-    
     public void StartCheckQuest(int progressQuestID, List<QuestDBEntity> questDBList)
     {
         foreach (var entity in questDBList)

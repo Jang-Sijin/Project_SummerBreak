@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using Cinemachine;
 
 public class DialogSystem : MonoBehaviour
 {
@@ -313,10 +310,6 @@ public class DialogSystem : MonoBehaviour
 		if(PlayerEventSystem.instance.NearObject.CompareTag("LandMarkObj"))
 		{
 			PlayerEventSystem.instance.NearObject.GetComponent<MapOpenTrigger>().StartCutScene();
-			// 랜드마크 컷씬 타임라인/애니메이션을 출력한다.
-			// PlayableDirector pd;
-			// pd = Get  PlayableDirector
-			// pd.Play();
 		}
 	}
 }

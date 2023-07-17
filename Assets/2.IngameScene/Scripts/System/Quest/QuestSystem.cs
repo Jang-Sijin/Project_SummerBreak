@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class QuestSystem : MonoBehaviour
 {
-    [Header("↓Excel DB Scriptable 오브젝트를 연결해주세요.[차후 Manager(싱글턴)으로 등록할 수 있도록 구조 변경 필요!]")] 
+    [Header("↓Excel DB Scriptable 오브젝트를 연결해주세요.")] 
     [SerializeField] private ExcelDB excelDB; // Import Excel File
     
     [Header("↓MenuUI - Quest_Menu를 연결해주세요.")]
     [SerializeField] private QuestMenu _questMenu;
 
-    public QuestAnimationTimeline QuestAnimationTimeline { get; private set; }
+    public QuestAnimationTimeline QuestAnimationTimeline;
 
-    public int PlayerProgressQuestID { get { return _playerProgressQuestID; } set { _playerProgressQuestID = value; } }
+    public int PlayerProgressQuestID { get => _playerProgressQuestID; set { _playerProgressQuestID = value; } }
     private int _playerProgressQuestID;
 
-    public List<QuestDBEntity> QuestDBList { get { return _questList; } }
+    public List<QuestDBEntity> QuestDBList => _questList;
     private List<QuestDBEntity> _questList; // Excel QuestDBSheet의 DB리스트
 
     public QuestCheckTrigger QuestCheckTrigger { get { return _questCheckTrigger; } }
