@@ -5,36 +5,38 @@ using UnityEngine;
 
 public class ItemToolTip : MonoBehaviour
 {
-    private RectTransform _rectTransform;
+    private RectTransform rectTransform;
 
-    [SerializeField] private TMP_Text _itemNameText;
-    [SerializeField] private TMP_Text _itemInfoText;
+    [SerializeField] private TMP_Text itemNameText;
+    [SerializeField] private TMP_Text itemInfoText;
     
     void Start()
     {
-        _rectTransform = this.GetComponent<RectTransform>();
+        rectTransform = this.GetComponent<RectTransform>();
     }
 
+    // 아이템 툴팁 UI 출력, itemName: 아이템 이름, itemInfo: 아이템 정보
     public void ShowToolTip(string itemName, string itemInfo)
     {
-        gameObject.SetActive(true);
+        gameObject.SetActive(true); // 툴팁 UI 활성화
         StartCoroutine(UpdateMousePosition());
-        _itemNameText.text = itemName;
-        _itemInfoText.text = itemInfo;
+        itemNameText.text = itemName; // 아이템 이름
+        itemInfoText.text = itemInfo; // 아이템 정보
     }
-
+    
+    // 마우스 위치가 변경되면 툴팁 위치도 함께 이동하도록 설정
     private IEnumerator UpdateMousePosition()
     {
         Vector3 addPosition = new Vector3(10, -10);
         
         while (true)
         {
-            print("마우스 갱신중");
             if (Input.mousePresent)
             {
-                _rectTransform.position = Input.mousePosition + addPosition;
+                Debug.Log("[장시진] 마우스 갱신중 " + rectTransform.position);
+                rectTransform.position = Input.mousePosition + addPosition;
             }
-
+           
             yield return null;
         }
     }
@@ -43,7 +45,7 @@ public class ItemToolTip : MonoBehaviour
     {
         gameObject.SetActive(false);
         StopCoroutine(UpdateMousePosition());
-        _itemNameText.text = "";
-        _itemInfoText.text = "";
+        itemNameText.text = "";
+        itemInfoText.text = "";
     }
 }

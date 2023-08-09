@@ -51,7 +51,7 @@ public class InventorySystem : MonoBehaviour
         itemSlots = inventorySlotsParent.GetComponentsInChildren<Slot>();
         equipmentSlot = inventoryEquipmentSlot.GetComponent<Slot>();
 
-        // [임시 빌드용 디폴트 아이템] // 나중에 제대로 함수 추가 필요
+        // [임시 빌드용 디폴트 아이템] //
         itemSlots[11].AddItem(pen);
     }
 
@@ -84,9 +84,11 @@ public class InventorySystem : MonoBehaviour
             {
                 playerCoinCount += (count * 10);
             }
-                
+              
+            // 코인 소유 개수 출력 UI(Text) 갱신
             PlayerUI getPlayerUI = playerUI.GetComponent<PlayerUI>();
             getPlayerUI.UpdatePlayerCoinCountUI();
+            
             return;
         }
         
@@ -117,6 +119,7 @@ public class InventorySystem : MonoBehaviour
         }
     }
     
+    // 아이템 선택 시 테두리 애니메이션, 배경 알파값 조정
     public void ChangeBgImageAlphaSlots(int alpha)
     {
         Color color;
@@ -135,11 +138,13 @@ public class InventorySystem : MonoBehaviour
         equipmentSlot.GetComponent<Image>().color = color;
     }
 
+    // 인게임 접속 시 인벤토리 아이템 셋팅
     public void LoadInventory(int coinCount, Dictionary<string, int> getEquipment, Dictionary<string, int> getInventorySlotItems)
     {
-        // 코인(재화)
+        // 코인(재화) 셋팅
         playerCoinCount = coinCount;
         PlayerUI getPlayerUI = playerUI.GetComponent<PlayerUI>();
+        // 코인(재화)개수 및 UI 업데이트
         getPlayerUI.UpdatePlayerCoinCountUI();
         
         
@@ -148,7 +153,7 @@ public class InventorySystem : MonoBehaviour
         equipmentSlot = inventoryEquipmentSlot.GetComponent<Slot>();
         
         
-        // 장비 슬롯
+        // 이전 인벤토리 장비 슬롯 셋팅
         if (getEquipment != null)
         {
             foreach (var equipment in getEquipment)
@@ -164,6 +169,7 @@ public class InventorySystem : MonoBehaviour
         }
 
         int i = 0;
+        // 이전 인벤토리 아이템 슬롯 셋팅
         foreach (var getItemIndex in getInventorySlotItems)
         {
             Item findItem = Array.Find(ItemDB.ItemDBList, item => item.name == getItemIndex.Key);
@@ -197,6 +203,7 @@ public class InventorySystem : MonoBehaviour
     }
     
     // parameter1의 아이템 이름으로 인벤토리 슬롯을 검색하여 획득한 아이템을 찾아서 parameter2 만큼 아이템 개수를 변경한다.
+    // 아이템 개수 증가/감소가 필요할 때 사용하시면 됩니다.
     public void FindSetCountInventorySlotItem(string itemName, int count = -1)
     {
         if (equipmentSlot.item != null && equipmentSlot.item.itemName == itemName)
@@ -216,7 +223,8 @@ public class InventorySystem : MonoBehaviour
         return;
     }
     
-    // findItemName과 같은 아이템이 인벤토리에 존재하는지 확인한다. [아이템의 개수를 반환합니다. // 아이템이 없으면 0을 반환]
+    // findItemName과 같은 아이템이 인벤토리에 존재하는지 확인한다.
+    // [아이템의 개수를 반환합니다. // 아이템이 없으면 0을 반환]
     public int FindInventorySlotItem(string findItemName)
     {
         if (equipmentSlot.item != null && equipmentSlot.item.itemName == findItemName)
@@ -235,12 +243,14 @@ public class InventorySystem : MonoBehaviour
         return 0;
     }
 
-    public Slot SaveEquipmentSlot()
+    // 인벤토리 장비 슬롯 데이터 가져오기
+    public Slot GetEquipmentSlot()
     {
         return equipmentSlot;
     }
     
-    public Slot[] SaveInventoryItems()
+    // 인벤토리 아이템 슬롯 데이터 가져오기
+    public Slot[] GetInventoryItems()
     {
         return itemSlots;
     }

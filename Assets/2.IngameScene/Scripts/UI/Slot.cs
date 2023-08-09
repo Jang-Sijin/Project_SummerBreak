@@ -1,13 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using KON;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 
 public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
@@ -16,7 +10,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     [SerializeField] private GameObject equipmentSlot;
     
     [Header("마우스 위치")]
-    private Vector3 _originMousePos;
+    private Vector3 originMousePos;
     
     [Header("획득한 아이템")]
     public Item item; // 획득한 아이템 DB
@@ -24,15 +18,15 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public Image itemImage; // 아이템의 이미지
 
     // 필요한 컴포넌트
-    [SerializeField] private GameObject item_CountImage; // 획득한 아이템의 배경 이미지
-    [SerializeField] private TMP_Text text_Count; // 획득한 아이템의 개수 텍스트
+    [SerializeField] private GameObject itemCountImage; // 획득한 아이템의 배경 이미지
+    [SerializeField] private TMP_Text textCount; // 획득한 아이템의 개수 텍스트
     [Header("아래 TMP_Text: Inventory 하위 오브젝트에 있는 이름과 동일한 오브젝트를 연결해 주세요.")]
-    [SerializeField] private TMP_Text item_ShowName_Text; // 아이템의 이름(정보)을 보여주는 텍스트
-    [SerializeField] private TMP_Text item_ShowInfo_Text; // 아이템의 내용(정보)를 보여주는 텍스트
+    [SerializeField] private TMP_Text itemShowNameText; // 아이템의 이름(정보)을 보여주는 텍스트
+    [SerializeField] private TMP_Text itemShowInfoText; // 아이템의 내용(정보)를 보여주는 텍스트
 
     private void Start()
     {
-        _originMousePos = this.transform.position;
+        originMousePos = this.transform.position;
     }
 
     // 이미지의 투명도 조절
@@ -53,13 +47,13 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         // 장비 아이템이 아닐 때
         if (item.itemType != Item.ItemType.Equipment)
         {
-            text_Count.text = itemCount.ToString();
-            item_CountImage.SetActive(true);
+            textCount.text = itemCount.ToString();
+            itemCountImage.SetActive(true);
         }
         else // 장비 아이템일 때
         {
-            text_Count.text = itemCount.ToString("0");
-            item_CountImage.SetActive(false);
+            textCount.text = itemCount.ToString("0");
+            itemCountImage.SetActive(false);
         }
 
         SetItemImageColor(1);
@@ -69,7 +63,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public void SetSlotCount(int _count)
     {
         itemCount += _count;
-        text_Count.text = itemCount.ToString();
+        textCount.text = itemCount.ToString();
 
         if (itemCount <= 0)
             ClearSlot();
@@ -83,8 +77,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         itemImage.sprite = null;
         SetItemImageColor(0);
         
-        text_Count.text = "0";
-        item_CountImage.SetActive(false);
+        textCount.text = "0";
+        itemCountImage.SetActive(false);
     }
 
     // 마우스 클릭 이벤트
@@ -99,8 +93,9 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             {
                 if (item.itemType == Item.ItemType.Equipment) // 장비 아이템일 때
                 {
-                    // 장착
-                    // 장비 아이템이 확정된 후 작업 시작 하도록
+                    // 장비 아이템은 장착은 하지만
+                    // 장비를 사용하거나 소모되는 규칙은 없습니다.
+                    // 기획상 장비 아이템을 장착 여부만 필요합니다.
                 }
                 else if(item.itemType == Item.ItemType.Consumables) // 소모 아이템
                 {
@@ -109,11 +104,9 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
                     {
                          case "싱글하트물약":
                             playerStatus.HealHealth(20.0f);
-                            //SetSlotCount(-1);
                             break;
                          case "더블하트물약":
                              playerStatus.HealHealth(40.0f);
-                             //SetSlotCount(-1);
                              break;
                          case "태양석":
                              playerStatus.HealMaxStamina();
@@ -134,8 +127,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             if (item != null && item.itemInfo != null)
             {
                 Debug.Log($"{item.itemInfo}");
-                item_ShowName_Text.text = item.itemName;
-                item_ShowInfo_Text.text = item.itemInfo;
+                itemShowNameText.text = item.itemName;
+                itemShowInfoText.text = item.itemInfo;
             }
         }
     }
@@ -160,7 +153,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     {
         Debug.Log("[장시진] ItemSlot OnDrag 호출");
         
-        // 아이템이 있을 때 드래그의 위치를 슬롯의 위치로 설정해준다.
+        // 아이템이 있을 때 드래그의 위치를 슬롯의 위치로 설정해줍니다.
         if (item != null)
         {
             DragSlot.instance.transform.position = eventData.position;
@@ -176,13 +169,14 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         DragSlot.instance.dragSlot = null;
     }
 
-    // 슬롯과 슬롯의 교체 // 드래그를 멈춘 위치에 있는 오브젝트에서 호출됩니다.
+    // 각 슬롯 간의 아이템 교체 // 드래그를 멈춘 위치에 있는 오브젝트에서 호출됩니다.
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("[장시진] ItemSlot OnDrop 호출");
         
         if (DragSlot.instance.dragSlot != null)
         {
+            // 마우스 드래그를 통한 슬롯 교환
             ChangeSlot();
         }
     }
@@ -202,12 +196,12 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             
             if (copyItem != null)
             {
-                print("예외");
+                Debug.Log("[장시진] 이동 가능한 슬롯 위치가 아닙니다. 기존 슬롯으로 다시 이동합니다.");
                 DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
             }
             else
             {
-                print("비어있는 장비슬롯에 장비 아이템 장착");
+                Debug.Log("[장시진] 비어있는 장비슬롯에 장비 아이템 장착");
                 DragSlot.instance.dragSlot.ClearSlot();
             }
         }
@@ -217,12 +211,12 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             
             if (copyItem != null)
             {
-                print("비어있지 않은 장비슬롯에 장비 아이템 장착");
+                Debug.Log("[장시진] 비어있지 않은 장비슬롯에 장비 아이템 장착");
                 DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
             }
             else
             {
-                print("예외");
+                Debug.Log("[장시진] 예외");
                 DragSlot.instance.dragSlot.ClearSlot();
             }
         }
@@ -232,12 +226,12 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             
             if (copyItem != null)
             {
-                print("장비 아이템이 있는 일반슬롯과 드래그 중인 아이템과 교환");
+                Debug.Log("장비 아이템이 있는 일반슬롯과 드래그 중인 아이템과 교환");
                 DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
             }
             else
             {
-                print("장비 copyItem null");
+                Debug.Log("장비 copyItem null");
                 DragSlot.instance.dragSlot.ClearSlot();
             }
         }
@@ -247,12 +241,12 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             
             if (copyItem != null)
             {
-                print("일반 아이템이 있는 일반슬롯과 드래그 중인 일반 아이템과 교환");
+                Debug.Log("일반 아이템이 있는 일반슬롯과 드래그 중인 일반 아이템과 교환");
                 DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
             }
             else
             {
-                print("장비 copyItem null");
+                Debug.Log("장비 copyItem null");
                 DragSlot.instance.dragSlot.ClearSlot();
             }
         }
@@ -263,12 +257,12 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             
             if (copyItem != null)
             {
-                print("일반 아이템이 있는 일반슬롯과 장비 슬롯이 아닌 장비 아이템과 교환");
+                Debug.Log("일반 아이템이 있는 일반슬롯과 장비 슬롯이 아닌 장비 아이템과 교환");
                 DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
             }
             else
             {
-                print("장비 copyItem null");
+                Debug.Log("장비 copyItem null");
                 DragSlot.instance.dragSlot.ClearSlot();
             }
         }
@@ -279,12 +273,12 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             
             if (copyItem != null)
             {
-                print("일반 아이템이 있는 일반슬롯과 장비 슬롯이 아닌 장비 아이템과 교환");
+                Debug.Log("일반 아이템이 있는 일반슬롯과 장비 슬롯이 아닌 장비 아이템과 교환");
                 DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
             }
             else
             {
-                print("장비 copyItem null");
+                Debug.Log("장비 copyItem null");
                 DragSlot.instance.dragSlot.ClearSlot();
             }
         }
@@ -294,12 +288,12 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             
             if (copyItem != null)
             {
-                print("장비 아이템 교환");
+                Debug.Log("장비 아이템 교환");
                 DragSlot.instance.dragSlot.AddItem(copyItem, copyItemCount);
             }
             else
             {
-                print("비어있는 슬롯과 아이템 교환");
+                Debug.Log("비어있는 슬롯과 아이템 교환");
                 DragSlot.instance.dragSlot.ClearSlot();
             }
         }

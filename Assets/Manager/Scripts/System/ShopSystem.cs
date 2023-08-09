@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +28,6 @@ public class ShopSystem : MonoBehaviour
 
     [Header("상점 뒤로가기 버튼 설정")] 
     [SerializeField] private GameObject shopBuyBackButton;
-
     [SerializeField] private GameObject shopSaleBackButton;
 
     [Header("상점 구매 확인 UI 설정")] 
@@ -38,9 +38,9 @@ public class ShopSystem : MonoBehaviour
 
     [Header("상점 판매 확인 UI 설정")] 
     [SerializeField] private GameObject shopSaleRequestUI;
-    
-    [SerializeField] 
-    private GameObject shopSaleRequestFailUI;
+    [SerializeField] private GameObject shopSaleRequestFailUI;
+    [SerializeField] private GameObject shopSaleRequestSuccessUI;
+    [SerializeField] private TMP_Text shopSaleRequestSuccessText;
 
     [Header("플레이어 코인 UI 설정")] 
     [SerializeField] private GameObject playerCoinUI;
@@ -57,7 +57,6 @@ public class ShopSystem : MonoBehaviour
 
     // [상점 판매UI]
     private SaleSlot saleInventoryEquipmentSlot;
-
     private SaleSlot[] saleInventorySlots;
 
     // 상점 아이템(슬롯)을 마우스로 선택하면 상점 아이템 리스트 배열의 어느 아이템인지 확인하는 변수
@@ -68,9 +67,7 @@ public class ShopSystem : MonoBehaviour
     private Image shopSaleButtonImage;
 
     #region Shop System 싱글톤 설정
-
-    public static ShopSystem instance; // Game Manager을 싱글톤으로 관리
-
+    public static ShopSystem instance;
     private void Awake()
     {
         // Game Manager 싱글톤 설정
@@ -80,11 +77,10 @@ public class ShopSystem : MonoBehaviour
         }
         else
         {
-            // 이미 Game Manager가 존재할 때 오브젝트 파괴 
+            // 이미 Shop System이 존재할 때 오브젝트 파괴 
             Destroy(this.gameObject);
         }
     }
-
     #endregion
 
     private void Start()
@@ -104,6 +100,7 @@ public class ShopSystem : MonoBehaviour
         InitSetUI();
     }
 
+    // [초기 상점 아이템 정보 셋팅]
     private void InitShopItemList()
     {
         try
@@ -123,6 +120,7 @@ public class ShopSystem : MonoBehaviour
         }
     }
 
+    // [초기 상점 구매창/판매창 버튼 정보 셋팅]
     private void InitSetButton()
     {
         shopBuyButtonImage = shopBuyButton.GetComponent<Image>();
@@ -132,13 +130,13 @@ public class ShopSystem : MonoBehaviour
         shopBuyButtonImage.color = new Color(1, 1, 1, 1);
         shopSaleButtonImage.color = new Color(1, 1, 1, 0);
     }
-
+    
     private void InitSetUI()
     {
         shopBuyRequestUI.SetActive(false);
         shopSaleRequestUI.SetActive(false);
     }
-
+    
     public void ChangeBgImageAlphaSlots(int alpha)
     {
         // 모든 슬롯의 흰색 테두리 배경의 알파값을 0으로 설정한다.
@@ -174,9 +172,6 @@ public class ShopSystem : MonoBehaviour
         // 상점 시스템을 종료할 때 상점 구매 목록이 보이도록 설정 후 종료한다. 
         shopBuyButtonImage.color = new Color(1, 1, 1, 1);
         shopSaleButtonImage.color = new Color(1, 1, 1, 0);
-
-        // 상점 인벤토리 슬롯의 내용을 인벤토리 시스템의 아이템 슬롯에 저장(반영)한다
-        // ...
     }
 
     public void ClickBuyRequestYesButton()
@@ -184,10 +179,10 @@ public class ShopSystem : MonoBehaviour
         // [상점에서 선택한 슬롯의 아이템을 구매한다.] // 선택지: [구매성공/ 구매실패]
         // 1. 선택한 상점 슬롯의 아이템을 인벤토리에 1개 추가한다.
         // 2. 플레이어가 소지하고 있는 코인에 선택한 상점 슬롯의 아이템의 가격(코인)을 감소시킨다.
-        // selectBuyShopItem
+        
         if (selectBuyShopItem == null)
         {
-            print($"[장시진] 상점에서 선택한 슬롯이 존재하지 않습니다. [오류]");
+            Debug.Log($"[장시진] 상점에서 선택한 슬롯이 존재하지 않습니다. [오류]");
             shopBuyRequestUI.SetActive(false);
             return;
         }
@@ -196,7 +191,8 @@ public class ShopSystem : MonoBehaviour
         {
             if (shopItemSlot.item.itemName == selectBuyShopItem.item.itemName)
             {
-                // 1.상점에서 판매하는 아이템이 0보다 클 경우(구매할 수 있는 조건) + 2.플레이어가 소지하고 있는 코인이 선택한 상점 슬롯의 아이템의 가격(코인)보다 크거나 같을 때 (구매할 수 있는 조건)
+                // 1.상점에서 판매하는 아이템이 0보다 클 경우(구매할 수 있는 조건)
+                // 2.플레이어가 소지하고 있는 코인이 선택한 상점 슬롯의 아이템의 가격(코인)보다 크거나 같을 때 (구매할 수 있는 조건)
                 if ((shopItemSlot.itemCount > 0) &&
                     (InventorySystem.instance.playerCoinCount >= selectBuyShopItem.buyItemPrice))
                 {
@@ -227,6 +223,7 @@ public class ShopSystem : MonoBehaviour
                     shopBuyRequestFailUI.SetActive(true);
                 }
 
+                // 마우스로 선택한 아이템 정보 초기화
                 selectBuyShopItem = null;
                 break;
             }
@@ -237,14 +234,14 @@ public class ShopSystem : MonoBehaviour
     {
         if (selectSaleShopItem == null)
         {
-            print($"[장시진] 상점에서 선택한 슬롯이 존재하지 않습니다. [오류]");
+            Debug.Log($"[장시진] 상점에서 선택한 슬롯이 존재하지 않습니다. [오류]");
             shopSaleRequestUI.SetActive(false);
             return;
         }
 
         foreach (var itemDB in shopItemList)
         {
-            // 상점에서 판매하는 아이템DB와 판매하려는 아이템의 이름이 같을 때 
+            // 상점에서 판매하는 아이템DB리스트와 판매하려는 아이템의 이름이 같을 때 
             // [조건]
             // 1. 소지하고 있는 아이템의 개수가 0보다 큰 경우(판매할 수 있는 조건) && 2. 상점 아이템DB 판매 가격이 0보다 큰 경우
             // [처리]
@@ -257,18 +254,20 @@ public class ShopSystem : MonoBehaviour
             {
                 // 선택한 아이템 개수를 감소 시킨다.
                 selectSaleShopItem.SetSlotCount(-1);
-
-                InventorySystem.instance.SetPlayerCoinCount(itemDB.saleItemPrice);
                 
+                // 판매 가격에 대한 코인 획득, 인벤토리에 있는 아이템을 1개 감소
+                InventorySystem.instance.SetPlayerCoinCount(itemDB.saleItemPrice);
                 InventorySystem.instance.FindSetCountInventorySlotItem(itemDB.item.itemName, -1);
                 
-                // 상점 Canvas가 오픈될 때 판매UI에 있는 인벤토리 슬롯 리스트를 인벤토리 아이템 리스트로 셋팅한다. 
-                // InventorySystem.Instance.InitShopSaleInventorySlots(ref saleInventoryEquipmentSlot, ref saleInventorySlots);            
-
                 // 상점 판매UI에서 선택한 슬롯의 정보를 초기화한다.
                 selectSaleShopItem = null;
                 // 활성화된 RequestUI를 비활성화 한다.
                 shopSaleRequestUI.SetActive(false);
+                
+                // 어떤 아이템을 판매하였는지 텍스트 문구를 출력한다.
+                shopSaleRequestSuccessText.text = itemDB.item.itemName + $" 아이템을 판매하였습니다.";
+                // 판매 완료 UI 출력
+                shopSaleRequestSuccessUI.SetActive(true);
 
                 return;
             }
