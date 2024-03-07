@@ -20,16 +20,12 @@ public class QuestMenu : MonoBehaviour
 
     public static Action<QuestSlot> ClickSlot;
 
-    private void Awake()
+    private void Start()
     {
         ClickSlot = (QuestSlot questSlot) =>
         {
             SelectQuestSlot(questSlot);
         };
-    }
-
-    private void Start()
-    {
     }
 
     public void Init()
