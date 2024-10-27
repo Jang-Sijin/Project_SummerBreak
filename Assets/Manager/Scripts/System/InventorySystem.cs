@@ -44,7 +44,7 @@ public class InventorySystem : MonoBehaviour
 
     private void Start()
     {
-        if (JsonManager.instance.CheckSaveFile())
+        if (JsonManager.Instance.CheckSaveFile())
             return;
         
         // 해당 오브젝트의 자식 slot 오브젝트를 itemSlots 배열에 할당한다.

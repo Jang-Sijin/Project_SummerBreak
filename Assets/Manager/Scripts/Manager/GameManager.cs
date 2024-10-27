@@ -172,7 +172,7 @@ public class GameManager : MonoBehaviour
     private void InitLoadSaveData()
     {
         // 로드할 데이터가 없을 때
-        if (!JsonManager.instance.CheckSaveFile())
+        if (!JsonManager.Instance.CheckSaveFile())
         {
             Debug.Log($"[장시진] 불러올 데이터가 없습니다. 새로운 게임을 시작합니다.");
             return;
@@ -182,7 +182,7 @@ public class GameManager : MonoBehaviour
         DialogSystem.instance.Setup();
 
         print($"[장시진] 불러올 데이터가 있습니다.");
-        SaveInfo saveinfo = JsonManager.instance.LoadSaveFile();
+        SaveInfo saveinfo = JsonManager.Instance.LoadSaveFile();
 
         // 플레이어 데이터 로드
         playerGameObject.transform.position = saveinfo.position;

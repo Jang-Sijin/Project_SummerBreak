@@ -33,6 +33,6 @@ public class SaveButton : MonoBehaviour
 
     public void ClickSaveButton()
     {
-        JsonManager.instance.Save(JsonManager.instance.GetCurrentSelectBtnName(), saveNameText);
+        JsonManager.Instance.Save(JsonManager.Instance.GetCurrentSelectBtnName(), saveNameText);
     }
 }

@@ -37,7 +37,7 @@ public class DialogSystem : MonoBehaviour
 
 	private void Start()
 	{
-		if (!JsonManager.instance.CheckSaveFile())
+		if (!JsonManager.Instance.CheckSaveFile())
 		{
 			Setup();
 		}

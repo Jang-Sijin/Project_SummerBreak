@@ -21,13 +21,13 @@ public class SaveSlot : MonoBehaviour, IPointerClickHandler
 
     private void SetTextMeshPro()
     {
-        slotTitleNameText.text = SaveDataDictionary.s_saveDataDictionary[this.gameObject.name].name;
-        slotTimeText.text = SaveDataDictionary.s_saveDataDictionary[this.gameObject.name].saveTime;
+        slotTitleNameText.text = SaveDataDictionary.s_SaveDataDictionary[this.gameObject.name].name;
+        slotTimeText.text = SaveDataDictionary.s_SaveDataDictionary[this.gameObject.name].saveTime;
     }
 
     public void ClearSlot()
     {
-        JsonManager.instance.ClearSlot(this.gameObject.name);
+        JsonManager.Instance.ClearSlot(this.gameObject.name);
         SetTextMeshPro();
     }
 
@@ -45,7 +45,7 @@ public class SaveSlot : MonoBehaviour, IPointerClickHandler
             print($"{this.gameObject.name}");
             print("세이브 슬롯 마우스 좌클릭으로 선택됨.");
             
-            JsonManager.instance.SelectSlot(this.gameObject.name);
+            JsonManager.Instance.SelectSlot(this.gameObject.name);
             SetTextMeshPro();
         }
     }
